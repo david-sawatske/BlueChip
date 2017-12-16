@@ -26,7 +26,7 @@ belongs to league, <br>
 belongs to user
 
 
-## owned_stocks
+## transactions
 column name  | data type | details
 -------------|-----------|-----------------------
 id           | integer   | not null, primary key
