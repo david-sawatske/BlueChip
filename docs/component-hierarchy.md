@@ -19,16 +19,17 @@
   * UserLeagueIndex
     * UserLeaguePortfolio
       * UserLeaguePortfolioHeader
-      * StockShow
+      * StockShow (see below)
 
 **TransactionContainer**
 * Transaction
   * DataByLeague (if StockSearchContainer ancestor)
   * PurchaseDateData
+  * StockHeader
 
 **StockSearchContainer**
 * StockSearch
-  * StockShow
+  * StockShow (see below)
 
 **LeagueIndexContainer**
 * LeagueIndex
@@ -41,8 +42,8 @@
 
 **StockShow (presentational)**
   * StockHeader
-  * StockSummary
   * StockChart
+  * StockSummary
   * StockNewsIndex
     * StockNewsItem
   * UserOwnedData
