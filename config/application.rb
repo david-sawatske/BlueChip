@@ -17,6 +17,7 @@ module BlueChip
       g.template_engine false
       g.test_framework  nil
       g.stylesheets false
+      g.skip_routes  true
     end
   end
 end
