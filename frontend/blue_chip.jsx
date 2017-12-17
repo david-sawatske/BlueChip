@@ -7,8 +7,15 @@ import Root from './components/root';
 import configureStore from './store/store.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  let store;
 
-  const store = configureStore();
+  if (window.currentUser) {
+    const preloadedState = { session: { currentUser: window.currentUser } };
+    store = configureStore(preloadedState);
+    delete window.currentUser;
+  } else {
+    store = configureStore();
+  }
 
   // Testing Start //
   window.getState = store.getState;
