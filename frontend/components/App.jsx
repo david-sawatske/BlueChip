@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import HomePage from './home/home_page_container';
-import SessionForm from './session_form/session_form_container';
+import MastheadContainer from './masthead/masthead_container';
 
 const App = () => (
   <div className="container">
     <header className="header">
-      <h1>header</h1>
+      <MastheadContainer />
     </header>
 
     <Switch className="body">
