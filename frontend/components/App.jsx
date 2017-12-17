@@ -1,6 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import HomePage from './home/home_page_container';
+import SessionForm from './session_form/session_form_container';
+
 const App = () => (
   <div className="container">
     <header className="header">
@@ -8,7 +11,7 @@ const App = () => (
     </header>
 
     <Switch className="body">
-      <Route exact path="/" component={ TempComponent } />
+      <Route exact path="/" component={ HomePage } />
     </Switch>
 
     <footer className="footer">
@@ -18,9 +21,3 @@ const App = () => (
 );
 
 export default App;
-
-const TempComponent = () => (
-  <div>
-    <h1>HOME</h1>
-  </div>
-)
