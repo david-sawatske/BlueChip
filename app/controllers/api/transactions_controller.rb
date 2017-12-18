@@ -1,9 +1,10 @@
 class Api::TransactionsController < ApplicationController
   def create
-    @stock = OwnedStock.new(stock_params)
+    @stock = Transaction.new(stock_params)
+    @user = current_user
 
     if @stock.save
-      render :show
+      render "api/users/show"
     else
       render json: @stock.errors.full_messages, status: 422
     end
@@ -11,7 +12,7 @@ class Api::TransactionsController < ApplicationController
 
   private
     def stock_params
-      params.require(:stock).permit(:ticker, :purchase_day, :share_quant,
+      params.require(:stock).permit(:symbol, :purchase_day, :share_quant,
                                     :user_id, :league_id, :share_price)
     end
 end
