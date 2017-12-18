@@ -5,4 +5,8 @@ class League < ApplicationRecord
   has_many :transactions
   has_many :cash_balances
   has_many :users, through: :cash_balances
+
+  def self.random_league
+    League.limit(1).order("RANDOM()").first
+  end
 end
