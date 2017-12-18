@@ -31,7 +31,9 @@ column name  | data type | details
 -------------|-----------|-----------------------
 id           | integer   | not null, primary key
 symbol       | string    | not null
-transactions | jsonb     | not null
+share_quant  | integer   | not null
+share_price  | float     | not null
+purchase_day | datetime  | not null
 user_id      | integer   | not null, indexed
 league_id    | integer   | not null, indexed
 
