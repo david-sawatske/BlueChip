@@ -12,4 +12,14 @@ module UsersHelper
 
     { 'balancesById': byId, 'allBalanceIds': allIds }
   end
+
+  def user_transacton_data(user)
+    byId = user.transactions.select( :id, :share_price, :share_quant,
+                                     :purchase_day, :symbol )
+                            .index_by(&:id)
+
+    allIds = byId.keys.map { |id| id.to_s }
+
+    { 'byId': byId, 'allIds': allIds }
+  end
 end
