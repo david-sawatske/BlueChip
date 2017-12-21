@@ -11,7 +11,7 @@ module UsersHelper
 
     allIds = byId.keys.map { |id| id.to_s }
 
-    { 'byId': byId, 'allIds': allIds }
+    { 'leaguesById': byId, 'allLeagueIds': allIds }
   end
 
   def user_balance_data(user)
@@ -40,7 +40,7 @@ module UsersHelper
 
     allIds = byId.keys.map { |id| id.to_s }
 
-    { 'byId': byId, 'allIds': allIds }
+    { 'transactionsById': byId, 'allTransactionIds': allIds }
   end
 
   def user_league_balances(user)
