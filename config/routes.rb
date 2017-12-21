@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :leagues, only: [:index, :show, :create]
     resources :users, only: [:create, :show]
     resources :cash_balances, only: [:create, :update]
-    resources :session, only: [:create, :destroy]
+    resource :session, only: [:create, :destroy]
     resources :transactions, only: [:create]
   end
 end
