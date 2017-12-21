@@ -22,4 +22,20 @@ module UsersHelper
 
     { 'byId': byId, 'allIds': allIds }
   end
+
+  def user_league_balances(user)
+    joinedById = user.cash_balances.select(:id, :user_id, :league_id).index_by(&:id)
+
+    joinedAllIds = joinedById.keys.map { |id| id.to_s }
+
+    { 'userLeagueBalancesById' => joinedById, 'allUserLeagueBalanceIds' => joinedAllIds }
+  end
+
+  def user_league_transactions(user)
+    joinedById = user.transactions.select(:id, :user_id, :league_id).index_by(&:id)
+
+    joinedAllIds = joinedById.keys.map { |id| id.to_s }
+
+    { 'userLeagueTransactionsById' => joinedById, 'allUserLeagueTransactionIds' => joinedAllIds }
+  end
 end
