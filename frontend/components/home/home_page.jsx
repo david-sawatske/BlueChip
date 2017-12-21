@@ -6,6 +6,11 @@ class HomePage extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.requestTargetUserData(2),
+    this.props.requestTargetUserData(1)
+  }
+
   render()  {
     const { currentUser } = this.props;
 
