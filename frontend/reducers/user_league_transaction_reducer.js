@@ -26,9 +26,9 @@ const allUserLeagueTransactionIds = (state = [], action) => {
   }
 };
 
-const userLeagueTransactionsReducer = combineReducers({
+const UserLeagueTransactionsReducer = combineReducers({
   userLeagueTransactionsById,
   allUserLeagueTransactionIds
 });
 
-export default userLeagueTransactionsReducer;
+export default UserLeagueTransactionsReducer;
