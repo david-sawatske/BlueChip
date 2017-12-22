@@ -1,1 +1,6 @@
-json.extract! user, :id, :username
+json.users user_data(@user)
+json.leagues user_league_data(@user)
+json.cashBalances user_balance_data(@user)
+json.transactions user_transacton_data(@user)
+json.userLeagueBalances user_league_balances(@user)
+json.userLeagueTransactions user_league_transactions(@user)
