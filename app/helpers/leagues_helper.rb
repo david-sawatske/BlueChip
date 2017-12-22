@@ -1,4 +1,15 @@
 module LeaguesHelper
+    def league_data(league)
+      byId = {}
+      id = league.id.to_s
+
+      byId[id] = { id: id, name: league.name, startingBalance: league.starting_balance }
+
+      allIds = [id]
+
+      { leaguesById: byId, allLeagueIds: allIds}
+    end
+
     def league_user_data(league)
       byId = {}
       allIds = []
@@ -10,7 +21,7 @@ module LeaguesHelper
         allIds.push(id)
       end
 
-      { usersById: byId, allIds: allIds }
+      { usersById: byId, allUserIds: allIds }
     end
 
     def league_balance_data(league)

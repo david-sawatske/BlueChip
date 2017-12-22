@@ -1,5 +1,5 @@
 @leagues.each do |league|
   json.set! league.id do
-    json.partial! 'league', league: league
+    json.partial! 'api/leagues/league', league: league
   end
 end
