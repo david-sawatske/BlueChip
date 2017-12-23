@@ -12,8 +12,8 @@ const EntitiesReducer = combineReducers({
   leagues: LeaguesReducer,
   cashBalances: BalancesReducer,
   transactions: TransactionsReducer,
-  userLeagueBalancesReducer: UserLeagueBalancesReducer,
-  userLeagueTransactionsReducer: UserLeagueTransactionsReducer,
+  userLeagueBalances: UserLeagueBalancesReducer,
+  userLeagueTransactions: UserLeagueTransactionsReducer,
 });
 
 export default EntitiesReducer;
