@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import { RECEIVE_TARGET_USER_DATA } from '../actions/user_actions';
 import { RECEIVE_ALL_LEAGUES,
+         RECEIVE_SAMPLE_LEAGUE,
          RECEIVE_TARGET_LEAGUE } from '../actions/league_actions';
 
 import { merge, union } from 'lodash';
@@ -11,6 +12,7 @@ const balancesById = (state = {}, action) => {
     case RECEIVE_TARGET_USER_DATA:
       return merge({}, state, action.targetUser.cashBalances.cashBalancesById);
     case RECEIVE_TARGET_LEAGUE:
+    case RECEIVE_SAMPLE_LEAGUE:
       return merge({}, state, action.targetLeague.cashBalances.balancesById);
     case RECEIVE_ALL_LEAGUES:
       return merge({}, state, getLeagueData(action).byId);
@@ -25,6 +27,7 @@ const allBalanceIds = (state = [], action) => {
     case RECEIVE_TARGET_USER_DATA:
       return union([], state, action.targetUser.cashBalances.allCashBalancesIds);
     case RECEIVE_TARGET_LEAGUE:
+    case RECEIVE_SAMPLE_LEAGUE:
       return union([], state, action.targetLeague.cashBalances.allBalanceIds);
     case RECEIVE_ALL_LEAGUES:
       return union(state, getLeagueData(action).allIds);
