@@ -3,7 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import HomePage from './home/home_page_container';
 import MastheadContainer from './masthead/masthead_container';
-import LeagueFormContainer from './league/league_form_container.js';
+import LeagueFormContainer from './league/league_form_container';
+import LeagueIndexContainer from './league/league_index_container';
 
 const App = () => (
   <div className="container">
@@ -14,6 +15,7 @@ const App = () => (
     <Switch className="body">
       <Route exact path="/" component={ HomePage } />
       <Route path="/leagues/new" component={ LeagueFormContainer }/>
+      <Route path="/leagues" component={ LeagueIndexContainer }/>
     </Switch>
 
     <footer className="footer">
