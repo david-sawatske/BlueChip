@@ -9,16 +9,16 @@ class LeagueIndex extends Component {
   }
 
   componentWillMount() {
-    this.props.requestAllLeagues()
-
-    if (this.props.currentUser) {
-      this.props.requestTargetUserData(this.props.currentUser.id)
-    }
+    this.props.requestAllLeagues().then(data => {
+      if (this.props.currentUser) {
+        this.props.requestTargetUserData(this.props.currentUser.id)
+      }
+    })
   }
 
   render() {
     const { leagueIds, leagueData } = this.props;
-console.log(leagueData);
+
     return (
       <div className="">
         <h1 className="">All Leagues</h1>
