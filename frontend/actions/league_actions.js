@@ -1,5 +1,6 @@
 import * as LeagueAPIUtil from '../util/league_api_util';
 
+export const RECEIVE_SAMPLE_LEAGUE = 'RECEIVE_SAMPLE_LEAGUE';
 export const RECEIVE_TARGET_LEAGUE = 'RECEIVE_TARGET_LEAGUE';
 export const RECEIVE_ALL_LEAGUES = 'RECEIVE_ALL_LEAGUES';
 
@@ -12,6 +13,11 @@ export const receiveTargetLeague = league => ({
 export const receiveAllLeagues = allLeagues => ({
   type: RECEIVE_ALL_LEAGUES,
   allLeagues
+});
+
+export const receiveSampleLeague = sampleLeague => ({
+  type: RECEIVE_SAMPLE_LEAGUE,
+  targetLeague: sampleLeague
 });
 
 // thunk async action creators
@@ -31,3 +37,8 @@ export const createLeague = league => dispatch => (
     return(data);
   })
 );
+
+export const requestSampleLeague = id => dispatch => {
+  return LeagueAPIUtil.fetchTargetLeague(id).then(league =>
+    dispatch(receiveSampleLeague(league)));
+};
