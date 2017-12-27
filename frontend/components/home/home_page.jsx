@@ -7,8 +7,7 @@ class HomePage extends React.Component {
   }
 
   componentWillMount() {
-    this.props.requestTargetUserData(2),
-    this.props.requestTargetUserData(1)
+    this.props.requestSampleLeague('random')
   }
 
   render()  {
