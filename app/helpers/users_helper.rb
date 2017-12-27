@@ -3,11 +3,11 @@ module UsersHelper
     byId = {}
     id = user.id.to_s
 
-    byId[id] = { id: id, username: user.username}
+    byId[id] = { id: id, username: user.username }
 
     allIds = [id]
 
-    { usersById: byId, allUserIds: allIds}
+    { usersById: byId, allUserIds: allIds }
   end
 
   def user_league_data(user)
