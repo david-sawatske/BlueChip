@@ -18,7 +18,7 @@ class LeagueIndex extends Component {
 
   render() {
     const { leagueIds, leagueData } = this.props;
-
+console.log(leagueData);
     return (
       <div className="">
         <h1 className="">All Leagues</h1>
