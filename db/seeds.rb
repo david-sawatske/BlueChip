@@ -20,7 +20,7 @@ end
 users = []
 leagues = []
 
-10.times do
+5.times do
   users << User.create!(username: Faker::Internet.user_name, password: "password")
 end
 
