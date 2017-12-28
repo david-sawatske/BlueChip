@@ -5,6 +5,7 @@ import HomePage from './home/home_page_container';
 import MastheadContainer from './masthead/masthead_container';
 import LeagueFormContainer from './league/league_form_container';
 import LeagueIndexContainer from './league/league_index_container';
+import UserShow from './users/user_show';
 
 const App = () => (
   <div className="container">
@@ -16,6 +17,7 @@ const App = () => (
       <Route exact path="/" component={ HomePage } />
       <Route path="/leagues/new" component={ LeagueFormContainer }/>
       <Route path="/leagues" component={ LeagueIndexContainer }/>
+      <Route path="/users/:userId" component={ UserShow }/>
     </Switch>
 
     <footer className="footer">
