@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import { RECEIVE_TARGET_BALANCE } from '../actions/cash_balance_actions';
 import { RECEIVE_TARGET_USER_DATA } from '../actions/user_actions';
 import { RECEIVE_ALL_LEAGUES,
          RECEIVE_SAMPLE_LEAGUE,
@@ -14,6 +15,8 @@ const balancesById = (state = {}, action) => {
     case RECEIVE_TARGET_LEAGUE:
     case RECEIVE_SAMPLE_LEAGUE:
       return merge({}, state, action.targetLeague.cashBalances.balancesById);
+    case RECEIVE_TARGET_BALANCE:
+      return merge({}, state, action.targetBalance.cashBalances.balancesById);
     case RECEIVE_ALL_LEAGUES:
       return merge({}, state, getLeagueData(action).byId);
     default:
@@ -29,6 +32,8 @@ const allBalanceIds = (state = [], action) => {
     case RECEIVE_TARGET_LEAGUE:
     case RECEIVE_SAMPLE_LEAGUE:
       return union([], state, action.targetLeague.cashBalances.allBalanceIds);
+    case RECEIVE_TARGET_BALANCE:
+      return union([], state, action.targetBalance.cashBalances.allBalanceIds);
     case RECEIVE_ALL_LEAGUES:
       return union(state, getLeagueData(action).allIds);
     default:
