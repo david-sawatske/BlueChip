@@ -17,14 +17,18 @@ class LeagueIndex extends Component {
   }
 
   render() {
-    const { leagueIds, leagueData } = this.props;
+    const { leagueIds, leagueData, currentUser, createCashBalance,
+            currentUserLeagueIds } = this.props;
 
     return (
       <div className="">
         <h1 className="">All Leagues</h1>
         <ul className="">
           {Object.keys(leagueData).map(leagueId => (
-            <LeagueIndexItem league={leagueData[leagueId]}
+            <LeagueIndexItem currentUserLeagueIds={currentUserLeagueIds}
+                             createCashBalance={createCashBalance}
+                             league={leagueData[leagueId]}
+                             currentUser={currentUser}
                              key={leagueId}/>
           ))}
         </ul>
