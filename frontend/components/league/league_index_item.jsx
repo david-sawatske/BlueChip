@@ -17,8 +17,9 @@ class LeagueIndexItem extends Component {
     this.props.createCashBalance({ user_id: this.props.currentUser.id,
                                    league_id: this.props.league.id,
                                    balance: this.props.league.startingBalance })
-  }
+      .then(data => this.props.requestTargetUserData(this.props.currentUser.id));
 
+  }
 
   render() {
     const { league, currentUserLeagueIds, currentUser } = this.props;

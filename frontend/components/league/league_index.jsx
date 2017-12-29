@@ -18,14 +18,15 @@ class LeagueIndex extends Component {
 
   render() {
     const { leagueIds, leagueData, currentUser, createCashBalance,
-            currentUserLeagueIds } = this.props;
+            currentUserLeagueIds, requestTargetUserData } = this.props;
 
     return (
       <div className="">
         <h1 className="">All Leagues</h1>
         <ul className="">
           {Object.keys(leagueData).map(leagueId => (
-            <LeagueIndexItem currentUserLeagueIds={currentUserLeagueIds}
+            <LeagueIndexItem requestTargetUserData={requestTargetUserData}
+                             currentUserLeagueIds={currentUserLeagueIds}
                              createCashBalance={createCashBalance}
                              league={leagueData[leagueId]}
                              currentUser={currentUser}
