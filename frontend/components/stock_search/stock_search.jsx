@@ -8,16 +8,25 @@ class StockSearch extends React.Component {
     super(props);
 
     this.state = { ticker: "",
-                   interval: "" };
+                   interval: "",
+                   searchInitiated: false,
+                   prevSearchData: null };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
   }
 
+  toggleSearchInitiated() {
+    this.setState({ searchInitiated: true })
+  }
+
   handleSubmit(event) {
     event.preventDefault();
 
-    this.props.requestStockSearch(this.state.ticker, this.state.interval);
+    this.props.requestStockSearch(this.state.ticker, this.state.interval)
+      .then( data => {
+        this.toggleSearchInitiated();
+      })
   }
 
   update(field) {
@@ -27,10 +36,22 @@ class StockSearch extends React.Component {
   }
 
   render() {
-    const { isRemoteLoading } = this.props;
+    const searchedTicker = this.state.ticker.toUpperCase();
+    const { isRemoteLoading, remoteStockData } = this.props;
 
     let ShowComponent = null;
-    (isRemoteLoading) ? ShowComponent = <Loader /> : ShowComponent = <h2>loaded</h2>
+
+    if (isRemoteLoading) {
+      ShowComponent = <Loader />
+    } else if (this.state.searchInitiated && remoteStockData[searchedTicker]) {
+      ShowComponent = <StockShow
+        stockData={remoteStockData[searchedTicker]}/>
+
+        this.state.prevSearchData = remoteStockData[searchedTicker]
+    } else if (this.state.prevSearchData) {
+      ShowComponent = <StockShow
+        stockData={this.state.prevSearchData}/>
+    }
 
     return (
       <div>

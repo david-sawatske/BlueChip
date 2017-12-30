@@ -5,7 +5,8 @@ import { requestStockSearch } from '../../actions/remote_stock_actions';
 import StockSearch from './stock_search';
 
 const mapStateToProps = state => ({
-  isRemoteLoading: state.ui.loading.remoteStockLoading
+  isRemoteLoading: state.ui.loading.remoteStockLoading,
+  remoteStockData: state.ui.remoteStocks.remoteStockData
 });
 
 const mapDispatchToProps = dispatch => ({

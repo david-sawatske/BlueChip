@@ -2,22 +2,24 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import HomePage from './home/home_page_container';
-import MastheadContainer from './masthead/masthead_container';
-import LeagueFormContainer from './league/league_form_container';
-import LeagueIndexContainer from './league/league_index_container';
+import Masthead from './masthead/masthead_container';
+import LeagueForm from './league/league_form_container';
+import LeagueIndex from './league/league_index_container';
+import StockSearch from './stock_search/stock_search_container';
 import UserShow from './users/user_show';
 
 const App = () => (
   <div className="container">
     <header className="header">
-      <MastheadContainer />
+      <Masthead />
     </header>
 
     <Switch className="body">
-      <Route exact path="/" component={ HomePage } />
-      <Route path="/leagues/new" component={ LeagueFormContainer }/>
-      <Route path="/leagues" component={ LeagueIndexContainer }/>
+      <Route exact path="/leagues" component={ LeagueIndex }/>
+      <Route path="/stocks/search" component={ StockSearch }/>
+      <Route path="/leagues/new" component={ LeagueForm }/>
       <Route path="/users/:userId" component={ UserShow }/>
+      <Route exact path="/" component={ HomePage } />
     </Switch>
 
     <footer className="footer">
