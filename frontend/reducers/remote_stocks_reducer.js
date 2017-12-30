@@ -7,9 +7,9 @@ import { RECEIVE_STOCK_SERIES,
 const remoteStockData = (state = {}, action) => {
   switch(action.type) {
     case RECEIVE_STOCK_SERIES:
-      return merge({}, state, action);
+      return merge({}, state, action.stockSeriesData);
     case RECEIVE_STOCK_SEARCH:
-      return merge({}, state, action);
+      return merge({}, state, action.stockSeriesData);
     default:
       return state;
   }
