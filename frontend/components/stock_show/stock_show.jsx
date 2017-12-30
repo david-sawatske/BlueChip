@@ -3,17 +3,19 @@ import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 
+import StockHeader from './stock_header';
+
 class StockShow extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { stockData } = this.props
+    const { quote } = this.props.stockData;
 
     return (
       <div>
-        <h2>{stockData.quote.companyName}</h2>
+        <StockHeader quote={quote} />
       </div>
     )
   }
