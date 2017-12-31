@@ -9,7 +9,7 @@ class StockHeader extends React.Component {
     const { quote } = this.props;
     const change = quote.change;
     const percent = (quote.changePercent * 100).toFixed(2);
-console.log(quote);
+
     const showSign = num => (
       (num > 0 ? '+' : '')
     )
