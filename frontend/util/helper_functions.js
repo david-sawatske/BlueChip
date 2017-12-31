@@ -13,3 +13,8 @@ export const numAbbr = number => {
     return "Data not available"
   }
 }
+
+export const dateConv = data => {
+  const date = data.date.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3')
+  return Date.parse(`${date}T${data.minute}`)
+};

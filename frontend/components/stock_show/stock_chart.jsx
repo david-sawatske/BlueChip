@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 import Highcharts from 'highcharts/highstock';
-import {
-  HighchartsStockChart, Chart, withHighcharts, XAxis, YAxis, Title, Legend,
-  SplineSeries, Navigator, Tooltip
-} from 'react-jsx-highstock';
+import { HighchartsStockChart, Chart, withHighcharts, XAxis, YAxis, Title,
+         Legend, SplineSeries, Navigator, Tooltip } from 'react-jsx-highstock';
+
+import { dateConv } from '../../util/helper_functions';
 
 class StockChart extends Component {
   constructor (props) {
@@ -13,12 +13,6 @@ class StockChart extends Component {
 
   render() {
     const { chart } = this.props;
-
-    const dateConv = data => {
-      const date = data.date.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3')
-      return Date.parse(`${date}T${data.minute}`)
-    };
-
     const chartData = []
 
     chart.map(obj => {
