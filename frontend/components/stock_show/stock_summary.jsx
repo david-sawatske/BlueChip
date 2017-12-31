@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { numAbbr } from '../../util/helper_functions'
+
 const StockSummary = ({ quote }) => (
   <div>
     <h3>Stock Summary</h3>
@@ -19,7 +21,7 @@ const StockSummary = ({ quote }) => (
         </tr>
         <tr>
           <td>Market Cap</td>
-          <td>{(quote.marketCap / 1000000000).toFixed(3).toString()}</td>
+          <td>{numAbbr(quote.marketCap)}</td>
         </tr>
         <tr>
           <td>52 Week High</td>
