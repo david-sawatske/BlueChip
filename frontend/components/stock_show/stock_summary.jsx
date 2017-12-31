@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { numAbbr } from '../../util/helper_functions'
+import { numAbbr, numberToCurrency } from '../../util/helper_functions'
 
 const StockSummary = ({ quote }) => (
   <div>
@@ -9,11 +9,10 @@ const StockSummary = ({ quote }) => (
       <tbody>
         <tr>
           <td>Avg Total Volume</td>
-          <td>{quote.avgTotalVolume}</td>
         </tr>
         <tr>
           <td>Latest Volume</td>
-          <td>{quote.latestVolume}</td>
+          <td>{numAbbr(quote.latestVolume)}</td>
         </tr>
         <tr>
           <td>P/E Ratio</td>
@@ -25,11 +24,11 @@ const StockSummary = ({ quote }) => (
         </tr>
         <tr>
           <td>52 Week High</td>
-          <td>{quote.week52High}</td>
+          <td>{numberToCurrency(quote.week52High)}</td>
         </tr>
         <tr>
           <td>52 Week Low</td>
-          <td>{quote.week52Low}</td>
+          <td>{numberToCurrency(quote.week52Low)}</td>
         </tr>
         <tr>
           <td>YTD Change</td>

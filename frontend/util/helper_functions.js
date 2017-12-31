@@ -3,11 +3,11 @@ export const numberToCurrency = number => (
 )
 
 export const numAbbr = number => {
-  if (number >= 1.0e+12) {
+  if (Math.abs(number / 1.0e+12) >= 1) {
     return (number / 1.0e+12).toLocaleString() + " T"
-  } else if (number / 1.0e+9) {
+  } else if (Math.abs(number / 1.0e+9) >= 1) {
       return (number / 1.0e+9).toLocaleString() + " B"
-  } else if (number / 1.0e+6) {
+  } else if (Math.abs(number / 1.0e+6) >= 1) {
       return (number / 1.0e+6).toLocaleString() + " M"
   } else {
     return "Data not available"
@@ -23,7 +23,3 @@ export const dateConv = data => {
 
   return toEST(Date.parse(`${date}T${data.minute}`))
 };
-
-
-
-// 1514583600000
