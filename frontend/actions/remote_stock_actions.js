@@ -20,9 +20,9 @@ export const startRemoteFetch = () => ({
 });
 
 // thunk async action creators
-export const  requestStockSearch = (symbol, interval) => dispatch => {
+export const  requestStockSearch = (symbol, interval, dataTypes) => dispatch => {
   dispatch(startRemoteFetch());
-  return RemoteStockAPIUtil.fetchStockSeries(symbol, interval)
+  return RemoteStockAPIUtil.fetchStockSeries(symbol, interval, dataTypes)
     .then(stockSeriesData => {
       dispatch(receiveStockSearch(stockSeriesData));
       return stockSeriesData;

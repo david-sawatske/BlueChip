@@ -10,8 +10,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestStockSearch: (ticker, interval) => (
-    dispatch(requestStockSearch(ticker, interval))
+  requestStockSearch: (ticker, interval, dataTypes) => (
+    dispatch(requestStockSearch(ticker, interval, dataTypes))
   )
 });
 
