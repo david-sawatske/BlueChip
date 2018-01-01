@@ -8,6 +8,7 @@ import StockSummary from './stock_summary';
 import StockHeader from './stock_header';
 import CompanyData from './company_data';
 import StockChart from './stock_chart';
+import StockNews from './stock_news_index';
 
 class StockShow extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class StockShow extends React.Component {
 
   render() {
     const { stockData, interval } = this.props
-    const { quote, chart, logo, company, stats } = stockData;
+    const { quote, chart, logo, company, stats, news } = stockData;
 
     return (
       <div>
@@ -27,6 +28,8 @@ class StockShow extends React.Component {
         <StockSummary quote={quote} />
         <CompanyData company={company}
                      stats={stats} />
+        <StockNews news={news}
+                   companyName={quote.companyName} />
       </div>
     )
   }
