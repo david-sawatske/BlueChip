@@ -21,13 +21,14 @@ class StockShow extends React.Component {
 
     return (
       <div>
-        <StockChart chart={chart}
-                    interval={interval} />
         <StockHeader quote={quote}
                      logo={logo} />
+        <StockChart chart={chart}
+                    interval={interval} />
         <StockSummary quote={quote} />
         <CompanyData company={company}
-                     stats={stats} />
+                     float={stats.float}
+                     employees={(stats.revenue / stats.revenuePerEmployee)} />
         <StockNews news={news}
                    companyName={quote.companyName} />
       </div>
