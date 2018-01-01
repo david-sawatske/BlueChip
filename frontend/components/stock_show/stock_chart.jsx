@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Highcharts from 'highcharts/highstock';
 import { HighchartsStockChart, Chart, withHighcharts, XAxis, YAxis, Title,
@@ -7,7 +7,7 @@ import { HighchartsStockChart, Chart, withHighcharts, XAxis, YAxis, Title,
 
 import { dateConv } from '../../util/helper_functions';
 
-class StockChart extends Component {
+class StockChart extends React.Component {
   constructor (props) {
     super(props);
 
@@ -17,19 +17,18 @@ class StockChart extends Component {
     this.setYType = this.setYType.bind(this);
   }
 
-
   setYType() {
-    (this.state.yType === "volumeData") ? this.setState({ yType: "priceData",
-                                                          typeButton: "Volume Data" })
-                                        :
-                                          this.setState({ yType: "volumeData",
-                                                          typeButton: "Price Data" })
+    if (this.state.yType === "volumeData") {
+      this.setState({ yType: "priceData", typeButton: "Volume Data" })
+    } else {
+        this.setState({ yType: "volumeData", typeButton: "Price Data" })
+      }
   }
 
   render() {
     const { chart, week52High, week52Low } = this.props;
-    const priceData = []
-    const volumeData = []
+    const priceData = [];
+    const volumeData = [];
 
     chart.map(obj => {
       if (obj.average > 0) {
@@ -37,7 +36,6 @@ class StockChart extends Component {
         volumeData.push([dateConv(obj), obj.volume]);
       }
     })
-
 
     const graphTypeButton = <button className="button" onClick={ (e) =>
                               this.setYType(e) }>
@@ -49,19 +47,19 @@ class StockChart extends Component {
           yAxis = <div>
                     <YAxis id="price">
                       <YAxis.Title>Price</YAxis.Title>
-                      <SplineSeries id="price" name="Price" data={priceData} />
+                      <SplineSeries id="price"
+                                    name="Price"
+                                    data={priceData} />
                     </YAxis>
-
-
                   </div>
       } else if (this.state.yType === "volumeData") {
           yAxis = <YAxis id="volumeData">
                     <YAxis.Title>Price</YAxis.Title>
-                    <AreaSplineSeries id="volumeData" name="Volume" data={volumeData} />
+                    <AreaSplineSeries id="volumeData"
+                                      name="Volume"
+                                      data={volumeData} />
                   </YAxis>
       }
-
-
 
     return (
       <div className="app">
@@ -86,9 +84,8 @@ class StockChart extends Component {
             <Navigator.Series seriesId="price" />
           </Navigator>
         </HighchartsStockChart>
-
       </div>
-    );
+    )
   }
 }
 
