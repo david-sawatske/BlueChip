@@ -15,13 +15,15 @@ class StockShow extends React.Component {
   }
 
   render() {
-    const { quote, chart, logo, company, stats } = this.props.stockData;
+    const { stockData, interval } = this.props
+    const { quote, chart, logo, company, stats } = stockData;
 
     return (
       <div>
+        <StockChart chart={chart}
+                    interval={interval} />
         <StockHeader quote={quote}
                      logo={logo} />
-        <StockChart chart={chart} />
         <StockSummary quote={quote} />
         <CompanyData company={company}
                      stats={stats} />

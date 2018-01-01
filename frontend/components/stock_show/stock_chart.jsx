@@ -26,14 +26,17 @@ class StockChart extends React.Component {
   }
 
   render() {
-    const { chart, week52High, week52Low } = this.props;
+    const { chart, interval } = this.props;
     const priceData = [];
     const volumeData = [];
 
     chart.map(obj => {
-      if (obj.average > 0) {
-        priceData.push([dateConv(obj), obj.average]);
-        volumeData.push([dateConv(obj), obj.volume]);
+      const date = (interval === '1d') ? dateConv(obj) : Date.parse(obj.date);
+      const price = (interval === '1d') ? obj.average : obj.close;
+
+      if (price > 0) {
+        priceData.push([date, price]);
+        volumeData.push([date, obj.volume]);
       }
     })
 
