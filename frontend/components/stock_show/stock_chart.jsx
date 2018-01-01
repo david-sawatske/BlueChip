@@ -2,32 +2,73 @@ import React, { Component } from 'react';
 
 import Highcharts from 'highcharts/highstock';
 import { HighchartsStockChart, Chart, withHighcharts, XAxis, YAxis, Title,
-         Legend, SplineSeries, Navigator, Tooltip } from 'react-jsx-highstock';
+         Legend, SplineSeries, AreaSplineSeries, Navigator, Tooltip
+       } from 'react-jsx-highstock';
 
 import { dateConv } from '../../util/helper_functions';
 
 class StockChart extends Component {
   constructor (props) {
     super(props);
+
+    this.state = { yType: "priceData",
+                   typeButton: "Volume Data" }
+
+    this.setYType = this.setYType.bind(this);
+  }
+
+
+  setYType() {
+    (this.state.yType === "volumeData") ? this.setState({ yType: "priceData",
+                                                          typeButton: "Volume Data" })
+                                        :
+                                          this.setState({ yType: "volumeData",
+                                                          typeButton: "Price Data" })
   }
 
   render() {
-    const { chart } = this.props;
-    const chartData = []
+    const { chart, week52High, week52Low } = this.props;
+    const priceData = []
+    const volumeData = []
 
     chart.map(obj => {
       if (obj.average > 0) {
-        chartData.push([dateConv(obj), obj.average]);
+        priceData.push([dateConv(obj), obj.average]);
+        volumeData.push([dateConv(obj), obj.volume]);
       }
     })
 
 
+    const graphTypeButton = <button className="button" onClick={ (e) =>
+                              this.setYType(e) }>
+                              { this.state.typeButton }
+                            </button>
+
+    let yAxis
+    if (this.state.yType === "priceData") {
+          yAxis = <div>
+                    <YAxis id="price">
+                      <YAxis.Title>Price</YAxis.Title>
+                      <SplineSeries id="price" name="Price" data={priceData} />
+                    </YAxis>
+
+
+                  </div>
+      } else if (this.state.yType === "volumeData") {
+          yAxis = <YAxis id="volumeData">
+                    <YAxis.Title>Price</YAxis.Title>
+                    <AreaSplineSeries id="volumeData" name="Volume" data={volumeData} />
+                  </YAxis>
+      }
+
+
+
     return (
       <div className="app">
+        { graphTypeButton }
+
         <HighchartsStockChart>
           <Chart zoomType="x" />
-
-          <Title></Title>
 
           <Legend>
             <Legend.Title>Key</Legend.Title>
@@ -39,10 +80,7 @@ class StockChart extends Component {
             <XAxis.Title>Date</XAxis.Title>
           </XAxis>
 
-          <YAxis id="price">
-            <YAxis.Title>Price</YAxis.Title>
-            <SplineSeries id="price" name="Price" data={chartData} />
-          </YAxis>
+          { yAxis }
 
           <Navigator>
             <Navigator.Series seriesId="price" />
