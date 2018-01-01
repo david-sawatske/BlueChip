@@ -14,14 +14,15 @@ class StockSearch extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
+  }
 
+  componentWillMount() {
+    this.props.requestStockSearch('aapl', '6m')
+      .then( data => {
+            this.toggleSearchInitiated();
+      })
 
-        this.props.requestStockSearch('aapl', '6m')
-          .then( data => {
-                this.toggleSearchInitiated();
-          })
-
-          this.state.ticker = "aapl"
+      this.setState({ticker: 'aapl'})
   }
 
   toggleSearchInitiated() {
@@ -46,6 +47,7 @@ class StockSearch extends React.Component {
   render() {
     const searchedTicker = this.state.ticker.toUpperCase();
     const { isRemoteLoading, remoteStockData } = this.props;
+    const intervals = ['5y', '2y','1y', 'YTD', '6m','3m', '1m', '1d'];
 
     let ShowComponent = null;
 
@@ -73,24 +75,24 @@ class StockSearch extends React.Component {
                 className=""
               />
             </label>
-
-            <label>Interval:
-              <select onChange={this.update('interval')}>
-                <option value="">Choose an Interval</option>
-                <option value="1d">Intraday</option>
-                <option value="1m">One Month</option>
-                <option value="3m">Three Months</option>
-                <option value="6m">Six Months</option>
-                <option value="ytd">Year To Date</option>
-                <option value="1y">One Year</option>
-                <option value="5y">Five Years</option>
-              </select>
-            </label>
           <input type="submit" value="Search" />
         </form>
 
         <br/>
-          { ShowComponent }
+
+        <form onSubmit={this.handleSubmit} className="">
+          {intervals.map((interval, idx) =>
+            <button className="button"
+              key={idx}
+              onClick={ () => this.setState({ interval: interval }) }>
+              { interval }
+            </button>
+          )}
+        </form>
+
+        <br/>
+
+        { ShowComponent }
       </div>
     );
   }
