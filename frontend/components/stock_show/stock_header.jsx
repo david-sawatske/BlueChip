@@ -6,7 +6,7 @@ class StockHeader extends React.Component {
   }
 
   render() {
-    const { quote } = this.props;
+    const { quote, logo } = this.props;
     const change = quote.change;
     const percent = (quote.changePercent * 100).toFixed(2);
 
@@ -16,6 +16,7 @@ class StockHeader extends React.Component {
 
     return (
       <div>
+        <img src={ logo.url } />
         <h3>{quote.companyName} ({quote.symbol})</h3>
         <h2>{quote.latestPrice}</h2>
         <h3>Change: {showSign(change)}{change}</h3>

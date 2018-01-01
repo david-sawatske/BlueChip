@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 
 import StockSummary from './stock_summary';
 import StockHeader from './stock_header';
+import CompanyData from './company_data';
 import StockChart from './stock_chart';
 
 class StockShow extends React.Component {
@@ -14,11 +15,12 @@ class StockShow extends React.Component {
   }
 
   render() {
-    const { quote, chart } = this.props.stockData;
+    const { quote, chart, logo } = this.props.stockData;
 
     return (
       <div>
-        <StockHeader quote={quote} />
+        <StockHeader quote={quote}
+                     logo={logo} />
         <StockChart chart={chart} />
         <StockSummary quote={quote} />
       </div>

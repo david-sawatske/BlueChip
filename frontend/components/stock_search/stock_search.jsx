@@ -14,6 +14,14 @@ class StockSearch extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
+
+
+        this.props.requestStockSearch('aapl', '6m')
+          .then( data => {
+                this.toggleSearchInitiated();
+          })
+
+          this.state.ticker = "aapl"
   }
 
   toggleSearchInitiated() {
