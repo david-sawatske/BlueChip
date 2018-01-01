@@ -15,7 +15,7 @@ class StockShow extends React.Component {
   }
 
   render() {
-    const { quote, chart, logo } = this.props.stockData;
+    const { quote, chart, logo, company, stats } = this.props.stockData;
 
     return (
       <div>
@@ -23,6 +23,8 @@ class StockShow extends React.Component {
                      logo={logo} />
         <StockChart chart={chart} />
         <StockSummary quote={quote} />
+        <CompanyData company={company}
+                     stats={stats} />
       </div>
     )
   }
