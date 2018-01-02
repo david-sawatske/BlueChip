@@ -2,14 +2,14 @@ import { combineReducers } from 'redux';
 
 import { mergeWith} from 'lodash';
 
-import { RECEIVE_STOCK_SERIES,
-         RECEIVE_STOCK_SEARCH } from '../actions/remote_stock_actions';
+import { RECEIVE_STOCK_SEARCH,
+         START_REMOTE_STOCK_FETCH } from '../actions/remote_stock_actions';
 
 const remoteStockData = (state = {}, action) => {
   switch(action.type) {
-    case RECEIVE_STOCK_SERIES:
-      return mergeWith({}, action.stockSeriesData, state, customizer);
     case RECEIVE_STOCK_SEARCH:
+      return mergeWith({}, action.stockSeriesData, state, customizer);
+    case START_REMOTE_STOCK_FETCH:
       return mergeWith({}, action.stockSeriesData, state, customizer);
     default:
       return state;
