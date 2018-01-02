@@ -1,6 +1,6 @@
 import * as UserAPIUtil from '../util/user_api_util';
 
-export const START_REMOTE_FETCH = 'START_REMOTE_FETCH';
+export const START_RAILS_USER_FETCH = 'START_RAILS_USER_FETCH';
 export const RECEIVE_TARGET_USER_DATA = 'RECEIVE_TARGET_USER_DATA';
 
 // sync action creators
@@ -9,15 +9,14 @@ export const receiveTargetUserData = user => ({
   targetUser: user
 });
 
-export const startRemoteFetch = () => ({
-  type: START_REMOTE_FETCH
+export const startRailsUserFetch = () => ({
+  type: START_RAILS_USER_FETCH
 });
 
 // thunk async action creators
 export const requestTargetUserData = id => dispatch => {
-  dispatch(startRemoteFetch());
+  dispatch(startRailsUserFetch());
   return UserAPIUtil.fetchTargetUserData(id).then(user =>{
     dispatch(receiveTargetUserData(user));
-    return user;
   });
 };
