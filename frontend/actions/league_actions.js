@@ -1,6 +1,6 @@
 import * as LeagueAPIUtil from '../util/league_api_util';
 
-export const RECEIVE_SAMPLE_LEAGUE = 'RECEIVE_SAMPLE_LEAGUE';
+export const START_RAILS_LEAGUE_FETCH = 'START_RAILS_LEAGUE_FETCH';
 export const RECEIVE_TARGET_LEAGUE = 'RECEIVE_TARGET_LEAGUE';
 export const RECEIVE_ALL_LEAGUES = 'RECEIVE_ALL_LEAGUES';
 
@@ -15,21 +15,24 @@ export const receiveAllLeagues = allLeagues => ({
   allLeagues
 });
 
-export const receiveSampleLeague = sampleLeague => ({
-  type: RECEIVE_SAMPLE_LEAGUE,
-  targetLeague: sampleLeague
+export const startRailsLeagueFetch = () => ({
+  type: START_RAILS_LEAGUE_FETCH
 });
 
 // thunk async action creators
 export const requestTargetLeague = id => dispatch => {
-  return LeagueAPIUtil.fetchTargetLeague(id).then(league =>
-    dispatch(receiveTargetLeague(league)));
-}
+  dispatch(startRailsLeagueFetch());
+  return LeagueAPIUtil.fetchTargetLeague(id).then(league => {
+    dispatch(receiveTargetLeague(league))
+  });
+};
 
-export const requestAllLeagues = () => dispatch => (
-  LeagueAPIUtil.fetchAllLeagues()
-    .then(leagues => dispatch(receiveAllLeagues(leagues)))
-);
+export const requestAllLeagues = () => dispatch => {
+  dispatch(startRailsLeagueFetch());
+  return LeagueAPIUtil.fetchAllLeagues().then(leagues => {
+    dispatch(receiveAllLeagues(leagues));
+  });
+};
 
 export const createLeague = league => dispatch => (
   LeagueAPIUtil.createLeague(league).then(data => {
@@ -37,8 +40,3 @@ export const createLeague = league => dispatch => (
     return(data);
   })
 );
-
-export const requestSampleLeague = id => dispatch => {
-  return LeagueAPIUtil.fetchTargetLeague(id).then(league =>
-    dispatch(receiveSampleLeague(league)));
-};

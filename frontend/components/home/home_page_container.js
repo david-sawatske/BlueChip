@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { requestSampleLeague } from '../../actions/league_actions';
+import { requestTargetLeague } from '../../actions/league_actions';
 import { getLeagueUserData } from '../../reducers/selectors';
 
 import HomePage from './home_page';
@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  requestSampleLeague: id => dispatch(requestSampleLeague(id))
+  requestTargetLeague: id => dispatch(requestTargetLeague(id))
 })
 
 export default connect(

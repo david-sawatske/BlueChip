@@ -9,7 +9,7 @@ class HomePage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.requestSampleLeague('random')
+    this.props.requestTargetLeague('random')
   }
 
   render()  {
