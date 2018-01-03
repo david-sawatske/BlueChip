@@ -2,11 +2,11 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import HomePage from './home/home_page_container';
+import UserShow from './users/user_show_container';
 import Masthead from './masthead/masthead_container';
 import LeagueForm from './league/league_form_container';
 import LeagueIndex from './league/league_index_container';
 import StockSearch from './stock_search/stock_search_container';
-import UserShow from './users/user_show';
 
 const App = () => (
   <div className="container">
