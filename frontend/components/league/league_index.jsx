@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import LeagueIndexItem from './league_index_item'
+import LeagueIndexItem from './league_index_item_container'
 import Loader from '../shared/loader';
 
 class LeagueIndex extends Component {
@@ -18,28 +18,18 @@ class LeagueIndex extends Component {
   }
 
   render() {
-    const { isLeagueLoading, requestTargetUserData, currentUserLeagueIds,
-            isUserLoading, leagueData, createCashBalance,
-            currentUser } = this.props;
+    const { isLeagueLoading, requestTargetUserData, isUserLoading,
+            currentUserLeagueIds, leagueIds, allLeaguesData } = this.props;
 
     let ShowComponent
     if ( isLeagueLoading || isUserLoading ) {
       ShowComponent = <Loader />
     } else {
-        ShowComponent = Object.keys(leagueData).map(leagueId => (
-          <LeagueIndexItem requestTargetUserData={requestTargetUserData}
-                           currentUserLeagueIds={currentUserLeagueIds}
-                           createCashBalance={createCashBalance}
-                           league={leagueData[leagueId]}
-                           currentUser={currentUser}
-                           key={leagueId}/>
-      ))
-
-
-
-
-      ///// LeagueIndexItemContainer ???? ///
-
+        ShowComponent = leagueIds.map( id  => (
+          <LeagueIndexItem currentUserLeagueIds={currentUserLeagueIds}
+                           leagueData={allLeaguesData[id]}
+                           key={id} />
+        ))
     }
 
     return (

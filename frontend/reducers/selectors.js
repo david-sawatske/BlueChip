@@ -44,3 +44,18 @@ export const getLeagueUserData = state => {
 
   return leagueUserData
 }
+
+export const getUserLeagueIds = state => {
+  const currentUser = state.session.currentUser;
+  const userLeagueJoin = state.entities.userLeagueBalances.userLeagueBalancesById;
+  const currentUserLeagueIds = []
+
+  if (currentUser) {
+    const currentUserId = currentUser.id
+    if (currentUser.id) {
+      return Object.values(userLeagueJoin)
+      .filter(obj => obj.userId === currentUserId.toString())
+      .map(selectObj => selectObj.leagueId)
+    }
+  }
+}

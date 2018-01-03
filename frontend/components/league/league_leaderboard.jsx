@@ -9,7 +9,7 @@ class LeagueLeaderboard extends React.Component {
 
   render() {
     const { leagueUserData } = this.props;
-
+    
     const sortedLeagueUserData = leagueUserData.sort((a, b) => {
       const totalAssetsA = a.cashInvested + a.cashBalance;
       const totalAssetsB = b.cashInvested + b.cashBalance;

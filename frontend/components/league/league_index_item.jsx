@@ -15,20 +15,19 @@ class LeagueIndexItem extends Component {
     e.preventDefault();
 
     this.props.createCashBalance({ user_id: this.props.currentUser.id,
-                                   league_id: this.props.league.id,
-                                   balance: this.props.league.startingBalance })
+                                   league_id: this.props.leagueData.id,
+                                   balance: this.props.leagueData.startingBalance })
       .then(data => this.props.requestTargetUserData(this.props.currentUser.id));
 
   }
 
   render() {
-    const { league, currentUserLeagueIds, currentUser } = this.props;
-    const leagueUserData = league.leagueUserData;
+    const { currentUserLeagueIds, leagueData, currentUser } = this.props;
 
     let leagueIndexButton = null;
-    if (currentUserLeagueIds && currentUserLeagueIds.includes(league.id)) {
+    if (currentUserLeagueIds && currentUserLeagueIds.includes(leagueData.id)) {
         leagueIndexButton =
-          <Link className="league-join-button" to={`/users/${currentUser.id}`}>
+          <Link className="" to={`/users/${currentUser.id}`}>
             View Your Leagues
           </Link>
       } else if (currentUser) {
@@ -43,10 +42,10 @@ class LeagueIndexItem extends Component {
 
     return (
       <div className="">
-        <h2>{league.name}</h2>
-        <h4>Starting Balance: {league.startingBalance}</h4>
+        <h2>{leagueData.name}</h2>
+        <h4>Starting Balance: {leagueData.startingBalance}</h4>
         <h4>League Leaders</h4>
-        <LeagueLeaderboard leagueUserData={leagueUserData}/>
+        <LeagueLeaderboard leagueUserData={ leagueData.leagueUserData } />
         { leagueIndexButton }
       </div>
     )
