@@ -8,7 +8,8 @@ import { getLeagueUserData } from '../../reducers/selectors';
 import LeagueIndex from './league_index';
 
 const mapStateToProps = state => ({
-  leagueIds: state.entities.leagues.allLeagueIds,
+  isLeagueLoading: state.ui.loading.railsLeagueLoading,
+  isUserLoading: state.ui.loading.railsUserLoading,
   currentUser: state.session.currentUser,
   leagueData: getLeagueUserData(state),
   currentUserLeagueIds: getUserLeagueIds(state)
@@ -17,7 +18,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   createCashBalance: cash_balance => dispatch(createCashBalance(cash_balance)),
   requestTargetUserData: id => dispatch(requestTargetUserData(id)),
-  requestAllLeagues: () => dispatch(requestAllLeagues()),
+  requestAllLeagues: () => dispatch(requestAllLeagues())
 })
 
 export default connect(
@@ -25,6 +26,7 @@ export default connect(
   mapDispatchToProps
 )(LeagueIndex)
 
+// START Selectors
 const getUserLeagueIds = state => {
   const currentUser = state.session.currentUser;
   const userLeagueJoin = state.entities.userLeagueBalances.userLeagueBalancesById;
@@ -39,3 +41,4 @@ const getUserLeagueIds = state => {
     }
   }
 }
+// END Selectors
