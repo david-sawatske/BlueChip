@@ -2,14 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import LeagueIndexItem from '../league/league_index_item'
+import Loader from '../shared/loader';
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.requestTargetLeague('random')
+  componentWillMount() {
+    if ( !this.props.leagueIds[0] ) {
+      this.props.requestTargetLeague('random')
+    }
   }
 
   render()  {
@@ -18,10 +21,10 @@ class HomePage extends React.Component {
 
     let leaderBoard = null;
     if (sampleLeagueId) {
-      leaderBoard = <LeagueIndexItem league={leagueData[sampleLeagueId]}
+      leaderBoard = <LeagueIndexItem leagueData={leagueData[sampleLeagueId]}
                                      key={sampleLeagueId}/>
     } else {
-      leaderBoard = <div>loading</div>
+      leaderBoard = <Loader />
     }
 
     return (
@@ -31,7 +34,7 @@ class HomePage extends React.Component {
           <div className="">
             <h3>Check leaderboars to see where you rank</h3>
             <div>
-              {leaderBoard}
+              { leaderBoard }
             </div>
           </div>
         </section>
