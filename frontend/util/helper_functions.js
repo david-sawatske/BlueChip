@@ -23,3 +23,10 @@ export const dateConv = data => {
 
   return toEST(Date.parse(`${date}T${data.minute}`))
 };
+
+
+export const arrSample = arr => {
+  const randIdx = Math.floor(Math.random() * arr.length |0);
+
+  return arr[randIdx]
+}
