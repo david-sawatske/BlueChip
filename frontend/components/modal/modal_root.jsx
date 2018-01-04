@@ -3,7 +3,7 @@ import React  from 'react';
 import SessionModal from './session_modal';
 
 const MODAL_COMPONENTS = {
-
+  'session': SessionModal
 }
 
 class ModalRoot extends React.Component {
