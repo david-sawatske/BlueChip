@@ -4,12 +4,16 @@ const getLeagueUserIds = (userLeagueBalances, usersById, leagueId) => (
     .map(filteredObj => filteredObj.userId)
 )
 
-const getAssociatedData = (joinData, sourceData, userId, leagueId) => (
-  Object.values(joinData)
-  .filter(obj => obj.userId === userId &&
-    (obj.leagueId === leagueId || leagueId === undefined))
-  .map(obj2 => sourceData[obj2.id])
-)
+const getAssociatedData = (joinData, sourceData, userId, leagueId, sourceKey) => {
+  const associatedData = Object.values(joinData)
+                          .filter(obj => obj.userId === userId &&
+                                         (obj.leagueId === leagueId ||
+                                         leagueId === undefined)
+                                  )
+                          .map(obj2 => sourceData[obj2.id])
+
+  return (associatedData.length === 1) ? associatedData[0][sourceKey] : associatedData;
+}
 
 export const getLeagueUserData = state => {
   const leagueUserData = {};
@@ -27,11 +31,14 @@ export const getLeagueUserData = state => {
     leagueUserData[leagueId] = currLeague
 
     const leagueBalance = leagueUsers.map(userId => {
-      const bal = getAssociatedData(balAssocData, balancesById, userId, leagueId)[0].balance
-      const trans = getAssociatedData(transAssocData, transactionsById, userId, leagueId)
+      const bal = getAssociatedData(balAssocData, balancesById, userId, leagueId, 'balance')
+      const transactions = getAssociatedData(transAssocData, transactionsById,
+                                             userId, leagueId)
       let cashInvested = 0
 
-      trans.map(t => cashInvested += (t.sharePrice * t.shareQuant))
+      transactions.map(trasnaction => (
+        cashInvested += ( trasnaction.sharePrice * trasnaction.shareQuant))
+      )
 
       return { username: usersById[userId].username,
                id: userId,
@@ -45,17 +52,14 @@ export const getLeagueUserData = state => {
   return leagueUserData
 }
 
-export const getUserLeagueIds = state => {
-  const currentUser = state.session.currentUser;
-  const userLeagueJoin = state.entities.userLeagueBalances.userLeagueBalancesById;
-  const currentUserLeagueIds = []
+export const getUserLeagueIds = ( state, userId ) => {
+  let targetUserID;
+  (state.session.currentUser) ? targetUserID = state.session.currentUser.id :
+                                targetUserID = userId
 
-  if (currentUser) {
-    const currentUserId = currentUser.id
-    if (currentUser.id) {
-      return Object.values(userLeagueJoin)
-      .filter(obj => obj.userId === currentUserId.toString())
-      .map(selectObj => selectObj.leagueId)
-    }
-  }
+  const userLeagueJoin = state.entities.userLeagueBalances.userLeagueBalancesById;
+
+  return Object.values(userLeagueJoin)
+    .filter(obj => obj.userId === targetUserID)
+    .map(selectObj => selectObj.leagueId)
 }
