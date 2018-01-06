@@ -26,26 +26,36 @@ class LeagueForm extends React.Component {
   }
 
   render() {
+  const currentUser = this.props.currentUser;
+  let LeagueFormInput;
+
+  if (currentUser) {
+    LeagueFormInput =
+      <form className="league-form" onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          value={this.state.name}
+          placeholder="League Name"
+          onChange={this.update('name')}
+          className="text-input"
+        />
+        <input
+          type="number"
+          value={this.state.starting_balance}
+          placeholder="Starting Cash Balance"
+          onChange={this.update('starting_balance')}
+          className="number-input"
+        />
+      <button id="new-league">Create League</button>
+    </form>
+  } else {
+    LeagueFormInput = 'Please Login or Sign Up to create a League'
+  }
+
     return (
       <div className="league-new">
         <h2>Create a New League</h2>
-        <form className="league-form" onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              value={this.state.name}
-              placeholder="League Name"
-              onChange={this.update('name')}
-              className="text-input"
-            />
-            <input
-              type="number"
-              value={this.state.starting_balance}
-              placeholder="Starting Cash Balance"
-              onChange={this.update('starting_balance')}
-              className="number-input"
-            />
-          <button id="new-league">Create League</button>
-        </form>
+        { LeagueFormInput }
       </div>
     );
   }
