@@ -60,7 +60,7 @@ module UsersHelper
 
     joinedById.each do |id, balance|
       joinedById[id] = {
-        "id" => balance.id.to_s,
+        "balanceId" => balance.id.to_s,
         "userId" => balance.user_id.to_s,
         "leagueId" => balance.league_id.to_s
       }
@@ -78,7 +78,7 @@ module UsersHelper
 
     joinedById.each do |id, transaction|
       joinedById[id] = {
-        "id" => transaction.id.to_s,
+        "transactionId" => transaction.id.to_s,
         "userId" => transaction.user_id.to_s,
         "leagueId" => transaction.league_id.to_s
       }
