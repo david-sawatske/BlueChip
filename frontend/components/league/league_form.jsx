@@ -15,8 +15,25 @@ class LeagueForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.createLeague(this.state)
-      .then(data => this.props.history.push(`/`));
+
+
+
+    this.props.createLeague(this.state).then(leagueData => {
+      const newLeagueObj = Object.values(leagueData.leagues.leaguesById)[0]
+      const cashBalance = { balance: newLeagueObj.startingBalance,
+                            user_id: this.props.currentUser.id,
+                            league_id: newLeagueObj.id }
+
+     this.props.createCashBalance(cashBalance).then(balanceData => {
+       const newBalanceObj = Object.values(balanceData.targetBalance
+                                                      .userLeagueBalances
+                                                      .userLeagueBalancesById)[0]
+
+       this.props.requestTargetUserData(newBalanceObj.user_id).then(userData => {
+        this.props.history.push(`/users/${newBalanceObj.user_id}`);
+       })
+     })
+    })
   }
 
   update(field) {
