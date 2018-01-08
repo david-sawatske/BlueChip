@@ -89,3 +89,47 @@ export const getLeagueUserData = state => {
   return leagueUserData
 }
 // END: Selectors to pass to LeagueIndex Components //
+
+// START: Selectors to pass to UserShow Components //
+const idNamer = (obj, type) => {
+  const newObj = Object.assign({}, obj);
+
+  newObj[`${type}Id`] = obj.id;
+  delete newObj.id;
+
+  return newObj
+};
+
+export const getUserLeagueData = state => {
+  const usersById = state.entities.users.usersById;
+  const userLeagueData = {}
+
+  state.entities.users.allUserIds.map(userId => {
+    userLeagueData[userId] = merge(usersById[userId], { userLeagueData: {} })
+  })
+
+  const userLeagueBalances = state.entities.userLeagueBalances.userLeagueBalancesById;
+  const userLeagueTransactions = state.entities.userLeagueTransactions.transactionsById;
+  const transactions = state.entities.transactions.transactionsById;
+  const cashBalances = state.entities.cashBalances.balancesById;
+  const leagues = state.entities.leagues.leaguesById;
+
+  Object.values(userLeagueBalances).map(joinObj => {
+    const leagueData = merge(idNamer(cashBalances[joinObj.balanceId], 'balance'),
+                             idNamer(leagues[joinObj.leagueId], 'league'),
+                             { remoteStockData: {} })
+
+
+  userLeagueData[joinObj.userId]['userLeagueData'][joinObj.leagueId] = leagueData
+  })
+
+  Object.values(userLeagueTransactions).map(joinObj => {
+    let remoteData = userLeagueData[joinObj.userId]['userLeagueData'][joinObj.leagueId]['remoteStockData']
+    const currRemoteStock = transactions[joinObj.transactionId]
+
+    remoteData[currRemoteStock.symbol] = merge(currRemoteStock, remoteData[currRemoteStock.symbol])
+  })
+
+  return userLeagueData
+}
+// END: Selectors to pass to UserShow Components //
