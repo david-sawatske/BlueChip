@@ -1,5 +1,6 @@
 import React from 'react';
 
+import UserLeagueIndex from './user_league_index';
 import UserAvatar from './user_avatar';
 import Loader from '../shared/loader';
 
@@ -36,6 +37,9 @@ class UserShow extends React.Component {
           <div>
               <UserAvatar userData={{ id: targetUserData.id,
                                       username: targetUserData.username }} />
+
+              <UserLeagueIndex userLeagueData={targetUserData.userLeagueData}
+                               currentUser={currentUser} />
           </div>
     }
 
