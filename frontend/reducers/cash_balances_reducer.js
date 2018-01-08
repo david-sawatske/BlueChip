@@ -11,7 +11,7 @@ import { merge, union } from 'lodash';
 const balancesById = (state = {}, action) => {
   switch(action.type) {
     case RECEIVE_TARGET_USER_DATA:
-      return merge({}, state, action.targetUser.cashBalances.cashBalancesById);
+      return merge({}, state, action.targetUser.cashBalances.balancesById);
     case RECEIVE_TARGET_LEAGUE:
     case RECEIVE_SAMPLE_LEAGUE:
       return merge({}, state, action.targetLeague.cashBalances.balancesById);
@@ -28,7 +28,7 @@ const allBalanceIds = (state = [], action) => {
   const allBalances = action.allBalances;
   switch(action.type) {
     case RECEIVE_TARGET_USER_DATA:
-      return union([], state, action.targetUser.cashBalances.allCashBalancesIds);
+      return union([], state, action.targetUser.cashBalances.allBalanceIds);
     case RECEIVE_TARGET_LEAGUE:
     case RECEIVE_SAMPLE_LEAGUE:
       return union([], state, action.targetLeague.cashBalances.allBalanceIds);
