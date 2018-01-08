@@ -23,14 +23,20 @@ class UserShow extends React.Component {
   }
 
   render() {
-    const { currentUser, usersById, isRailsUserLoading } = this.props;
+    const { currentUser, isRailsUserLoading, userData } = this.props;
     const targetUserId = this.props.match.params.userId;
 
     let ShowComponent
     if (isRailsUserLoading) {
       ShowComponent = <Loader />
-    } else if (usersById[targetUserId]) {
-        ShowComponent = <UserAvatar userData={usersById[targetUserId]} />
+    } else if (userData[targetUserId]) {
+        const targetUserData = userData[targetUserId];
+
+        ShowComponent =
+          <div>
+              <UserAvatar userData={{ id: targetUserData.id,
+                                      username: targetUserData.username }} />
+          </div>
     }
 
     return (
