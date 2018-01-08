@@ -126,8 +126,10 @@ export const getUserLeagueData = state => {
   Object.values(userLeagueTransactions).map(joinObj => {
     let remoteData = userLeagueData[joinObj.userId]['userLeagueData'][joinObj.leagueId]['remoteStockData']
     const currRemoteStock = transactions[joinObj.transactionId]
+    const stockDataToMerge =
 
-    remoteData[currRemoteStock.symbol] = merge(currRemoteStock, remoteData[currRemoteStock.symbol])
+    remoteData[currRemoteStock.symbol] = merge(remoteData[currRemoteStock.symbol],
+                                             { [currRemoteStock.id]: currRemoteStock })
   })
 
   return userLeagueData
