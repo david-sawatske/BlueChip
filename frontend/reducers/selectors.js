@@ -1,7 +1,10 @@
-const getLeagueUserIds = (userLeagueBalances, usersById, leagueId) => (
-  Object.values(userLeagueBalances)
-    .filter(joinObj => joinObj.leagueId === leagueId)
-    .map(filteredObj => filteredObj.userId)
+import { merge } from 'lodash';
+
+// START: Generic, reuseable selectors //
+const getAssociatedIds = (joinData, targetIdKey, associatedIdKey, associatedId) => (
+    Object.values(joinData)
+    .filter(joinObj => joinObj[associatedIdKey] === associatedId)
+    .map(filteredObj => filteredObj[targetIdKey])
 )
 
 const getAssociatedData = (joinData, sourceData, userId, leagueId, sourceKey) => {
@@ -10,56 +13,79 @@ const getAssociatedData = (joinData, sourceData, userId, leagueId, sourceKey) =>
                                          (obj.leagueId === leagueId ||
                                          leagueId === undefined)
                                   )
-                          .map(obj2 => sourceData[obj2.id])
+                          .map(obj2 => sourceData[obj2[sourceKey]])
 
-  return (associatedData.length === 1) ? associatedData[0][sourceKey] : associatedData;
+  const valueKey = sourceKey.slice(0, -2)
+  if (associatedData.length == 1) {
+    return { [valueKey]: associatedData[0][valueKey] }
+  } else {
+      return associatedData
+  }
 }
+// END: Generic, reuseable selectors //
 
-export const getLeagueUserData = state => {
-  const leagueUserData = {};
-
-  state.entities.leagues.allLeagueIds.map(leagueId => {
-    const balAssocData = state.entities.userLeagueBalances.userLeagueBalancesById;
-    const transAssocData = state.entities.userLeagueTransactions.transactionsById;
-    const currLeague = state.entities.leagues.leaguesById[leagueId];
-    const balancesById = state.entities.cashBalances.balancesById;
-    const transactionsById = state.entities.transactions.transactionsById;
-    const usersById = state.entities.users.usersById;
-
-    const leagueUsers = getLeagueUserIds(balAssocData, usersById, leagueId)
-
-    leagueUserData[leagueId] = currLeague
-
-    const leagueBalance = leagueUsers.map(userId => {
-      const bal = getAssociatedData(balAssocData, balancesById, userId, leagueId, 'balance')
-      const transactions = getAssociatedData(transAssocData, transactionsById,
-                                             userId, leagueId)
-      let cashInvested = 0
-
-      transactions.map(trasnaction => (
-        cashInvested += ( trasnaction.sharePrice * trasnaction.shareQuant))
-      )
-
-      return { username: usersById[userId].username,
-               id: userId,
-               cashBalance: bal,
-               cashInvested: cashInvested }
-    })
-
-    leagueUserData[leagueId]['leagueUserData'] = leagueBalance
-  })
-
-  return leagueUserData
-}
-
-export const getUserLeagueIds = ( state, userId ) => {
+export const getUserLeagueIds = (state, userId) => {
   let targetUserID;
   (state.session.currentUser) ? targetUserID = state.session.currentUser.id :
                                 targetUserID = userId
 
-  const userLeagueJoin = state.entities.userLeagueBalances.userLeagueBalancesById;
+  const balAssocData = state.entities.userLeagueBalances.userLeagueBalancesById;
 
-  return Object.values(userLeagueJoin)
-    .filter(obj => obj.userId === targetUserID)
-    .map(selectObj => selectObj.leagueId)
+  return  getAssociatedIds(balAssocData, 'leagueId', 'userId', targetUserID)
 }
+
+// START: Selectors to pass to LeagueIndex Components //
+export const getLeagueUserData = state => {
+  const transactJoinData = state.entities.userLeagueTransactions.transactionsById;
+  const transactionsById = state.entities.transactions.transactionsById;
+
+  const balJoinData = state.entities.userLeagueBalances.userLeagueBalancesById;
+  const balancesById = state.entities.cashBalances.balancesById;
+
+  const leaguesById = state.entities.leagues.leaguesById;
+  const usersById = state.entities.users.usersById;
+
+  let leagueUserData
+
+
+  Object.keys(leaguesById).map(leagueId => {
+    leagueUserData = merge(leagueUserData, { [leagueId]: leaguesById[leagueId] })
+  })
+
+  Object.values(balJoinData).map(joinObj => {
+    const userId = joinObj.userId
+    const leagueId = joinObj.leagueId
+    const balanceId = joinObj.balanceId
+    const username = usersById[userId]['username']
+    const cashBalance = balancesById[balanceId]['balance']
+    const cashInvested = 0
+
+    const userData = { [userId]: { userId, username, cashBalance, cashInvested }}
+
+    const dataToMerge = merge(leagueUserData[leagueId]['leagueUserData'],
+                              userData)
+
+    leagueUserData[leagueId]['leagueUserData'] = dataToMerge
+  })
+
+
+  Object.values(transactJoinData).map(joinObj => {
+    const userId = joinObj.userId
+    const leagueId = joinObj.leagueId
+    const currTransact = transactionsById[joinObj['transactionId']]
+
+    const currInvested = (currTransact.shareQuant * currTransact.sharePrice)
+
+    leagueUserData[leagueId]['leagueUserData'][userId]['cashInvested'] += currInvested
+  })
+
+
+  Object.keys(leaguesById).map(leagueId => {
+    const asArray = Object.values(leagueUserData[leagueId]['leagueUserData'])
+
+    leagueUserData[leagueId]['leagueUserData'] = asArray
+  })
+
+  return leagueUserData
+}
+// END: Selectors to pass to LeagueIndex Components //
