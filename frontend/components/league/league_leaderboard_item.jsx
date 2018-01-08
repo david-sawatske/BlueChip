@@ -2,11 +2,9 @@ import React from 'react';
 
 import { numberToCurrency } from '../../util/helper_functions';
 
-const LeagueLeaderboardItem = ({ userData, rank }) => {
-  const user = userData;
+const LeagueLeaderboardItem = ({ user, rank }) => {
   const netCashInvested = numberToCurrency( user.cashInvested +
                                             user.cashBalance );
-
   return (
     <div className='user-data'>
       <h3>{rank}.</h3>
