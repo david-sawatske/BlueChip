@@ -9,7 +9,7 @@ class UserLeagueIndex extends React.Component {
 
     // this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.state = { targetLeagueId: '' }
+    this.state = { targetLeagueId: this.props.sampleLeagueId }
   }
 
   setShowLeague(e, leagueId) {

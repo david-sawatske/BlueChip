@@ -32,6 +32,7 @@ class UserShow extends React.Component {
       ShowComponent = <Loader />
     } else if (userData[targetUserId]) {
         const targetUserData = userData[targetUserId];
+        const sampleLeagueId = Object.keys(targetUserData.userLeagueData)[0]
 
         ShowComponent =
           <div>
@@ -39,7 +40,8 @@ class UserShow extends React.Component {
                                       username: targetUserData.username }} />
 
               <UserLeagueIndex userLeagueData={targetUserData.userLeagueData}
-                               currentUser={currentUser} />
+                               currentUser={currentUser}
+                               sampleLeagueId={sampleLeagueId} />
           </div>
     }
 
