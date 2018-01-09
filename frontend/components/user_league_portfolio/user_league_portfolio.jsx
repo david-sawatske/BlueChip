@@ -1,16 +1,17 @@
 import React from 'react';
 
 import UserLeaguePortfolioHeader from './user_league_portfolio_header';
+import StockIndex from '../stock_index/stock_index_container';
 
 class UserLeaguePortfolio extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  calcCashInvested(remoteStockData) {
+  calcCashInvested(transactionData) {
     let cashInvested = 0;
 
-    Object.values(remoteStockData).map(allTransact => {
+    Object.values(transactionData).map(allTransact => {
       Object.values(allTransact).map( transaction => {
         cashInvested += (transaction.shareQuant * transaction.sharePrice)
       })
@@ -20,16 +21,17 @@ class UserLeaguePortfolio extends React.Component {
   }
 
   render() {
-    const { leagueData } = this.props;
-    const remoteStockData = leagueData.remoteStockData;
-
-    const cashInvested = this.calcCashInvested(leagueData.remoteStockData);
+    const { leagueData, currentUser } = this.props;
+    const transactionData = leagueData.transactionData;
+    const cashInvested = this.calcCashInvested(leagueData.transactionData);
 
     return (
       <div className="">
         <UserLeaguePortfolioHeader cashInvested={cashInvested}
                                    balance={leagueData.balance}
                                    leagueName={leagueData.name} />
+
+        <StockIndex transactionData={transactionData} />
       </div>
     );
   }
