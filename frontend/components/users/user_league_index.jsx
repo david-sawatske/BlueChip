@@ -38,7 +38,7 @@ class UserLeagueIndex extends React.Component {
         <ul>
           {Object.values(userLeagueData).map(league => (
               <button onClick={(e) => this.setShowLeague(e, league.leagueId)}
-                      key={league.id}>
+                      key={league.leagueId}>
                 { league.name }
               </button>
             )
