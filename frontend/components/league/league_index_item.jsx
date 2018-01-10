@@ -22,7 +22,8 @@ class LeagueIndexItem extends Component {
   }
 
   render() {
-    const { currentUserLeagueIds, leagueData, currentUser } = this.props;
+    const { currentUserLeagueIds, leagueData, currentUser,
+            hideModal, showModal, formType } = this.props;
 
     let leagueIndexButton = null;
     if (currentUserLeagueIds && currentUserLeagueIds.includes(leagueData.id)) {
@@ -37,7 +38,9 @@ class LeagueIndexItem extends Component {
           </form>
       } else {
         leagueIndexButton =
-          <MastheadButtons />
+          <MastheadButtons hideModal={hideModal}
+                           showModal={showModal}
+                           formType={formType} />
       }
 
     return (
