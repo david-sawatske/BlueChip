@@ -2,6 +2,10 @@ export const numberToCurrency = number => (
   number.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
 )
 
+export const stringToInt = string => (
+  Number(string) ? Number(string) : string
+)
+
 export const numAbbr = number => {
   if (Math.abs(number / 1.0e+12) >= 1) {
     return (number / 1.0e+12).toLocaleString() + " T"
