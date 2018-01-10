@@ -3,7 +3,7 @@ import { merge } from 'lodash';
 // START: Generic, reuseable selectors //
 const getAssociatedIds = (joinData, targetIdKey, associatedIdKey, associatedId) => (
     Object.values(joinData)
-    .filter(joinObj => joinObj[associatedIdKey] === associatedId)
+    .filter(joinObj => joinObj[associatedIdKey] == associatedId)
     .map(filteredObj => filteredObj[targetIdKey])
 )
 
