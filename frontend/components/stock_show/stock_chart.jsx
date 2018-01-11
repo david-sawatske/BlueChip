@@ -30,9 +30,12 @@ class StockChart extends React.Component {
     const priceData = [];
     const volumeData = [];
 
+    let setInterval
+    (interval) ? setInterval = interval : setInterval = '1d'
+
     chart.map(obj => {
-      const date = (interval === '1d') ? dateConv(obj) : Date.parse(obj.date);
-      const price = (interval === '1d') ? obj.average : obj.close;
+      const date = (setInterval === '1d') ? dateConv(obj) : Date.parse(obj.date);
+      const price = (setInterval === '1d') ? obj.average : obj.close;
 
       if (price > 0) {
         priceData.push([date, price]);
