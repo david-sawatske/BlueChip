@@ -5,7 +5,7 @@ import StockHeader from './stock_header';
 import CompanyData from './company_data';
 import StockChart from './stock_chart';
 import StockNews from './stock_news_index';
-import Loader from '../shared/loader';
+import UserTransactions from './user_transaction_index';
 
 class StockShow extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class StockShow extends React.Component {
   }
 
   render() {
-    const { remoteStockData, interval } = this.props
+    const { remoteStockData, interval, stockTransactionData } = this.props
 
     let ShowComponent
     if (remoteStockData) {
@@ -23,11 +23,18 @@ class StockShow extends React.Component {
         <div>
           <StockHeader quote={quote}
                        logo={logo} />
+          <UserTransactions transactData={stockTransactionData} />
           <StockSummary quote={quote} />
           <StockChart chart={chart}
-                      interval={interval}/>
+                      interval={interval} />
           <StockNews news={news} />
+
         </div>
+    }
+
+    let ConditionalComponent
+    if (stockTransactionData) {
+
     }
 
     return (
