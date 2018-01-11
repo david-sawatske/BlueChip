@@ -23,7 +23,6 @@ class StockShow extends React.Component {
         <div>
           <StockHeader quote={quote}
                        logo={logo} />
-          <UserTransactions transactData={stockTransactionData} />
           <StockSummary quote={quote} />
           <StockChart chart={chart}
                       interval={interval} />
@@ -32,14 +31,15 @@ class StockShow extends React.Component {
         </div>
     }
 
-    let ConditionalComponent
+    let TransactionComponent
     if (stockTransactionData) {
-
+      TransactionComponent = <UserTransactions transactData={stockTransactionData} />
     }
 
     return (
       <div>
         { ShowComponent }
+        { TransactionComponent }
       </div>
     )
   }
