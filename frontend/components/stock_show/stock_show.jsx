@@ -18,7 +18,6 @@ class StockShow extends React.Component {
     let ShowComponent
     if (remoteStockData) {
       const { quote, chart, logo, company, stats, news } = remoteStockData;
-      const defaultInterval = '1d'
 
       ShowComponent =
         <div>
@@ -26,11 +25,9 @@ class StockShow extends React.Component {
                        logo={logo} />
           <StockSummary quote={quote} />
           <StockChart chart={chart}
-                      interval={defaultInterval}/>
+                      interval={interval}/>
           <StockNews news={news} />
         </div>
-    } else {
-      ShowComponent = <Loader />
     }
 
     return (

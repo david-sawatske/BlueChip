@@ -17,8 +17,9 @@ class StockIndex extends React.Component {
   }
 
   render() {
-    const { remoteStockData, isRemoteStockLoading, transactionData } = this.props;
-
+    const { remoteStockData,
+            transactionData,
+            isRemoteStockLoading  } = this.props;
 
     let ShowComponent
     if ( isRemoteStockLoading ) {
