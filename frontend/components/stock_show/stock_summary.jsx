@@ -9,6 +9,7 @@ const StockSummary = ({ quote }) => (
       <tbody>
         <tr>
           <td>Avg Total Volume</td>
+          <td>{numAbbr(quote.avgTotalVolume)}</td>
         </tr>
         <tr>
           <td>Latest Volume</td>
