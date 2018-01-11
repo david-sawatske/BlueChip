@@ -29,6 +29,7 @@ class StockIndex extends React.Component {
 
         ShowComponent = tickerArray.map((symbol, idx)=> (
           <StockShow remoteStockData={remoteStockData[symbol]}
+                     transactionData={transactionData[symbol]}
                      isRemoteStockLoading={isRemoteStockLoading}
                      key={idx} />
         ))
