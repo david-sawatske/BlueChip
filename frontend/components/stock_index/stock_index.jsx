@@ -27,9 +27,9 @@ class StockIndex extends React.Component {
     } else {
         const tickerArray = Object.keys(transactionData)
 
-        ShowComponent = tickerArray.map((symbol, idx)=> (
+        ShowComponent = tickerArray.map((symbol, idx) => (
           <StockShow remoteStockData={remoteStockData[symbol]}
-                     transactionData={transactionData[symbol]}
+                     stockTransactionData={transactionData[symbol]}
                      isRemoteStockLoading={isRemoteStockLoading}
                      key={idx} />
         ))
