@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LeagueLeaderboardItem from './league_leaderboard_item';
+
+import SortableTable from '../table/table_body';
 
 class LeagueLeaderboard extends React.Component {
   constructor(props) {
@@ -10,29 +11,9 @@ class LeagueLeaderboard extends React.Component {
   render() {
     const { leagueUserData } = this.props;
 
-    const sortedLeagueUserData = leagueUserData.sort((a, b) => {
-      const totalAssetsA = a.cashInvested + a.cashBalance;
-      const totalAssetsB = b.cashInvested + b.cashBalance;
-
-      return (
-        totalAssetsB - totalAssetsA
-      )
-    });
-
     return (
       <div className="">
-        { sortedLeagueUserData.map((userObj, index) => {
-          const rank = index + 1;
-
-          return (
-            <div key={index}>
-              <div>
-                <LeagueLeaderboardItem rank={rank}
-                                       user={userObj} />
-              </div>
-            </div>
-          )
-        })}
+        <SortableTable dataArr={leagueUserData}/>
       </div>
     )}
   }
