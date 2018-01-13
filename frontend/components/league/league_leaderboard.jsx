@@ -10,10 +10,20 @@ class LeagueLeaderboard extends React.Component {
 
   render() {
     const { leagueUserData } = this.props;
+    const tableHeadings = { 'username': 'Username',
+                            'cashBalance': 'Cash Balance',
+                            'cashInvested': 'Cash Invested',
+                            'totalEquity': 'Total Equity' }
+    const isDataCurrency = { 'username': false,
+                             'cashBalance': true,
+                             'cashInvested': true,
+                             'totalEquity': true }
 
     return (
       <div className="">
-        <SortableTable dataArr={leagueUserData}/>
+        <SortableTable dataArr={leagueUserData}
+                       tableHeadings={tableHeadings}
+                       isDataCurrency={isDataCurrency}/>
       </div>
     )}
   }
