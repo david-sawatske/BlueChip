@@ -33,7 +33,9 @@ class StockShow extends React.Component {
 
     let TransactionComponent
     if (stockTransactionData) {
-      TransactionComponent = <UserTransactions transactData={stockTransactionData} />
+      const transactArray = Object.values(stockTransactionData);
+
+      TransactionComponent = <UserTransactions transactData={transactArray} />
     }
 
     return (
