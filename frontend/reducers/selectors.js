@@ -58,9 +58,10 @@ export const getLeagueUserData = state => {
     const balanceId = joinObj.balanceId
     const username = usersById[userId]['username']
     const cashBalance = balancesById[balanceId]['balance']
+    const totalEquity = cashBalance
     const cashInvested = 0
 
-    const userData = { [userId]: { userId, username, cashBalance, cashInvested }}
+    const userData = { [userId]: { userId, username, cashBalance, cashInvested, totalEquity }}
 
     const dataToMerge = merge(leagueUserData[leagueId]['leagueUserData'],
                               userData)
@@ -72,11 +73,13 @@ export const getLeagueUserData = state => {
   Object.values(transactJoinData).map(joinObj => {
     const userId = joinObj.userId
     const leagueId = joinObj.leagueId
+    const totalEquity = leagueUserData[leagueId]['totalEquity']
     const currTransact = transactionsById[joinObj['transactionId']]
 
     const currInvested = (currTransact.shareQuant * currTransact.sharePrice)
 
     leagueUserData[leagueId]['leagueUserData'][userId]['cashInvested'] += currInvested
+    leagueUserData[leagueId]['leagueUserData'][userId]['totalEquity'] += currInvested
   })
 
 
@@ -100,9 +103,14 @@ const idNamer = (obj, type) => {
   return newObj
 };
 
-export const getUserLeagueData = state => {
-  const usersById = state.entities.users.usersById;
+export const getUserLeagueData = (state, targetUserId) => {
   const userLeagueData = {}
+
+  let usersById
+  (targetUserId) ? usersById = [ targetUserId ]
+                    :
+                   usersById = state.entities.users.usersById;
+
 
   state.entities.users.allUserIds.map(userId => {
     userLeagueData[userId] = merge(usersById[userId], { userLeagueData: {} })
