@@ -16,10 +16,16 @@ class LeagueLeaderboard extends React.Component {
                             'cashBalance': 'Cash Balance',
                             'cashInvested': 'Cash Invested',
                             'totalEquity': 'Total Equity' }
+
     const isDataCurrency = { 'username': false,
                              'cashBalance': true,
                              'cashInvested': true,
                              'totalEquity': true }
+
+    const isDataDate = { 'username': false,
+                         'cashBalance': false,
+                         'cashInvested': false,
+                         'totalEquity': false }
 
     const allowedKeys = Object.keys(tableHeadings)
     const tableData = Object.values(leagueUserData).map(dataObj => (
@@ -29,6 +35,7 @@ class LeagueLeaderboard extends React.Component {
     return (
       <div className="">
         <SortableTable dataArr={tableData}
+                       isDataDate={isDataDate}
                        tableHeadings={tableHeadings}
                        isDataCurrency={isDataCurrency}/>
       </div>
