@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import SortableHeader from './table_header';
 
@@ -24,6 +25,8 @@ class SortableTable extends React.Component {
     this.setState({ dataArr: newOrder })
   }
 
+  // moment(transact.purchaseDay).calendar()
+
   renderRows(dataObj, index) {
     return (
       <tr key={index}>
@@ -31,6 +34,8 @@ class SortableTable extends React.Component {
         {Object.keys(dataObj).map((attribute, idx) => {
           if (this.props.isDataCurrency[attribute]) {
             return <th key={idx}>{numberToCurrency(dataObj[attribute])}</th>
+          } else if (this.props.isDataDate[attribute]) {
+            return <th key={idx}>{moment(dataObj[attribute]).calendar()}</th>
           } else {
             return <th key={idx}>{dataObj[attribute]}</th>
           }
@@ -40,7 +45,7 @@ class SortableTable extends React.Component {
   }
 
   render () {
-    const { tableHeadings, isDataCurrency } = this.props;
+    const { tableHeadings, isDataDate } = this.props;
     const { dataArr } = this.state;
 
     return (
