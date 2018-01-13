@@ -27,11 +27,12 @@ class SortableTable extends React.Component {
   renderRows(dataObj, index) {
     return (
       <tr key={index}>
-        {Object.keys(dataObj).map((key, idx) => {
-          if (this.props.isDataCurrency[key]) {
-            return <th key={idx}>{numberToCurrency(dataObj[key])}</th>
+        <th>{ index + 1 }</th>
+        {Object.keys(dataObj).map((attribute, idx) => {
+          if (this.props.isDataCurrency[attribute]) {
+            return <th key={idx}>{numberToCurrency(dataObj[attribute])}</th>
           } else {
-            return <th key={idx}>{dataObj[key]}</th>
+            return <th key={idx}>{dataObj[attribute]}</th>
           }
         })}
       </tr>
@@ -47,18 +48,16 @@ class SortableTable extends React.Component {
           <thead>
             <tr>
               <th>#</th>
-              {Object.keys(dataArr[0]).map((attribute, idx) => {
-                if (tableHeadings[attribute]) {
-                  return <SortableHeader title={tableHeadings[attribute]}
-                                         attribute={attribute}
-                                         onClick={this.sortArray}
-                                         key={idx} />
-                }
-              })}
+              {Object.keys(dataArr[0]).map((attribute, idx) => (
+                <SortableHeader title={tableHeadings[attribute]}
+                                attribute={attribute}
+                                onClick={this.sortArray}
+                                key={idx} />
+              ))}
             </tr>
           </thead>
           <tbody>
-            {dataArr.map(this.renderRows)}
+            { dataArr.map(this.renderRows) }
           </tbody>
       </table>
     );
@@ -66,22 +65,3 @@ class SortableTable extends React.Component {
 }
 
 export default SortableTable;
-
-
-{/* <tbody>
-  {dataArr.map((dataObj, idx) => {
-    const data = {}
-    Object.keys(dataObj).map(key => {
-      if (isDataCurrency[key]) {
-
-        data[key] = numberToCurrency(dataObj[key])
-
-      } else {
-        data[key] = dataObj[key]
-      }
-    })
-    console.log(data);
-
-    return <TableRow data={data}/>
-  })}
-</tbody> */}

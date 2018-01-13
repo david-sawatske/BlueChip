@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import SortableTable from '../table/table_body';
+import SortableTable from '../table/table';
+
+import { filterObject } from '../../util/helper_functions'
 
 class LeagueLeaderboard extends React.Component {
   constructor(props) {
@@ -19,9 +21,14 @@ class LeagueLeaderboard extends React.Component {
                              'cashInvested': true,
                              'totalEquity': true }
 
+    const allowedKeys = Object.keys(tableHeadings)
+    const tableData = Object.values(leagueUserData).map(dataObj => (
+       filterObject(dataObj, allowedKeys))
+    )
+
     return (
       <div className="">
-        <SortableTable dataArr={leagueUserData}
+        <SortableTable dataArr={tableData}
                        tableHeadings={tableHeadings}
                        isDataCurrency={isDataCurrency}/>
       </div>
