@@ -34,3 +34,13 @@ export const arrSample = arr => {
 
   return arr[randIdx]
 }
+
+
+export const filterObject = (sourceObj, allowedKeys) => (
+  Object.keys(sourceObj)
+    .filter(key => allowedKeys.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = sourceObj[key];
+      return obj;
+    }, {})
+)
