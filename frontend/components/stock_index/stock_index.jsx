@@ -17,8 +17,7 @@ class StockIndex extends React.Component {
   }
 
   render() {
-    const { remoteStockData,
-            transactionData,
+    const { remoteStockData, transactionData, showModal, hideModal,
             isRemoteStockLoading  } = this.props;
 
     let ShowComponent
@@ -30,7 +29,8 @@ class StockIndex extends React.Component {
         ShowComponent = tickerArray.map((symbol, idx) => (
           <StockShow remoteStockData={remoteStockData[symbol]}
                      stockTransactionData={transactionData[symbol]}
-                     isRemoteStockLoading={isRemoteStockLoading}
+                     showModal={showModal}
+                     hideModal={hideModal}
                      key={idx} />
         ))
     }
