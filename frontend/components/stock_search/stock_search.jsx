@@ -57,7 +57,8 @@ class StockSearch extends React.Component {
 
         this.state.prevSearchData = remoteStockData[searchedTicker]
     } else if (this.state.prevSearchData) {
-      ShowComponent = <StockShow remoteStockData={this.state.prevSearchData}/>
+      ShowComponent = <StockShow remoteStockData={this.state.prevSearchData}
+                                 interval={this.state.interval} />
     }
 
     return (
