@@ -16,6 +16,13 @@ class StockSearch extends React.Component {
     this.update = this.update.bind(this);
   }
 
+  componentWillMount() {
+    if (this.props.currentUser) {
+      this.props.requestTargetUserData(this.props.currentUser.id)
+
+    }
+  }
+
   toggleSearchInitiated() {
     this.setState({ searchInitiated: !this.state.searchInitiated })
   }
@@ -37,7 +44,7 @@ class StockSearch extends React.Component {
 
   render() {
     const searchedTicker = this.state.ticker.toUpperCase();
-    const { isRemoteLoading, remoteStockData } = this.props;
+    const { isRemoteLoading, remoteStockData, currentUserData } = this.props;
     const intervals = ['5y', '2y','1y', 'YTD', '6m','3m', '1m', '1d'];
 
     let ShowComponent = null;
