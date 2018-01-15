@@ -1,8 +1,10 @@
 import React  from 'react';
 
+import TransactionModal from './transaction_modal';
 import SessionModal from './session_modal';
 
 const MODAL_COMPONENTS = {
+  'transaction': TransactionModal,
   'session': SessionModal
 }
 
