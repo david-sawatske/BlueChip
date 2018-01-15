@@ -44,7 +44,7 @@ class StockSearch extends React.Component {
 
   render() {
     const searchedTicker = this.state.ticker.toUpperCase();
-    const { isRemoteLoading, remoteStockData, currentUserData } = this.props;
+    const { isRemoteLoading, remoteStockData, currentUserData, showModal, hideModal } = this.props;
     const intervals = ['5y', '2y','1y', 'YTD', '6m','3m', '1m', '1d'];
 
     let ShowComponent = null;
@@ -53,12 +53,16 @@ class StockSearch extends React.Component {
       ShowComponent = <Loader />
     } else if (this.state.searchInitiated && remoteStockData[searchedTicker]) {
       ShowComponent = <StockShow remoteStockData={remoteStockData[searchedTicker]}
+                                 showModal={showModal}
+                                 hideModal={hideModal}
                                  interval={this.state.interval} />
 
         this.state.prevSearchData = remoteStockData[searchedTicker]
     } else if (this.state.prevSearchData) {
       ShowComponent = <StockShow remoteStockData={this.state.prevSearchData}
-                                 interval={this.state.interval} />
+                                 showModal={showModal}
+                                 hideModal={hideModal}
+                                 interval={this.state.interval }/>
     }
 
     return (
