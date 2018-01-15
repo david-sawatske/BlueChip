@@ -31,7 +31,7 @@ class StockChart extends React.Component {
     const volumeData = [];
 
     let setInterval
-    (interval) ? setInterval = interval : setInterval = '1d'
+    (interval) ? setInterval = interval : setInterval = '1m'
 
     chart.map(obj => {
       const date = (setInterval === '1d') ? dateConv(obj) : Date.parse(obj.date);
