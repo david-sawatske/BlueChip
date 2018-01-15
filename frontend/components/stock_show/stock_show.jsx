@@ -6,6 +6,7 @@ import CompanyData from './company_data';
 import StockChart from './stock_chart';
 import StockNews from './stock_news_index';
 import UserTransactions from './user_transaction_index';
+import ModalRoot from  '../modal/modal_root_container'
 
 class StockShow extends React.Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class StockShow extends React.Component {
   }
 
   render() {
-    const { remoteStockData, interval, stockTransactionData } = this.props
+    const { remoteStockData, interval, showModal, hideModal,
+            stockTransactionData } = this.props
 
     let ShowComponent
     if (remoteStockData) {
@@ -21,6 +23,10 @@ class StockShow extends React.Component {
 
       ShowComponent =
         <div>
+          <button className="button" onClick={ () =>
+            showModal('transaction', { modalOpen: true }) }>
+            Buy/Sell this stock
+          </button>
           <StockHeader quote={quote}
                        logo={logo} />
           <StockSummary quote={quote} />
@@ -28,6 +34,8 @@ class StockShow extends React.Component {
                       interval={interval} />
           <StockNews news={news} />
 
+
+          <ModalRoot quote={quote}/>
         </div>
     }
 

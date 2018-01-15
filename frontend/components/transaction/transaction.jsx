@@ -6,49 +6,28 @@ class Transaction extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { symbol: "TEST",
-                   share_quant: "",
-                   share_price: "",
-                   purchase_day: "",
-                   user_id: 6,
-                   league_id: 1,
-                   cashBalance: 100000000,
-                   balanceId: 16,
-                   // user_id: this.props.currentUser.id,
-                   // league_id: Number(this.props.leagueId),
-                   // cashBalance: this.props.cashBalance,
-                   // balanceId: Number(this.props.balanceId),
-                   transactionType: "buy",
-                   targetUserId: this.props.match.params.userId
-                 };
+    this.state = { };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
   }
 
   componentWillMount() {
-    const quote  = {
-  "symbol": "GTLS",
-  "companyName": "Chart Industries Inc.",
-  "latestPrice": 100,
-  "latestSource": "IEX real time price",
-  "latestTime": "9:52:28 AM",
-  "latestVolume": 13994,
-  "change": 0.23,
-  "changePercent": 0.00442,
-  "avgTotalVolume": 277278,
-  "marketCap": 1608096327,
-  "peRatio": 100.5,
-  "week52High": 53.1,
-  "week52Low": 32.04,
-  "ytdChange": 0.07522215333746643
-}
+    const newState = { symbol: "",
+                       share_quant: "",
+                       share_price: "",
+                       purchase_day: "",
+                       user_id: "",
+                       league_id: "",
+                       cashBalance: "",
+                       balanceId: "",
+                       user_id: "",
+                       league_id: '',
+                       cashBalance: '',
+                       balanceId: '',
+                     };
 
-    this.setState({
-      symbol: quote.symbol,
-      share_price: quote.latestPrice,
-      purchase_day: new Date()
-    })
+  this.setState(newState)
   }
 
   transactionVerification() {
@@ -68,7 +47,7 @@ class Transaction extends React.Component {
       this.props.postTransaction(this.state)
       this.props.updateCashBalance(updatedBalance)
     } else {
-        alert('Insufficient Balance for that trade') // Future Error Action
+        alert('Insufficient Balance for that trade') // Future Error Action return
       }
     this.setState({
       share_quant: ""
@@ -98,11 +77,7 @@ class Transaction extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.props;
-    const { targetUser } = this.props;
-    const { leagueId } = this.props;
-    const { leagueBalance } = this.props;
-  console.log(this.state);
+    const { targetUserData, quote } = this.props;
 
     return (
       <div>
