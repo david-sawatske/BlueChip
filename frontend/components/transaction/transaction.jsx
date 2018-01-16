@@ -8,8 +8,8 @@ class Transaction extends React.Component {
 
     this.state = { };
 
+    this.setLeagueStateData = this.setLeagueStateData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.setLeague = this.setLeague.bind(this);
     this.update = this.update.bind(this);
   }
 
@@ -25,6 +25,7 @@ class Transaction extends React.Component {
                        league_id: '',
                        cashBalance: '',
                        balanceId: '',
+                       showLeagueData: false
                      };
 
   this.setState(newState)
@@ -70,13 +71,16 @@ class Transaction extends React.Component {
     )
   }
 
-  setLeague(leagueData, event) {
+  setLeagueStateData(leagueData, event) {
     event.preventDefault();
 
     this.setState({ league_id: leagueData['leagueId'],
                     cashBalance: leagueData['balance'],
-                    balanceId: leagueData['balanceId'] })
+                    balanceId: leagueData['balanceId'],
+                    showLeagueData: true })
   }
+
+  // Add little league data in Transacton when selected
 
   update(field) {
     return e => this.setState({
@@ -86,13 +90,15 @@ class Transaction extends React.Component {
 
   render() {
     const { targetUserData, quote } = this.props;
+    const targetUserId = Object.keys(targetUserData)[0];
 
     const LeagueChoices = [];
+
     Object.values(targetUserData).map( data => {
       Object.values(data.userLeagueData).map( leagueData => {
         LeagueChoices.push(
           <button className="button"
-                  onClick={ (e) => this.setLeague(leagueData, e) }
+                  onClick={ (e) => this.setLeagueStateData(leagueData, e) }
                   key={leagueData.leagueId}>
 
               { leagueData.name }
@@ -101,9 +107,22 @@ class Transaction extends React.Component {
       })
     })
 
+    let TransactonInfo
+    if (this.state.showLeagueData) {
+      const leagueData = targetUserData[targetUserId]
+                                       ['userLeagueData']
+                                       [this.state.league_id]
+
+        TransactonInfo = <div>
+                            <h1>Selected League: {leagueData.name}</h1>
+                            <h1>Available Balance: {leagueData.balance}</h1>
+                         </div>
+    }
+
     return (
       <div>
         { LeagueChoices }
+        { TransactonInfo }
 
         <form onSubmit={this.handleSubmit} className="">
             <label>Share Quantity:
