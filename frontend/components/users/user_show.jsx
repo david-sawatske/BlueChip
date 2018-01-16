@@ -24,7 +24,7 @@ class UserShow extends React.Component {
   }
 
   render() {
-    const { currentUser, isRailsUserLoading, userData } = this.props;
+    const { isRailsUserLoading, userData } = this.props;
     const targetUserId = this.props.match.params.userId;
 
     let ShowComponent
@@ -40,7 +40,6 @@ class UserShow extends React.Component {
                                       username: targetUserData.username }} />
 
               <UserLeagueIndex userLeagueData={targetUserData.userLeagueData}
-                               currentUser={currentUser}
                                sampleLeagueId={sampleLeagueId} />
           </div>
     }

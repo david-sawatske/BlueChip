@@ -21,7 +21,7 @@ class UserLeaguePortfolio extends React.Component {
   }
 
   render() {
-    const { leagueData, currentUser } = this.props;
+    const { leagueData } = this.props;
     const transactionData = leagueData.transactionData;
     const cashInvested = this.calcCashInvested(leagueData.transactionData);
 

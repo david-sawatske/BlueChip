@@ -19,7 +19,7 @@ class UserLeagueIndex extends React.Component {
   }
 
   render() {
-    const { userLeagueData, currentUser } = this.props;
+    const { userLeagueData } = this.props;
     const targetLeagueId = this.state.targetLeagueId;
 
     let ShowComponent
@@ -27,8 +27,7 @@ class UserLeagueIndex extends React.Component {
       const targetLeague = userLeagueData[targetLeagueId];
 
       ShowComponent = <UserLeaguePortfolio key={targetLeague.leagueId}
-                                           leagueData={targetLeague}
-                                           currentUser={currentUser} />
+                                           leagueData={targetLeague} />
     } else {
       ShowComponent = <h3>Select a League to View</h3>
     }
