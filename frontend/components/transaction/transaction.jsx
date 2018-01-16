@@ -1,5 +1,7 @@
 import React from 'react';
 
+import TransactionData from './transaction_data'
+
 import { stringToInt } from '../../util/helper_functions'
 
 class Transaction extends React.Component {
@@ -80,8 +82,6 @@ class Transaction extends React.Component {
                     showLeagueData: true })
   }
 
-  // Add little league data in Transacton when selected
-
   update(field) {
     return e => this.setState({
       [field]: stringToInt(e.currentTarget.value)
@@ -112,11 +112,13 @@ class Transaction extends React.Component {
       const leagueData = targetUserData[targetUserId]
                                        ['userLeagueData']
                                        [this.state.league_id]
+      const currStockTransactions = Object.values(leagueData['transactionData']
+                                                            [this.state.symbol])
 
-        TransactonInfo = <div>
-                            <h1>Selected League: {leagueData.name}</h1>
-                            <h1>Available Balance: {leagueData.balance}</h1>
-                         </div>
+      TransactonInfo = <TransactionData leagueName={leagueData.name}
+                                        balance={leagueData.balance}
+                                        transactData={currStockTransactions}
+                                        quote={quote} />
     }
 
     return (
