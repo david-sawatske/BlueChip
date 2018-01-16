@@ -35,7 +35,8 @@ class StockShow extends React.Component {
           <StockNews news={news} />
 
 
-          <ModalRoot quote={quote}/>
+          <ModalRoot quote={quote}
+                     logo={logo} />
         </div>
     }
 

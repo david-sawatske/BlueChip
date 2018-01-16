@@ -1,5 +1,6 @@
 import React from 'react';
 
+import StockHeader from '../stock_show/stock_header';
 import TransactionData from './transaction_data'
 import StockSummary from '../stock_show/stock_summary';
 
@@ -91,7 +92,7 @@ class Transaction extends React.Component {
   }
 
   render() {
-    const { targetUserData, quote } = this.props;
+    const { targetUserData, quote, logo } = this.props;
     const targetUserId = Object.keys(targetUserData)[0];
 
     const LeagueChoices = [];
@@ -123,8 +124,19 @@ class Transaction extends React.Component {
     }
 
     let StockData
-    if (quote) {
-       StockData = <StockSummary quote={quote} />
+    if (quote && logo) {
+       StockData =
+       <div>
+         <StockHeader quote={quote}
+                      logo={logo} />
+         <StockSummary quote={quote} />
+       </div>
+
+    } else if (quote) {
+      StockData = <StockSummary quote={quote} />
+    } else if (logo) {
+      StockData = <StockHeader quote={quote}
+                               logo={logo} />
     }
 
     return (
