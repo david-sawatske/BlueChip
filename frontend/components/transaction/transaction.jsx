@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TransactionData from './transaction_data'
+import StockSummary from '../stock_show/stock_summary';
 
 import { stringToInt } from '../../util/helper_functions'
 
@@ -8,7 +9,7 @@ class Transaction extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { };
+    this.state = { targetUserId: Object.keys(this.props.targetUserData)[0] };
 
     this.setLeagueStateData = this.setLeagueStateData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,20 +18,19 @@ class Transaction extends React.Component {
 
   componentWillMount() {
     const quote = (this.props.quote) ? this.props.quote : {};
-    const targetUserData = this.props.targetUserData;
-    const targetUserId = Object.keys(targetUserData)[0]
     const newState = { symbol: quote.symbol,
                        share_quant: "",
                        share_price: quote.latestPrice,
                        purchase_day: new Date(),
-                       user_id: targetUserId,
+                       user_id: this.state.targetUserId,
                        league_id: '',
                        cashBalance: '',
                        balanceId: '',
-                       showLeagueData: false
+                       showLeagueData: false,
+                       transactionType: 'buy'
                      };
 
-  this.setState(newState)
+    this.setState(newState)
   }
 
   transactionVerification() {
@@ -71,6 +71,8 @@ class Transaction extends React.Component {
     } else if (transactionType === 'buy') (
       this.transactionProcessor()
     )
+
+    this.props.requestTargetUserData(this.state.user_id)
   }
 
   setLeagueStateData(leagueData, event) {
@@ -93,7 +95,6 @@ class Transaction extends React.Component {
     const targetUserId = Object.keys(targetUserData)[0];
 
     const LeagueChoices = [];
-
     Object.values(targetUserData).map( data => {
       Object.values(data.userLeagueData).map( leagueData => {
         LeagueChoices.push(
@@ -121,9 +122,15 @@ class Transaction extends React.Component {
                                         quote={quote} />
     }
 
+    let StockData
+    if (quote) {
+       StockData = <StockSummary quote={quote} />
+    }
+
     return (
       <div>
         { LeagueChoices }
+        { StockData }
         { TransactonInfo }
 
         <form onSubmit={this.handleSubmit} className="">
