@@ -9,19 +9,19 @@ class Transaction extends React.Component {
     this.state = { };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setLeague = this.setLeague.bind(this);
     this.update = this.update.bind(this);
   }
 
   componentWillMount() {
-    const newState = { symbol: "",
+    const quote = (this.props.quote) ? this.props.quote : {};
+    const targetUserData = this.props.targetUserData;
+    const targetUserId = Object.keys(targetUserData)[0]
+    const newState = { symbol: quote.symbol,
                        share_quant: "",
-                       share_price: "",
-                       purchase_day: "",
-                       user_id: "",
-                       league_id: "",
-                       cashBalance: "",
-                       balanceId: "",
-                       user_id: "",
+                       share_price: quote.latestPrice,
+                       purchase_day: new Date(),
+                       user_id: targetUserId,
                        league_id: '',
                        cashBalance: '',
                        balanceId: '',
@@ -70,6 +70,14 @@ class Transaction extends React.Component {
     )
   }
 
+  setLeague(leagueData, event) {
+    event.preventDefault();
+
+    this.setState({ league_id: leagueData['leagueId'],
+                    cashBalance: leagueData['balance'],
+                    balanceId: leagueData['balanceId'] })
+  }
+
   update(field) {
     return e => this.setState({
       [field]: stringToInt(e.currentTarget.value)
@@ -79,8 +87,24 @@ class Transaction extends React.Component {
   render() {
     const { targetUserData, quote } = this.props;
 
+    const LeagueChoices = [];
+    Object.values(targetUserData).map( data => {
+      Object.values(data.userLeagueData).map( leagueData => {
+        LeagueChoices.push(
+          <button className="button"
+                  onClick={ (e) => this.setLeague(leagueData, e) }
+                  key={leagueData.leagueId}>
+
+              { leagueData.name }
+          </button>
+        )
+      })
+    })
+
     return (
       <div>
+        { LeagueChoices }
+
         <form onSubmit={this.handleSubmit} className="">
             <label>Share Quantity:
               <input type="number"
