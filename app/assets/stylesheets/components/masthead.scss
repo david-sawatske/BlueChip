@@ -1,0 +1,123 @@
+@import '_variables';
+
+/*--------------------------------------------------------------
+Basic responsive layout for all browsers:
+--------------------------------------------------------------*/
+.title {
+	display:inline-block;
+	font-size: 2.0vw;
+}
+
+.logo  {
+		width: 10%;
+		height: auto;
+}
+
+.session-buttons {
+	display:inline-block;
+	float: right;
+	padding-top: 30px;
+
+	.button {
+		background-color: $dark-blue;
+		border: none;
+		color: white;
+		margin: 5px;
+		padding: 10px 15px;
+		text-align: center;
+		text-decoration: none;
+		display: inline;
+		font-size: 1.75vw;
+		border-radius: 12px;
+	}
+}
+
+.top-nav {
+	background-color: $dark-grey;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+/* Style the links inside the navigation bar */
+.top-nav .nav-link {
+	display:inline-block;
+	color: $off-white;
+	text-align: center;
+	padding: 14px 22px;
+}
+
+/* Change the color of links on hover */
+.top-nav a:hover {
+	display:inline-block;
+	background-color: $blue-grey;
+	background-size: auto;
+	color: $off-white;
+	text-shadow: 1px 1px 2px #000000;
+	border-radius: 12px;
+}
+
+/*--------------------------------------------------------------
+CSS Grid layout for modern browsers:
+--------------------------------------------------------------*/
+@supports (grid-area: auto) {
+
+	@media screen and (min-width: 768px) {
+    .masthead {
+      display: grid;
+      grid-template-columns: [logo] 10% [title] auto [buttons] 60% ;
+      grid-template-rows: auto auto;
+    }
+
+    .title {
+      grid-column: title;
+      grid-row: 1/1;
+			font-size: 2.0vw;
+			justify-self: left;
+			align-self: center;
+    }
+
+    .logo  {
+      grid-column: logo;
+      grid-row: 1/1;
+			width: 100%;
+			height: auto;
+
+      align-self: left;
+      padding-top: 3px;
+      padding-bottom: 10px;
+    }
+
+    .session-buttons {
+      grid-column: buttons;
+      grid-row: 1/1;
+      padding-right: 5px;
+			justify-self: center;
+			align-self: center;
+    }
+
+		.top-nav {
+				grid-column: 1/4;
+				grid-row: 2/2;
+				background-color: $dark-grey;
+				padding-top: 5px;
+				padding-bottom: 5px;
+		}
+
+		/* Style the links inside the navigation bar */
+		.top-nav .nav-link {
+				float: left;
+				color: $off-white;
+				text-align: center;
+				padding: 14px 22px;
+				font-size: 1.75vw;
+		}
+
+		/* Change the color of links on hover */
+		.top-nav a:hover {
+				background-color: $blue-grey;
+				color: $off-white;
+				text-shadow: 1px 1px 2px #000000;
+				border-radius: 12px;
+		}
+  }
+}

@@ -6,6 +6,7 @@ TYPOGRAPHY
 --------------------------------------------------------------*/
 .container {
 	margin: 0;
+	background-color: rgb(195, 222, 251);
 }
 
 h1 {
@@ -43,5 +44,68 @@ img {
 	display: block;
 	border: 0;
 	width: 100%;
+	height: auto;
+}
+
+/*--------------------------------------------------------------
+CSS Grid layout for modern browsers:
+--------------------------------------------------------------*/
+@supports (grid-area: auto) {
+
+	@media screen and (min-width: 768px) {
+    .container {
+      display: grid;
+      grid-template-areas:
+      "header"
+      "body"
+			"footer";
+		}
+
+		.header {
+			grid-area: header;
+			background-color: white;
+			opacity: .9;
+		}
+
+		.body {
+			grid-area: body;
+		}
+
+		.footer {
+			grid-area: footer;
+			color: white;
+			background-color: black;
+			opacity: .9;
+		}
+  }
+}
+
+
+/****************************
+*     BUTTONS
+****************************/
+.button {
+    background-color: $dark-blue;
+    color: white;
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+		padding: 10px 15px;
+    display: inline;
+    font-size: 12px;
+    border-radius: 12px;
+}
+
+.button:hover {
+  background-color: $pale-green;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+
+
+
+// TEMP
+.stock-img {
+	width: 5%;
 	height: auto;
 }
