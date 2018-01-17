@@ -25,13 +25,13 @@ const getAssociatedData = (joinData, sourceData, userId, leagueId, sourceKey) =>
 // END: Generic, reuseable selectors //
 
 export const getUserLeagueIds = (state, userId) => {
-  let targetUserID;
-  (state.session.currentUser) ? targetUserID = state.session.currentUser.id :
-                                targetUserID = userId
+  let targetUserId;
+  (state.session.currentUser) ? targetUserId = state.session.currentUser.id :
+                                targetUserId = userId
 
   const balAssocData = state.entities.userLeagueBalances.userLeagueBalancesById;
 
-  return  getAssociatedIds(balAssocData, 'leagueId', 'userId', targetUserID)
+  return  getAssociatedIds(balAssocData, 'leagueId', 'userId', targetUserId)
 }
 
 // START: Selectors to pass to LeagueIndex Components //
@@ -104,15 +104,15 @@ const idNamer = (obj, type) => {
 };
 
 export const getUserLeagueData = (state, targetUserId) => {
-  const userLeagueData = {}
+  const userLeagueData = {};
+  const usersById = state.entities.users.usersById;
 
-  let usersById
-  (targetUserId) ? usersById = [ targetUserId ]
+  let targetUserIds
+  (targetUserId) ? targetUserIds = [targetUserId]
                     :
-                   usersById = state.entities.users.usersById;
+                   targetUserIds = state.entities.users.allUserIds;
 
-
-  state.entities.users.allUserIds.map(userId => {
+  targetUserIds.map(userId => {
     userLeagueData[userId] = merge(usersById[userId], { userLeagueData: {} })
   })
 
@@ -122,22 +122,35 @@ export const getUserLeagueData = (state, targetUserId) => {
   const cashBalances = state.entities.cashBalances.balancesById;
   const leagues = state.entities.leagues.leaguesById;
 
+
   Object.values(userLeagueBalances).map(joinObj => {
-    const leagueData = merge(idNamer(cashBalances[joinObj.balanceId], 'balance'),
-                             idNamer(leagues[joinObj.leagueId], 'league'),
-                             { transactionData: {} })
+    const joinUserId = joinObj.userId;
+    const joinLeagueId = joinObj.leagueId;
 
+    if (userLeagueData[joinUserId]) {
+      const leagueBalanceData = merge(idNamer(cashBalances[joinObj.balanceId], 'balance'),
+                                      idNamer(leagues[joinObj.leagueId], 'league'),
+                                      { transactionData: {} })
 
-  userLeagueData[joinObj.userId]['userLeagueData'][joinObj.leagueId] = leagueData
+      userLeagueData[joinUserId]['userLeagueData'][joinLeagueId] = leagueBalanceData;
+    }
+
   })
 
   Object.values(userLeagueTransactions).map(joinObj => {
-    let currTransactData = userLeagueData[joinObj.userId]['userLeagueData'][joinObj.leagueId]['transactionData']
-    const currRemoteStock = transactions[joinObj.transactionId]
-    const stockDataToMerge =
+    const joinUserId = joinObj.userId;
+    const joinLeagueId = joinObj.leagueId;
+    const joinTransactionId = joinObj.transactionId;
 
-    currTransactData[currRemoteStock.symbol] = merge(currTransactData[currRemoteStock.symbol],
-                                             { [currRemoteStock.id]: currRemoteStock })
+    const remoteData = transactions[joinTransactionId]
+
+    if (userLeagueData[joinUserId]) {
+      const userLeagueTrans = userLeagueData[joinUserId]['userLeagueData']
+                                                      [joinLeagueId]['transactionData']
+
+      userLeagueTrans[remoteData.symbol] = merge({[remoteData.id]: remoteData},
+                                                  userLeagueTrans[remoteData.symbol])
+    }
   })
 
   return userLeagueData
