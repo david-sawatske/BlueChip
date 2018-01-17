@@ -24,6 +24,8 @@ leagues = []
   users << User.create!(username: Faker::Internet.user_name, password: "password")
 end
 
+users << User.create!(username: 't1', password: "password")
+
 3.times do
   leagues << League.create!(name: Faker::GameOfThrones.unique.house, starting_balance: 10000)
 end
