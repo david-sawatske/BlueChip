@@ -12,7 +12,10 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { techTicker: '' }
+    this.state = { techTicker: '', activeComponentIdx: 0, timer: null }
+
+    this.initializeTimer = this.initializeTimer.bind(this);
+    this.autoCount = this.autoCount.bind(this);
   }
 
   componentWillMount() {
@@ -22,7 +25,45 @@ class HomePage extends React.Component {
     this.props.requestStockSearch(sampleTicker)
 
     if ( !this.props.leagueIds[0] ) {
-      this.props.requestTargetLeague('random')
+      this.props.requestTargetLeague('stockData')
+    }
+  }
+
+  initializeTimer() {
+    let timer = setInterval(this.autoCount, 5000);
+    this.setState({ timer });
+  }
+
+  componentDidMount() {
+    this.initializeTimer()
+  }
+
+  componentWillUnmount() {
+    this.clearInterval(this.state.timer);
+  }
+
+  autoCount() {
+    const currIdx = this.state.activeComponentIdx
+    if (currIdx < 3) {
+      this.setState({
+        activeComponentIdx: this.state.activeComponentIdx + 1
+      });
+    }
+  }
+
+  handleClick(direction, event) {
+    event.preventDefault();
+
+    const currentIdx = this.state.activeComponentIdx;
+    const change = (direction == 'left') ? -1 : 1
+    const newIdx = currentIdx + change
+
+    if (newIdx === 3) {
+      this.setState({ activeComponentIdx: 0 })
+    } else if (newIdx == -1){
+      this.setState({ activeComponentIdx: 2 })
+    } else {
+      this.setState({ activeComponentIdx: newIdx })
     }
   }
 
@@ -46,23 +87,66 @@ class HomePage extends React.Component {
                                  logo={sampleStock.logo} />
                     <StockChart interval={'1d'}
                                 chart={sampleStock.chart} />
-                 </div>
+                  </div>
     } else {
         StockData = <Loader />
     }
 
+    const AppData =
+      <div>
+        <h3 id="home-h3">JUST LIKE TRADING IN THE REAL MARKET</h3>
+        <ul id="main-list-1">
+          <li>Realtime equity data</li>
+          <li>Historical equity data</li>
+          <li>Technical indicators to make the best picks</li>
+        </ul>
+        <ul id="main-list-2">
+          <li>Create a league and invite friends</li>
+          <li>Join an existing league</li>
+          <li>Win bragging rights</li>
+        </ul>
+      </div>
+
+    let ActiveComponent
+    switch (this.state.activeComponentIdx) {
+      case 0:
+        ActiveComponent = AppData
+        break;
+      case 1:
+        ActiveComponent = <div>
+                            <h2>Live Stock Data</h2>
+                            <div id="home-stock-data">
+                              { StockData }
+                            </div>
+                          </div>
+        break;
+      case 2:
+        ActiveComponent = <div>
+                            <h2>Check leaderboards to see where you rank</h2>
+                            <div id="home-leaderboard">
+                              { LeaderBoard }
+                            </div>
+                          </div>
+        break;
+      default:
+        ActiveComponent = <h1>Welcome to BlueChip</h1>
+    }
+
     return (
-      <div className="">
-        <h1>Home</h1>
-        <section id="">
-          <div className="">
-            <h3>Check leaderboars to see where you rank</h3>
-            <div>
-              { LeaderBoard }
-              { StockData }
-            </div>
-          </div>
-        </section>
+      <div className="home">
+        <h1 id="home-h1">FREE STOCK TRADING FANTASY LEAGUES</h1>
+        <button className="button" onClick={ (e) =>
+            this.handleClick('left', e) }>
+            Left
+        </button>
+        <div id="home-data">
+{ this.state.activeComponentIdx }
+          { ActiveComponent }
+        </div>
+        <button className="button" onClick={ (e) =>
+            this.handleClick('right', e) }>
+            Right
+        </button>
       </div>
     )
   }
