@@ -1,1 +1,47 @@
 @import "components/*";
+@import '_variables';
+
+/*--------------------------------------------------------------
+TYPOGRAPHY
+--------------------------------------------------------------*/
+.container {
+	margin: 0;
+}
+
+h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  color: $dark-green;
+  clear: both;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Quattrocento Sans', sans-serif;
+  font-weight: 400;
+  clear: both;
+}
+
+p, a, li, form, textarea, button {
+  font-family: 'Quattrocento Sans', sans-serif;
+  font-weight: 200;
+  text-decoration: none;
+}
+
+
+/*--------------------------------------------------------------
+GENERAL
+--------------------------------------------------------------*/
+h1,
+h2,
+h3 {
+	text-align: center;
+	margin: 0;
+	padding: 16px;
+}
+
+img {
+	display: block;
+	border: 0;
+	width: 100%;
+	height: auto;
+}
