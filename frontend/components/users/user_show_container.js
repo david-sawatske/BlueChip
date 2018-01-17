@@ -8,7 +8,8 @@ import UserShow from './user_show';
 
 const mapStateToProps = state => ({
   isRailsUserLoading: state.ui.loading.railsUserLoading,
-  userData: getUserLeagueData(state)
+  userData: getUserLeagueData(state),
+  currentUserId: state.session.currentUser.id
 });
 
 const mapDispatchToProps = dispatch => ({
