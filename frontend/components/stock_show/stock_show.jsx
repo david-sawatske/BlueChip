@@ -19,7 +19,7 @@ class StockShow extends React.Component {
 
     let ShowComponent
     if (remoteStockData) {
-      const { quote, chart, logo, company, stats, news } = remoteStockData;
+      const { quote, chart, logo, company, stats, news, currentUser } = remoteStockData;
 
       ShowComponent =
         <div>
