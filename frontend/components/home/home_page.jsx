@@ -14,8 +14,8 @@ class HomePage extends React.Component {
 
     this.state = { techTicker: '', activeComponentIdx: 0, timer: null }
 
-    this.initializeTimer = this.initializeTimer.bind(this);
-    this.autoCount = this.autoCount.bind(this);
+    // this.initializeTimer = this.initializeTimer.bind(this);
+    // this.autoCount = this.autoCount.bind(this);
   }
 
   componentWillMount() {
@@ -29,27 +29,27 @@ class HomePage extends React.Component {
     }
   }
 
-  initializeTimer() {
-    let timer = setInterval(this.autoCount, 5000);
-    this.setState({ timer });
-  }
-
-  componentDidMount() {
-    this.initializeTimer()
-  }
-
-  componentWillUnmount() {
-    this.clearInterval(this.state.timer);
-  }
-
-  autoCount() {
-    const currIdx = this.state.activeComponentIdx
-    if (currIdx < 3) {
-      this.setState({
-        activeComponentIdx: this.state.activeComponentIdx + 1
-      });
-    }
-  }
+  // initializeTimer() {
+  //   let timer = setInterval(this.autoCount, 5000);
+  //   this.setState({ timer });
+  // }
+  //
+  // componentDidMount() {
+  //   this.initializeTimer()
+  // }
+  //
+  // componentWillUnmount() {
+  //   this.clearInterval(this.state.timer);
+  // }
+  //
+  // autoCount() {
+  //   const currIdx = this.state.activeComponentIdx
+  //   if (currIdx < 3) {
+  //     this.setState({
+  //       activeComponentIdx: this.state.activeComponentIdx + 1
+  //     });
+  //   }
+  // }
 
   handleClick(direction, event) {
     event.preventDefault();
@@ -92,19 +92,29 @@ class HomePage extends React.Component {
         StockData = <Loader />
     }
 
-    const AppData =
-      <div>
-        <h3 id="home-h3">JUST LIKE TRADING IN THE REAL MARKET</h3>
-        <ul id="main-list-1">
+    const listOne =
+      <div className="list-one">
+        <ul className="main-list-1">
           <li>Realtime equity data</li>
           <li>Historical equity data</li>
           <li>Technical indicators to make the best picks</li>
         </ul>
-        <ul id="main-list-2">
+      </div>
+
+    const listTwo =
+      <div className="list-two">
+        <ul className="main-list-2">
           <li>Create a league and invite friends</li>
           <li>Join an existing league</li>
           <li>Win bragging rights</li>
         </ul>
+      </div>
+
+    const AppData =
+      <div className="app-data">
+        <h2 className="home-h2">JUST LIKE TRADING IN THE REAL MARKET</h2>
+        { listOne }
+        { listTwo }
       </div>
 
     let ActiveComponent
@@ -115,7 +125,7 @@ class HomePage extends React.Component {
       case 1:
         ActiveComponent = <div>
                             <h2>Live Stock Data</h2>
-                            <div id="home-stock-data">
+                            <div className="home-stock-data">
                               { StockData }
                             </div>
                           </div>
@@ -123,7 +133,7 @@ class HomePage extends React.Component {
       case 2:
         ActiveComponent = <div>
                             <h2>Check leaderboards to see where you rank</h2>
-                            <div id="home-leaderboard">
+                            <div className="home-leaderboard">
                               { LeaderBoard }
                             </div>
                           </div>
@@ -134,19 +144,22 @@ class HomePage extends React.Component {
 
     return (
       <div className="home">
-        <h1 id="home-h1">FREE STOCK TRADING FANTASY LEAGUES</h1>
-        <button className="button" onClick={ (e) =>
-            this.handleClick('left', e) }>
-            Left
-        </button>
-        <div id="home-data">
-{ this.state.activeComponentIdx }
+        <h1 className="home-h1">FREE STOCK TRADING FANTASY LEAGUES</h1>
+
+        <div className="home-data">
           { ActiveComponent }
         </div>
-        <button className="button" onClick={ (e) =>
-            this.handleClick('right', e) }>
-            Right
-        </button>
+
+        <aside className="sidebar">
+          <button className="nav-btn" onClick={ (e) =>
+              this.handleClick('left', e) }>
+              ◀
+          </button>
+          <button className="nav-btn" onClick={ (e) =>
+              this.handleClick('right', e) }>
+              ▶
+          </button>
+        </aside>
       </div>
     )
   }
