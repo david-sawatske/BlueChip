@@ -9,27 +9,30 @@ CSS Grid layout for modern browsers:
 			display: grid;
 			height:100vh;
 
-			grid-template-columns: 5% auto 5%;
-			grid-template-rows: 15% auto;
+			grid-template-columns: 30% 5% auto 5%;
+			grid-template-rows: 10% 10% 5% auto;
 		}
 
 		.home-h1 {
-			grid-column: 2;
-			grid-row: 1;
+			grid-column: 3;
+			grid-row: 2;
+			font-size: 300%;
+			color: $dark-blue
 		}
 
 		.home-data {
-			height: 95%;
-			grid-column: 2/3;
-			grid-row: 2/3;
-			background-color: white;
+			height: 90%;
+			grid-column: 3;
+			grid-row: 4;
+			background-color: $background-grey;
+			border-radius: 25px;
+			align-self: right
 		}
 
 		.sidebar {
 			display: inherit;
-			grid-template-columns: inherit;
-			grid-column: 1/4;
-			grid-row: 2/3;
+			grid-column: 2/5;
+			grid-row: 3;
 		}
 
 		.nav-btn {
@@ -44,14 +47,13 @@ CSS Grid layout for modern browsers:
 		}
 
 		.nav-btn:last-of-type {
-			grid-column: 3/4;
+			grid-column: 5;
 		}
 	}
 
 	.app-data {
 		display: grid;
 		grid-area: main;
-		background-color: white;
 			grid-template:
 				"heading heading"
 				"left right";
@@ -61,5 +63,5 @@ CSS Grid layout for modern browsers:
 			grid-area: heading;
 			align-self: center;
 		}
-	
+
 }
