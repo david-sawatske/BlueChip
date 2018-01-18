@@ -10,7 +10,7 @@ CSS Grid layout for modern browsers:
 			height:100vh;
 
 			grid-template-columns: 30% 5% auto 5%;
-			grid-template-rows: 10% 10% 5% auto;
+			grid-template-rows: 5% 10% auto;
 		}
 
 		.home-h1 {
@@ -23,7 +23,7 @@ CSS Grid layout for modern browsers:
 		.home-data {
 			height: 90%;
 			grid-column: 3;
-			grid-row: 4;
+			grid-row: 3/3;
 			background-color: $background-grey;
 			border-radius: 25px;
 			align-self: right
@@ -37,6 +37,7 @@ CSS Grid layout for modern browsers:
 
 		.nav-btn {
 	    background: transparent;
+			color: #77878B;
 	    border: none !important;
 			opacity: .2;
 		}
@@ -60,8 +61,15 @@ CSS Grid layout for modern browsers:
 		}
 
 		.home-h2 {
+			color: #77878B;
+			font-size: 200%;
 			grid-area: heading;
 			align-self: center;
+			margin: 25px
+		}
+
+		.home li {
+			color: yellow;
 		}
 
 }

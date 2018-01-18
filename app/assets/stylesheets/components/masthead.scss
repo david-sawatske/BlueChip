@@ -81,10 +81,7 @@ CSS Grid layout for modern browsers:
       grid-row: 1/1;
 			width: 100%;
 			height: auto;
-
       align-self: left;
-      padding-top: 3px;
-      padding-bottom: 10px;
     }
 
     .session-buttons {
@@ -96,28 +93,32 @@ CSS Grid layout for modern browsers:
     }
 
 		.top-nav {
-				grid-column: 1/4;
-				grid-row: 2/2;
-				background-color: $dark-grey;
-				padding-top: 5px;
-				padding-bottom: 5px;
+			grid-column: 1/4;
+			grid-row: 2/2;
+			background-color: $dark-grey;
+			padding-top: 2px;
+			padding-bottom: 2px;
 		}
 
 		/* Style the links inside the navigation bar */
-		.top-nav .nav-link {
-				float: left;
-				color: $off-white;
-				text-align: center;
-				padding: 14px 22px;
-				font-size: 1.75vw;
+		.nav-link {
+			float: left;
+			color: $off-white;
+			text-align: center;
+			padding: 14px 22px;
+			font-size: 1.75vw;
+		}
+
+		.nav-link:last-of-type {
+			float: right;
 		}
 
 		/* Change the color of links on hover */
-		.top-nav a:hover {
-				background-color: $blue-grey;
-				color: $off-white;
-				text-shadow: 1px 1px 2px #000000;
-				border-radius: 12px;
+		a:hover {
+			background-color: $blue-grey;
+			color: $off-white;
+			text-shadow: 1px 1px 2px #000000;
+			border-radius: 12px;
 		}
   }
 }

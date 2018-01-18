@@ -97,14 +97,14 @@ class HomePage extends React.Component {
         <ul className="main-list-1">
           <li>Realtime equity data</li>
           <li>Historical equity data</li>
-          <li>Technical indicators to make the best picks</li>
+          <li>Technical data to make the best picks</li>
         </ul>
       </div>
 
     const listTwo =
       <div className="list-two">
         <ul className="main-list-2">
-          <li>Create a league and invite friends</li>
+          <li>Create a league and play friends</li>
           <li>Join an existing league</li>
           <li>Win bragging rights</li>
         </ul>
@@ -112,9 +112,8 @@ class HomePage extends React.Component {
 
     const AppData =
       <div className="app-data">
-        <h2 className="home-h2">JUST LIKE TRADING IN THE REAL MARKET</h2>
-        { listOne }
-        { listTwo }
+        <h2 className="home-h2">Just like trading in the real market</h2>
+
       </div>
 
     let ActiveComponent
@@ -124,17 +123,19 @@ class HomePage extends React.Component {
         break;
       case 1:
         ActiveComponent = <div>
-                            <h2>Live Stock Data</h2>
+                            <h2 className="home-h2">Live Stock Data</h2>
                             <div className="home-stock-data">
                               { StockData }
+                              { listOne }
                             </div>
                           </div>
         break;
       case 2:
         ActiveComponent = <div>
-                            <h2>Check leaderboards to see where you rank</h2>
+                            <h2 className="home-h2">Check leaderboards to see where you rank</h2>
                             <div className="home-leaderboard">
                               { LeaderBoard }
+                              { listTwo }
                             </div>
                           </div>
         break;

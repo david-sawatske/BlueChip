@@ -17,7 +17,7 @@ class Masthead extends React.Component {
     const { currentUser, showModal, hideModal } = this.props;
 
     return (
-      <div className="masthead">
+      <div>
         {currentUser ? (
           <div className="session-buttons">
             <button className="button" onClick={ (e) =>

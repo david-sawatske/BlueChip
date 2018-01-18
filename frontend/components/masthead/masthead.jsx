@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 
 import MastheadButtons from './masthead_buttons';
+import TopNav from './top_nav';
 
 const MastHead = props => (
   <div className="masthead">
@@ -14,6 +15,7 @@ const MastHead = props => (
     </Link>
 
     <MastheadButtons { ...props }/>
+    <TopNav />
   </div>
 );
 
