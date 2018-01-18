@@ -16,7 +16,7 @@ class StockHeader extends React.Component {
 
     return (
       <div>
-        <img src={ logo.url } />
+        <img className="stock-img" src={ logo.url } />
         <h3>{quote.companyName} ({quote.symbol})</h3>
         <h2>{quote.latestPrice}</h2>
         <h3>Change: {showSign(change)}{change}</h3>
