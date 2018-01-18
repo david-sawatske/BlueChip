@@ -16,7 +16,7 @@ export const ModalStyle = {
   },
   content : {
     position                   : 'absolute',
-    fontFamily                 : '"Cinzel Decorative", sans-serif',
+    fontFamily                 : '"Oswald", sans-serif',
     left                       : '',
     top                        : '15vmin',
     right                      : '',
