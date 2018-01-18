@@ -1,0 +1,116 @@
+@import "components/*";
+@import '_variables';
+
+/*--------------------------------------------------------------
+TYPOGRAPHY
+--------------------------------------------------------------*/
+.container {
+	margin: 0;
+}
+
+h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  color: $dark-green;
+  clear: both;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Quattrocento Sans', sans-serif;
+  font-weight: 400;
+  clear: both;
+}
+
+p, a, li, form, textarea, button {
+  font-family: 'Quattrocento Sans', sans-serif;
+  font-weight: 200;
+  text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
+
+/*--------------------------------------------------------------
+GENERAL
+--------------------------------------------------------------*/
+h1,
+h2,
+h3 {
+	text-align: center;
+	margin: 0;
+	padding: 16px;
+}
+
+img {
+	display: block;
+	border: 0;
+	width: 100%;
+	height: auto;
+}
+
+/*--------------------------------------------------------------
+CSS Grid layout for modern browsers:
+--------------------------------------------------------------*/
+@supports (grid-area: auto) {
+
+	@media screen and (min-width: 768px) {
+    .container {
+			background: url('<%= asset_path 'home-bg.jpg' %>');
+			background-size: cover;
+
+      grid-template-areas:
+      "header"
+      "body"
+			"footer";
+		}
+
+		.header {
+			grid-area: header;
+			background-color: white;
+			opacity: .9;
+		}
+
+		.body {
+			grid-area: body;
+		}
+
+		.footer {
+			grid-area: footer;
+			color: white;
+			background-color: black;
+			opacity: .9;
+		}
+  }
+}
+
+
+/****************************
+*     BUTTONS
+****************************/
+.button {
+    background-color: $dark-blue;
+    color: white;
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+		padding: 10px 15px;
+    display: inline;
+    font-size: 12px;
+    border-radius: 12px;
+}
+
+.button:hover {
+  background-color: $pale-green;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+
+
+
+// TEMP
+.stock-img {
+	width: 5%;
+	height: auto;
+}
