@@ -68,7 +68,7 @@ class StockChart extends React.Component {
       }
 
     return (
-      <div className="app">
+      <div className="chart">
         { graphTypeButton }
 
         <HighchartsStockChart>

@@ -19,8 +19,15 @@ class StockSearch extends React.Component {
   componentWillMount() {
     if (this.props.currentUser) {
       this.props.requestTargetUserData(this.props.currentUser.id)
-
     }
+
+          
+          this.props.requestStockSearch('aapl', '6m')
+            .then( data => {
+                  this.toggleSearchInitiated();
+            })
+
+            this.setState({ticker: 'aapl'})
   }
 
   toggleSearchInitiated() {
@@ -44,11 +51,11 @@ class StockSearch extends React.Component {
 
   render() {
     const searchedTicker = this.state.ticker.toUpperCase();
-    const { isRemoteLoading, remoteStockData, currentUserData, showModal, hideModal } = this.props;
+    const { isRemoteLoading, remoteStockData,
+            currentUserData, showModal, hideModal } = this.props;
     const intervals = ['5y', '2y','1y', 'YTD', '6m','3m', '1m', '1d'];
 
     let ShowComponent = null;
-
     if (isRemoteLoading) {
       ShowComponent = <Loader />
     } else if (this.state.searchInitiated && remoteStockData[searchedTicker]) {
@@ -62,28 +69,29 @@ class StockSearch extends React.Component {
       ShowComponent = <StockShow remoteStockData={this.state.prevSearchData}
                                  showModal={showModal}
                                  hideModal={hideModal}
-                                 interval={this.state.interval }/>
+                                 interval={this.state.interval} />
     }
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit} className="">
+      <div className="stock-search">
+        <form onSubmit={this.handleSubmit} className="search">
             <br/>
-            <label>Ticker:
-              <input type="text"
+            <label>Enter Ticker:</label>
+              <input
+                type="text"
                 value={this.state.ticker}
                 onChange={this.update('ticker')}
-                className=""
+                className="ticker-input"
+                placeholder="Enter Ticker"
               />
-            </label>
           <input type="submit" value="Search" />
         </form>
 
         <br/>
 
-        <form onSubmit={this.handleSubmit} className="">
+        <form onSubmit={this.handleSubmit} className="intervals">
           {intervals.map((interval, idx) =>
-            <button className="button"
+            <button
               key={idx}
               onClick={ () => this.setState({ interval: interval }) }>
               { interval }

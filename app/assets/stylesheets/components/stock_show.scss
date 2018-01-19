@@ -1,0 +1,76 @@
+@import '_variables';
+
+/*--------------------------------------------------------------
+CSS Grid layout for modern browsers:
+--------------------------------------------------------------*/
+@supports (grid-area: auto) {
+	@media screen and (min-width: 768px) {
+		.stock-show {
+			display: grid;
+			background-color: $transparent-white;
+
+			grid-template-areas: "header header header t-btn   t-btn"
+													 "header header header summary summary"
+													 "chart  chart  chart  summary summary"
+													 "chart  chart  chart  summary summary"
+													 "chart  chart  chart  summary summary"
+ 													 ".      news   news   news .";
+		}
+
+		.stock-header {
+			grid-area: header;
+
+			display: grid;
+			grid-template-areas: "logo   name   name"
+													 "price  change percent"
+													 "time   .      .";
+
+			background-color: #2c5e7e;
+
+			.logo {
+				grid-area: logo;
+				width: auto;
+				height: auto;
+				padding:1px;
+				border:1px solid $dark-grey;
+				background-color: $off-white;
+			}
+
+			.name {
+				grid-area: name;
+				font-size: 250%;
+			}
+
+			.price {
+				grid-area: price;
+				font-size: 150%;
+			}
+
+			.change {
+				grid-area: change;
+				font-size: 150%;
+			}
+
+			.time {
+				grid-area: time;
+			}
+		}
+
+		.t-btn {
+			grid-area: t-btn;
+		}
+
+		.stock-summary {
+			grid-area: summary;
+		}
+
+		.chart {
+			grid-area: chart;
+		}
+
+		.news {
+			grid-area: news;
+		}
+
+	}
+}

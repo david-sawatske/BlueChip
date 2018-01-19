@@ -15,13 +15,22 @@ class StockHeader extends React.Component {
     )
 
     return (
-      <div>
-        <img className="stock-img" src={ logo.url } />
-        <h3>{quote.companyName} ({quote.symbol})</h3>
-        <h2>{quote.latestPrice}</h2>
-        <h3>Change: {showSign(change)}{change}</h3>
-        <h3>Percent Change: ({showSign(percent)}{percent}%)</h3>
-        <h5>{quote.latestSource} as of {quote.latestTime}</h5>
+      <div className="stock-header">
+        <img className="logo" src={ logo.url } />
+        <h2 className="name">{quote.companyName} ({quote.symbol})</h2>
+        <div className="price">
+          <h3>Latest Price</h3>
+          {quote.latestPrice}
+        </div>
+        <div className="change">
+          <h3>Day Change</h3>
+          {showSign(change)}{change}
+        </div>
+        <div className="percent">
+          <h3>Percent Change</h3>
+          {showSign(percent)}{percent}%
+         </div>
+        <div className="time">{quote.latestSource} as of {quote.latestTime}</div>
       </div>
     )
   }

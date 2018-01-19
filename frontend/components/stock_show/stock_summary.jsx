@@ -3,7 +3,7 @@ import React from 'react';
 import { numAbbr, numberToCurrency } from '../../util/helper_functions'
 
 const StockSummary = ({ quote }) => (
-  <div>
+  <div className="stock-summary">
     <h3>Stock Summary</h3>
     <table>
       <tbody>

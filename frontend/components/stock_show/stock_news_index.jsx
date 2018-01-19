@@ -2,7 +2,7 @@ import React from 'react';
 import StockNewsItem from './stock_news_item';
 
 const StockNewsIndex = ({ news, companyName }) => (
-  <div>
+  <div className="news">
     <h2>Latest {companyName} News</h2>
     <ul>
       {news.map(( story, idx ) =>
