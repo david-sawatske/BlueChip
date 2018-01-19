@@ -1,0 +1,67 @@
+@import '_variables';
+
+/*--------------------------------------------------------------
+CSS Grid layout for modern browsers:
+--------------------------------------------------------------*/
+@supports (grid-area: auto) {
+	@media screen and (min-width: 768px) {
+		.stock-search {
+			display: grid;
+			height:100vh;
+			background-color: $background-grey;
+
+			grid-template-columns:  auto auto;
+			grid-template-rows: 15% auto;
+		}
+
+		.search {
+			grid-column: 1/3;
+			grid-row: 1;
+			background-color: $background-grey;
+			color: $blue-grey;
+			font-size: 150%;
+
+			input[type=text] {
+					padding:10px;
+					border:2px solid #ccc;
+					-webkit-border-radius: 5px;
+					border-radius: 5px;
+					font-size: 150%;
+					background-color: $blue-grey;
+			}
+
+			input[type=submit] {
+					padding:10px 15px;
+					background: $background-grey;
+					color: $blue-grey;
+					border-color: $blue-grey;
+					border-style: solid;
+					border-radius: 5px;
+					font-size: 100%;
+			}
+		}
+
+		.intervals {
+			grid-column: 1/3;
+			grid-row: 2;
+			button {
+				padding:5px 15px;
+				background: $background-grey;
+				color: $blue-grey;
+				border-color: $blue-grey;
+				border-style: solid;
+				border-radius: 5px;
+				font-size: 100%;
+			}
+			button:hover {
+				padding:5px 15px;
+				background: $blue-grey;
+				color: $background-grey;
+				border-color: $background-grey;
+				border-style: solid;
+				border-radius: 5px;
+				font-size: 100%;
+			}
+		}
+	}
+}
