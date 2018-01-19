@@ -59,8 +59,8 @@ CSS Grid layout for modern browsers:
     .container {
 			background: url('<%= asset_path 'home-bg.jpg' %>');
 			background-size: cover;
-		  height: 100%;
-		  overflow: hidden;
+		  height: 100vh;
+		  overflow: scroll;
 
       grid-template-areas:
       "header"
@@ -106,13 +106,4 @@ CSS Grid layout for modern browsers:
 .button:hover {
   background-color: $pale-green;
   text-shadow: 2px 2px 4px #000000;
-}
-
-
-
-
-// TEMP
-.stock-img {
-	width: 5%;
-	height: auto;
 }
