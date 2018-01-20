@@ -54,13 +54,12 @@ img {
 CSS Grid layout for modern browsers:
 --------------------------------------------------------------*/
 @supports (grid-area: auto) {
-
 	@media screen and (min-width: 768px) {
     .container {
 			background: url('<%= asset_path 'home-bg.jpg' %>');
 			background-size: cover;
-		  height: 100vh;
-		  overflow: scroll;
+		  height: 110vh;
+			overflow: scroll;
 
       grid-template-areas:
       "header"
@@ -76,7 +75,6 @@ CSS Grid layout for modern browsers:
 
 		.body {
 			grid-area: body;
-			padding-bottom: 10%;
 		}
 
 		.footer {
@@ -84,10 +82,8 @@ CSS Grid layout for modern browsers:
 			color: white;
 			background-color: black;
 			opacity: .9;
-			top: 95%;
-			size: 5%;
 			position: absolute;
-			align-content: right;
+			width: 100%;
 		}
   }
 }

@@ -19,10 +19,11 @@ class StockShow extends React.Component {
 
     let ShowComponent
     if (remoteStockData) {
-      const { quote, chart, logo, company, stats, news, currentUser } = remoteStockData;
+      const { quote, chart, logo, company,
+              stats, news, currentUser } = remoteStockData;
 
       ShowComponent =
-        <div className="stock-show">
+        <div>
           <button className="t-btn" onClick={ () =>
             showModal('transaction', { modalOpen: true }) }>
             Buy/Sell this stock
@@ -48,7 +49,7 @@ class StockShow extends React.Component {
     }
 
     return (
-      <div>
+      <div className="stock-show">
         { ShowComponent }
         { TransactionComponent }
       </div>

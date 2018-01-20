@@ -71,7 +71,7 @@ CSS Grid layout for modern browsers:
     .title {
       grid-column: title;
       grid-row: 1/1;
-			font-size: 2.0vw;
+			font-size: 1.75vw;
 			justify-self: left;
 			align-self: center;
     }
@@ -79,9 +79,10 @@ CSS Grid layout for modern browsers:
     .logo  {
       grid-column: logo;
       grid-row: 1/1;
-			width: 100%;
+			width: 75%;
 			height: auto;
-      align-self: left;
+      align-self: center;
+			margin-left: auto;
     }
 
     .session-buttons {
@@ -111,13 +112,13 @@ CSS Grid layout for modern browsers:
 
 		.nav-link:last-of-type {
 			float: right;
+			margin-right: 5%;
 		}
 
 		/* Change the color of links on hover */
 		a:hover {
-			background-color: $blue-grey;
 			color: $off-white;
-			text-shadow: 1px 1px 2px #000000;
+			text-shadow: 2px 2px 4px $main-blue;
 			border-radius: 12px;
 		}
   }

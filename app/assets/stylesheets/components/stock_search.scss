@@ -5,45 +5,54 @@ CSS Grid layout for modern browsers:
 --------------------------------------------------------------*/
 @supports (grid-area: auto) {
 	@media screen and (min-width: 768px) {
-		.stock-search {
+		.stock-search-container {
 			display: grid;
-			height:100vh;
-			background-color: $background-grey;
+			height: 100vh;
 
-			grid-template-columns:  auto auto;
-			grid-template-rows: 15% auto;
+			grid-template-columns: 25% auto;
+			grid-template-rows: 15% 10% auto;
 		}
 
-		.search {
-			grid-column: 1/3;
-			grid-row: 1;
-			background-color: $background-grey;
+		.stock-show {
+			grid-column: 2/3;
+			grid-row: 1/3;
+			background-color: transparent-white;
+		}
+
+		.stock-search {
+			grid-column: 1/2;
+			grid-row: 1/2;
 			color: $blue-grey;
-			font-size: 150%;
+			display: inherit;
+			grid-template-areas: "label ."
+													 "bar button";
+
+			label {
+				grid-area: label;
+			}
 
 			input[type=text] {
-					padding:10px;
+					grid-area: bar;
 					border:2px solid #ccc;
-					-webkit-border-radius: 5px;
 					border-radius: 5px;
-					font-size: 150%;
 					background-color: $blue-grey;
 			}
 
 			input[type=submit] {
-					padding:10px 15px;
+					grid-area: button;
 					background: $background-grey;
+    			margin: 5px;
 					color: $blue-grey;
 					border-color: $blue-grey;
 					border-style: solid;
 					border-radius: 5px;
-					font-size: 100%;
 			}
 		}
 
-		.intervals {
-			grid-column: 1/3;
-			grid-row: 2;
+	 .intervals {
+		 grid-column: 1/2;
+		 grid-row: 2/3;
+
 			button {
 				padding:5px 15px;
 				background: $background-grey;
@@ -51,7 +60,6 @@ CSS Grid layout for modern browsers:
 				border-color: $blue-grey;
 				border-style: solid;
 				border-radius: 5px;
-				font-size: 100%;
 			}
 			button:hover {
 				padding:5px 15px;

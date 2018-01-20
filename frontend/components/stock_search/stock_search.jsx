@@ -21,7 +21,7 @@ class StockSearch extends React.Component {
       this.props.requestTargetUserData(this.props.currentUser.id)
     }
 
-          
+
           this.props.requestStockSearch('aapl', '6m')
             .then( data => {
                   this.toggleSearchInitiated();
@@ -73,8 +73,8 @@ class StockSearch extends React.Component {
     }
 
     return (
-      <div className="stock-search">
-        <form onSubmit={this.handleSubmit} className="search">
+      <div className="stock-search-container">
+        <form onSubmit={this.handleSubmit} className="stock-search">
             <br/>
             <label>Enter Ticker:</label>
               <input
