@@ -1,0 +1,78 @@
+.highcharts-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  line-height: normal;
+  font-size: 12px;
+}
+
+.highcharts-root text {
+  stroke-width: 0;
+}
+
+.highcharts-title {
+  fill: red;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+
+.highcharts-background {
+  fill: #333;
+}
+
+.highcharts-plot-border, .highcharts-plot-background {
+  fill: #545E75;
+}
+
+.highcharts-grid-line {
+  stroke: #77878B;
+}
+
+.highcharts-xaxis-grid .highcharts-grid-line {
+  stroke-width: 0;
+}
+
+.highcharts-tick {
+  stroke: #545E75;
+}
+
+.highcharts-selection-marker {
+  fill: rgb(253,255,50);
+  fill-opacity: 0.25;
+}
+
+.highcharts-graph {
+  fill: red;
+  fill-opacity: 0.25;
+}
+
+/* Legend */
+.highcharts-legend-box {
+  fill: #545E75;
+}
+
+.highcharts-navigator-outline {
+  stroke: rgba(128, 179, 236, 0.3);
+  fill: none;
+}
+
+.highcharts-navigator-handle {
+  stroke: #b2b1b6;
+  fill: #ebe7e8;
+  cursor: ew-resize;
+}
+
+.highcharts-navigator-series {
+  stroke: rgba(128, 179, 236, 0.3);
+  fill: none;
+}
+
+/* No-data module */
+.highcharts-no-data text {
+  font-weight: bold;
+  font-size: 12px;
+  fill: #60606a;
+}

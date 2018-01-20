@@ -2,8 +2,10 @@ import React from 'react';
 
 import Highcharts from 'highcharts/highstock';
 import { HighchartsStockChart, Chart, withHighcharts, XAxis, YAxis, Title,
-         Legend, SplineSeries, AreaSplineSeries, Navigator, Tooltip
+         Subtitle, Legend, SplineSeries, AreaSplineSeries, Navigator, Tooltip
        } from 'react-jsx-highstock';
+
+import '../../../app/assets/stylesheets/components/chart';
 
 import { dateConv } from '../../util/helper_functions';
 
@@ -26,7 +28,7 @@ class StockChart extends React.Component {
   }
 
   render() {
-    const { chart, interval } = this.props;
+    const { chart, interval, companyName } = this.props;
     const priceData = [];
     const volumeData = [];
 
@@ -73,6 +75,9 @@ class StockChart extends React.Component {
 
         <HighchartsStockChart>
           <Chart zoomType="x" />
+
+          <Title> - </Title>
+          <Subtitle>{ interval }</Subtitle>
 
           <Legend>
             <Legend.Title>Key</Legend.Title>
