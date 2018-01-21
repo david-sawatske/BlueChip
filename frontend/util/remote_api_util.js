@@ -1,7 +1,7 @@
 const ROOT_URL = 'https://api.iextrading.com/1.0/stock/';
 
 export const fetchStockSeries = (symbol,
-                                 interval = '1m',
+                                 interval = '1d',
                                  dataTypes = 'logo,quote,news,chart,company,stats') => {
   return $.ajax({
     method: 'GET',
