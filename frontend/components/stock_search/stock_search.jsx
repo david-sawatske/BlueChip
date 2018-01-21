@@ -8,7 +8,7 @@ class StockSearch extends React.Component {
     super(props);
 
     this.state = { ticker: "",
-                   interval: "6m",
+                   interval: { ['1d']: "One Day" },
                    searchInitiated: false,
                    prevSearchData: null };
 
@@ -20,14 +20,6 @@ class StockSearch extends React.Component {
     if (this.props.currentUser) {
       this.props.requestTargetUserData(this.props.currentUser.id)
     }
-
-
-          this.props.requestStockSearch('aapl', '6m')
-            .then( data => {
-                  this.toggleSearchInitiated();
-            })
-
-            this.setState({ticker: 'aapl'})
   }
 
   toggleSearchInitiated() {
@@ -36,8 +28,8 @@ class StockSearch extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    this.props.requestStockSearch(this.state.ticker, this.state.interval)
+    const intervalKey = Object.keys(this.state.interval)[0];
+    this.props.requestStockSearch(this.state.ticker, intervalKey)
       .then( data => {
         this.toggleSearchInitiated();
       })
@@ -45,7 +37,7 @@ class StockSearch extends React.Component {
 
   update(field) {
     return e => this.setState({
-      [field]: e.currentTarget.value
+      [field]: e.currentTarget.value.toUpperCase()
     });
   }
 
@@ -53,7 +45,14 @@ class StockSearch extends React.Component {
     const searchedTicker = this.state.ticker.toUpperCase();
     const { isRemoteLoading, remoteStockData,
             currentUserData, showModal, hideModal } = this.props;
-    const intervals = ['5y', '2y','1y', 'YTD', '6m','3m', '1m', '1d'];
+    const intervals = [ { ['5y']: "Five Years" },
+                        { ['2y']:" Two Years" },
+                        { ['1y']:" One Year" },
+                        { ['YTD']: "Year to Date" },
+                        { ['6m']: "Six Months" },
+                        { ['3m']: "Three Months" },
+                        { ['1m']: "One Month" },
+                        { ['1d']: "One Day" } ];
 
     let ShowComponent = null;
     if (isRemoteLoading) {
@@ -94,7 +93,7 @@ class StockSearch extends React.Component {
             <button
               key={idx}
               onClick={ () => this.setState({ interval: interval }) }>
-              { interval }
+              { interval[idx] }
             </button>
           )}
         </form>

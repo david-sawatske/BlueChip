@@ -85,8 +85,9 @@ class HomePage extends React.Component {
       StockData = <div>
                     <StockHeader quote={sampleStock.quote}
                                  logo={sampleStock.logo} />
-                    <StockChart interval={'1d'}
-                                chart={sampleStock.chart} />
+                    <StockChart interval={{ ['1d']: "One Day" }}
+                                chart={sampleStock.chart}
+                                companyName={sampleStock.quote.companyName} />
                   </div>
     } else {
         StockData = <Loader />

@@ -32,7 +32,8 @@ class StockShow extends React.Component {
                        logo={logo} />
           <StockSummary quote={quote} />
           <StockChart chart={chart}
-                      interval={interval} />
+                      interval={interval}
+                      companyName={quote.companyName}/>
           <StockNews news={news} />
 
 

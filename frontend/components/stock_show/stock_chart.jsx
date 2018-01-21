@@ -14,9 +14,21 @@ class StockChart extends React.Component {
     super(props);
 
     this.state = { yType: "priceData",
-                   typeButton: "Volume Data" }
+                   typeButton: "Volume Data",
+                   intervalStr: "One Month",
+                   intervalKey: "1m" }
 
     this.setYType = this.setYType.bind(this);
+  }
+
+  componentWillMount() {
+    const interval = this.props.interval;
+    let intervalKey;
+    if (interval) {
+      intervalKey = Object.keys(interval)[0];
+      this.setState({ intervalStr: interval.intervalKey,
+                      intervalKey: intervalKey });
+    }
   }
 
   setYType() {
@@ -29,15 +41,13 @@ class StockChart extends React.Component {
 
   render() {
     const { chart, interval, companyName } = this.props;
+    const { intervalStr, intervalKey } = this.state;
     const priceData = [];
     const volumeData = [];
-
-    let setInterval
-    (interval) ? setInterval = interval : setInterval = '1m'
-
+console.log(chart);
     chart.map(obj => {
-      const date = (setInterval === '1d') ? dateConv(obj) : Date.parse(obj.date);
-      const price = (setInterval === '1d') ? obj.average : obj.close;
+      const date = (intervalKey === '1d') ? dateConv(obj) : Date.parse(obj.date);
+      const price = (intervalKey === '1d') ? obj.average : obj.close;
 
       if (price > 0) {
         priceData.push([date, price]);
@@ -69,6 +79,8 @@ class StockChart extends React.Component {
                   </YAxis>
       }
 
+    const subtitle = companyName + ' - ' + interval[intervalKey];
+
     return (
       <div className="chart">
         { graphTypeButton }
@@ -77,7 +89,7 @@ class StockChart extends React.Component {
           <Chart zoomType="x" />
 
           <Title> - </Title>
-          <Subtitle>{ interval }</Subtitle>
+          <Subtitle>{ subtitle }</Subtitle>
 
           <Legend>
             <Legend.Title>Key</Legend.Title>
