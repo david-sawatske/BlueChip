@@ -222,9 +222,13 @@ CSS Grid layout for modern browsers:
 		.hide-search {
 			h1.searched {
 				grid-row: 1;
-				color: black;
-				opacity: .66;
-				position: absolute;
+
+				color: $blue-grey;
+				margin-left: -50px;
+				margin-top: 33px;
+				margin-right: -50px;
+				font-size: 125%;
+				transform: rotate(270deg);
 			}
 
 			.initial {
