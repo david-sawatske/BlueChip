@@ -26,10 +26,13 @@ CSS Grid layout for modern browsers:
 			border-radius: 10% 10% 5% 5%;
 			padding: 0% 3%;
 
-
-			.initial {
+			h1 {
 				grid-row: 1;
 				color: $pale-green;
+			}
+
+			h1.searched {
+				display: none;
 			}
 
 			.search {
@@ -49,24 +52,39 @@ CSS Grid layout for modern browsers:
 					font-size: 250%;
 				}
 
-				input[type="submit"] {
+				.submit-search {
 					grid-column: 6/8;
 					grid-row: 1;
-					height: 66%;
 					align-self: center;
-					margin-right: 10%;
-					transition: transform .2s;
-					background: $background-grey;
-					font-size: 110%;
-					color: $blue-grey;
-					border-color: $blue-grey;
-					border-style: solid;
-					border-radius: 5px;
+					justify-self: center;
+
+					input[type="submit"] {
+						background: $background-grey;
+						padding: 10%;
+						font-size: 150%;
+						color: $blue-grey;
+						border-color: $blue-grey;
+						border-style: solid;
+						border-radius: 5px;
+					}
 				}
 
-				input[type="submit"]:hover {
-					transition: transform .2s;
-					transform: scale(1.2);
+				.int-val {
+					display: inline;
+					opacity: .66;
+				}
+
+				label:hover .search-val {
+					display: inline;
+					padding: 12.5%;
+				}
+
+				label:hover .int-val {
+					display: none;
+				}
+
+				.search-val {
+					display: none;
 				}
 			}
 
@@ -80,6 +98,7 @@ CSS Grid layout for modern browsers:
 					transition: transform .2s;
 					padding:5px 15px;
 					background: $background-grey;
+					font-size: 110%;
 					color: $blue-grey;
 					border-color: $blue-grey;
 					border-style: solid;
@@ -92,10 +111,9 @@ CSS Grid layout for modern browsers:
 				}
 			}
 
-			.searched {
-				display: none;
-			}
 		}
+
+
 
 		.side-search {
 			grid-column: 1;
@@ -107,9 +125,13 @@ CSS Grid layout for modern browsers:
 			border-radius: 10% 10% 5% 5%;
 			padding: 0% 3%;
 
-			.initial {
+			h1.searched {
 				grid-row: 1;
 				color: $pale-green;
+			}
+
+			h1.searched {
+				display: none;
 			}
 
 			.search {
@@ -137,8 +159,8 @@ CSS Grid layout for modern browsers:
 					grid-column: 1;
 					grid-row: 2;
 					align-self: center;
-					
-					margin: 15%;
+
+					margin-top: 15%;
 					transition: transform .2s;
 					padding:5px 15px;
 					background: $background-grey;
@@ -169,12 +191,15 @@ CSS Grid layout for modern browsers:
 			form.intervals {
 				grid-column: auto;
 				grid-row: 3;
+
 				color: $pale-green;
+				justify-self: center;
 
 				button {
-					display: block;
+					display: flex;
+					margin: auto;
+					margin-top: 10px;
 
-					margin: 5%;
 					transition: transform .2s;
 					padding:5px 15px;
 					background: $background-grey;
