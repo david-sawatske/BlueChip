@@ -23,7 +23,8 @@ CSS Grid layout for modern browsers:
 			grid-template-rows: 33% auto;
 
 			background-color: $background-grey;
-
+			border-radius: 10% 10% 5% 5%;
+			padding: 0% 3%;
 
 
 			h1 {
@@ -53,18 +54,19 @@ CSS Grid layout for modern browsers:
 					grid-row: 1;
 					height: 66%;
 					align-self: center;
-					background: transparent;
-					font-size: 125%;
-					color: $dark-grey;
-					margin: 5px;
-					border: none;
+					margin-right: 10%;
+					transition: transform .2s;
+					background: $background-grey;
+					font-size: 110%;
+					color: $blue-grey;
+					border-color: $blue-grey;
+					border-style: solid;
+					border-radius: 5px;
 				}
 
 				input[type="submit"]:hover {
-					background: $background-grey;
-					color: $pale-green;
-					border-radius: 10px;
-					opacity: .66;
+					transition: transform .2s;
+					transform: scale(1.2);
 				}
 			}
 
@@ -85,7 +87,8 @@ CSS Grid layout for modern browsers:
 				}
 
 				button:hover {
-					transform: scale(1.5);
+					transform: scale(1.75);
+					background: $grey;
 				}
 			}
 
