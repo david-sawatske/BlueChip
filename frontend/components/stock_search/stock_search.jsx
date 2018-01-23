@@ -10,9 +10,11 @@ class StockSearch extends React.Component {
     this.state = { ticker: "",
                    interval: { ['1d']: "One Day" },
                    searchInitiated: false,
-                   prevSearchData: null };
+                   prevSearchData: null,
+                   isSearchHovered: false };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleHover = this.handleHover.bind(this);
     this.update = this.update.bind(this);
   }
 
@@ -22,8 +24,8 @@ class StockSearch extends React.Component {
     }
   }
 
-  toggleSearchInitiated() {
-    this.setState({ searchInitiated: !this.state.searchInitiated })
+  setSearchInitiated() {
+    this.setState({ searchInitiated: true })
   }
 
   handleSubmit(event) {
@@ -31,13 +33,20 @@ class StockSearch extends React.Component {
     const intervalKey = Object.keys(this.state.interval)[0];
     this.props.requestStockSearch(this.state.ticker, intervalKey)
       .then( data => {
-        this.toggleSearchInitiated();
+        this.setSearchInitiated();
       })
+  }
+
+  handleHover(){
+    this.setState({
+      isSearchHovered: !this.state.isSearchHovered
+    });
   }
 
   update(field) {
     return e => this.setState({
-      [field]: e.currentTarget.value.toUpperCase()
+      [field]: e.currentTarget.value.toUpperCase(),
+      isSearchHovered: true
     });
   }
 
@@ -45,6 +54,9 @@ class StockSearch extends React.Component {
     const searchedTicker = this.state.ticker.toUpperCase();
     const { isRemoteLoading, remoteStockData,
             currentUserData, showModal, hideModal } = this.props;
+    const { isSearchHovered } = this.state;
+    const currIntValue = Object.values(this.state.interval);
+
     const intervals = [ { ['5y']: "Five Years" },
                         { ['2y']:" Two Years" },
                         { ['1y']:" One Year" },
@@ -53,6 +65,7 @@ class StockSearch extends React.Component {
                         { ['3m']: "Three Months" },
                         { ['1m']: "One Month" },
                         { ['1d']: "One Day" } ];
+
 
     let ShowComponent = null;
     if (isRemoteLoading) {
@@ -71,34 +84,53 @@ class StockSearch extends React.Component {
                                  interval={this.state.interval} />
     }
 
+    let searchClass
+    if (!this.state.searchInitiated) {
+      searchClass = "initial-search"
+    } else if (isSearchHovered && this.state.searchInitiated) {
+      searchClass = "side-search"
+    } else {
+      searchClass = "hide-search"
+    }
+
     return (
       <div className="stock-search-container">
-        <form onSubmit={this.handleSubmit} className="stock-search">
-            <br/>
-            <label>Enter Ticker:</label>
-              <input
-                type="text"
-                value={this.state.ticker}
-                onChange={this.update('ticker')}
-                className="ticker-input"
-                placeholder="Enter Ticker"
-              />
-          <input type="submit" value="Search" />
-        </form>
+        <div className={searchClass}
+             onMouseEnter={this.handleHover}
+             onMouseLeave={this.handleHover}>
 
-        <br/>
+        <h1 className='initial'>Enter Ticker for Live Stock Data</h1>
+        <h1 className='searched'>Stock Search</h1>
 
-        <form onSubmit={this.handleSubmit} className="intervals">
-          {intervals.map((interval, idx) =>
-            <button
-              key={idx}
-              onClick={ () => this.setState({ interval: interval }) }>
-              { interval[idx] }
-            </button>
-          )}
-        </form>
+          <form onSubmit={this.handleSubmit}
+            className="search">
+            <input
+              type="text"
+              value={this.state.ticker}
+              onChange={this.update('ticker')}
+              placeholder="Ticker"
+            />
 
-        <br/>
+            <label className='submit-search'>
+              <input type="submit" value={currIntValue} className="int-val"/>
+              <input type="submit" value='Search' className="search-val"/>
+            </label>
+          </form>
+
+          <form onSubmit={this.handleSubmit}
+                className="intervals">
+            {intervals.map((interval, idx) => {
+              const intVal = Object.values(interval)[0];
+              if (intVal != currIntValue) {
+                return <button
+                        key={idx}
+                        onClick={ () => this.setState({ interval: interval }) }>
+                        { intVal }
+                      </button>
+              }
+            })}
+          </form>
+        </div>
 
         { ShowComponent }
       </div>

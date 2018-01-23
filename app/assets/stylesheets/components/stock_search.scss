@@ -26,7 +26,7 @@ CSS Grid layout for modern browsers:
 			border-radius: 10% 10% 5% 5%;
 			padding: 0% 3%;
 
-			h1 {
+			h1.initial {
 				grid-row: 1;
 				color: $pale-green;
 			}
@@ -113,10 +113,9 @@ CSS Grid layout for modern browsers:
 
 		}
 
-
-
 		.side-search {
 			grid-column: 1;
+			width: 250px;
 
 			display: inherit;
 			grid-template-rows: auto;
@@ -130,7 +129,7 @@ CSS Grid layout for modern browsers:
 				color: $pale-green;
 			}
 
-			h1.searched {
+			h1.initial {
 				display: none;
 			}
 
@@ -216,6 +215,27 @@ CSS Grid layout for modern browsers:
 		  }
 
 			.initial {
+				display: none;
+			}
+		}
+
+		.hide-search {
+			h1.searched {
+				grid-row: 1;
+				color: black;
+				opacity: .66;
+				position: absolute;
+			}
+
+			.initial {
+				display: none;
+			}
+
+			.search {
+				display: none;
+			}
+
+			form.intervals {
 				display: none;
 			}
 		}
