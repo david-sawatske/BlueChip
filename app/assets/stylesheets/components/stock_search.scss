@@ -27,7 +27,7 @@ CSS Grid layout for modern browsers:
 			padding: 0% 3%;
 
 
-			h1 {
+			.initial {
 				grid-row: 1;
 				color: $pale-green;
 			}
@@ -92,7 +92,98 @@ CSS Grid layout for modern browsers:
 				}
 			}
 
-			label {
+			.searched {
+				display: none;
+			}
+		}
+
+		.side-search {
+			grid-column: 1;
+
+			display: inherit;
+			grid-template-rows: auto;
+			align-content: start;
+			background-color: $background-grey;
+			border-radius: 10% 10% 5% 5%;
+			padding: 0% 3%;
+
+			.initial {
+				grid-row: 1;
+				color: $pale-green;
+			}
+
+			.search {
+				grid-row: 2;
+				display: inherit;
+
+				grid-template-columns: auto;
+				grid-template-row: auto;
+				margin-bottom: 15%;
+				justify-items: center;
+
+				input[type=text] {
+					grid-column: 1;
+					grid-row: 1;
+					width: 80%;
+					color: black;
+					border:2px solid #ccc;
+					border-radius: 5px;
+					background-color: $blue-grey;
+					font-size: 150%;
+				}
+
+
+				input[type="submit"] {
+					grid-column: 1;
+					grid-row: 1;
+					align-self: center;
+					justify-self: right;
+					margin-right: 12%;
+
+
+					transition: transform .2s;
+					background: $background-grey;
+					font-size: 110%;
+					height: 90%;
+					color: $blue-grey;
+					border-color: $blue-grey;
+					border-style: solid;
+					border-radius: 5px;
+				}
+
+				input[type="submit"]:hover {
+					border-color: black;
+				}
+
+			}
+
+			form.intervals {
+				grid-column: auto;
+				grid-row: 3;
+				color: $pale-green;
+
+				button {
+					display: block;
+
+					margin: 5%;
+					transition: transform .2s;
+					padding:5px 15px;
+					background: $background-grey;
+					color: $blue-grey;
+					border-color: $blue-grey;
+					border-style: solid;
+					border-radius: 5px;
+				}
+
+				button:hover {
+					transform: scale(1.75);
+					background: $grey;
+				}
+		  }
+
+
+
+			.initial {
 				display: none;
 			}
 		}
