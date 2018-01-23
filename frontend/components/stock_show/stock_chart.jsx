@@ -44,7 +44,7 @@ class StockChart extends React.Component {
     const { intervalStr, intervalKey } = this.state;
     const priceData = [];
     const volumeData = [];
-console.log(chart);
+
     chart.map(obj => {
       const date = (intervalKey === '1d') ? dateConv(obj) : Date.parse(obj.date);
       const price = (intervalKey === '1d') ? obj.average : obj.close;
