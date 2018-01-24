@@ -13,9 +13,9 @@ class UserTransactions extends React.Component {
   render() {
     const { transactData } = this.props;
 
-    const tableHeadings = { 'purchaseDay': 'Date Purchased',
-                            'sharePrice': 'Purchase Price',
-                            'shareQuant': 'Purchase Quantitiy',
+    const tableHeadings = { 'purchaseDay': 'Date',
+                            'sharePrice': 'Price',
+                            'shareQuant': 'Quantitiy',
                             'Symbol': 'Stock' }
 
     const isDataCurrency = { 'purchaseDay': false,
@@ -34,7 +34,8 @@ class UserTransactions extends React.Component {
     )
 
     return (
-      <div className="">
+      <div className="transaction-data">
+        <h1>Transaction History</h1>
         <SortableTable dataArr={tableData}
                        isDataDate={isDataDate}
                        tableHeadings={tableHeadings}
