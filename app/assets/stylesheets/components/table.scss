@@ -1,0 +1,52 @@
+table {
+  table-layout: fixed;
+  font-family: 'Oswald', sans-serif;
+  border: 1.5px solid $dark-grey;
+  border-collapse: collapse;
+  width: auto;
+
+  th, td {
+    padding: 15px;
+  }
+
+  thead {
+    text-transform: uppercase;
+    font-family: inherit;
+    color: $dark-blue;
+    font-style: italic;
+    text-align: center;
+    background: $transparent-white;
+    border-bottom: 1px solid $dark-grey;
+
+    .ranking {
+      pointer-events: none;
+    }
+
+    tr {
+      th {
+        a {
+
+        }
+      }
+    }
+
+
+
+  }
+
+// table => tbody => tr => th
+  tbody {
+    tr {
+      background-color: $pale-green;
+    }
+
+    tr:nth-child(even) {
+      background-color: $background-blue;
+    }
+
+    .index {
+      text-align: center;
+    }
+
+  }
+}

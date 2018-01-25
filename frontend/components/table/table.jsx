@@ -25,19 +25,17 @@ class SortableTable extends React.Component {
     this.setState({ dataArr: newOrder })
   }
 
-  // moment(transact.purchaseDay).calendar()
-
   renderRows(dataObj, index) {
     return (
       <tr key={index}>
-        <th>{ index + 1 }</th>
+        <td className="index">{ index + 1 }</td>
         {Object.keys(dataObj).map((attribute, idx) => {
           if (this.props.isDataCurrency[attribute]) {
-            return <th key={idx}>{numberToCurrency(dataObj[attribute])}</th>
+            return <td key={idx}>{numberToCurrency(dataObj[attribute])}</td>
           } else if (this.props.isDataDate[attribute]) {
-            return <th key={idx}>{moment(dataObj[attribute]).calendar()}</th>
+            return <td key={idx}>{moment(dataObj[attribute]).calendar()}</td>
           } else {
-            return <th key={idx}>{dataObj[attribute]}</th>
+            return <td key={idx}>{dataObj[attribute]}</td>
           }
         })}
       </tr>
@@ -52,7 +50,7 @@ class SortableTable extends React.Component {
         <table>
           <thead>
             <tr>
-              <th>Ranking</th>
+              <th><a className="ranking">Ranking</a></th>
               {Object.keys(dataArr[0]).map((attribute, idx) => (
                 <SortableHeader title={tableHeadings[attribute]}
                                 attribute={attribute}
