@@ -33,9 +33,9 @@ class LeagueIndex extends Component {
     }
 
     return (
-      <div className="">
-        <h1 className="">All Leagues</h1>
-        <ul className="">
+      <div className="index-page">
+        <h1 className="index-title">League Leaderboards</h1>
+        <ul className="league-index">
           { ShowComponent }
         </ul>
       </div>

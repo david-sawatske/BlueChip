@@ -33,7 +33,7 @@ class LeagueLeaderboard extends React.Component {
     )
 
     return (
-      <div className="">
+      <div className="leaderboard">
         <SortableTable dataArr={tableData}
                        isDataDate={isDataDate}
                        tableHeadings={tableHeadings}

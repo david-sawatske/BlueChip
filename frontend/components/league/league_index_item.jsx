@@ -34,7 +34,7 @@ class LeagueIndexItem extends Component {
       } else if (currentUser) {
         leagueIndexButton =
           <form onSubmit={this.handleSubmit}>
-            <input className="league-join-button" type="submit" value="Join League" />
+            <input type="submit" value="Join League" />
           </form>
       } else {
         leagueIndexButton =
@@ -44,12 +44,20 @@ class LeagueIndexItem extends Component {
       }
 
     return (
-      <div className="">
-        <h2>{leagueData.name}</h2>
-        <h4>Starting Balance: {leagueData.startingBalance}</h4>
-        <h4>League Leaders</h4>
-        <LeagueLeaderboard leagueUserData={ leagueData.leagueUserData } />
-        { leagueIndexButton }
+      <div className="league">
+        <div className="league-title">
+          <h1>{ leagueData.name }</h1>
+          <h2>Starting Balance: {leagueData.startingBalance}</h2>
+        </div>
+
+        <div className="league-table">
+          <h3>League Leaders</h3>
+          <LeagueLeaderboard leagueUserData={ leagueData.leagueUserData } />
+        </div>
+
+        <div className="league-right">
+          { leagueIndexButton }
+        </div>
       </div>
     )
   }

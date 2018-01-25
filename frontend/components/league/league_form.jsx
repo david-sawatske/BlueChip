@@ -16,8 +16,6 @@ class LeagueForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-
-
     this.props.createLeague(this.state).then(leagueData => {
       const newLeagueObj = Object.values(leagueData.leagues.leaguesById)[0]
       const cashBalance = { balance: newLeagueObj.startingBalance,

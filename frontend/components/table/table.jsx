@@ -52,7 +52,7 @@ class SortableTable extends React.Component {
         <table>
           <thead>
             <tr>
-              <th>#</th>
+              <th>Ranking</th>
               {Object.keys(dataArr[0]).map((attribute, idx) => (
                 <SortableHeader title={tableHeadings[attribute]}
                                 attribute={attribute}
