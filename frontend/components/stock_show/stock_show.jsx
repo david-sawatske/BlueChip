@@ -113,30 +113,28 @@ class StockShow extends React.Component {
                        logo={logo} />
 
           <div className="side-data">
-            <StockSummary quote={quote} />
-
+            { TransactionComponent }
+            
             <button className="transaction-button" onClick={ () =>
               showModal('transaction', { modalOpen: true }) }>
               Buy/Sell this stock
             </button>
-
-
-            { TransactionComponent }
-
-            <CompanyData company={company}
-                         float={float}
-                         employees={employees}/>
           </div>
 
-            <StockChart chart={chart}
-                        interval={interval}
-                        companyName={quote.companyName}/>
+          <StockSummary quote={quote} />
 
-            <StockNews news={news} />
+          <CompanyData company={company}
+                       float={float}
+                       employees={employees}/>
 
+          <StockChart chart={chart}
+                      interval={interval}
+                      companyName={quote.companyName}/>
 
-            <ModalRoot quote={quote}
-                       logo={logo} />
+          <StockNews news={news} />
+
+          <ModalRoot quote={quote}
+                     logo={logo} />
 
         </div>
     }

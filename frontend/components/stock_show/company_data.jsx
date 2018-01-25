@@ -4,7 +4,7 @@ import { numAbbr } from '../../util/helper_functions'
 
 const CompanyData = ({ company, float, employees }) => (
   <div className ="company-data">
-    <h3>{ company.companyName }'s Company Data</h3>
+    <h3>Company Data</h3>
     <p>{ company.description }</p>
     <p>Exchange: { company.exchange }</p>
     <p>Number of Employees: ~{ Math.floor(employees) }</p>

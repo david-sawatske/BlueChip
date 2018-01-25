@@ -7,9 +7,9 @@ class StockSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { ticker: "",
+    this.state = { ticker: "AMD",
                    interval: { ['1d']: "One Day" },
-                   searchInitiated: false,
+                   searchInitiated: true,
                    prevSearchData: null,
                    isSearchHovered: false };
 
@@ -22,6 +22,9 @@ class StockSearch extends React.Component {
     if (this.props.currentUser) {
       this.props.requestTargetUserData(this.props.currentUser.id)
     }
+
+
+    this.props.requestStockSearch('AMD', '1d')
   }
 
   setSearchInitiated() {
@@ -32,7 +35,7 @@ class StockSearch extends React.Component {
     event.preventDefault();
     const intervalKey = Object.keys(this.state.interval)[0];
     this.props.requestStockSearch(this.state.ticker, intervalKey)
-      .then( data => {
+      .then(data => {
         this.setSearchInitiated();
       })
   }
