@@ -37,7 +37,8 @@ class LeagueLeaderboard extends React.Component {
         <SortableTable dataArr={tableData}
                        isDataDate={isDataDate}
                        tableHeadings={tableHeadings}
-                       isDataCurrency={isDataCurrency}/>
+                       isDataCurrency={isDataCurrency}
+                       initialSort="totalEquity" />
       </div>
     )}
   }

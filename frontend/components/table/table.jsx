@@ -25,6 +25,14 @@ class SortableTable extends React.Component {
     this.setState({ dataArr: newOrder })
   }
 
+  componentWillMount() {
+    const { initialSort } = this.props;
+
+    if (initialSort) {
+      this.sortArray(initialSort, false)
+    }
+  }
+
   renderRows(dataObj, index) {
     return (
       <tr key={index}>
