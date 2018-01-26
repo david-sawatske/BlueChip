@@ -13,7 +13,8 @@ class SortableTable extends React.Component {
     this.sortArray = this.sortArray.bind(this);
     this.renderRows = this.renderRows.bind(this);
 
-    this.state = { dataArr: this.props.dataArr };
+    this.state = { dataArr: this.props.dataArr,
+                   sortedValue: "" };
   }
 
   sortArray(targetKey, isOrderASC) {
@@ -22,7 +23,9 @@ class SortableTable extends React.Component {
     const newOrder = (isOrderASC) ? dataArr.sort((a, b) => a[targetKey] > b[targetKey]) :
                                     dataArr.sort((a, b) => b[targetKey] > a[targetKey])
 
-    this.setState({ dataArr: newOrder })
+    this.setState({ dataArr: newOrder,
+                    sortedValue: targetKey,
+                    isOrderASC: isOrderASC })
   }
 
   componentWillMount() {
@@ -52,21 +55,33 @@ class SortableTable extends React.Component {
 
   render () {
     const { tableHeadings, isDataDate } = this.props;
-    const { dataArr } = this.state;
+    const { dataArr, isOrderASC, sortedValue } = this.state;
+    let arrow;
 
     return (
         <table>
           <thead>
             <tr>
               <th><a className="ranking">Ranking</a></th>
-              {Object.keys(dataArr[0]).map((attribute, idx) => (
-                <SortableHeader title={tableHeadings[attribute]}
-                                attribute={attribute}
-                                onClick={this.sortArray}
-                                key={idx} />
-              ))}
+              {Object.keys(dataArr[0]).map((attribute, idx) => {
+                if (attribute === sortedValue) {
+                  arrow = isOrderASC ? '⬆' : '⬇';
+                } else {
+                  arrow = '⬍'
+                }
+
+                return (
+                  <SortableHeader title={tableHeadings[attribute]}
+                                  attribute={attribute}
+                                  onClick={this.sortArray}
+                                  key={idx}
+                                  arrow={arrow}/>
+                )
+
+              })}
             </tr>
           </thead>
+          
           <tbody>
             { dataArr.map(this.renderRows) }
           </tbody>
