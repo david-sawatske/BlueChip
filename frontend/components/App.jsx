@@ -8,6 +8,8 @@ import LeagueForm from './league/league_form_container';
 import LeagueIndex from './league/league_index_container';
 import StockSearch from './stock_search/stock_search_container';
 
+import Loader from './shared/loader';
+
 const App = () => (
   <div className="container">
     <header className="header">
@@ -20,6 +22,7 @@ const App = () => (
       <Route path="/leagues/new" component={ LeagueForm }/>
       <Route path="/users/:userId" component={ UserShow }/>
       <Route exact path="/" component={ HomePage } />
+      <Route  path="/loader" component={ Loader } />
     </Switch>
 
     <footer className="footer">

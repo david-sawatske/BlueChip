@@ -17,7 +17,9 @@ class LeagueIndexItem extends Component {
     this.props.createCashBalance({ user_id: this.props.currentUser.id,
                                    league_id: this.props.leagueData.id,
                                    balance: this.props.leagueData.startingBalance })
-      .then(data => this.props.requestTargetUserData(this.props.currentUser.id));
+              .then(data => (
+                this.props.requestTargetUserData(this.props.currentUser.id))
+              );
 
   }
 
@@ -28,13 +30,13 @@ class LeagueIndexItem extends Component {
     let leagueIndexButton = null;
     if (currentUserLeagueIds && currentUserLeagueIds.includes(leagueData.id)) {
         leagueIndexButton =
-          <Link className="" to={`/users/${currentUser.id}`}>
+          <Link className="button" to={`/users/${currentUser.id}`}>
             View Your Leagues
           </Link>
       } else if (currentUser) {
         leagueIndexButton =
           <form onSubmit={this.handleSubmit}>
-            <input type="submit" value="Join League" />
+            <input type="submit" value="Join League" className="button" />
           </form>
       } else {
         leagueIndexButton =
