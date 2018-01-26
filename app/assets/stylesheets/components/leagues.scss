@@ -2,7 +2,7 @@
 	@media screen and (min-width: 768px) {
     .index-page {
       display: grid;
-      grid-template-columns: 5% auto 5%;
+      grid-template-columns: 5% auto 15% 5%;
       grid-template-rows: 10% auto;
       height:100vh;
       overflow-y: scroll;
@@ -20,7 +20,7 @@
       }
 
       .league-index {
-        grid-column: 2/3;
+        grid-column: 2/4;
         grid-row: 2;
 
         background-color: $background-grey;
@@ -34,7 +34,7 @@
         overflow-y: scroll;
 
         .league {
-          grid-column: 2/3;
+          grid-column: 2/4;
           grid-row: auto;
 
 					background-color: $transparent-white;
@@ -43,7 +43,7 @@
 					margin-bottom: 5%;
 
           display: grid;
-          grid-template-columns: auto;
+          grid-template-columns: 75% auto;
           grid-template-rows: auto;
 
           .league-title {
@@ -95,10 +95,38 @@
             grid-column: 2;
             grid-row: 2;
 
+						display: inherit;
+						grid-template-columns: 50% auto;
+						grid-template-rows: 15% 15% auto;
+
+						.link-button {
+							a {
+								grid-row: 2/3;
+								margin-top: 20%;
+
+								background-color: $dark-blue;
+								color: white;
+								margin: 5px;
+								text-align: center;
+								border-radius: 12px;
+							}
+						}
+
 						.button {
 							border: none;
 							font-size: 125%;
-							margin-top: -10px;
+						}
+
+						div {
+							grid-column: 1;
+							grid-row: 1;
+
+							.session-buttons {
+								button {
+									background-color: $background-blue;
+									font-size: 100%;
+								}
+							}
 						}
 					}
         }

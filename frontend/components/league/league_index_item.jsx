@@ -36,7 +36,9 @@ class LeagueIndexItem extends Component {
       } else if (currentUser) {
         leagueIndexButton =
           <form onSubmit={this.handleSubmit}>
-            <input type="submit" value="Join League" className="button" />
+            <input type="submit"
+                   value="Join League"
+                   className="button" />
           </form>
       } else {
         leagueIndexButton =
