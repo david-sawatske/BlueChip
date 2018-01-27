@@ -1,0 +1,25 @@
+@supports (grid-area: auto) {
+	@media screen and (min-width: 768px) {
+    .user-show-container {
+			display: grid;
+      grid-template-columns: 5% auto 5%;
+      grid-template-rows: 10% auto;
+      height:100vh;
+      overflow-y: scroll;
+
+			.user-show {
+				grid-column: 2/3;
+				grid-row: 2;
+
+				display: grid;
+				grid-template-columns: 25% auto;
+				grid-template-rows: inherit;
+
+				.avatar {
+					grid-column: 1;
+					grid-row: 1;
+				}
+			}
+    }
+  }
+}

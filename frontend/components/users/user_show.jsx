@@ -39,7 +39,7 @@ class UserShow extends React.Component {
         const sampleLeagueId = Object.keys(targetUserData.userLeagueData)[0]
 
         ShowComponent =
-          <div>
+          <div className="user-show">
               <UserAvatar userData={{ id: targetUserData.id,
                                       username: targetUserData.username }} />
 
@@ -49,8 +49,8 @@ class UserShow extends React.Component {
     }
 
     return (
-      <div className="">
-        <h1>{ ShowComponent }</h1>
+      <div className="user-show-container">
+        { ShowComponent }
       </div>
     )
   }
