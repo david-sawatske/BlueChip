@@ -40,7 +40,7 @@ class StockChart extends React.Component {
   }
 
   render() {
-    const { chart, interval, companyName } = this.props;
+    const { chart, companyName, interval = '1d' } = this.props;
     const { intervalStr, intervalKey } = this.state;
     const priceData = [];
     const volumeData = [];
