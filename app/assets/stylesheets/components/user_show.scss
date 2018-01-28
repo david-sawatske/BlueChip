@@ -2,22 +2,65 @@
 	@media screen and (min-width: 768px) {
     .user-show-container {
 			display: grid;
+
       grid-template-columns: 5% auto 5%;
-      grid-template-rows: 10% auto;
+      grid-template-rows: 15% auto;
       height:100vh;
       overflow-y: scroll;
 
+
 			.user-show {
 				grid-column: 2/3;
-				grid-row: 2;
+				grid-row: 1/4;
 
+				background-color: $background-grey;
 				display: grid;
-				grid-template-columns: 25% auto;
-				grid-template-rows: inherit;
+
+			  grid-template-columns: 20% auto;
+			  grid-template-rows: 20% auto;
 
 				.avatar {
 					grid-column: 1;
 					grid-row: 1;
+				}
+
+				.user-league-index {
+					grid-column: 1/3;
+					grid-row: 1/4;
+
+					display: grid;
+
+					grid-template-columns: 20% auto;
+					grid-template-rows: 10% auto;
+
+					ul {
+						grid-column: 1;
+						grid-row: 2;
+						background-color: $background-green;
+						padding-left: initial;
+						align-self: start;
+
+
+						button {
+							color: $dark-grey;
+							font-size: 150%;
+							width: 100%;
+
+							text-align: center;
+							padding: 10px 15px;
+							display: inline;
+   						border: none;
+						}
+					}
+
+					.league-portfolio {
+						grid-column: 2;
+						grid-row: 1/3;
+
+						h1, h3 {
+							display: inline;
+						}
+					}
 				}
 			}
     }

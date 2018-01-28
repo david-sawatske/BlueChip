@@ -26,7 +26,7 @@ class UserLeaguePortfolio extends React.Component {
     const cashInvested = this.calcCashInvested(leagueData.transactionData);
 
     return (
-      <div className="">
+      <div className="league-portfolio">
         <UserLeaguePortfolioHeader cashInvested={cashInvested}
                                    balance={leagueData.balance}
                                    leagueName={leagueData.name} />

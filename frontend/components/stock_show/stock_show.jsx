@@ -114,7 +114,7 @@ class StockShow extends React.Component {
 
           <div className="side-data">
             { TransactionComponent }
-            
+
             <button className="transaction-button" onClick={ () =>
               showModal('transaction', { modalOpen: true }) }>
               Buy/Sell this stock
