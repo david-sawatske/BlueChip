@@ -101,7 +101,7 @@ class StockShow extends React.Component {
     if (remoteStockData) {
       const { quote, chart, logo, company,
               stats, news, currentUser } = remoteStockData;
-
+console.log(company);
       const { float, revenuePerEmployee, revenue } = stats;
 
       const employees = ( revenue / revenuePerEmployee )
@@ -131,7 +131,8 @@ class StockShow extends React.Component {
                       interval={interval}
                       companyName={quote.companyName}/>
 
-          <StockNews news={news} />
+          <StockNews news={news}
+                     companyName={quote.companyName}/>
 
           <ModalRoot quote={quote}
                      logo={logo} />

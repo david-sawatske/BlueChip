@@ -1,10 +1,12 @@
 import React from 'react';
-import moment from 'moment'
+import moment from 'moment';
 
-const StockNewsItem = ({ story }) => (
-  <div>
+const StockNewsItem = ({ story, storyNumber }) => (
+  <div className={storyNumber}>
+    <a href={story.url}>
+      <h2>{story.headline}</h2>
+    </a>
     <h6>{moment(story.datetime).calendar()} from {story.source}</h6>
-    <a href={story.url}>{story.headline}</a>
     <p>{story.summary}</p>
   </div>
 );

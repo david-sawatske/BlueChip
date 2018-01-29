@@ -135,7 +135,7 @@ class StockSearch extends React.Component {
           </form>
         </div>
 
-        { ShowComponent }
+        <div className={searchClass}>{ ShowComponent } </div>
       </div>
     );
   }
