@@ -16,8 +16,8 @@ class UserShow extends React.Component {
   componentWillMount() {
     this.fetchUserData(this.props.match.params.userId)
 
-    if (this.props.currentUserId) {
-      this.fetchUserData(this.props.currentUserId)
+    if (this.props.currentUser) {
+      this.fetchUserData(this.props.currentUser.id)
     }
   }
 
