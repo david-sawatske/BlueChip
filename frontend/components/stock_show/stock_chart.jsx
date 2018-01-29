@@ -16,7 +16,7 @@ class StockChart extends React.Component {
     this.state = { yType: "priceData",
                    typeButton: "Volume Data",
                    intervalStr: "One Month",
-                   intervalKey: "1m" }
+                   intervalKey: "1d" }
 
     this.setYType = this.setYType.bind(this);
   }
@@ -40,7 +40,7 @@ class StockChart extends React.Component {
   }
 
   render() {
-    const { chart, companyName, interval = '1d' } = this.props;
+    const { chart, companyName, interval = {'1d' : 'One Day'} } = this.props;
     const { intervalStr, intervalKey } = this.state;
     const priceData = [];
     const volumeData = [];
