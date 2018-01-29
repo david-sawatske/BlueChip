@@ -103,14 +103,14 @@ const idNamer = (obj, type) => {
   return newObj
 };
 
-export const getUserLeagueData = (state, targetUserId) => {
+export const getUserLeagueData = (state, targetUser) => {
   const userLeagueData = {};
   const usersById = state.entities.users.usersById;
 
   let targetUserIds
-  (targetUserId) ? targetUserIds = [targetUserId]
-                    :
-                   targetUserIds = state.entities.users.allUserIds;
+  (targetUser) ? targetUserIds = [targetUser.id]
+                  :
+                 targetUserIds = state.entities.users.allUserIds;
 
   targetUserIds.map(userId => {
     userLeagueData[userId] = merge(usersById[userId], { userLeagueData: {} })

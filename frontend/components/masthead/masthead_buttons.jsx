@@ -13,10 +13,6 @@ class Masthead extends React.Component {
     this.props.logout()
   }
 
-  componentWillMount() {
-    this.props.showModal('session', { modalOpen: true, formType: 'login' })
-  }
-
   render() {
     const { currentUser, showModal, hideModal } = this.props;
 
