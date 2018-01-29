@@ -19,11 +19,12 @@ CSS Grid layout for modern browsers:
 			.stock-data {
 				grid-column: auto;
 				grid-row: auto;
+				margin-top: 1%;
 
 				display: inherit;
 				grid-template-areas: "head head side side"
-														 "summ comp side side"
-														 "chart chart chart chart"
+														 "comp comp side side"
+														 "chart chart chart summ"
 														 "news news news news";
 				grid-gap: 1%;
 
@@ -134,6 +135,7 @@ CSS Grid layout for modern browsers:
 						display: inline;
 						font-size: 12px;
 						border-radius: 12px;
+						border: none;
 					}
 
 					.transaction-data {
@@ -149,24 +151,53 @@ CSS Grid layout for modern browsers:
 				}
   			.company-data {
 					grid-area: comp;
+					width: 75%;
 					justify-self: center;
+					margin-bottom: 10%;
+
+
+					display: grid;
+					grid-template-areas: "title"
+															 "data";
+
+					h3 {
+						grid-area: title;
+						font-size: 150%;
+						background-color: $pale-green;
+					}
+
+					.data {
+						grid-area: data;
+						background-color: $background-green;
+
+						display: grid;
+						grid-template-areas: "title"
+																 "data";
+						p {
+							padding: 0 5%;
+						}
+					}
+
 				}
 
 				.stock-summary {
 					grid-area: summ;
-					justify-self: center;
+					justify-self: left;
+					margin-left: -20%;
 				}
 
 				.chart-container {
 					grid-area: chart;
 					justify-self: center;
 					width: 80%;
+					transform: scale(1.2);
 				}
 
 				.news {
 					grid-area: news;
 					width: 90%;
 					justify-self: center;
+					margin-top: 4%;
 					background-color: $news-back;
 					border-radius: 2%;
 
