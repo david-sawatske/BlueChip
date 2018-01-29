@@ -46,10 +46,8 @@ class SessionForm extends React.Component {
         <ul>
           <li>Realtime equity data</li>
           <li>Historical equity data</li>
-          <li>Technical indicators to make the best picks</li>
-          <li>Create a league and invite friends</li>
-          <li>Join an existing league</li>
-          <li>Win bragging rights</li>
+          <li>Create or Join Leagues</li>
+          <li>Win bragging rights!</li>
         </ul>
       )
     }
@@ -77,27 +75,18 @@ class SessionForm extends React.Component {
     return (
       <div className="session">
         { errorList }
-        <form onSubmit={this.handleSubmit} className="session-form">
-          <br/>
-          <div className="">
-            <br/>
-              <input type="text"
-                value={this.state.username}
-                onChange={this.update('username')}
-                className="text-input"
-              />
-            <br/>
-              <input type="password"
-                value={this.state.password}
-                onChange={this.update('password')}
-                className="text-input"
-              />
-            <br/>
-            <input id="session-button"
-                   type="submit"
-                   value={this.props.formType}
-            />
-            <br/>
+        <form onSubmit={this.handleSubmit}>
+          <div className="session-input">
+            <input type="text"
+              value={this.state.username}
+              onChange={this.update('username')} />
+              
+            <input type="password"
+              value={this.state.password}
+              onChange={this.update('password')} />
+              
+            <input type="submit"
+                   value="Start Trading" />
           </div>
         </form>
 

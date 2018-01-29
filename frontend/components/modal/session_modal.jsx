@@ -26,16 +26,19 @@ class SesssionModal extends React.Component {
     const { modalOpen, hideModal, currentUser } = this.props;
 
     let NavLink = null;
+    let NavHeader = null;
     if (this.state.formType == 'login') {
-      NavLink = <button className="button" onClick={ (signup) =>
+      NavLink = <button className="session-toggle" onClick={ (signup) =>
                   this.formTypeToggle('signup') }>
-                  Sign Up
+                  Need an Account? Sign Up Here!
                 </button>
+      NavHeader = <h1>Login</h1>
     } else if (this.state.formType == 'signup') {
-        NavLink = <button className="button" onClick={ (e) =>
+        NavLink = <button className="session-toggle" onClick={ (e) =>
                     this.formTypeToggle('login') }>
-                    Sign In
+                    Click Here to Sign In
                   </button>
+        NavHeader = <h1>Sign Up</h1>
      }
 
     return (
@@ -43,10 +46,12 @@ class SesssionModal extends React.Component {
         <Modal
           isOpen={modalOpen}
           onRequestClose={hideModal}
-          style={ModalStyle}>
+          style={ModalStyle}
+          className="session-modal">
 
-          <h1>Session</h1>
           { NavLink }
+
+          { NavHeader }
 
           <SessionFormContainer formType={this.state.formType}
                                 currentUser={currentUser} />
