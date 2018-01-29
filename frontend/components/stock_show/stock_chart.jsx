@@ -82,7 +82,7 @@ class StockChart extends React.Component {
     const subtitle = companyName + ' - ' + interval[intervalKey];
 
     return (
-      <div className="chart">
+      <div className="chart-container">
         { graphTypeButton }
 
         <HighchartsStockChart>
