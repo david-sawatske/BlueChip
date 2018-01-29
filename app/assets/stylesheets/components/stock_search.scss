@@ -114,14 +114,13 @@ CSS Grid layout for modern browsers:
 		}
 
 		.side-search {
-			grid-column: 1;
+			grid-column: auto;
 			width: auto;
 
 			display: inherit;
 			grid-template-rows: auto;
 			align-content: start;
 			background-color: $background-grey;
-			border-radius: 10% 10% 5% 5%;
 			padding: 0% 3%;
 
 			h1.searched {
@@ -216,6 +215,18 @@ CSS Grid layout for modern browsers:
 
 			.initial {
 				display: none;
+			}
+
+			.stock-show {
+				grid-column: auto;
+				grid-row: auto;
+				margin-top: 1%;
+
+				display: inherit;
+				grid-template-areas: "head head side side"
+														 "comp comp side side"
+														 "chart chart chart summ"
+														 "news news news news";
 			}
 		}
 

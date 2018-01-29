@@ -60,34 +60,34 @@ class StockShow extends React.Component {
                                       "sharePrice": 132.29,
                                       "purchaseDay": "2017-10-02T00:37:20.193Z"
                                     },
-                                    {
-                                      "id": "36",
-                                      "symbol": "AAPL",
-                                      "shareQuant": 86,
-                                      "sharePrice": 91.37,
-                                      "purchaseDay": "2017-05-21T23:58:39.621Z"
-                                    },
-                                    {
-                                      "id": "61",
-                                      "symbol": "AAPL",
-                                      "shareQuant": 95,
-                                      "sharePrice": 132.29,
-                                      "purchaseDay": "2017-10-02T00:37:20.193Z"
-                                    },
-                                    {
-                                      "id": "36",
-                                      "symbol": "AAPL",
-                                      "shareQuant": 86,
-                                      "sharePrice": 91.37,
-                                      "purchaseDay": "2017-05-21T23:58:39.621Z"
-                                    },
-                                    {
-                                      "id": "61",
-                                      "symbol": "AAPL",
-                                      "shareQuant": 95,
-                                      "sharePrice": 132.29,
-                                      "purchaseDay": "2017-10-02T00:37:20.193Z"
-                                    },
+                                    // {
+                                    //   "id": "36",
+                                    //   "symbol": "AAPL",
+                                    //   "shareQuant": 86,
+                                    //   "sharePrice": 91.37,
+                                    //   "purchaseDay": "2017-05-21T23:58:39.621Z"
+                                    // },
+                                    // {
+                                    //   "id": "61",
+                                    //   "symbol": "AAPL",
+                                    //   "shareQuant": 95,
+                                    //   "sharePrice": 132.29,
+                                    //   "purchaseDay": "2017-10-02T00:37:20.193Z"
+                                    // },
+                                    // {
+                                    //   "id": "36",
+                                    //   "symbol": "AAPL",
+                                    //   "shareQuant": 86,
+                                    //   "sharePrice": 91.37,
+                                    //   "purchaseDay": "2017-05-21T23:58:39.621Z"
+                                    // },
+                                    // {
+                                    //   "id": "61",
+                                    //   "symbol": "AAPL",
+                                    //   "shareQuant": 95,
+                                    //   "sharePrice": 132.29,
+                                    //   "purchaseDay": "2017-10-02T00:37:20.193Z"
+                                    // },
                                   ]
 
     let TransactionComponent
@@ -101,7 +101,7 @@ class StockShow extends React.Component {
     if (remoteStockData) {
       const { quote, chart, logo, company,
               stats, news, currentUser } = remoteStockData;
-console.log(company);
+
       const { float, revenuePerEmployee, revenue } = stats;
 
       const employees = ( revenue / revenuePerEmployee )

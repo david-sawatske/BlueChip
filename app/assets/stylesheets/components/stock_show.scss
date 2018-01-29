@@ -120,6 +120,8 @@ CSS Grid layout for modern browsers:
 					grid-template-rows: 10% auto auto;
 					overflow-y: scroll;
 					justify-content: center;
+					background-color: $background-blue;
+					margin-right: 10%;
 
 					.transaction-button {
 						grid-column: 1;
@@ -184,6 +186,7 @@ CSS Grid layout for modern browsers:
 					grid-area: summ;
 					justify-self: left;
 					margin-left: -20%;
+					border: 2px solid black;
 				}
 
 				.chart-container {
