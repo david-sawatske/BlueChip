@@ -1,7 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import UserLeaguePortfolio from '../user_league_portfolio/user_league_portfolio'
+import UserLeaguePortfolio from '../user_league_portfolio/user_league_portfolio';
+import PortfolioHeader from '../user_league_portfolio/user_league_portfolio_header';
+
+import { calcCashInvested } from '../../util/helper_functions';
 
 class UserLeagueIndex extends React.Component {
   constructor(props) {
@@ -33,13 +36,19 @@ class UserLeagueIndex extends React.Component {
     return (
       <div className="user-league-index">
         <ul>
-          {Object.values(userLeagueData).map(league => (
-              <button onClick={(e) => this.setShowLeague(e, league.leagueId)}
+          {Object.values(userLeagueData).map(league => {
+            const cashInvested = calcCashInvested(league.transactionData);
+
+            return (
+              <div onClick={(e) => this.setShowLeague(e, league.leagueId)}
                       key={league.leagueId}>
-                { league.name }
-              </button>
+
+                <PortfolioHeader cashInvested={cashInvested}
+                                 balance={league.balance}
+                                 leagueName={league.name} />
+              </div>
             )
-          )}
+          })}
         </ul>
 
         { ShowComponent }
