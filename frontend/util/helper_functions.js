@@ -35,7 +35,6 @@ export const arrSample = arr => {
   return arr[randIdx]
 }
 
-
 export const filterObject = (sourceObj, allowedKeys) => (
   Object.keys(sourceObj)
     .filter(key => allowedKeys.includes(key))
@@ -44,3 +43,15 @@ export const filterObject = (sourceObj, allowedKeys) => (
       return obj;
     }, {})
 )
+
+export const calcCashInvested = transactionData => {
+  let cashInvested = 0;
+
+  Object.values(transactionData).map(allTransact => {
+    Object.values(allTransact).map( transaction => {
+      cashInvested += (transaction.shareQuant * transaction.sharePrice)
+    })
+  })
+
+  return cashInvested
+}
