@@ -2,7 +2,7 @@ import React from 'react';
 
 import { numberToCurrency } from '../../util/helper_functions'
 
-const UserLeaguePortfolioHeader = ({ balance, cashInvested, leagueName }) => (
+const PortfolioHeader = ({ balance, cashInvested, leagueName }) => (
   <div>
     <h1>{leagueName}</h1>
     <h3>Cash Available: {numberToCurrency(balance)}</h3>
@@ -10,4 +10,4 @@ const UserLeaguePortfolioHeader = ({ balance, cashInvested, leagueName }) => (
   </div>
 );
 
-export default UserLeaguePortfolioHeader;
+export default PortfolioHeader;
