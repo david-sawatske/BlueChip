@@ -7,8 +7,6 @@ class UserLeagueIndex extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.handleSubmit = this.handleSubmit.bind(this);
-
     this.state = { targetLeagueId: this.props.sampleLeagueId }
   }
 
