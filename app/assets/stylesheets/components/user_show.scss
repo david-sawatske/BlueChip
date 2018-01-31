@@ -74,6 +74,11 @@
 						}
 
 						.league-data:hover {
+							h1 {
+								font-size: 150%;
+								text-shadow: -1px -1px 1px $blue-grey;
+							}
+
 							h3 {
 								display: block;
 								font-size: 100%;
