@@ -20,18 +20,19 @@ end
 users = []
 leagues = []
 
-5.times do
+20.times do
   users << User.create!(username: Faker::Internet.user_name, password: "password")
 end
 
 users << User.create!(username: 't1', password: "password")
+users << User.create!(username: 't2', password: "password")
 
-3.times do
+5.times do
   leagues << League.create!(name: Faker::GameOfThrones.unique.house, starting_balance: 10000)
 end
 
 
-100.times do
+10000.times do
   Transaction.create!(user_id: users.sample.id,
                       league_id: leagues.sample.id,
                       symbol: symbols.sample,
