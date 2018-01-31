@@ -7,6 +7,7 @@ import StockIndex from './stock_index';
 
 const mapStateToProps = (state, ownProps) => ({
   isRemoteStockLoading: state.ui.loading.remoteStockLoading,
+  isRailsUserLoading: state.ui.loading.railsUserLoading,
   remoteStockData: state.ui.remoteStocks.remoteStockData,
   ownedTickers: getOwnedTickers(ownProps.transactionData),
   currentUser: state.session.currentUser
@@ -24,12 +25,10 @@ const mapDispatchToProps = dispatch => ({
 
 // Selects all of the ticker symbols for owned stocks
 const getOwnedTickers = transactionData => {
-  const tickers = [];
+  let tickers = [];
 
   Object.values(transactionData).map(transaction => {
-    Object.values(transaction).map(stockObj => {
-      tickers.push(stockObj.symbol)
-    })
+    tickers.push([...new Set(Object.values(transaction).map(a => a.symbol))])
   })
 
   return tickers.join()
