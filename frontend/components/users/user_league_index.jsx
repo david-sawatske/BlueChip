@@ -38,6 +38,11 @@ class UserLeagueIndex extends React.Component {
         <ul className="joined-leagues">
           {Object.values(userLeagueData).map(league => {
             const cashInvested = calcCashInvested(league.transactionData);
+            let leagueClass = "league-data";
+
+            if (league.leagueId == this.state.targetLeagueId) {
+              leagueClass = "league-data-active";
+            }
 
             return (
               <div onClick={(e) => this.setShowLeague(e, league.leagueId)}
@@ -45,7 +50,8 @@ class UserLeagueIndex extends React.Component {
 
                 <PortfolioHeader cashInvested={cashInvested}
                                  balance={league.balance}
-                                 leagueName={league.name} />
+                                 leagueName={league.name}
+                                 leagueClass={leagueClass} />
               </div>
             )
           })}

@@ -87,6 +87,26 @@
 								margin-bottom: -10%;
 							}
 						}
+
+						.league-data-active {
+							opacity: .66;
+
+							h1 {
+								font-size: 133%;
+								text-align: left;
+								margin-left: -25%;
+								margin-bottom: -10%;
+								color: $dark-grey;
+							}
+
+							h3 {
+								display: block;
+								font-size: 100%;
+								text-align: left;
+								margin-left: -25%;
+								margin-bottom: -10%;
+							}
+						}
 					}
 
 					.league-portfolio {
