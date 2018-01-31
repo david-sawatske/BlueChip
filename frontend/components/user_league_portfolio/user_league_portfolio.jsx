@@ -3,7 +3,7 @@ import React from 'react';
 import PortfolioHeader from './user_league_portfolio_header';
 import StockIndex from '../stock_index/stock_index_container';
 
-import { calcCashInvested } from '../../util/helper_functions'
+import { calcCashInvested } from '../../util/helper_functions';
 
 class UserLeaguePortfolio extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class UserLeaguePortfolio extends React.Component {
                          balance={leagueData.balance}
                          leagueName={leagueData.name} />
 
-        <StockIndex transactionData={transactionData} />
+        {/* <StockIndex transactionData={transactionData} /> */}
       </div>
     );
   }
