@@ -1,7 +1,13 @@
 import React from 'react';
+import { merge } from 'lodash';
 
-import StockShow from '../stock_show/stock_show'
+import StockShow from '../stock_show/stock_show';
 import Loader from '../shared/loader';
+
+import SortableTable from '../table/table';
+
+import { filterObject } from '../../util/helper_functions';
+
 
 class StockIndex extends React.Component {
   constructor(props) {
@@ -18,22 +24,51 @@ class StockIndex extends React.Component {
 
   render() {
     const { remoteStockData, transactionData, showModal, hideModal,
-            isRemoteStockLoading, currentUser  } = this.props;
+            isRemoteStockLoading, currentUser, investedByTicker } = this.props;
 
     let ShowComponent
     if ( isRemoteStockLoading ) {
       ShowComponent = <Loader />
-    } else {
-        const tickerArray = Object.keys(transactionData)
+    } else if (Object.keys(remoteStockData) != 0) {
 
-        ShowComponent = tickerArray.map((symbol, idx) => (
-          <StockShow remoteStockData={remoteStockData[symbol]}
-                     stockTransactionData={transactionData[symbol]}
-                     currentUser={currentUser}
-                     showModal={showModal}
-                     hideModal={hideModal}
-                     key={idx} />
-        ))
+      const tableHeadings = { 'companyName': 'Company',
+                              'symbol': 'Symbol',
+                              'latestPrice': 'Price',
+                              'invested': 'Total Invested',
+                              'sharesOwned': 'Shares Owned' }
+
+      const isDataCurrency = { 'companyName': false,
+                               'symbol': false,
+                               'latestPrice': true,
+                               'invested': true,
+                               'sharesOwned': false }
+
+      const isDataDate = { 'companyName': false,
+                           'symbol': false,
+                           'latestPrice': false,
+                           'invested': false,
+                           'sharesOwned': false }
+
+      const allowedKeys = Object.keys(tableHeadings)
+
+      const tableData = Object.values(remoteStockData).map(dataObj => {
+        const quote = dataObj.quote;
+        const toFilter = merge({}, quote, investedByTicker[quote.symbol]);
+
+        return (
+         filterObject(toFilter, allowedKeys)
+        )
+      })
+
+  /// send in an <a> tag with `onClick` to show modal of StockShow
+
+      if (tableData.length != 0) {
+      ShowComponent = <SortableTable dataArr={tableData}
+                                     isDataDate={isDataDate}
+                                     tableHeadings={tableHeadings}
+                                     isDataCurrency={isDataCurrency}
+                                     initialSort="companyName" />
+      }
     }
 
     return (

@@ -81,7 +81,7 @@ class SortableTable extends React.Component {
               })}
             </tr>
           </thead>
-          
+
           <tbody>
             { dataArr.map(this.renderRows) }
           </tbody>
