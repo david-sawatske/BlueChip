@@ -48,7 +48,7 @@ class UserLeagueIndex extends React.Component {
               <div onClick={(e) => this.setShowLeague(e, league.leagueId)}
                    key={league.leagueId} >
 
-                <PortfolioHeader cashInvested={cashInvested}
+                <PortfolioHeader cashInvested={cashInvested.totalCashInvested}
                                  balance={league.balance}
                                  leagueName={league.name}
                                  leagueClass={leagueClass} />
