@@ -44,14 +44,36 @@ export const filterObject = (sourceObj, allowedKeys) => (
     }, {})
 )
 
+const calcTransaction = transaction => (
+  transaction.shareQuant * transaction.sharePrice
+)
+
+const calcByTickerTransaction = transaction => (
+  transaction.shareQuant * transaction.sharePrice
+)
+
 export const calcCashInvested = transactionData => {
-  let cashInvested = 0;
+  let totalCashInvested = 0;
+  const investedByTicker = {}
 
   Object.values(transactionData).map(allTransact => {
-    Object.values(allTransact).map( transaction => {
-      cashInvested += (transaction.shareQuant * transaction.sharePrice)
+    Object.values(allTransact).map(transaction => {
+      const currCashInvested = calcTransaction(transaction);
+      const sharesTransacted = transaction.shareQuant;
+      const symbol = transaction.symbol;
+
+      totalCashInvested += currCashInvested;
+
+      if (investedByTicker[symbol]) {
+        investedByTicker[symbol]['invested'] += currCashInvested;
+        investedByTicker[symbol]['sharesOwned'] += sharesTransacted;
+      } else {
+        investedByTicker[symbol] = { invested: currCashInvested,
+                                     sharesOwned: sharesTransacted }
+      }
     })
   })
 
-  return cashInvested
+  return { totalCashInvested: totalCashInvested,
+           investedByTicker: investedByTicker }
 }

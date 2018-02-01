@@ -13,15 +13,17 @@ class UserLeaguePortfolio extends React.Component {
   render() {
     const { leagueData } = this.props;
     const transactionData = leagueData.transactionData;
-    const cashInvested = calcCashInvested(leagueData.transactionData);
+    const { investedByTicker,
+            totalCashInvested } = calcCashInvested(transactionData);
 
     return (
       <div className="league-portfolio">
-        <PortfolioHeader cashInvested={cashInvested}
+        <PortfolioHeader cashInvested={totalCashInvested}
                          balance={leagueData.balance}
                          leagueName={leagueData.name} />
 
-        {/* <StockIndex transactionData={transactionData} /> */}
+        <StockIndex transactionData={transactionData}
+                    investedByTicker={investedByTicker} />
       </div>
     );
   }
