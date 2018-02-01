@@ -35,34 +35,37 @@ class StockIndex extends React.Component {
                               'symbol': 'Symbol',
                               'latestPrice': 'Current Price',
                               'invested': 'Total Invested',
-                              'sharesOwned': 'Shares Owned' }
+                              'sharesOwned': 'Shares Owned',
+                              'searchLink': 'Get Stock Details' }
 
       const isDataCurrency = { 'companyName': false,
                                'symbol': false,
                                'latestPrice': true,
                                'invested': true,
-                               'sharesOwned': false }
+                               'sharesOwned': false,
+                               'searchLink': false }
 
       const isDataDate = { 'companyName': false,
                            'symbol': false,
                            'latestPrice': false,
                            'invested': false,
-                           'sharesOwned': false }
+                           'sharesOwned': false,
+                           'searchLink': false }
 
       const allowedKeys = Object.keys(tableHeadings)
 
       const tableData = Object.values(remoteStockData).map(dataObj => {
         const quote = dataObj.quote;
-        const toFilter = merge({}, quote, investedByTicker[quote.symbol]);
+        const searchLink = { searchLink: <img className="logo" src={dataObj.logo.url} />};
+
+        const toFilter = merge({}, searchLink, quote, investedByTicker[quote.symbol]);
 
         return (
          filterObject(toFilter, allowedKeys)
         )
+
       })
 
-  /// send in an <a> tag with `onClick` to show modal of StockShow
-
-    
     ShowComponent = <SortableTable dataArr={tableData}
                                    isDataDate={isDataDate}
                                    tableHeadings={tableHeadings}
