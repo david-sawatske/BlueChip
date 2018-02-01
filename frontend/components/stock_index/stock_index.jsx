@@ -33,7 +33,7 @@ class StockIndex extends React.Component {
 
       const tableHeadings = { 'companyName': 'Company',
                               'symbol': 'Symbol',
-                              'latestPrice': 'Price',
+                              'latestPrice': 'Current Price',
                               'invested': 'Total Invested',
                               'sharesOwned': 'Shares Owned' }
 
@@ -62,13 +62,13 @@ class StockIndex extends React.Component {
 
   /// send in an <a> tag with `onClick` to show modal of StockShow
 
-      if (tableData.length != 0) {
-      ShowComponent = <SortableTable dataArr={tableData}
-                                     isDataDate={isDataDate}
-                                     tableHeadings={tableHeadings}
-                                     isDataCurrency={isDataCurrency}
-                                     initialSort="companyName" />
-      }
+    
+    ShowComponent = <SortableTable dataArr={tableData}
+                                   isDataDate={isDataDate}
+                                   tableHeadings={tableHeadings}
+                                   isDataCurrency={isDataCurrency}
+                                   initialSort="symbol" />
+
     }
 
     return (
