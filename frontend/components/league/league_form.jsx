@@ -61,16 +61,19 @@ class LeagueForm extends React.Component {
           onChange={this.update('starting_balance')}
           className="number-input"
         />
-      <button id="new-league">Create League</button>
+        <input type="submit"
+               value="Create League" />
     </form>
   } else {
-    LeagueFormInput = 'Please Login or Sign Up to create a League'
+    LeagueFormInput = <h2>Please Login or Sign Up to create a League</h2>
   }
 
     return (
-      <div className="league-new">
-        <h2>Create a New League</h2>
-        { LeagueFormInput }
+      <div className="league-new-container">
+        <div className="league-new">
+          <h1>Create a New League</h1>
+          { LeagueFormInput }
+        </div>
       </div>
     );
   }

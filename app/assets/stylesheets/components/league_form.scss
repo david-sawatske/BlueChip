@@ -1,0 +1,66 @@
+@supports (grid-area: auto) {
+	@media screen and (min-width: 768px) {
+		.league-new-container {
+			height: 75vh;
+			display: grid;
+			grid-template-columns: 33% auto 33%;
+			grid-template-rows: 15% auto;
+
+			.league-new {
+				grid-column: 2;
+				grid-row: 2;
+				height: 50%;
+
+				display: inherit;
+				grid-template-areas: "title"
+														 "form";
+
+				grid-template-rows: 25% auto;
+
+				background-color: white;
+				border-radius: 5% 15%;
+
+				h1 {
+					grid-area: title;
+				}
+
+				h2 {
+					grid-area: form;
+				}
+
+				.league-form {
+					grid-area: form;
+
+					display: inherit;
+					justify-items: center;
+
+					input {
+						display: block;
+						height: 50%;
+						padding: 5%;
+						font-size: 100%;
+					}
+
+					input[type="submit"] {
+						background-color: $dark-blue;
+						color: $off-white;
+						border-radius: 5px;
+						font-size: 100%;
+						display: block;
+						margin-right: auto;
+						margin-left: auto;
+					}
+
+					input[type="submit"]:hover {
+						border: 2px solid $dark-grey;
+						font-size: 105%;
+					}
+				}
+
+				.league {
+					grid-area: preview;
+				}
+			}
+    }
+  }
+}
