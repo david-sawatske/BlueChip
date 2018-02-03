@@ -71,6 +71,13 @@ class StockIndex extends React.Component {
                            'sharesOwned': false,
                            'searchLink': false }
 
+      const isDataSotable = { 'companyName': true,
+                              'symbol': true,
+                              'latestPrice': true,
+                              'invested': true,
+                              'sharesOwned': true,
+                              'searchLink': false }
+
       const allowedKeys = Object.keys(tableHeadings);
 
       const tableData = Object.keys(investedByTicker).map(ticker => {
@@ -97,6 +104,7 @@ class StockIndex extends React.Component {
                                       isDataDate={isDataDate}
                                       tableHeadings={tableHeadings}
                                       isDataCurrency={isDataCurrency}
+                                      isDataSotable={isDataSotable}
                                       initialSort="symbol" />
 
     }

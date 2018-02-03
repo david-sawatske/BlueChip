@@ -24,9 +24,11 @@ class SortableHeader extends React.Component {
   }
 
   render () {
+    const clickFn = (this.props.arrow) ? this.handleClick : null;
+
     return (
       <th>
-        <a onClick={this.handleClick}>{ this.props.title } { this.props.arrow }</a>
+        <a onClick={clickFn}>{ this.props.title } { this.props.arrow }</a>
       </th>
     );
   }
