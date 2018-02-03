@@ -37,9 +37,13 @@ class SortableTable extends React.Component {
   }
 
   renderRows(dataObj, index) {
+    const rankings = (this.props.ranked) ? <td className="index">{ index + 1 }</td>
+                                             :
+                                           null;
+
     return (
       <tr key={index}>
-        <td className="index">{ index + 1 }</td>
+        { rankings }
         {Object.keys(dataObj).map((attribute, idx) => {
           if (this.props.isDataCurrency[attribute]) {
             return <td key={idx}>{numberToCurrency(dataObj[attribute])}</td>
@@ -54,15 +58,18 @@ class SortableTable extends React.Component {
   }
 
   render () {
-    const { tableHeadings, isDataDate } = this.props;
+    const { tableHeadings, isDataDate, ranked } = this.props;
     const { dataArr, isOrderASC, sortedValue } = this.state;
+    const rankHeader = (ranked) ? <th><a className="ranking">Ranking</a></th>
+                                           :
+                                         null;
     let arrow;
 
     return (
         <table>
           <thead>
             <tr>
-              <th><a className="ranking">Ranking</a></th>
+              { rankHeader }
               {Object.keys(dataArr[0]).map((attribute, idx) => {
                 if (attribute === sortedValue) {
                   arrow = isOrderASC ? '⬆' : '⬇';
