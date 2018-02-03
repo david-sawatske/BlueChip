@@ -21,18 +21,8 @@ table {
     .ranking {
       pointer-events: none;
     }
-
-
-    tr {
-      th {
-        a {
-
-        }
-      }
-    }
   }
 
-// table => tbody => tr => th
   tbody {
     tr {
       background-color: $pale-green;
@@ -46,9 +36,16 @@ table {
       text-align: center;
     }
 
+    .logo {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      height: 33%;
+      width: 33%;
+    }
+
     .logo:hover {
       cursor: pointer;
     }
-
   }
 }
