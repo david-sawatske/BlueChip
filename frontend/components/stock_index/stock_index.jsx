@@ -25,10 +25,10 @@ class StockIndex extends React.Component {
     }
   }
 
-  handleClick(dataObj, event) {
+  handleClick(quote, event) {
     event.preventDefault();
 
-    this.setState({ clickedTicker: dataObj.quote.symbol,
+    this.setState({ clickedTicker: quote.symbol,
                     showTable: false })
   }
 
@@ -46,8 +46,10 @@ class StockIndex extends React.Component {
     let TableComponent
     if ( isRemoteStockLoading ) {
       TableComponent = <Loader />
-    } else if (Object.keys(remoteStockData) != 0 && this.state.showTable) {
+    } else if ( Object.keys(investedByTicker ) == 0) {
+      TableComponent = <h1>none owned</h1>
 
+    } else if (Object.keys(remoteStockData) != 0 && this.state.showTable) {
       const tableHeadings = { 'companyName': 'Company',
                               'symbol': 'Symbol',
                               'latestPrice': 'Current Price',
@@ -69,24 +71,27 @@ class StockIndex extends React.Component {
                            'sharesOwned': false,
                            'searchLink': false }
 
-      const allowedKeys = Object.keys(tableHeadings)
+      const allowedKeys = Object.keys(tableHeadings);
 
-      const tableData = Object.values(remoteStockData).map(dataObj => {
-        const quote = dataObj.quote;
+      const tableData = Object.keys(investedByTicker).map(ticker => {
+        const remoteData = remoteStockData[ticker];
+        const quote = remoteData.quote;
+
         const searchLink = { searchLink: <img className="logo"
-                                              src={dataObj.logo.url}
+                                              src={remoteData.logo.url}
                                               onClick={ (e) =>
-                                                this.handleClick(dataObj, e) }
-                                         />};
-
+                                                this.handleClick(quote, e) }
+                                         />
+                           };
         const toFilter = merge( {}, searchLink, quote,
                                 investedByTicker[quote.symbol] );
 
         return (
          filterObject(toFilter, allowedKeys)
         )
-
       })
+
+      console.log(tableData);
 
       TableComponent = <SortableTable dataArr={tableData}
                                       isDataDate={isDataDate}
