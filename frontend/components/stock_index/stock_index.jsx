@@ -124,7 +124,7 @@ class StockIndex extends React.Component {
     }
 
     return (
-      <div className="">
+      <div className="stock-index-table">
         { StockShowComponent }
         { TableComponent }
       </div>
