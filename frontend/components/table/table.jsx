@@ -61,8 +61,8 @@ class SortableTable extends React.Component {
     const { tableHeadings, ranked, isDataSotable } = this.props;
     const { dataArr, isOrderASC, sortedValue } = this.state;
     const rankHeader = (ranked) ? <th><a className="ranking">Ranking</a></th>
-                                           :
-                                         null;
+                                     :
+                                   null;
     let arrow;
 
     return (
