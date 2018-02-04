@@ -20,7 +20,8 @@ class UserLeaguePortfolio extends React.Component {
       <div className="league-portfolio">
         <PortfolioHeader cashInvested={totalCashInvested}
                          balance={leagueData.balance}
-                         leagueName={leagueData.name} />
+                         leagueName={leagueData.name}
+                         leagueClass="user-stock-header" />
 
         <StockIndex transactionData={transactionData}
                     investedByTicker={investedByTicker} />
