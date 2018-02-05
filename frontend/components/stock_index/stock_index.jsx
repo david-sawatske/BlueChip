@@ -113,8 +113,7 @@ class StockIndex extends React.Component {
     if (this.state.clickedTicker) {
       const tkr = this.state.clickedTicker;
       StockShowComponent = <div>
-                             <button className=""
-                                     onClick={ (e) => this.closeStockShow(e) }>
+                             <button onClick={ (e) => this.closeStockShow(e) }>
                                Return to Transactions
                              </button>
                              <StockShow remoteStockData={remoteStockData[tkr]}
