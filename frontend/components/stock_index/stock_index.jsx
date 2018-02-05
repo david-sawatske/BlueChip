@@ -110,8 +110,6 @@ class StockIndex extends React.Component {
         )
       })
 
-      console.log(tableData);
-
       TableComponent = <SortableTable dataArr={tableData}
                                       isDataDate={isDataDate}
                                       tableHeadings={tableHeadings}
