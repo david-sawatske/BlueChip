@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { merge } from 'lodash';
 
 import StockShow from '../stock_show/stock_show';
@@ -47,7 +48,18 @@ class StockIndex extends React.Component {
     if ( isRemoteStockLoading ) {
       TableComponent = <Loader />
     } else if ( Object.keys(investedByTicker ) == 0) {
-      TableComponent = <h1>none owned</h1>
+      TableComponent = <div className="no-transacitons">
+                         <div className="overlay-data">
+                           <h1>No Transactions</h1>
+                           <NavLink className="button"
+                                    to="/stocks/search">
+                             Search Stocks to Trade
+                           </NavLink>
+                         </div>
+
+                         <img src='http://res.cloudinary.com/sawatskeda10/image/upload/v1517851894/no_transactions_gabgil.jpg'
+                         alt='no-transacitons'/>
+                       </div>
 
     } else if (Object.keys(remoteStockData) != 0 && this.state.showTable) {
       const tableHeadings = { 'companyName': 'Company',
