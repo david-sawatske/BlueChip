@@ -153,6 +153,6 @@ export const getUserLeagueData = (state, targetUser) => {
     }
   })
 
-  return userLeagueData
+  return (targetUser) ? Object.values(userLeagueData)[0] : userLeagueData
 }
 // END: Selectors to pass to UserShow Components //
