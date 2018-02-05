@@ -127,6 +127,7 @@ class StockIndex extends React.Component {
                                Return to Transactions
                              </button>
                              <StockShow remoteStockData={remoteStockData[tkr]}
+                                        transactionData={transactionData[tkr]}
                                         showModal={showModal}
                                         hideModal={hideModal} />
                            </div>

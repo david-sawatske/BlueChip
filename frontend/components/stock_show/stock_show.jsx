@@ -15,11 +15,11 @@ class StockShow extends React.Component {
 
   render() {
     const { remoteStockData, interval, showModal, hideModal,
-            stockTransactionData } = this.props;
+            transactionData } = this.props;
 
     let TransactionComponent
-    if (stockTransactionData) {
-      const transactArray = Object.values(stockTransactionData);
+    if (transactionData) {
+      const transactArray = Object.values(transactionData);
 
       TransactionComponent = <UserTransactions transactData={transactArray} />
     }
