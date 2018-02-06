@@ -16,26 +16,22 @@ class StockShow extends React.Component {
   render() {
     const { remoteStockData, interval, showModal, hideModal,
             transactionData } = this.props;
+    const transactArray = Object.values(transactionData);
 
     let TransactionComponent
-    if (transactionData) {
-      const transactArray = Object.values(transactionData);
-
+    if (transactArray.length > 0) {
       TransactionComponent = <UserTransactions transactData={transactArray} />
     }
 
     let ShowComponent
     if (remoteStockData) {
-      const { quote, chart, logo, company,
-              stats, news, currentUser } = remoteStockData;
-
+      const { quote, chart, logo, company, stats, news } = remoteStockData;
       const { float, revenuePerEmployee, revenue } = stats;
 
       const employees = ( revenue / revenuePerEmployee )
 
       ShowComponent =
         <div className="stock-data">
-
           <StockHeader quote={quote}
                        logo={logo} />
 
@@ -51,6 +47,7 @@ class StockShow extends React.Component {
           <CompanyData company={company}
                        float={float}
                        employees={employees}/>
+
           <div className="mid-data">
             <StockSummary quote={quote} />
 
@@ -64,7 +61,6 @@ class StockShow extends React.Component {
 
           <ModalRoot quote={quote}
                      logo={logo} />
-
         </div>
     }
 
