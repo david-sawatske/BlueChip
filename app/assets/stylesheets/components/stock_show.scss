@@ -26,59 +26,71 @@ CSS Grid layout for modern browsers:
 														 "comp comp side side"
 														 "chart chart chart summ"
 														 "news news news news";
+				grid-template-columns: 50% 50%;
 				grid-gap: 1%;
-
 
 				.stock-header {
 					grid-area: head;
+					grid-column: 1;
 					width: auto;
 
 					display: grid;
-					grid-template-columns: auto auto auto;
-					grid-template-rows: auto;
-
-					grid-template-columns: repeat(4, 25%);
+					grid-template-columns: repeat(5, 20%);
 					grid-template-rows: auto;
 					grid-column-gap: 1%;
 					grid-row-gap: 2%;
 
-
-					.logo {
-						grid-column: 1/1;
-						grid-row: 1;
-						width: auto;
-						height: auto;
-						padding:1px;
-						border:1px solid $dark-grey;
-						background-color: $off-white;
-					}
-
-					.name {
-						grid-column: 2/4;
+				  .top {
+						grid-column: 1/6;
 						grid-row: 1;
 
-						align-self: center;
-						justify-self: left;
-						font-size: 250%;
-					}
+						display: grid;
+						grid-template-columns: 25% auto;
+						grid-template-rows: auto;
 
-					.price {
-						grid-column: 1;
+						.logo {
+							grid-column: 1;
+							width: 50%;
+							height: auto;
+							align-self: center;
+							justify-self: center;
+							padding:1px;
+							border:1px solid $dark-grey;
+							background-color: $off-white;
+						}
+
+						.name {
+							grid-column: 2;
+							align-self: center;
+							justify-self: left;
+							font-size: 200%;
+						}
+					 }
+
+					.data {
+						grid-column: 1/6;
 						grid-row: 2;
 
 						display: inherit;
-						grid-template-rows: auto;
+						grid-template-columns: auto;
 
-						div {
+						.price {
+							grid-column: 1/3;
 							grid-row: 2;
-							justify-self: center;
-							font-size: 300%;
-						}
-					}
 
+							display: inherit;
+							grid-template-rows: auto;
+
+							div {
+								grid-row: 3;
+								justify-self: center;
+								font-size: 200%;
+								margin-top: -25%;
+							}
+						}
 
 						div.total {
-							grid-column: 2;
+							grid-column: 4;
 							grid-row: 2;
 
 							display: inherit;
@@ -87,7 +99,8 @@ CSS Grid layout for modern browsers:
 							div {
 								grid-row: 2;
 								justify-self: center;
-								font-size: 200%;
+								font-size: 150%;
+								margin-top: -25%;
 							}
 						}
 
@@ -101,50 +114,40 @@ CSS Grid layout for modern browsers:
 							div {
 								grid-row: 2;
 								justify-self: center;
-								font-size: 200%;
+								font-size: 150%;
+								margin-top: -25%;
 							}
-
 						}
+					}
 
 					.time {
-						grid-column: 1/3;
-						margin-left: 15%;
+						grid-column: 1/5;
+						margin-left: 5%;
 					}
 				}
 
 				.side-data {
 					grid-area: side;
+					grid-column: 2;
 
 					display: inherit;
 					grid-template-columns: auto;
 					grid-template-rows: 10% auto auto;
 					overflow-y: scroll;
+					overflow-x: hidden;
 					justify-content: center;
 					background-color: $background-blue;
-					margin-right: 10%;
 
 					.transaction-button {
-						grid-column: 1;
+						grid-column: auto;
 						grid-row: 1;
 						justify-self: center;
-
-						background-color: $background-grey;
-						color: white;
-						margin: 5px;
-						text-align: center;
-						text-decoration: none;
-						padding: 10px 15px;
-						display: inline;
-						font-size: 12px;
-						border-radius: 12px;
-						border: none;
 					}
 
 					.transaction-data {
-						grid-column: 1;
+						grid-column: auto;
 						grid-row: 2;
-						justify-self: center;
-						width: 100%;
+						width: 115%;
 
 						overflow-y: scroll;
 					}
@@ -153,10 +156,11 @@ CSS Grid layout for modern browsers:
 				}
   			.company-data {
 					grid-area: comp;
+					grid-column: 1;
+
 					width: 75%;
 					justify-self: center;
 					margin-bottom: 10%;
-
 
 					display: grid;
 					grid-template-areas: "title"
