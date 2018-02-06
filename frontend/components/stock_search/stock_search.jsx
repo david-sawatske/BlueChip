@@ -3,16 +3,19 @@ import React from 'react';
 import StockShow from '../stock_show/stock_show';
 import Loader from '../shared/loader';
 
+import { merge } from 'lodash';
+
 class StockSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { ticker: "AMD",
+    this.state = { ticker: "AAPL",
                    interval: { ['1d']: "One Day" },
-                   searchInitiated: false,
+                   searchInitiated: true,
                    prevSearchData: null,
                    isSearchHovered: false };
 
+    this.userTransactionData = this.userTransactionData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleHover = this.handleHover.bind(this);
     this.update = this.update.bind(this);
@@ -22,6 +25,8 @@ class StockSearch extends React.Component {
     if (this.props.currentUser) {
       this.props.requestTargetUserData(this.props.currentUser.id)
     }
+
+      this.props.requestStockSearch(this.state.ticker, '1d')
   }
 
   setSearchInitiated() {
@@ -37,7 +42,7 @@ class StockSearch extends React.Component {
       })
   }
 
-  handleHover(){
+  handleHover() {
     this.setState({
       isSearchHovered: !this.state.isSearchHovered
     });
@@ -50,12 +55,27 @@ class StockSearch extends React.Component {
     });
   }
 
+  userTransactionData(currentUserData) {
+    const transactData = {};
+
+    Object.values(currentUserData.userLeagueData).map(val => {
+      const targTranData = val.transactionData[this.state.ticker];
+
+      Object.values(targTranData).map( transaction => {
+        transactData[transaction.id] = merge({ ['league']: val.name }, transaction );
+      });
+    })
+
+    return transactData;
+  }
+
   render() {
     const searchedTicker = this.state.ticker.toUpperCase();
     const { isRemoteLoading, remoteStockData,
             currentUserData, showModal, hideModal } = this.props;
     const { isSearchHovered } = this.state;
     const currIntValue = Object.values(this.state.interval);
+    const transactionData = this.userTransactionData(currentUserData);
 
     const intervals = [ { ['5y']: "Five Years" },
                         { ['2y']:" Two Years" },
@@ -72,6 +92,7 @@ class StockSearch extends React.Component {
       ShowComponent = <Loader />
     } else if (this.state.searchInitiated && remoteStockData[searchedTicker]) {
       ShowComponent = <StockShow remoteStockData={remoteStockData[searchedTicker]}
+                                 transactionData={transactionData}
                                  showModal={showModal}
                                  hideModal={hideModal}
                                  interval={this.state.interval} />
@@ -79,6 +100,7 @@ class StockSearch extends React.Component {
         this.state.prevSearchData = remoteStockData[searchedTicker]
     } else if (this.state.prevSearchData) {
       ShowComponent = <StockShow remoteStockData={this.state.prevSearchData}
+                                 transactData={transactData}
                                  showModal={showModal}
                                  hideModal={hideModal}
                                  interval={this.state.interval} />
