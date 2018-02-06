@@ -48,7 +48,7 @@ class SortableTable extends React.Component {
           if (this.props.isDataCurrency[attribute]) {
             return <td key={idx}>{numberToCurrency(dataObj[attribute])}</td>
           } else if (this.props.isDataDate[attribute]) {
-            return <td key={idx}>{moment(dataObj[attribute]).calendar()}</td>
+            return <td key={idx}>{moment(dataObj[attribute]).format('L')}</td>
           } else {
             return <td key={idx}>{dataObj[attribute]}</td>
           }
