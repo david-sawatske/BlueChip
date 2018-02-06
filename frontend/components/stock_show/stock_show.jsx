@@ -48,15 +48,16 @@ class StockShow extends React.Component {
             </button>
           </div>
 
-          <StockSummary quote={quote} />
-
           <CompanyData company={company}
                        float={float}
                        employees={employees}/>
+          <div className="mid-data">
+            <StockSummary quote={quote} />
 
-          <StockChart chart={chart}
-                      interval={interval}
-                      companyName={quote.companyName}/>
+            <StockChart chart={chart}
+                        interval={interval}
+                        companyName={quote.companyName}/>
+          </div>
 
           <StockNews news={news}
                      companyName={quote.companyName}/>
