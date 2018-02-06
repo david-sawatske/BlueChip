@@ -270,12 +270,21 @@ CSS Grid layout for modern browsers:
 						grid-area: subtitle;
 
 						font-size: 100%;
+						font-weight: bold;
+						font-style: italic;
 						border-bottom: 2px solid;
 						border-top: 2px solid;
 					}
 
 					h4 {
 						grid-area: subtitle;
+						margin-left: 2%;
+
+						font-size: 75%;
+					}
+
+					h6 {
+						margin: -10px 2% -5px 0;
 					}
 
 					p {
@@ -298,19 +307,18 @@ CSS Grid layout for modern browsers:
 						grid-template-rows: repeat(5, auto);
 						grid-gap: 4%;
 
-						h6 {
-							margin-top: -10px;
-							margin-bottom: -10px;
-							transition: transform 2s;
-						}
-
 						div {
 							transition: transform .25s linear;
+
+							p {
+								margin-left: 5%;
+							}
 						}
 
 						div:hover {
 							background-color: $news-transparent;
 							transform: scale(1.25);
+							box-shadow: -5px 10px 10px 0px $blue-grey;
 						}
 
 						.story-0 {
