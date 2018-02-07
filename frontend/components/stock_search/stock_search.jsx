@@ -22,11 +22,13 @@ class StockSearch extends React.Component {
   }
 
   componentWillMount() {
+    const additionalDataTypes = 'financials,earnings,';
+
     if (this.props.currentUser) {
       this.props.requestTargetUserData(this.props.currentUser.id)
     }
 
-      this.props.requestStockSearch(this.state.ticker, '1d')
+    this.props.requestStockSearch(this.state.ticker,'1d', additionalDataTypes)
   }
 
   setSearchInitiated() {
