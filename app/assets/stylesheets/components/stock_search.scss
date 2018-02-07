@@ -11,6 +11,25 @@ CSS Grid layout for modern browsers:
 
 			grid-template-columns: auto auto;
 			grid-template-rows: auto;
+
+
+			.stock-show {
+				.stock-data {
+					width: 90%;
+					grid-template-columns: repeat(4, 25%);
+					grid-template-rows: 10% 15% 15% 35%;
+
+					.transaction-button {
+						height: 75%;
+						width: 25%;
+						background-color: $dark-blue;
+				    color: white;
+
+				    border-radius: 12px;
+						border: none;
+					}
+				}
+			}
 		}
 
 		.initial-search {
@@ -119,6 +138,7 @@ CSS Grid layout for modern browsers:
 
 			display: inherit;
 			grid-template-rows: auto;
+			justify-content: center;
 			align-content: start;
 			background-color: $background-grey;
 			padding: 0% 3%;
@@ -213,20 +233,18 @@ CSS Grid layout for modern browsers:
 				}
 		  }
 
-			.initial {
+			.stock-summary {
 				display: none;
 			}
 
-			.stock-show {
-				grid-column: auto;
-				grid-row: auto;
-				margin-top: 1%;
+			.chart-container {
+				height: 100%;
+				justify-content: center;
+				margin-left: 30%;
+			}
 
-				display: inherit;
-				grid-template-areas: "head head side side"
-														 "comp comp side side"
-														 "chart chart chart summ"
-														 "news news news news";
+			.initial {
+				display: none;
 			}
 		}
 
