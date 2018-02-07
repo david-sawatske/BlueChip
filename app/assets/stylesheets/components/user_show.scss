@@ -50,7 +50,7 @@
 
 					display: inherit;
 			  	grid-template-columns: 20% auto;
-					grid-template-rows: minmax(225px, 30%) auto;
+					grid-template-rows: minmax(250px, 15%) auto;
 
 					.joined-leagues {
 						grid-column: 1;
@@ -58,12 +58,14 @@
 						overflow-y: scroll;
 
 						background-color: $transparent-white;
+						h1, h3 {
+							text-align: left;
+						}
 
 					  .league-data {
 							h1 {
 								font-size: 133%;
-								text-align: left;
-								margin-left: -25%;
+								margin-left: auto;
 								margin-bottom: -10%;
 							}
 
@@ -81,8 +83,6 @@
 							h3 {
 								display: block;
 								font-size: 100%;
-								text-align: left;
-								margin-left: -25%;
 								margin-bottom: -10%;
 							}
 						}
@@ -92,8 +92,6 @@
 
 							h1 {
 								font-size: 133%;
-								text-align: left;
-								margin-left: -25%;
 								margin-bottom: -10%;
 								color: $dark-grey;
 							}
@@ -101,8 +99,6 @@
 							h3 {
 								display: block;
 								font-size: 100%;
-								text-align: left;
-								margin-left: -25%;
 								margin-bottom: -10%;
 							}
 						}
