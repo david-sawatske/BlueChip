@@ -5,6 +5,7 @@ import StockHeader from './stock_header';
 import CompanyData from './company_data';
 import StockChart from './stock_chart';
 import StockNews from './stock_news_index';
+import EarningsTable from './earnings_table';
 import UserTransactions from './user_transaction_index';
 import ModalRoot from  '../modal/modal_root_container';
 
@@ -25,7 +26,8 @@ class StockShow extends React.Component {
 
     let ShowComponent
     if (remoteStockData) {
-      const { quote, chart, logo, company, stats, news } = remoteStockData;
+      const { quote, chart, logo, company, stats, news,
+              earnings, financials } = remoteStockData;
       const { float, revenuePerEmployee, revenue } = stats;
 
       const employees = ( revenue / revenuePerEmployee )
@@ -58,6 +60,8 @@ class StockShow extends React.Component {
 
           <StockNews news={news}
                      companyName={quote.companyName}/>
+
+          <EarningsTable earnings={earnings.earnings} />
 
           <ModalRoot quote={quote}
                      logo={logo} />
