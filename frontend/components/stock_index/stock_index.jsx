@@ -90,6 +90,8 @@ class StockIndex extends React.Component {
                               'sharesOwned': true,
                               'searchLink': false }
 
+      const sideHeadings = { };
+
       const allowedKeys = Object.keys(tableHeadings);
 
       const tableData = Object.keys(investedByTicker).map(ticker => {
@@ -112,6 +114,7 @@ class StockIndex extends React.Component {
 
       TableComponent = <SortableTable dataArr={tableData}
                                       isDataDate={isDataDate}
+                                      sideHeadings={sideHeadings}
                                       tableHeadings={tableHeadings}
                                       isDataCurrency={isDataCurrency}
                                       isDataSotable={isDataSotable}

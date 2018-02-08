@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SortableTable from '../table/table'
+import SortableTable from '../table/table';
 
 import { filterObject } from '../../util/helper_functions'
 import { numberToCurrency } from '../../util/helper_functions';
@@ -33,18 +33,19 @@ class UserTransactions extends React.Component {
                             'shareQuant': true,
                             'league': true }
 
+    const sideHeadings = { };
+
     const allowedKeys = Object.keys(tableHeadings)
     const tableData = Object.values(transactData).map(dataObj => (
        filterObject(dataObj, allowedKeys))
     )
-
-    // console.log(tableData);
 
     return (
       <div className="transaction-data">
         <h1>Transaction History</h1>
         <SortableTable dataArr={tableData}
                        isDataDate={isDataDate}
+                       sideHeadings={sideHeadings}
                        isDataSotable={isDataSotable}
                        tableHeadings={tableHeadings}
                        isDataCurrency={isDataCurrency}
