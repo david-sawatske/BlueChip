@@ -63,9 +63,11 @@ class StockSearch extends React.Component {
     Object.values(currentUserData.userLeagueData).map(val => {
       const targTranData = val.transactionData[this.state.ticker];
 
-      Object.values(targTranData).map( transaction => {
-        transactData[transaction.id] = merge({ ['league']: val.name }, transaction );
-      });
+      if (targTranData) {
+        Object.values(targTranData).map(transaction => {
+          transactData[transaction.id] = merge({ ['league']: val.name }, transaction );
+        });
+      }
     })
 
     return transactData;
