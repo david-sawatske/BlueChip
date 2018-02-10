@@ -69,7 +69,7 @@ class SessionForm extends React.Component {
     let errorList = null;
 
     if (this.state.hasErrors) {
-      errorList = this.renderErrors(this.props.errors.session);
+      errorList = this.renderErrors(this.props.errors);
     }
 
     return (
@@ -80,11 +80,11 @@ class SessionForm extends React.Component {
             <input type="text"
               value={this.state.username}
               onChange={this.update('username')} />
-              
+
             <input type="password"
               value={this.state.password}
               onChange={this.update('password')} />
-              
+
             <input type="submit"
                    value="Start Trading" />
           </div>
