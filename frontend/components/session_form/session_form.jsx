@@ -43,7 +43,7 @@ class SessionForm extends React.Component {
   signupBullets() {
     if (this.props.formType === 'signup') {
       return (
-        <ul>
+        <ul className="signup-bullets">
           <li>Realtime equity data</li>
           <li>Historical equity data</li>
           <li>Create or Join Leagues</li>
