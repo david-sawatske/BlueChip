@@ -57,10 +57,10 @@ class StockSearch extends React.Component {
     });
   }
 
-  userTransactionData(currentUserData) {
+  userTransactionData(currentUserTranData) {
     const transactData = {};
 
-    Object.values(currentUserData.userLeagueData).map(val => {
+    Object.values(currentUserTranData).map(val => {
       const targTranData = val.transactionData[this.state.ticker];
 
       if (targTranData) {
@@ -75,11 +75,17 @@ class StockSearch extends React.Component {
 
   render() {
     const searchedTicker = this.state.ticker.toUpperCase();
-    const { isRemoteLoading, remoteStockData,
+    const { isRemoteLoading, remoteStockData, isRailsUserLoading,
             currentUserData, showModal, hideModal } = this.props;
     const { isSearchHovered } = this.state;
     const currIntValue = Object.values(this.state.interval);
-    const transactionData = this.userTransactionData(currentUserData);
+
+    const currentUserTranData = currentUserData.userLeagueData;
+
+    let transactionData
+    (currentUserTranData) ? this.userTransactionData(currentUserTranData)
+                              :
+                            null;
 
     const intervals = [ { ['5y']: "Five Years" },
                         { ['2y']:" Two Years" },
@@ -92,7 +98,7 @@ class StockSearch extends React.Component {
 
 
     let ShowComponent = null;
-    if (isRemoteLoading) {
+    if (isRemoteLoading || isRailsUserLoading) {
       ShowComponent = <Loader />
     } else if (this.state.searchInitiated && remoteStockData[searchedTicker]) {
       ShowComponent = <StockShow remoteStockData={remoteStockData[searchedTicker]}

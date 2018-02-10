@@ -10,8 +10,8 @@ import StockSearch from './stock_search';
 const mapStateToProps = state => ({
   currentUserData: getUserLeagueData(state, state.session.currentUser),
   isRemoteLoading: state.ui.loading.remoteStockLoading,
-  remoteStockData: state.ui.remoteStocks.remoteStockData,
-  currentUser: state.session.currentUser
+  isRailsUserLoading: state.ui.loading.railsUserLoading,
+  remoteStockData: state.ui.remoteStocks.remoteStockData
 });
 
 const mapDispatchToProps = dispatch => ({

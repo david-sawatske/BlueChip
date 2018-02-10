@@ -17,7 +17,9 @@ class StockShow extends React.Component {
   render() {
     const { remoteStockData, interval, showModal, hideModal,
             transactionData } = this.props;
-    const transactArray = Object.values(transactionData);
+    const transactArray = (transactionData) ? Object.values(transactionData)
+                                               :
+                                              [];
 
     let TransactionComponent
     if (transactArray.length > 0) {
