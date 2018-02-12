@@ -77,3 +77,11 @@ export const calcCashInvested = transactionData => {
   return { totalCashInvested: totalCashInvested,
            investedByTicker: investedByTicker }
 }
+
+export const camelToTitle = camel => {
+  const firstLettLow = camel.replace(/([a-z])([A-Z])/g, '$1 $2')
+
+  return (
+    firstLettLow.charAt(0).toUpperCase() +  firstLettLow.slice(1)
+  )
+}
