@@ -1,80 +1,113 @@
 import React from 'react';
 
+import { camelToTitle } from '../../util/helper_functions'
+
 class FinancialsTable extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  renderRow(dataKey, dataArr, idx1) {
-    return (
-      <tr key={idx1}>
-        <td>{ dataKey }</td>
-        { dataArr.map((datum, idx2) => (
-            <td key={idx2}>
-              {datum}
-            </td>
-        ))}
-      </tr>
-    )
+  renderRows(dataObj) {
+    return Object.keys(dataObj).map((earnKey, idx) => {
+      const tdClass = (idx === 0) ? 'side-head' : null;
+
+      return ( <tr key={earnKey}>
+                  { dataObj[earnKey].map((datum, idx) => (
+                    <td className='tdClass'
+                        key={earnKey + idx} >
+                      { datum }
+                    </td>
+                  )) }
+                </tr> )
+    })
   }
 
   render() {
     const { financials } = this.props;
+    const pushData = (dataType, currDataObj, dataKey) => {
+      const sideHead = camelToTitle(dataKey);
+      const datum = (currDataObj[dataKey]) ? currDataObj[dataKey] / 1000 : '-';
 
-    const finData = {};
+      if (dataType[dataKey].includes(sideHead)) {
+        dataType[dataKey].push(datum);
+      } else {
+        dataType[dataKey].unshift(sideHead);
+        dataType[dataKey].push(datum);
+      }
+    }
+
+    const incomeData = { 'grossProfit': [],
+                         'costOfRevenue': [],
+                         'operatingRevenue': [],
+                         'totalRevenue': [],
+                         'operatingIncome': [],
+                         'netIncome': [],
+                         'researchAndDevelopment': [],
+                         'operatingExpense': [] }
+
+    const balanceData = { 'currentAssets': [],
+                          'totalAssets': [],
+                          'totalLiabilities': [],
+                          'currentCash': [],
+                          'currentDebt': [],
+                          'totalCash': [],
+                          'totalDebt': [],
+                          'shareholderEquity': [] }
+
+    const cashData = { 'cashChange': [],
+                       'cashFlow': [],
+                       'operatingGainsLosses': [] }
+
+
+    const topHeadings = [];
 
     financials.map(dataObj => {
-      Object.keys(dataObj).map(dataKey => {
-        const data = (dataObj[dataKey]) ? dataObj[dataKey] : '-';
+      topHeadings.unshift(dataObj['reportDate']);
 
-        if (finData[dataKey]) {
-          finData[dataKey].push(data)
-        } else {
-          finData[dataKey] = [];
-          finData[dataKey].push(data)
+      Object.keys(dataObj).map(dataKey => {
+        if (incomeData.hasOwnProperty(dataKey)) {
+          pushData(incomeData, dataObj, dataKey)
+        } else if (balanceData.hasOwnProperty(dataKey)) {
+          pushData(balanceData, dataObj, dataKey)
+        } else if (cashData.hasOwnProperty(dataKey)) {
+          pushData(cashData, dataObj, dataKey)
         }
       })
+
     })
 
-    const headings = []
-    const rows = []
-
-    Object.keys(finData).map((dataKey, idx) => {
-      const dataArr = finData[dataKey];
-
-      if (dataKey === "reportDate") {
-        headings.push(<tr key={idx}>
-                        <td className="sub-heading">Income Statement</td>
-                        { dataArr.map((datum, idx2) => (
-                          <th key={idx2}>
-                            {datum}
-                          </th>
-                        ))}
-                      </tr>)
-      } else if (dataKey === "currentAssets") {
-        rows.push(<tr key={idx}>
-                    <td className="sub-heading">Balance Sheet</td>
-                  </tr>)
-        rows.push(this.renderRow(dataKey, dataArr))
-      } else if (dataKey === "cashChange"){
-        rows.push(<tr key={idx}>
-                    <td className="sub-heading">Cash Flow</td>
-                  </tr>)
-        rows.push(this.renderRow(dataKey, dataArr, idx))
-      } else {
-        rows.push(this.renderRow(dataKey, dataArr, idx))
-      }
-    })
-
-  return (
-    <div className ="financials">
-      <h1>Financials</h1>
+   return (
+    <div className ="financials-table">
       <table>
         <thead>
-          { headings }
+          <tr>
+            <th>Financials</th>
+            <td>(numbers in thousands)</td> 
+          </tr>
         </thead>
-        <tbody>
-          { rows }
+
+        <tbody className="financials-body">
+          <tr>
+            <td className="side-head">
+              Income Statement
+            </td>
+
+            { topHeadings.map((head, idx) => (
+              <th key={idx}>{ head }</th>
+            )) }
+          </tr>
+          { this.renderRows(incomeData) }
+          <tr>
+            <td className="side-head">
+              Balance Sheet
+            </td>
+          </tr>
+          { this.renderRows(balanceData) }
+          <tr>
+            <td className="side-head">
+              Cash Flow
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
