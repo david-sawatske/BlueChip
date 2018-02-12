@@ -388,6 +388,8 @@ CSS Grid layout for modern browsers:
 
 			.earnings-table {
 				width: 200%;
+				grid-column: auto;
+				grid-row: auto;
 
 				display: grid;
 				grid-template-columns: 10% auto;
@@ -403,7 +405,7 @@ CSS Grid layout for modern browsers:
 
 				table {
 					width: 200%;
-					
+
 					grid-column: 1/3;
 					grid-row: 1;
 
@@ -436,6 +438,42 @@ CSS Grid layout for modern browsers:
 						td {
 							text-align: center;
 						}
+					}
+				}
+			}
+
+			.financials {
+				width: 300%;
+				grid-column: auto;
+				grid-row: auto;
+
+				display: grid;
+				grid-template-columns: 10% auto;
+				grid-template-rows: auto;
+
+				table {
+					grid-column: 1/3;
+					grid-row: 2;
+
+					thead {
+						border: 1px solid $dark-grey;
+						background: rgba(141, 50, 219, 0);
+
+						th {
+							background-color: $transparent-white;
+						}
+					}
+
+					tbody {
+
+					}
+
+					.sub-heading {
+						background-color: $transparent-white;
+						font-size: 150%;
+						text-transform: uppercase;
+						color: black;
+						font-style: italic;
 					}
 				}
 			}
