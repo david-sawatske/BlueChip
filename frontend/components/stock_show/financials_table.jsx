@@ -8,18 +8,18 @@ class FinancialsTable extends React.Component {
   }
 
   renderRows(dataObj) {
-    return Object.keys(dataObj).map((earnKey, idx) => {
-      const tdClass = (idx === 0) ? 'side-head' : null;
+    return Object.keys(dataObj).map((earnKey, idx) => (
+      <tr key={earnKey}>
+        { dataObj[earnKey].map((datum, idx) => {
+          const tdClass = (idx === 0) ? 'side-head' : null;
 
-      return ( <tr key={earnKey}>
-                  { dataObj[earnKey].map((datum, idx) => (
-                    <td className='tdClass'
-                        key={earnKey + idx} >
-                      { datum }
-                    </td>
-                  )) }
-                </tr> )
-    })
+          return (<td className={tdClass}
+                      key={earnKey + idx} >
+                    { datum }
+                  </td>
+        )})}
+      </tr> )
+    )
   }
 
   render() {
@@ -82,32 +82,32 @@ class FinancialsTable extends React.Component {
         <thead>
           <tr>
             <th>Financials</th>
-            <td>(numbers in thousands)</td> 
+            <td colSpan="4">(numbers in thousands)</td>
           </tr>
         </thead>
 
         <tbody className="financials-body">
-          <tr>
-            <td className="side-head">
+          <tr className="sub-head">
+            <td >
               Income Statement
             </td>
-
             { topHeadings.map((head, idx) => (
               <th key={idx}>{ head }</th>
             )) }
           </tr>
           { this.renderRows(incomeData) }
-          <tr>
-            <td className="side-head">
+          <tr className="sub-head">
+            <td colSpan="5">
               Balance Sheet
             </td>
           </tr>
           { this.renderRows(balanceData) }
-          <tr>
-            <td className="side-head">
+          <tr className="sub-head">
+            <td colSpan="5">
               Cash Flow
             </td>
           </tr>
+          { this.renderRows(cashData) }
         </tbody>
       </table>
     </div>

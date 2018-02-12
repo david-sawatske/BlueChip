@@ -430,38 +430,56 @@ CSS Grid layout for modern browsers:
 				}
 			}
 
-			.financials {
-				width: 300%;
-				grid-column: auto;
-				grid-row: auto;
+			.financials-table {
+				thead {
+					background: $transparent-white;
+					width: 200%;
 
-				display: grid;
-				grid-template-columns: 10% auto;
-				grid-template-rows: auto;
+					th  {
+						font-family: Quattrocento;
+						font-size: 150%;
+						font-style: normal;
+					}
 
-				table {
-					grid-column: 1/3;
-					grid-row: 2;
+					td {
+						color: $blue-grey;
+						font-weight: normal;
+						text-align: left;
+						text-transform: none;
+					}
+				}
 
-					thead {
-						border: 1px solid $dark-grey;
-						background: rgba(141, 50, 219, 0);
+				tbody {
+					.sub-head {
+						background: $transparent-white;
+
+						td {
+							text-align: left;
+							color: $dark-blue;
+							font-size: 125%;
+						}
 
 						th {
-							background-color: $transparent-white;
+							color: $blue-grey;
+							font-weight: normal;
+							font-style: italic;
 						}
 					}
 
-					tbody {
-
+					td {
+						text-align: center;
 					}
 
-					.sub-heading {
-						background-color: $transparent-white;
-						font-size: 150%;
-						text-transform: uppercase;
-						color: black;
+					.side-head {
+						background: $transparent-white;
+						color: $blue-grey;
+						font-weight: normal;
 						font-style: italic;
+						text-align: left;
+						width: 15%;
+						padding-left: 5%;
+						border-top: 1px solid $table-outline;
+						border-bottom: 1px solid $table-outline;
 					}
 				}
 			}
