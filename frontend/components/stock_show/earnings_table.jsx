@@ -1,10 +1,6 @@
 import React from 'react';
 import { merge } from 'lodash';
 
-import SortableTable from '../table/table'
-
-import { filterObject } from '../../util/helper_functions';
-
 class EarningsTable extends React.Component {
   constructor(props) {
     super(props);
@@ -13,48 +9,58 @@ class EarningsTable extends React.Component {
   render() {
     const { earnings } = this.props;
 
-    const isDataCurrency = { };
-    const isDataDate = { };
-    const isDataSotable = { };
+    const sideHeadings = { actualEPS: "Actual EPS",
+                           consensusEPS: "Consensus EPS",
+                           EPSSurpriseDollar: "EPS Surprise (dollar)",
+                           numberOfEstimates: "Number of Estimates " }
 
-    const tableHeadings = {}
-    earnings.map(qData => {
-      const fiscalPeriod = qData.fiscalPeriod;
-      tableHeadings[fiscalPeriod] = fiscalPeriod;
+    const topHeadings = [];
+    const earnData = {};
+
+    earnings.map(earnObj => {
+      topHeadings.unshift(earnObj['fiscalPeriod']);
+
+      Object.keys(earnObj).map(earnKey => {
+        if (sideHeadings.hasOwnProperty(earnKey)) {
+          const sideHead = sideHeadings[earnKey];
+          const datum = earnObj[earnKey];
+
+          if (earnData[sideHead]) {
+            earnData[sideHead].unshift(datum);
+          } else {
+            earnData[sideHead] = [];
+            earnData[sideHead].unshift(datum);
+          }
+        }
+      })
     })
-    const sideHeadings = { ['actualEPS']: 'Actual EPS',
-                           ['estimatedEPS']: 'Estimated EPS',
-                           ['EPSSurpriseDollar']: 'EPS Surprise (dollar)',
-                           ['numberOfEstimates']: 'Number of Estimates' };
 
-    const sideKeys = Object.keys(sideHeadings)
-
-    const tableData = Object.keys(sideHeadings).map(key => (
-                        {[key]: sideHeadings[key]})
-                      )
-
-    Object.values(earnings).map((qObj, idx) => {
-      if ( idx < tableData.length ){
-        Object.keys(tableHeadings).map((key, idx2) => {
-          const sideKey = sideKeys[idx]
-
-          tableData[idx] = merge(tableData[idx], {[key]: earnings[idx2][sideKey]})
-        })
-      }
-    })
+    topHeadings.unshift('Earnings')
 
     return (
     <div className ="earnings-table">
-      <h1>Earnings</h1>
-      <SortableTable dataArr={tableData}
-                     isDataDate={isDataDate}
-                     sideHeadings={sideHeadings}
-                     tableHeadings={tableHeadings}
-                     isDataSotable={isDataSotable}
-                     isDataCurrency={isDataCurrency}
-                     initialSort=""
-                     ranked={false} />
+        <table>
+          <thead className="earn-head">
+            <tr>
+              { topHeadings.map(head => (
+                <th>{ head }</th>
+              )) }
+            </tr>
+          </thead>
 
+          <tbody className="earn-body">
+            { Object.keys(earnData).map(earnKey => (
+              <tr>
+                <td className="side-head">
+                  { earnKey }
+                </td>
+                { earnData[earnKey].map(datum => (
+                  <td>{ datum }</td>
+                )) }
+              </tr>
+            )) }
+          </tbody>
+        </table>
       </div>
     )
   }
