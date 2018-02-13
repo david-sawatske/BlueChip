@@ -13,6 +13,7 @@ class StockSearch extends React.Component {
                    interval: { ['1d']: "One Day" },
                    searchInitiated: true,
                    prevSearchData: null,
+                   prevPeerData: null,
                    isSearchHovered: false };
 
     this.userTransactionData = this.userTransactionData.bind(this);
@@ -86,8 +87,18 @@ class StockSearch extends React.Component {
             currentUserData, showModal, hideModal } = this.props;
     const { isSearchHovered } = this.state;
     const currIntValue = Object.values(this.state.interval);
-
     const currentUserTranData = currentUserData.userLeagueData;
+    const peerData = {};
+
+    if (remoteStockData[this.state.ticker]) {
+      const peerTkrArr = remoteStockData[this.state.ticker]
+                                        ['relevant']
+                                        ['symbols']
+
+      peerTkrArr.map(tkr => {
+        peerData[tkr] = remoteStockData[tkr]
+      })
+    }
 
     let transactionData
     (currentUserTranData) ? this.userTransactionData(currentUserTranData)
@@ -109,14 +120,17 @@ class StockSearch extends React.Component {
       ShowComponent = <Loader />
     } else if (this.state.searchInitiated && remoteStockData[searchedTicker]) {
       ShowComponent = <StockShow remoteStockData={remoteStockData[searchedTicker]}
+                                 peerData={peerData}
                                  transactionData={transactionData}
                                  showModal={showModal}
                                  hideModal={hideModal}
                                  interval={this.state.interval} />
 
-        this.state.prevSearchData = remoteStockData[searchedTicker]
+        this.state.prevSearchData = remoteStockData[searchedTicker];
+        this.state.prevPeerhData = peerData;
     } else if (this.state.prevSearchData) {
       ShowComponent = <StockShow remoteStockData={this.state.prevSearchData}
+                                 peerData={this.state.prevPeerData}
                                  transactData={transactData}
                                  showModal={showModal}
                                  hideModal={hideModal}
