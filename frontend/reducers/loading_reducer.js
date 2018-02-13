@@ -1,4 +1,5 @@
 import { RECEIVE_STOCK_SEARCH,
+         START_REMOTE_PEER_FETCH,
          START_REMOTE_STOCK_FETCH } from '../actions/remote_stock_actions';
 
 import { RECEIVE_TARGET_LEAGUE,
@@ -20,6 +21,8 @@ const LoadingReducer = (state = initialState, action) => {
     case RECEIVE_STOCK_SEARCH:
       return Object.assign({}, state, { remoteStockLoading: false });
     case START_REMOTE_STOCK_FETCH:
+      return Object.assign({}, state, { remoteStockLoading: true });
+    case START_REMOTE_PEER_FETCH:
       return Object.assign({}, state, { remoteStockLoading: true });
     case RECEIVE_TARGET_LEAGUE:
     case RECEIVE_ALL_LEAGUES:
