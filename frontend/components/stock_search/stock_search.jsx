@@ -22,13 +22,20 @@ class StockSearch extends React.Component {
   }
 
   componentWillMount() {
-    const additionalDataTypes = 'financials,earnings,';
+    const additionalDataTypes = 'financials,earnings,relevant,';
 
     if (this.props.currentUser) {
       this.props.requestTargetUserData(this.props.currentUser.id)
     }
 
     this.props.requestStockSearch(this.state.ticker,'1d', additionalDataTypes)
+      .then(stockData => {
+        const peerStr = this.props.remoteStockData[this.state.ticker]
+                                                  ['relevant']
+                                                  ['symbols']
+                                                  .toString()
+        this.props.requestStockPeers(peerStr);
+      })
   }
 
   setSearchInitiated() {
