@@ -1,4 +1,5 @@
 import { RECEIVE_STOCK_SEARCH,
+         RECEIVE_PEER_SEARCH,
          START_REMOTE_PEER_FETCH,
          START_REMOTE_STOCK_FETCH } from '../actions/remote_stock_actions';
 
@@ -11,6 +12,7 @@ import { RECEIVE_TARGET_USER_DATA,
 
 const initialState = {
   remoteStockLoading: false,
+  remotePeersLoading: false,
   railsLeagueLoading: false,
   railsUserLoading: false
 };
@@ -20,10 +22,12 @@ const LoadingReducer = (state = initialState, action) => {
   switch(action.type){
     case RECEIVE_STOCK_SEARCH:
       return Object.assign({}, state, { remoteStockLoading: false });
+    case RECEIVE_PEER_SEARCH:
+      return Object.assign({}, state, { remotePeersLoading: false });
     case START_REMOTE_STOCK_FETCH:
       return Object.assign({}, state, { remoteStockLoading: true });
     case START_REMOTE_PEER_FETCH:
-      return Object.assign({}, state, { remoteStockLoading: true });
+      return Object.assign({}, state, { remotePeersLoading: true });
     case RECEIVE_TARGET_LEAGUE:
     case RECEIVE_ALL_LEAGUES:
       return Object.assign({}, state, { railsLeagueLoading: false });

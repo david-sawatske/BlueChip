@@ -3,11 +3,17 @@ import * as RemoteStockAPIUtil from '../util/remote_api_util';
 export const START_REMOTE_STOCK_FETCH = 'START_REMOTE_STOCK_FETCH';
 export const START_REMOTE_PEER_FETCH = 'START_REMOTE_PEER_FETCH';
 export const RECEIVE_STOCK_SEARCH = 'RECEIVE_STOCK_SEARCH';
+export const RECEIVE_PEER_SEARCH = 'RECEIVE_PEER_SEARCH';
 
 // sync action creators
 export const receiveStockSearch = stockSeriesData => ({
   type: RECEIVE_STOCK_SEARCH,
   stockSeriesData
+});
+
+export const receivePeerSearch = stockPeerData => ({
+  type: RECEIVE_PEER_SEARCH,
+  stockPeerData
 });
 
 export const startStockRemoteFetch = () => ({
@@ -29,10 +35,10 @@ export const requestStockSearch = (symbol, interval, dataTypes) => dispatch => {
 }
 
 export const requestStockPeers = tkrStr => dispatch => {
-  dispatch(startStockRemoteFetch());
+  dispatch(startStockPeerFetch());
 
   return RemoteStockAPIUtil.fetchPeers(tkrStr)
     .then(stockPeerData => {
-      dispatch(receiveStockSearch(stockPeerData));
+      dispatch(receivePeerSearch(stockPeerData));
   });
 }
