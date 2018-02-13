@@ -1,4 +1,4 @@
-const ROOT_URL = 'https://api.iextrading.com/1.0/stock/';
+const ROOT_URL = 'https://api.iextrading.com/1.0/stock/market/batch?symbols=';
 
 const defaultDataTypes = 'logo,quote,news,chart,company,stats';
 export const fetchStockSeries = ( symbol,
@@ -12,6 +12,13 @@ export const fetchStockSeries = ( symbol,
 
   return $.ajax({
     method: 'GET',
-    url: `${ROOT_URL}market/batch?symbols=${symbol}&types=${dataTypes}&range=${interval}&last=5`
+    url: `${ROOT_URL}${symbol}&types=${dataTypes}&range=${interval}&last=5`
   })
 }
+
+export const fetchPeers = tkrStr => (
+  $.ajax({
+    method: 'GET',
+    url: `${ROOT_URL}${tkrStr}&types=quote`
+  })
+)
