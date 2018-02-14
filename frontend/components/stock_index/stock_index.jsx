@@ -69,27 +69,18 @@ class StockIndex extends React.Component {
                               'sharesOwned': 'Shares Owned',
                               'searchLink': 'Click Logo for More Data' }
 
-      const isDataCurrency = { 'companyName': false,
-                               'symbol': false,
-                               'latestPrice': true,
-                               'invested': true,
-                               'sharesOwned': false,
-                               'searchLink': false }
 
-      const isDataDate = { 'companyName': false,
-                           'symbol': false,
-                           'latestPrice': false,
-                           'invested': false,
-                           'sharesOwned': false,
-                           'searchLink': false }
 
       const isDataSotable = { 'companyName': true,
                               'symbol': true,
                               'latestPrice': true,
                               'invested': true,
-                              'sharesOwned': true,
-                              'searchLink': false }
+                              'sharesOwned': true }
 
+      const isDataCurrency = { 'invested': true };
+      const isDataInteger = { 'sharesOwned': true };
+      const isDataPercent = { };
+      const isDataDate = { };
       const sideHeadings = { };
 
       const allowedKeys = Object.keys(tableHeadings);
@@ -116,8 +107,10 @@ class StockIndex extends React.Component {
                                       isDataDate={isDataDate}
                                       sideHeadings={sideHeadings}
                                       tableHeadings={tableHeadings}
-                                      isDataCurrency={isDataCurrency}
                                       isDataSotable={isDataSotable}
+                                      isDataPercent={isDataPercent}
+                                      isDataInteger={isDataInteger}
+                                      isDataCurrency={isDataCurrency}
                                       initialSort="symbol" />
 
     }

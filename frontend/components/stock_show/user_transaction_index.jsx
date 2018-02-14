@@ -18,21 +18,15 @@ class UserTransactions extends React.Component {
                             'shareQuant': 'Quantitiy',
                             'league': 'League' }
 
-    const isDataCurrency = { 'purchaseDay': false,
-                             'sharePrice': true,
-                             'shareQuant': false,
-                             'league': false }
-
-    const isDataDate = { 'purchaseDay': true,
-                         'sharePrice': false,
-                         'shareQuant': false,
-                         'league': false }
-
     const isDataSotable = { 'purchaseDay': true,
                             'sharePrice': true,
                             'shareQuant': true,
                             'league': true }
 
+    const isDataCurrency = { 'sharePrice': true };
+    const isDataPercent = { };
+    const isDataInteger = { };
+    const isDataDate = { };
     const sideHeadings = { };
 
     const allowedKeys = Object.keys(tableHeadings)
@@ -46,8 +40,10 @@ class UserTransactions extends React.Component {
         <SortableTable dataArr={tableData}
                        isDataDate={isDataDate}
                        sideHeadings={sideHeadings}
-                       isDataSotable={isDataSotable}
                        tableHeadings={tableHeadings}
+                       isDataSotable={isDataSotable}
+                       isDataPercent={isDataPercent}
+                       isDataInteger={isDataInteger}
                        isDataCurrency={isDataCurrency}
                        initialSort="purchaseDay" />
       </div>

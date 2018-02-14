@@ -17,22 +17,18 @@ class LeagueLeaderboard extends React.Component {
                             'cashInvested': 'Cash Invested',
                             'totalEquity': 'Total Equity' }
 
-    const isDataCurrency = { 'username': false,
-                             'cashBalance': true,
-                             'cashInvested': true,
-                             'totalEquity': true }
-
-    const isDataDate = { 'username': false,
-                         'cashBalance': false,
-                         'cashInvested': false,
-                         'totalEquity': false }
-
     const isDataSotable = { 'username': true,
                             'cashBalance': true,
                             'cashInvested': true,
                             'totalEquity': true }
 
-    const sideHeadings = { }
+    const isDataCurrency = { 'cashBalance': true,
+                             'cashInvested': true }
+
+    const isDataInteger = { };
+    const isDataPercent = { };
+    const isDataDate = { };
+    const sideHeadings = { };
 
     const allowedKeys = Object.keys(tableHeadings)
     const tableData = Object.values(leagueUserData).map(dataObj => (
@@ -46,6 +42,8 @@ class LeagueLeaderboard extends React.Component {
                        sideHeadings={sideHeadings}
                        tableHeadings={tableHeadings}
                        isDataSotable={isDataSotable}
+                       isDataPercent={isDataPercent}
+                       isDataInteger={isDataInteger}
                        isDataCurrency={isDataCurrency}
                        initialSort="totalEquity"
                        ranked={true} />
