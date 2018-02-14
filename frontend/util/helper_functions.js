@@ -8,13 +8,17 @@ export const stringToInt = string => (
 
 export const numAbbr = number => {
   if (Math.abs(number / 1.0e+12) >= 1) {
-    return (number / 1.0e+12).toLocaleString() + " T"
+    return (number / 1.0e+12).toLocaleString() + " T";
   } else if (Math.abs(number / 1.0e+9) >= 1) {
-      return (number / 1.0e+9).toLocaleString() + " B"
+      return (number / 1.0e+9).toLocaleString() + " B";
   } else if (Math.abs(number / 1.0e+6) >= 1) {
-      return (number / 1.0e+6).toLocaleString() + " M"
+      return (number / 1.0e+6).toLocaleString() + " M";
+  } else if (Math.abs(number / 1.0e+3) >= 1) {
+      return (number / 1.0e+3).toLocaleString() + " k";
+  } else if (Number.isInteger(number)) {
+      return number;
   } else {
-    return "Data not available"
+    return "Data not available";
   }
 }
 
