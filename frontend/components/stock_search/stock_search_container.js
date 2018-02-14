@@ -11,6 +11,7 @@ import StockSearch from './stock_search';
 const mapStateToProps = state => ({
   currentUserData: getUserLeagueData(state, state.session.currentUser),
   isRemoteLoading: state.ui.loading.remoteStockLoading,
+  isPeerLoading: state.ui.loading.remotePeersLoading,
   isRailsUserLoading: state.ui.loading.railsUserLoading,
   remoteStockData: state.ui.remoteStocks.remoteStockData
 });
