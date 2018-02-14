@@ -22,6 +22,10 @@ export const numAbbr = number => {
   }
 }
 
+export const numToPercent = num => (
+  parseFloat(num * 100).toFixed(2)+"%"
+)
+
 const toEST = timestamp => (
   timestamp  - (7 * 60 * 60 * 1000)
 );
