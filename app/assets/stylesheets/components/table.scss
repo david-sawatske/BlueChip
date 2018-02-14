@@ -21,6 +21,10 @@ table {
     .ranking {
       pointer-events: none;
     }
+
+    a {
+      display: ruby;
+    }
   }
 
   tbody {
@@ -46,6 +50,10 @@ table {
 
     .logo:hover {
       cursor: pointer;
+    }
+
+    td {
+      text-align: center;
     }
   }
 }
