@@ -20,9 +20,10 @@ class StockIndex extends React.Component {
 
   componentWillMount() {
     const { ownedTickers } = this.props;
+    const additionalDataTypes = 'financials,earnings,relevant,';
 
     if (ownedTickers) {
-      this.props.requestStockSearch(ownedTickers)
+      this.props.requestStockSearch(ownedTickers, '1d', additionalDataTypes)
     }
   }
 
