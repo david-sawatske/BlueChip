@@ -39,29 +39,29 @@ class EarningsTable extends React.Component {
 
     return (
     <div className ="earnings-table">
-        <table>
-          <thead className="earn-head">
-            <tr>
-              { topHeadings.map(head => (
-                <th>{ head }</th>
+      <table>
+        <thead className="earn-head">
+          <tr>
+            { topHeadings.map((head, idx) => (
+              <th key={idx}>{ head }</th>
+            )) }
+          </tr>
+        </thead>
+
+        <tbody className="earn-body">
+          { Object.keys(earnData).map((earnKey, idx) => (
+            <tr key={idx}>
+              <td className="side-head">
+                { earnKey }
+              </td>
+              { earnData[earnKey].map((datum, idx) => (
+                <td key={idx}>{ datum }</td>
               )) }
             </tr>
-          </thead>
-
-          <tbody className="earn-body">
-            { Object.keys(earnData).map(earnKey => (
-              <tr>
-                <td className="side-head">
-                  { earnKey }
-                </td>
-                { earnData[earnKey].map(datum => (
-                  <td>{ datum }</td>
-                )) }
-              </tr>
-            )) }
-          </tbody>
-        </table>
-      </div>
+          )) }
+        </tbody>
+      </table>
+    </div>
     )
   }
 };
