@@ -4,7 +4,7 @@ import moment from 'moment';
 import SortableHeader from './table_header';
 
 import { merge } from 'lodash';
-import { numberToCurrency } from '../../util/helper_functions'
+import { numberToCurrency, numAbbr, numToPercent } from '../../util/helper_functions'
 
 class SortableTable extends React.Component {
   constructor(props) {
@@ -37,20 +37,27 @@ class SortableTable extends React.Component {
   }
 
   renderRows(dataObj, index) {
-    const rankings = (this.props.ranked) ? <td className="index">{ index + 1 }</td>
-                                             :
-                                           null;
+    const { isDataDate, sideHeadings, isDataPercent, isDataInteger,
+            isDataCurrency, initialSort, ranked } = this.props
+
+    const rankings = (ranked) ? <td className="index">{ index + 1 }</td>
+                                  :
+                                null;
 
     return (
       <tr key={index}>
         { rankings }
         {Object.keys(dataObj).map((attribute, idx) => {
-          if (this.props.isDataCurrency[attribute]) {
+          if (isDataCurrency[attribute]) {
             return <td key={idx}>{numberToCurrency(dataObj[attribute])}</td>
-          } else if (this.props.isDataDate[attribute]) {
+          } else if (isDataDate[attribute]) {
             return <td key={idx}>{moment(dataObj[attribute]).format('L')}</td>
-          } else if (this.props.sideHeadings[attribute]) {
-            return <th key={idx}>{this.props.sideHeadings[attribute]}</th>
+          } else if (isDataInteger[attribute]) {
+            return <td key={idx}>{numAbbr(dataObj[attribute])}</td>
+          } else if (isDataPercent[attribute]) {
+            return <td key={idx}>{numToPercent(dataObj[attribute])}</td>
+          } else if (sideHeadings[attribute]) {
+            return <th key={idx}>{sideHeadings[attribute]}</th>
           } else {
             return <td key={idx}>{dataObj[attribute]}</td>
           }
