@@ -13,37 +13,65 @@ class StockIndex extends React.Component {
     super(props);
 
     this.state = { showTable: true,
+                   peersLoaded: false,
                    clickedTicker: '' }
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
-    const { ownedTickers } = this.props;
-    const additionalDataTypes = 'financials,earnings,relevant,';
+    const { ownedTickers, requestStockSearch, additionalDataTypes } = this.props;
+
 
     if (ownedTickers) {
-      this.props.requestStockSearch(ownedTickers, '1d', additionalDataTypes)
+      requestStockSearch(ownedTickers, '1d', additionalDataTypes)
     }
   }
 
   handleClick(quote, event) {
     event.preventDefault();
+    const { remoteStockData, requestStockPeers } = this.props;
 
-    this.setState({ clickedTicker: quote.symbol,
-                    showTable: false })
+    this.setState({ clickedTicker: quote.symbol,  showTable: false });
+
+    const peerStr = remoteStockData[quote.symbol]
+                                   ['relevant']
+                                   ['symbols']
+                                   .toString()
+
+    requestStockPeers(peerStr).then(val => {
+      this.setState({ peersLoaded: true })
+    })
   }
 
   closeStockShow(event) {
     event.preventDefault();
 
-    this.setState({ clickedTicker: '',
-                    showTable: true })
+    const { ownedTickers } = this.props;
+    const { additionalDataTypes, requestStockSearch } = this.props;
+
+    if (ownedTickers) {
+      requestStockSearch(ownedTickers, '1d', additionalDataTypes)
+    }
+
+    this.setState({ clickedTicker: '', showTable: true })
   }
 
   render() {
     const { remoteStockData, transactionData, showModal, hideModal,
-            isRemoteStockLoading, currentUser, investedByTicker } = this.props;
+            isRemoteStockLoading, investedByTicker } = this.props;
+    const { clickedTicker, showTable, peersLoaded } = this.state;
+
+    const peerData = [];
+    if (remoteStockData[clickedTicker]) {
+      const peerTkrArr = remoteStockData[clickedTicker]
+                                        ['relevant']
+                                        ['symbols']
+
+      peerTkrArr.map(tkr => {
+        peerData.push(remoteStockData[tkr])
+      })
+    }
 
     let TableComponent
     if ( isRemoteStockLoading ) {
@@ -62,7 +90,7 @@ class StockIndex extends React.Component {
                          alt='no-transacitons'/>
                        </div>
 
-    } else if (Object.keys(remoteStockData) != 0 && this.state.showTable) {
+    } else if (Object.keys(remoteStockData) != 0 && showTable) {
       const tableHeadings = { 'companyName': 'Company',
                               'symbol': 'Symbol',
                               'latestPrice': 'Current Price',
@@ -117,14 +145,15 @@ class StockIndex extends React.Component {
     }
 
     let StockShowComponent
-    if (this.state.clickedTicker) {
-      const tkr = this.state.clickedTicker;
+    if (clickedTicker && peersLoaded) {
+      const tkr = clickedTicker;
       StockShowComponent = <div>
                              <button onClick={ (e) => this.closeStockShow(e) }>
                                Return to Transactions
                              </button>
                              <StockShow remoteStockData={remoteStockData[tkr]}
                                         transactionData={transactionData[tkr]}
+                                        peerData={peerData}
                                         showModal={showModal}
                                         hideModal={hideModal} />
                            </div>
