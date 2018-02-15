@@ -6,8 +6,8 @@ CSS Grid layout for modern browsers:
 @supports (grid-area: auto) {
 	@media screen and (min-width: 768px) {
 		.stock-show {
-			width: auto;
-			height: 100vh;
+			width: 100vw;
+			height: 80vh;
 
 			display: grid;
 			grid-template-columns: auto;
@@ -17,6 +17,7 @@ CSS Grid layout for modern browsers:
 			background-color: $transparent-white;
 
 			.stock-data {
+				max-width: 75vw;
 				grid-column: auto;
 				grid-row: auto;
 				margin-top: 1%;
@@ -27,7 +28,7 @@ CSS Grid layout for modern browsers:
 														 "mid mid mid mid"
 														 "news news news news";
 				grid-template-columns: repeat(4, 25%);
-				grid-gap: 1%;
+				grid-gap: 2%;
 
 				.stock-header {
 					grid-area: head;
@@ -205,10 +206,10 @@ CSS Grid layout for modern browsers:
 
 					.chart-container {
 						grid-area: chart;
-
 						display: inherit;
-											grid-template-columns: auto;
-											grid-template-rows: auto;
+
+						grid-template-columns: auto;
+						grid-template-rows: auto;
 
 						.button {
 							grid-column: 1;

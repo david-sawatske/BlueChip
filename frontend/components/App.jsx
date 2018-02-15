@@ -12,22 +12,20 @@ import Loader from './shared/loader';
 
 const App = () => (
   <div className="container">
-    <header className="header">
+    <nav className="header">
       <Masthead />
-    </header>
+    </nav>
 
-    <Switch className="body">
-      <Route exact path="/leagues" component={ LeagueIndex }/>
-      <Route path="/stocks/search" component={ StockSearch }/>
-      <Route path="/leagues/new" component={ LeagueForm }/>
-      <Route path="/users/:userId" component={ UserShow }/>
-      <Route exact path="/" component={ HomePage } />
-      <Route  path="/loader" component={ Loader } />
-    </Switch>
-
-    <footer className="footer">
-      <h1>footer</h1>
-    </footer>
+    <section className="body">
+      <Switch>
+        <Route exact path="/leagues" component={ LeagueIndex }/>
+        <Route path="/stocks/search" component={ StockSearch }/>
+        <Route path="/leagues/new" component={ LeagueForm }/>
+        <Route path="/users/:userId" component={ UserShow }/>
+        <Route exact path="/" component={ HomePage } />
+        <Route  path="/loader" component={ Loader } />
+      </Switch>
+    </section>
   </div>
 );
 

@@ -7,7 +7,8 @@ CSS Grid layout for modern browsers:
 	@media screen and (min-width: 768px) {
 		.home {
 			display: grid;
-			height:100vh;
+			height: 80vh;
+			width: 100vw;
 
 			grid-template-columns: 30% 5% auto 5%;
 			grid-template-rows: 5% 10% auto;

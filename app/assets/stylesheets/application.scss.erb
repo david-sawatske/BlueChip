@@ -58,36 +58,29 @@ CSS Grid layout for modern browsers:
     .container {
 			background: url('<%= asset_path 'home-bg.jpg' %>');
 			background-size: cover;
-		  height: 110vh;
+		  height: 95vh;
+		  width: 100vw;
 			overflow: scroll;
 
-      grid-template-areas:
-      "header"
-      "body"
-			"footer";
+			display: grid;
+      grid-template-rows: 1fr 4fr;
 		}
 
 		.header {
-			grid-area: header;
+			grid-row: 1;
 			background-color: white;
 			opacity: .9;
+			position: fixed;
+			top: 0;
+
+			width: 100vw;
 		}
 
 		.body {
-			grid-area: body;
-		}
-
-		.footer {
-			grid-area: footer;
-			color: white;
-			background-color: black;
-			opacity: .9;
-			position: absolute;
-			width: 100%;
+			grid-row: 2;
 		}
   }
 }
-
 
 /****************************
 *     BUTTONS
