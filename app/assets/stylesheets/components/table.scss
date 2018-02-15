@@ -6,7 +6,7 @@ table {
   width: auto;
 
   th, td {
-    padding: 15px;
+    padding: 10px;
   }
 
   thead {
@@ -30,6 +30,18 @@ table {
   tbody {
     tr {
       background-color: $pale-green;
+      td:first-of-type {
+        font-style: italic;
+        font-weight: bold;
+        text-align: left;
+        font-family: Quattrocento;
+      }
+
+      td:not(first-of-type) {
+        font-family: Martel;
+        color: $grey;
+        font-size: 90%;
+      }
     }
 
     tr:nth-child(even) {
