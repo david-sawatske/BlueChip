@@ -36,12 +36,12 @@ class PeerData extends React.Component {
 
     const allowedKeys = Object.keys(tableHeadings)
     const tableData = Object.values(peerData).map(dataObj => (
-       filterObject(dataObj.quote, allowedKeys))
-  )
+                              filterObject(dataObj.quote, allowedKeys)))
+                            .slice(0, 4)
 
     return (
       <div className="peer-data">
-        <h1>Peers</h1>
+        <h2>Peer Data</h2>
         <SortableTable dataArr={tableData}
                        isDataDate={isDataDate}
                        sideHeadings={sideHeadings}
