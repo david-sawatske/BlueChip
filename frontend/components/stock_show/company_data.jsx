@@ -1,20 +1,38 @@
 import React from 'react';
 
-import { numAbbr } from '../../util/helper_functions'
+import { camelToTitle } from '../../util/helper_functions'
 
-const CompanyData = ({ company, float, employees }) => (
-  <div className ="company-data">
-    <h3>Company Data</h3>
-    <div className='data'>
-      <p>{ company.description }</p>
-      <p>Exchange: { company.exchange }</p>
-      <p>Number of Employees: ~{ Math.floor(employees) }</p>
-      <p>Float: { numAbbr(float) }</p>
-      <p>Industry: { company.industry }</p>
-      <p>Sector: { company.sector }</p>
-      <p>Website: { <a href={company.website }>{ company.website }</a>}</p>
-    </div>
-  </div>
-);
+class CompanyData extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  renderRows(dataObj) {
+    return Object.keys(dataObj).map((dataKey, idx) => (
+      <tr key={dataKey}>
+        <td className="side-head">{camelToTitle(dataKey)}</td>
+        <td>{dataObj[dataKey]}</td>
+      </tr> )
+    )
+  }
+
+  render() {
+    const { description, website, tableData } = this.props.companyData;
+
+    return (
+      <div className ="company-data">
+        <h2>Company Data</h2>
+        <p>{ description }</p>
+        <table>
+          <tbody>
+            { this.renderRows(tableData) }
+          </tbody>
+        </table>
+
+        <p>Website: {<a href={website}>{ website }</a>}</p>
+      </div>
+    );
+  }
+}
 
 export default CompanyData;

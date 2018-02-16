@@ -1,13 +1,17 @@
 import React from 'react';
 
-import StockSummary from './stock_summary';
-import StockHeader from './stock_header';
-import CompanyData from './company_data';
+import PeerData from './peer_data';
 import StockChart from './stock_chart';
+import CompanyData from './company_data';
+import StockHeader from './stock_header';
+import StockSummary from './stock_summary';
 import StockNews from './stock_news_index';
 import EarningsTable from './earnings_table';
+import FinancialsTable from './financials_table';
 import UserTransactions from './user_transaction_index';
 import ModalRoot from  '../modal/modal_root_container';
+
+import { numAbbr } from '../../util/helper_functions'
 
 class StockShow extends React.Component {
   constructor(props) {
@@ -16,7 +20,7 @@ class StockShow extends React.Component {
 
   render() {
     const { remoteStockData, interval, showModal, hideModal,
-            transactionData } = this.props;
+            transactionData, peerData } = this.props;
     const transactArray = (transactionData) ? Object.values(transactionData)
                                                :
                                               [];
@@ -31,15 +35,22 @@ class StockShow extends React.Component {
       const { quote, chart, logo, company, stats, news,
               earnings, financials } = remoteStockData;
       const { float, revenuePerEmployee, revenue } = stats;
-
-      const employees = ( revenue / revenuePerEmployee )
+      const companyData = {
+              description: company.description,
+              website: company.website,
+              tableData: { float: numAbbr(float),
+                           exchange: company.exchange,
+                           sector: company.sector,
+                           industry: company.industry,
+                           numberOfEmployees: ( revenue / revenuePerEmployee )}
+            }
 
       ShowComponent =
         <div className="stock-data">
           <StockHeader quote={quote}
                        logo={logo} />
 
-          <div className="side-data">
+          <div className="transaction-data">
             { TransactionComponent }
 
             <button className="transaction-button" onClick={ () =>
@@ -48,22 +59,22 @@ class StockShow extends React.Component {
             </button>
           </div>
 
-          <CompanyData company={company}
-                       float={float}
-                       employees={employees}/>
+          <CompanyData companyData={companyData} />
 
-          <div className="mid-data">
-            <StockSummary quote={quote} />
+          <PeerData peerData={peerData} />
 
-            <StockChart chart={chart}
-                        interval={interval}
-                        companyName={quote.companyName}/>
-          </div>
+          <StockSummary quote={quote} />
+
+          <StockChart chart={chart}
+                      interval={interval}
+                      companyName={quote.companyName}/>
 
           <StockNews news={news}
                      companyName={quote.companyName}/>
 
           <EarningsTable earnings={earnings.earnings} />
+
+          <FinancialsTable financials={financials.financials} />
 
           <ModalRoot quote={quote}
                      logo={logo} />
