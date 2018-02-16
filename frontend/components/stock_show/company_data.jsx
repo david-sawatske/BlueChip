@@ -29,7 +29,7 @@ class CompanyData extends React.Component {
           </tbody>
         </table>
 
-        <p>Website: {<a href={website}>{ website }</a>}</p>
+        <div>Website: {<a href={website}>{ website }</a>}</div>
       </div>
     );
   }
