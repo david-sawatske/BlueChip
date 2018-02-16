@@ -12,7 +12,7 @@ class UserTransactions extends React.Component {
 
   render() {
     const { transactData } = this.props;
-
+console.log(transactionData);
     const tableHeadings = { 'purchaseDay': 'Date',
                             'sharePrice': 'Price',
                             'shareQuant': 'Quantitiy',
