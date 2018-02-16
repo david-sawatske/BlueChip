@@ -35,6 +35,7 @@ class StockShow extends React.Component {
       const { quote, chart, logo, company, stats, news,
               earnings, financials } = remoteStockData;
       const { float, revenuePerEmployee, revenue } = stats;
+
       const companyData = {
               description: company.description,
               website: company.website,
@@ -42,7 +43,8 @@ class StockShow extends React.Component {
                            exchange: company.exchange,
                            sector: company.sector,
                            industry: company.industry,
-                           numberOfEmployees: ( revenue / revenuePerEmployee )}
+                           sharesOutstanding: numAbbr(stats.sharesOutstanding),
+                           numberOfEmployees: ( numAbbr(revenue / revenuePerEmployee) )}
             }
 
       ShowComponent =
@@ -50,29 +52,33 @@ class StockShow extends React.Component {
           <StockHeader quote={quote}
                        logo={logo} />
 
-          <div className="transaction-data">
-            { TransactionComponent }
-
-            <button className="transaction-button" onClick={ () =>
-              showModal('transaction', { modalOpen: true }) }>
-              Buy/Sell this stock
-            </button>
-          </div>
-
           <CompanyData companyData={companyData} />
 
           <PeerData peerData={peerData} />
 
-          <StockSummary quote={quote} />
+          <div className="summary-transaction">
+            <StockSummary quote={quote} />
 
-          <StockChart chart={chart}
-                      interval={interval}
-                      companyName={quote.companyName}/>
+            <div className="transaction-data">
+              { TransactionComponent }
+
+              <button className="transaction-button" onClick={ () =>
+                showModal('transaction', { modalOpen: true }) }>
+                Buy/Sell this stock
+              </button>
+            </div>
+          </div>
+
+          <div className="chart-earnings">
+            <StockChart chart={chart}
+                        interval={interval}
+                        companyName={quote.companyName}/>
+
+            <EarningsTable earnings={earnings.earnings} />
+          </div>
 
           <StockNews news={news}
                      companyName={quote.companyName}/>
-
-          <EarningsTable earnings={earnings.earnings} />
 
           <FinancialsTable financials={financials.financials} />
 
