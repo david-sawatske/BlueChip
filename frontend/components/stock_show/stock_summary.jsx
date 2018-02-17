@@ -1,43 +1,41 @@
 import React from 'react';
 
-import { numAbbr, numberToCurrency } from '../../util/helper_functions'
+import { numAbbr, numberToCurrency, camelToTitle,
+         numToPercent } from '../../util/helper_functions'
 
-const StockSummary = ({ quote }) => (
-  <div className="stock-summary">
-    <h3>Stock Summary</h3>
-    <table>
-      <tbody>
-        <tr>
-          <td>Avg Total Volume</td>
-          <td>{numAbbr(quote.avgTotalVolume)}</td>
-        </tr>
-        <tr>
-          <td>Latest Volume</td>
-          <td>{numAbbr(quote.latestVolume)}</td>
-        </tr>
-        <tr>
-          <td>P/E Ratio</td>
-          <td>{quote.peRatio}</td>
-        </tr>
-        <tr>
-          <td>Market Cap</td>
-          <td>{numAbbr(quote.marketCap)}</td>
-        </tr>
-        <tr>
-          <td>52 Week High</td>
-          <td>{numberToCurrency(quote.week52High)}</td>
-        </tr>
-        <tr>
-          <td>52 Week Low</td>
-          <td>{numberToCurrency(quote.week52Low)}</td>
-        </tr>
-        <tr>
-          <td>YTD Change</td>
-          <td>{(quote.ytdChange * 100).toFixed(2)}%</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-);
+class StockSummary extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const quote = this.props.quote;
+    const tableData = { ["Ave Total Volume"]: numAbbr(quote.avgTotalVolume),
+                        ["Latest Volume"]: numAbbr(quote.latestVolume),
+                        ["P/E Ratio"]: quote.peRatio,
+                        ["Market Cap"]: numAbbr(quote.marketCap),
+                        ["52 Week High"]: numberToCurrency(quote.week52High),
+                        ["52 Week Low"]: numberToCurrency(quote.week52Low),
+                        ["YTD Change"]: numToPercent(quote.ytdChange) }
+
+    return (
+      <div className="stock-summary">
+        <h2>Stock Summary</h2>
+        <table>
+          <tbody>
+            { Object.keys(tableData).map((sideHead, idx) => {
+              console.log(tableData[sideHead]);
+              return (
+              <tr key={idx}>
+                <td className="side-head">{sideHead}</td>
+                <td>{ tableData[sideHead] }</td>
+              </tr>
+            )}) }
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+}
 
 export default StockSummary;
