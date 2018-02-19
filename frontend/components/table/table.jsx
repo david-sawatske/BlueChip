@@ -36,9 +36,16 @@ class SortableTable extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.dataArr != this.props.dataArr) {
+      this.setState({ dataArr: nextProps.dataArr,
+                      sortedValue: '' })
+    }
+  }
+
   renderRows(dataObj, index) {
     const { isDataDate, sideHeadings, isDataPercent, isDataInteger,
-            isDataCurrency, initialSort, ranked } = this.props
+            isDataCurrency, ranked } = this.props
 
     const rankings = (ranked) ? <td className="index">{ index + 1 }</td>
                                   :
