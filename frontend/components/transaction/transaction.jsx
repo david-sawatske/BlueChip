@@ -109,8 +109,7 @@ class Transaction extends React.Component {
 
     let TransactonInfo
     if (this.state.showLeagueData) {
-      const leagueData = targetUserData[targetUserId]
-                                       ['userLeagueData']
+      const leagueData = targetUserData['userLeagueData']
                                        [this.state.league_id]
       const currStockTransactions = Object.values(leagueData['transactionData']
                                                             [this.state.symbol])
@@ -123,27 +122,17 @@ class Transaction extends React.Component {
 
     let StockData
     if (quote && logo) {
-       StockData =
-       <div>
-         <StockHeader quote={quote}
-                      logo={logo} />
-         <StockSummary quote={quote} />
-       </div>
-
-    } else if (quote) {
-      StockData = <StockSummary quote={quote} />
-    } else if (logo) {
-      StockData = <StockHeader quote={quote}
-                               logo={logo} />
+       StockData = <StockHeader quote={quote}
+                                logo={logo} />
     }
 
     return (
-      <div>
+      <div className="transaction">
         { LeagueChoices }
         { StockData }
         { TransactonInfo }
 
-        <form onSubmit={this.handleSubmit} className="">
+        <form onSubmit={this.handleSubmit} className="transaction-form">
             <label>Share Quantity:
               <input type="number"
                 value={this.state.share_quant}
