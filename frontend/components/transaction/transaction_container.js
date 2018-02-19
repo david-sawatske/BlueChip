@@ -5,12 +5,13 @@ import { postTransaction } from '../../actions/transaction_actions';
 import { requestTargetUserData } from '../../actions/user_actions';
 import { updateCashBalance } from '../../actions/cash_balance_actions';
 
-import { getUserLeagueData } from '../../reducers/selectors'
+import { getUserLeagueData } from '../../reducers/selectors';
 
 import Transaction from './transaction';
 
 const mapStateToProps = state => ({
-  targetUserData: getUserLeagueData(state, state.session.currentUser.id)
+  targetUserData: getUserLeagueData(state, state.session.currentUser),
+  currentUser: state.session.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({

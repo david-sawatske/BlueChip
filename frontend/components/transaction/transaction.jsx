@@ -92,21 +92,19 @@ class Transaction extends React.Component {
   }
 
   render() {
-    const { targetUserData, quote, logo } = this.props;
-    const targetUserId = Object.keys(targetUserData)[0];
+    const { targetUserData, currentUser, quote, logo } = this.props;
+    const targetUserId = currentUser.id;
 
     const LeagueChoices = [];
-    Object.values(targetUserData).map( data => {
-      Object.values(data.userLeagueData).map( leagueData => {
-        LeagueChoices.push(
-          <button className="button"
-                  onClick={ (e) => this.setLeagueStateData(leagueData, e) }
-                  key={leagueData.leagueId}>
+    Object.values(targetUserData.userLeagueData).map(leagueData => {
+      LeagueChoices.push(
+        <button className="button"
+                onClick={ (e) => this.setLeagueStateData(leagueData, e) }
+                key={leagueData.leagueId}>
 
-              { leagueData.name }
-          </button>
-        )
-      })
+            { leagueData.name }
+        </button>
+      )
     })
 
     let TransactonInfo
