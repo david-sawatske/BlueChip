@@ -12,7 +12,6 @@ class UserTransactions extends React.Component {
 
   render() {
     const { transactData } = this.props;
-console.log(transactionData);
     const tableHeadings = { 'purchaseDay': 'Date',
                             'sharePrice': 'Price',
                             'shareQuant': 'Quantitiy',
@@ -24,9 +23,10 @@ console.log(transactionData);
                             'league': true }
 
     const isDataCurrency = { 'sharePrice': true };
+    const isDataDate = { 'purchaseDay': true };
+
     const isDataPercent = { };
     const isDataInteger = { };
-    const isDataDate = { };
     const sideHeadings = { };
 
     const allowedKeys = Object.keys(tableHeadings)
