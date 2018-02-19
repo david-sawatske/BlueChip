@@ -76,13 +76,19 @@ class Transaction extends React.Component {
     this.props.requestTargetUserData(this.state.user_id)
   }
 
-  setLeagueStateData(leagueData, event) {
+  setLeagueStateData(event) {
     event.preventDefault();
+    const { userLeagueData } = this.props.targetUserData;
+    const leagueData = Object.values(userLeagueData)[event.target.value];
+
+    console.log(event.target.value);
+    console.log(leagueData);
 
     this.setState({ league_id: leagueData['leagueId'],
                     cashBalance: leagueData['balance'],
                     balanceId: leagueData['balanceId'],
                     showLeagueData: true })
+
   }
 
   update(field) {
@@ -96,14 +102,11 @@ class Transaction extends React.Component {
     const targetUserId = currentUser.id;
 
     const LeagueChoices = [];
-    Object.values(targetUserData.userLeagueData).map(leagueData => {
+    Object.values(targetUserData.userLeagueData).map((leagueData, idx) => {
       LeagueChoices.push(
-        <button className="button"
-                onClick={ (e) => this.setLeagueStateData(leagueData, e) }
-                key={leagueData.leagueId}>
-
-            { leagueData.name }
-        </button>
+        <option value={ idx } key={leagueData.name}>
+          { leagueData.name }
+        </option>
       )
     })
 
@@ -128,9 +131,12 @@ class Transaction extends React.Component {
 
     return (
       <div className="transaction">
-        { LeagueChoices }
         { StockData }
         { TransactonInfo }
+
+        <select onChange={ (e) => this.setLeagueStateData(e) }>
+          { LeagueChoices }
+        </select>
 
         <form onSubmit={this.handleSubmit} className="transaction-form">
             <label>Share Quantity:
