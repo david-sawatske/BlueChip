@@ -13,9 +13,10 @@ class Transaction extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { targetUserId: Object.keys(this.props.targetUserData)[0] };
+    this.state = { };
 
     this.setLeagueStateData = this.setLeagueStateData.bind(this);
+    this.setLeagueClicked = this.setLeagueClicked.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
   }
@@ -26,12 +27,14 @@ class Transaction extends React.Component {
                        share_quant: "",
                        share_price: quote.latestPrice,
                        purchase_day: new Date(),
-                       user_id: this.state.targetUserId,
+                       user_id: this.props.currentUser.id,
                        league_id: '',
                        cashBalance: '',
                        balanceId: '',
                        showLeagueData: false,
-                       transactionType: 'buy'
+                       transactionType: 'buy',
+                       leagueClicked: false,
+                       leagueBtnVal: "Select League"
                      };
 
     this.setState(newState)
@@ -85,7 +88,14 @@ class Transaction extends React.Component {
     this.setState({ league_id: leagueData['leagueId'],
                     cashBalance: leagueData['balance'],
                     balanceId: leagueData['balanceId'],
-                    showLeagueData: true })
+                    showLeagueData: true,
+                    leagueClicked: false,
+                    leagueBtnVal: leagueData.name
+                   })
+  }
+
+  setLeagueClicked() {
+    this.setState({ leagueClicked: true })
   }
 
   update(field) {
@@ -119,13 +129,24 @@ class Transaction extends React.Component {
                                 logo={logo} />
     }
 
+    let LeagueButtons
+    if (this.state.leagueClicked === true) {
+
+      LeagueButtons = <LeagueSelection leagueChoices={leagueChoices}
+                                       setLeagueStateData={this.setLeagueStateData} />
+    } else {
+      LeagueButtons = <button onClick={ this.setLeagueClicked }>
+                        { this.state.leagueBtnVal }
+                      </button>
+    }
+
+
     return (
       <div className="transaction">
         { StockData }
         { TransactonInfo }
 
-        <LeagueSelection leagueChoices={leagueChoices}
-                         setLeagueStateData={this.setLeagueStateData} />
+        { LeagueButtons }
 
         <form onSubmit={this.handleSubmit} className="transaction-form">
             <label>Share Quantity:
