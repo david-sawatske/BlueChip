@@ -23,14 +23,12 @@ class StockSummary extends React.Component {
         <h2>Stock Summary</h2>
         <table>
           <tbody>
-            { Object.keys(tableData).map((sideHead, idx) => {
-              console.log(tableData[sideHead]);
-              return (
+            { Object.keys(tableData).map((sideHead, idx) => (
               <tr key={idx}>
                 <td className="side-head">{sideHead}</td>
                 <td>{ tableData[sideHead] }</td>
               </tr>
-            )}) }
+            ))}
           </tbody>
         </table>
       </div>
