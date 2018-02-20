@@ -4,13 +4,16 @@ import StockHeader from '../stock_show/stock_header';
 import TransactionData from './transaction_data'
 import StockSummary from '../stock_show/stock_summary';
 
+
+import LeagueSelection from './league-selection';
+
 import { stringToInt } from '../../util/helper_functions'
 
 class Transaction extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { targetUserId: this.props.currentUser.id };
+    this.state = { targetUserId: Object.keys(this.props.targetUserData)[0] };
 
     this.setLeagueStateData = this.setLeagueStateData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -76,16 +79,13 @@ class Transaction extends React.Component {
     this.props.requestTargetUserData(this.state.user_id)
   }
 
-  setLeagueStateData(event) {
+  setLeagueStateData(leagueData, event) {
     event.preventDefault();
-    const { userLeagueData } = this.props.targetUserData;
-    const leagueData = Object.values(userLeagueData)[event.target.value];
 
     this.setState({ league_id: leagueData['leagueId'],
                     cashBalance: leagueData['balance'],
                     balanceId: leagueData['balanceId'],
                     showLeagueData: true })
-
   }
 
   update(field) {
@@ -98,14 +98,7 @@ class Transaction extends React.Component {
     const { targetUserData, currentUser, quote, logo } = this.props;
     const targetUserId = currentUser.id;
 
-    const LeagueChoices = [<option>Select League</option>];
-    Object.values(targetUserData.userLeagueData).map((leagueData, idx) => {
-      LeagueChoices.push(
-        <option value={ idx } key={ idx }>
-          { leagueData.name }
-        </option>
-      )
-    })
+    const leagueChoices = Object.values(targetUserData.userLeagueData)
 
     let TransactonInfo
     if (this.state.showLeagueData) {
@@ -131,10 +124,8 @@ class Transaction extends React.Component {
         { StockData }
         { TransactonInfo }
 
-        <select onChange={ (e) => this.setLeagueStateData(e) }
-                className="league-selector">
-          { LeagueChoices }
-        </select>
+        <LeagueSelection leagueChoices={leagueChoices}
+                         setLeagueStateData={this.setLeagueStateData} />
 
         <form onSubmit={this.handleSubmit} className="transaction-form">
             <label>Share Quantity:
