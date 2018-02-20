@@ -10,7 +10,7 @@ class Transaction extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { targetUserId: Object.keys(this.props.targetUserData)[0] };
+    this.state = { targetUserId: this.props.currentUser.id };
 
     this.setLeagueStateData = this.setLeagueStateData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -81,9 +81,6 @@ class Transaction extends React.Component {
     const { userLeagueData } = this.props.targetUserData;
     const leagueData = Object.values(userLeagueData)[event.target.value];
 
-    console.log(event.target.value);
-    console.log(leagueData);
-
     this.setState({ league_id: leagueData['leagueId'],
                     cashBalance: leagueData['balance'],
                     balanceId: leagueData['balanceId'],
@@ -101,10 +98,10 @@ class Transaction extends React.Component {
     const { targetUserData, currentUser, quote, logo } = this.props;
     const targetUserId = currentUser.id;
 
-    const LeagueChoices = [];
+    const LeagueChoices = [<option>Select League</option>];
     Object.values(targetUserData.userLeagueData).map((leagueData, idx) => {
       LeagueChoices.push(
-        <option value={ idx } key={leagueData.name}>
+        <option value={ idx } key={ idx }>
           { leagueData.name }
         </option>
       )
@@ -134,7 +131,8 @@ class Transaction extends React.Component {
         { StockData }
         { TransactonInfo }
 
-        <select onChange={ (e) => this.setLeagueStateData(e) }>
+        <select onChange={ (e) => this.setLeagueStateData(e) }
+                className="league-selector">
           { LeagueChoices }
         </select>
 
