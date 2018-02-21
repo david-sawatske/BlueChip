@@ -1,11 +1,9 @@
 import React from 'react';
 
-import StockHeader from '../stock_show/stock_header';
 import TransactionData from './transaction_data'
+import LeagueSelection from './league_selection';
+import StockHeader from '../stock_show/stock_header';
 import StockSummary from '../stock_show/stock_summary';
-
-
-import LeagueSelection from './league-selection';
 
 import { stringToInt } from '../../util/helper_functions'
 
@@ -131,37 +129,44 @@ class Transaction extends React.Component {
 
     let LeagueButtons
     if (this.state.leagueClicked === true) {
-
       LeagueButtons = <LeagueSelection leagueChoices={leagueChoices}
+                                       selectedLeague={this.state.leagueBtnVal}
                                        setLeagueStateData={this.setLeagueStateData} />
+    } else if ( this.state.leagueBtnVal === "Select League" ){
+      LeagueButtons = <button onClick={ this.setLeagueClicked }
+                              className="initial-league-button">
+                        { this.state.leagueBtnVal }
+                      </button>
     } else {
-      LeagueButtons = <button onClick={ this.setLeagueClicked }>
+      LeagueButtons = <button onClick={ this.setLeagueClicked }
+                              className="tran-league-button">
                         { this.state.leagueBtnVal }
                       </button>
     }
-
 
     return (
       <div className="transaction">
         { StockData }
         { TransactonInfo }
 
-        { LeagueButtons }
+        <div className="league-selector">
+          { LeagueButtons }
+        </div>
 
         <form onSubmit={this.handleSubmit} className="transaction-form">
-            <label>Share Quantity:
-              <input type="number"
-                value={this.state.share_quant}
-                onChange={this.update('share_quant')}
-                className=""
-              />
-            </label>
-            <label>Transaction Type:
-              <select onChange={this.update('transactionType')}>
-                <option value="buy">Buy</option>
-                <option value="sell">Sell</option>
-              </select>
-            </label>
+              <input type="text"
+                     placeholder="Share Quantitiy"
+                     value={this.state.share_quant}
+                     onChange={this.update('share_quant')} />
+
+              <button className="tran-type">
+                { this.state.transactionType }
+              </button>
+              <div>/</div>
+              <button className="tran-type">
+                { this.state.transactionType }
+              </button>
+
           <input type="submit" value="Submit Transacton" />
         </form>
       </div>
