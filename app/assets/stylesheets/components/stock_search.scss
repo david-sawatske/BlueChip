@@ -9,27 +9,8 @@ CSS Grid layout for modern browsers:
 			display: grid;
 			height: 75vh;
 
-			grid-template-columns: auto auto;
+			grid-template-columns: 1fr 19fr;
 			grid-template-rows: auto;
-
-
-			.stock-show {
-				.stock-data {
-					width: 90%;
-					grid-template-columns: repeat(4, 25%);
-					grid-template-rows: 10% 15% 15% 35%;
-
-					.transaction-button {
-						height: 75%;
-						width: 25%;
-						background-color: $dark-blue;
-				    color: white;
-
-				    border-radius: 12px;
-						border: none;
-					}
-				}
-			}
 		}
 
 		.initial-search {
@@ -133,7 +114,7 @@ CSS Grid layout for modern browsers:
 		}
 
 		.side-search {
-			grid-column: auto;
+			grid-column: 1f;
 			width: auto;
 
 			display: inherit;
@@ -250,6 +231,7 @@ CSS Grid layout for modern browsers:
 
 		.hide-search {
 			h1.searched {
+				grid-column: 1;
 				grid-row: 1;
 
 				color: $blue-grey;
@@ -270,6 +252,14 @@ CSS Grid layout for modern browsers:
 
 			form.intervals {
 				display: none;
+			}
+
+			.stock-show {
+				grid-column: 2;
+				grid-row: auto;
+
+				width: auto;
+				height: 100vh;
 			}
 		}
 	}

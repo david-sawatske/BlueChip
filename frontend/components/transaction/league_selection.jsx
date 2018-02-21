@@ -5,25 +5,32 @@ class LeagueSelection extends Component {
     super(props);
   }
 
+  returnButton(leagueData, className) {
+    return (
+      <button className={className}
+              onClick={ (e) => this.props.setLeagueStateData(leagueData, e) }
+              key={leagueData.leagueId}>
 
+          { leagueData.name }
+      </button>
+);
+  }
 
   render() {
     const { setLeagueStateData, leagueChoices, selectedLeague } = this.props;
 
-    return (
-      <div>
-        { leagueChoices.map(leagueData => {
-          if ( leagueData.name != selectedLeague ) {
-            return (
-              <button className="select-league-button"
-                      onClick={ (e) => setLeagueStateData(leagueData, e) }
-                      key={leagueData.leagueId}>
+    const leagueArr = []
+    leagueChoices.map(leagueData => {
+      if ( leagueData.name === selectedLeague ) {
+        leagueArr.unshift(this.returnButton(leagueData, 'selected-league'))
+      } else {
+        leagueArr.push(this.returnButton(leagueData, 'league-option'))
+      }
+    })
 
-                  { leagueData.name }
-              </button>
-            )
-          }
-        }) }
+    return (
+      <div className="league-selector">
+        { leagueArr }
       </div>
     );
   }

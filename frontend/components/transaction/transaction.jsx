@@ -17,6 +17,9 @@ class Transaction extends React.Component {
     this.setLeagueClicked = this.setLeagueClicked.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
+
+
+    this.toggleTransaction = this.toggleTransaction.bind(this);
   }
 
   componentWillMount() {
@@ -102,6 +105,12 @@ class Transaction extends React.Component {
     });
   }
 
+  toggleTransaction() {
+    const newType = ( this.state.transactionType === "buy" ) ? "sell" : "buy"
+
+    this.setState({ transactionType: newType })
+  }
+
   render() {
     const { targetUserData, currentUser, quote, logo } = this.props;
     const targetUserId = currentUser.id;
@@ -132,45 +141,38 @@ class Transaction extends React.Component {
       LeagueButtons = <LeagueSelection leagueChoices={leagueChoices}
                                        selectedLeague={this.state.leagueBtnVal}
                                        setLeagueStateData={this.setLeagueStateData} />
-    } else if ( this.state.leagueBtnVal === "Select League" ){
-      LeagueButtons = <button onClick={ this.setLeagueClicked }
-                              className="initial-league-button">
-                        { this.state.leagueBtnVal }
-                      </button>
     } else {
-      LeagueButtons = <button onClick={ this.setLeagueClicked }
-                              className="tran-league-button">
-                        { this.state.leagueBtnVal }
-                      </button>
+      LeagueButtons = <div className="league-selector">
+                        <button onClick={ this.setLeagueClicked }
+                                className="selected-league">
+                          { this.state.leagueBtnVal }
+                        </button>
+                      </div>
     }
 
     return (
       <div className="transaction">
         { StockData }
+        { LeagueButtons }
         { TransactonInfo }
 
-        <div className="league-selector">
-          { LeagueButtons }
-        </div>
-
         <form onSubmit={this.handleSubmit} className="transaction-form">
-              <input type="text"
-                     placeholder="Share Quantitiy"
-                     value={this.state.share_quant}
-                     onChange={this.update('share_quant')} />
+          <input type="text"
+                 placeholder="Share Quantitiy"
+                 value={this.state.share_quant}
+                 onChange={this.update('share_quant')} />
+         <label className="switch">
+           <input type="checkbox"
+                  onChange={this.toggleTransaction} />
+           <span className="slider"></span>
+         </label>
 
-              <button className="tran-type">
-                { this.state.transactionType }
-              </button>
-              <div>/</div>
-              <button className="tran-type">
-                { this.state.transactionType }
-              </button>
-
-          <input type="submit" value="Submit Transacton" />
-        </form>
-      </div>
-    );
+        <input type="submit"
+               value={this.state.transactionType}
+               className="button" />
+      </form>
+    </div>
+  );
   }
 }
 
