@@ -2,14 +2,14 @@ import React from 'react';
 
 import UserTransactions from '../stock_show/user_transaction_index';
 
+import { numberToCurrency } from '../../util/helper_functions'
+
 const TransactionData = ({ ...props }) => (
   <div className="transaction-data">
-    <div className="transction-header">
-      <h1>Selected League: { props.leagueName }</h1>
-      <h1>Available Balance: { props.balance }</h1>
+    <div className="transaction-header">
+      <h1>Available Balance: { numberToCurrency(props.balance) }</h1>
     </div>
 
-    <h1>Previous Transactons</h1>
     <UserTransactions transactData={ props.transactData } />
   </div>
 );
