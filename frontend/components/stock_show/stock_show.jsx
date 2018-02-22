@@ -44,7 +44,8 @@ class StockShow extends React.Component {
                            sector: company.sector,
                            industry: company.industry,
                            sharesOutstanding: numAbbr(stats.sharesOutstanding),
-                           numberOfEmployees: ( numAbbr(revenue / revenuePerEmployee) )}
+                           numberOfEmployees: (numAbbr(revenue / revenuePerEmployee))
+              }
             }
 
       ShowComponent =
@@ -59,13 +60,13 @@ class StockShow extends React.Component {
           <div className="summary-transaction">
             <StockSummary quote={quote} />
 
+            <button className="button" onClick={ () =>
+              showModal('transaction', { modalOpen: true }) }>
+              Buy/Sell
+            </button>
+
             <div className="transaction-data">
               { TransactionComponent }
-
-              <button className="transaction-button" onClick={ () =>
-                showModal('transaction', { modalOpen: true }) }>
-                Buy/Sell this stock
-              </button>
             </div>
           </div>
 
