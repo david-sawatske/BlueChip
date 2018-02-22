@@ -7,7 +7,7 @@ import TopNav from './top_nav';
 const MastHead = props => (
   <div className="masthead">
     <Link to="/" className="logo">
-      <img className="logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/v1516212174/logo_vuxq8f.jpg" />
+      <img className="logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
     </Link>
 
     <Link to="/" className="title">
