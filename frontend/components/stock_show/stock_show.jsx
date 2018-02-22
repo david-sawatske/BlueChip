@@ -25,6 +25,11 @@ class StockShow extends React.Component {
                                                :
                                               [];
 
+    const TransactionButton = <button className="button" onClick={ () =>
+                                showModal('transaction', { modalOpen: true }) }>
+                                Buy/Sell
+                              </button>
+
     let TransactionComponent
     if (transactArray.length > 0) {
       TransactionComponent = <UserTransactions transactData={transactArray} />
@@ -50,8 +55,12 @@ class StockShow extends React.Component {
 
       ShowComponent =
         <div className="stock-data">
-          <StockHeader quote={quote}
-                       logo={logo} />
+          <div className="header-container">
+            { TransactionButton }
+
+            <StockHeader quote={quote}
+                         logo={logo} />
+          </div>
 
           <CompanyData companyData={companyData} />
 
@@ -60,10 +69,7 @@ class StockShow extends React.Component {
           <div className="summary-transaction">
             <StockSummary quote={quote} />
 
-            <button className="button" onClick={ () =>
-              showModal('transaction', { modalOpen: true }) }>
-              Buy/Sell
-            </button>
+            { TransactionButton }
 
             <div className="transaction-data">
               { TransactionComponent }
