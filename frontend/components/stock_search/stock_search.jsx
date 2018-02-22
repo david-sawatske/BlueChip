@@ -9,7 +9,7 @@ class StockSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { ticker: "",
+    this.state = { ticker: "AAPL",
                    interval: { ['1d']: "One Day" },
                    searchInitiated: false,
                    prevSearchData: null,
@@ -28,6 +28,19 @@ class StockSearch extends React.Component {
     if (this.props.currentUser) {
       this.props.requestTargetUserData(this.props.currentUser.id)
     }
+
+    /// TEMP ///
+        const addTy = 'financials,earnings,relevant,';
+        const intKey = Object.keys(this.state.interval)[0];
+        this.props.requestStockSearch(this.state.ticker, intKey, addTy)
+          .then(stockData => {
+            const peerStr = this.props.remoteStockData[this.state.ticker]
+                                                      ['relevant']
+                                                      ['symbols']
+                                                      .toString()
+            this.props.requestStockPeers(peerStr);
+          }).then(data => { this.setSearchInitiated() })
+    /// TEMP ///
   }
 
   setSearchInitiated() {
@@ -97,10 +110,10 @@ class StockSearch extends React.Component {
       })
     }
 
-    let transactionData
-    (currentUserTranData) ? this.userTransactionData(currentUserTranData)
-                              :
-                            null;
+    const transactionData = (currentUserTranData) ?
+                              this.userTransactionData(currentUserTranData)
+                                :
+                              { };
 
     const intervals = [ { ['5y']: "Five Years" },
                         { ['2y']:" Two Years" },
@@ -128,7 +141,7 @@ class StockSearch extends React.Component {
     } else if (this.state.prevSearchData) {
       ShowComponent = <StockShow remoteStockData={this.state.prevSearchData}
                                  peerData={this.state.prevPeerData}
-                                 transactData={transactData}
+                                 transactionData={transactData}
                                  showModal={showModal}
                                  hideModal={hideModal}
                                  interval={this.state.interval} />
@@ -182,7 +195,7 @@ class StockSearch extends React.Component {
           </form>
         </div>
 
-        <div className={searchClass}>{ ShowComponent } </div>
+        <div className={searchClass}>{ ShowComponent }</div>
       </div>
     );
   }
