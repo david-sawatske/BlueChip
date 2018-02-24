@@ -6,35 +6,92 @@ CSS Grid layout for modern browsers:
 @supports (grid-area: auto) {
 	@media screen and (min-width: 768px) {
 		.home {
-			display: grid;
 			height: 80vh;
 			width: 100vw;
 
-			grid-template-columns: 1fr 6fr .5fr;
-			grid-template-rows: .5fr 4fr;
-		}
+			padding-top: 10%;
 
-		.home-h1 {
-			grid-column: 2;
-			grid-row: 1;
-			font-size: 300%;
-			color: $dark-blue
+			display: grid;
+			grid-template-columns: 1fr 1fr 6fr .5fr;
+			grid-template-rows: 1fr 6fr;
+
+			.logo {
+				grid-column: 2;
+				grid-row: 1;
+
+				height: auto;
+				width: 50%;
+			}
+
+			.home-h1 {
+				grid-column: 3;
+				grid-row: 1;
+
+				text-align: left;
+				font-size: 300%;
+				color: $dark-blue;
+			}
 		}
 
 		.home-data {
-			height: 90%;
-			grid-column: 2;
+			max-height: 55vh;
+			grid-column: 2/4;
 			grid-row: 2;
 
 			background-color: $background-grey;
 			border-radius: 2% 5%;
+
+			display: inherit;
+			grid-template-columns: auto;
+			grid-template-rows: auto;
+
+			.active-data {
+				max-height: 60vh;
+				grid-column: auto;
+				grid-row: 2;
+				overflow: hidden;
+
+				display: inherit;
+				grid-template-columns: auto;
+				grid-template-rows: auto;
+
+				h2 {
+					grid-column: auto;
+					grid-row: auto;
+				}
+
+ 				.show-sample {
+					grid-column: auto;
+					grid-column: auto;
+
+					height: 60vh;
+
+					display: inherit;
+					grid-template-columns: auto;
+					grid-template-rows: 1fr, 4fr;
+
+					.stock-header {
+						grid-column: 1/2;
+						grid-row: 1/2;
+
+						display: inherit;
+						grid-template-columns: auto;
+						grid-template-rows: auto;
+
+						.logo {
+							height: 10%;
+							width: 10%;
+						}
+
+
+					}
+				}
+			}
 		}
 
 		.sidebar {
 			grid-column: 2;
 			grid-row: 2;
-
-			height: 90%;
 
 			display: inherit;
 			grid-template-columns: 1fr 12fr 1fr;
