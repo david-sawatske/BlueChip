@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import LeagueIndexItem from '../league/league_index_item'
+import StockSummary from '../stock_show/stock_summary';
 import StockHeader from '../stock_show/stock_header';
 import StockChart from '../stock_show/stock_chart';
 import Loader from '../shared/loader';
@@ -80,12 +81,21 @@ class HomePage extends React.Component {
 
     let StockData = <Loader />;
     if (sampleStock) {
+      const { quote, logo } = sampleStock;
+
       StockData = <div className="show-sample">
-                    {/* <StockHeader quote={sampleStock.quote}
-                                 logo={sampleStock.logo} /> */}
-                    {/* <StockChart interval={{ ['1d']: "On e Day" }}
-                                chart={sampleStock.chart}
-                                companyName={sampleStock.quote.companyName} /> */}
+                    <StockHeader quote={quote}
+                                 logo={logo} />
+
+                    <StockSummary quote={quote} />
+
+{/* ROTATING COMPONENTS */}
+
+                    <div className="display-component">
+                      <StockChart interval={{ ['1d']: "On e Day" }}
+                                  chart={sampleStock.chart}
+                                  companyName={sampleStock.quote.companyName} />
+                    </div>
                   </div>
     }
 
@@ -111,14 +121,16 @@ class HomePage extends React.Component {
     switch (this.state.activeComponentIdx) {
       case 0:
         ActiveComponent = <div className="active-data">
-                            <h2> Realistic Stock Trading App </h2>
+                            <h2 className="data-head"> Realistic Stock Trading App </h2>
                           </div>
         break;
       case 1:
         ActiveComponent = <div className="active-data">
-                            <h2>Live Stock Data</h2>
+                            <h2 className="data-head"> Live Stock Data </h2>
                               { StockData }
-                              { listOne }
+
+
+
                           </div>
         break;
       case 2:
@@ -136,12 +148,12 @@ class HomePage extends React.Component {
       <div className="home">
         <h1 className="home-h1">FREE STOCK TRADING FANTASY LEAGUES</h1>
         <img className="logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
-        
+
         <div className="home-data">
           { ActiveComponent }
         </div>
 
-        <aside className="sidebar">
+        {/* <aside className="sidebar">
           <button className="nav-btn" onClick={ (e) =>
               this.handleClick('left', e) }>
               ◀
@@ -150,7 +162,7 @@ class HomePage extends React.Component {
               this.handleClick('right', e) }>
               ▶
           </button>
-        </aside>
+        </aside> */}
       </div>
     )
   }

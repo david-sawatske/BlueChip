@@ -31,93 +31,209 @@ CSS Grid layout for modern browsers:
 				font-size: 300%;
 				color: $dark-blue;
 			}
-		}
 
-		.home-data {
-			max-height: 55vh;
-			grid-column: 2/4;
-			grid-row: 2;
 
-			background-color: $background-grey;
-			border-radius: 2% 5%;
-
-			display: inherit;
-			grid-template-columns: auto;
-			grid-template-rows: auto;
-
-			.active-data {
-				max-height: 60vh;
-				grid-column: auto;
+			.home-data {
+				max-height: 80vh;
+				grid-column: 2/4;
 				grid-row: 2;
-				overflow: hidden;
+
+				background-color: $background-grey;
+				border-radius: 2% 5%;
 
 				display: inherit;
 				grid-template-columns: auto;
 				grid-template-rows: auto;
 
-				h2 {
+				.active-data {
 					grid-column: auto;
-					grid-row: auto;
-				}
-
- 				.show-sample {
-					grid-column: auto;
-					grid-column: auto;
-
-					height: 60vh;
+					grid-row: 1;
 
 					display: inherit;
-					grid-template-columns: auto;
-					grid-template-rows: 1fr, 4fr;
+					grid-template-columns: repeat(4, 1fr);
+					grid-template-rows: .1fr repeat(4, 1fr);
 
-					.stock-header {
-						grid-column: 1/2;
-						grid-row: 1/2;
+					.data-head {
+						grid-column: auto;
+						grid-row: 1;
+
+						text-align: left;
+						font-size: 125%;
+						color: $transparent-white;
+					}
+
+	 				.show-sample {
+						grid-column: 1/5;
+						grid-row: 2;
 
 						display: inherit;
-						grid-template-columns: auto;
+						grid-template-columns: 1fr 4fr;
 						grid-template-rows: auto;
 
-						.logo {
-							height: 10%;
-							width: 10%;
+						.display-component {
+							grid-column: 2/3;
+							grid-row: 3;
 						}
 
+
+						.stock-header {
+							grid-column: 1/3;
+							grid-row: 1/3;
+
+							background-color: $background-green;
+
+							display: inherit;
+							grid-template-columns: repeat(8, 1fr);
+							grid-template-rows: auto;
+
+							.top {
+								grid-column: 1/5;
+								grid-row: 1;
+
+								display: inherit;
+								grid-template-columns: 1fr 9fr;
+								grid-template-rows: 1fr;
+
+								.logo {
+									grid-column: 1;
+									grid-row: 1;
+
+									height: auto;
+									width: 75%;
+
+									border:1px solid $dark-grey;
+									background-color: $off-white;
+								}
+
+								.name {
+									grid-column: 2/4;
+									grid-row: 1;
+									font-size: 200%;
+									text-align: left;
+									align-self: center;
+									color: $bright-blue
+								}
+							}
+
+						  .data {
+								grid-column: 5/9;
+								grid-row: 1;
+
+								display: grid;
+								grid-template-columns: 1fr 1fr;
+								grid-template-rows: 1fr 1fr;
+
+								div {
+									display: grid;
+									grid-template-columns: auto;
+									grid-template-rows:  auto auto;
+
+									h3 {
+										grid-column: auto;
+										grid-row: 1;
+
+										text-align: left;
+										font-size: 90%;
+										padding: 0;
+									}
+
+									.display-data {
+										grid-column: auto;
+										grid-row: 2;
+
+
+										padding-left: 10%;
+									}
+								}
+
+								.price {
+								  grid-column: 1;
+									grid-row: 1/3;
+
+									h3 {
+										grid-column: auto;
+										grid-row: 1;
+
+									}
+
+									.display-data {
+										font-size: 250%;
+									}
+								}
+
+							.total {
+								grid-column: 2;
+								grid-row: 1;
+
+
+
+							}
+
+							.percent {
+								grid-column: 2;
+								grid-row: 2;
+
+								.display-data {
+									padding-left: 10%;
+								}
+							}
+
+
+						  }
+
+							.time {
+								grid-column: 1/3;
+								grid-row: 2;
+
+								align-self: end;
+							}
+						}
+
+						.stock-summary {
+							grid-column: 1;
+							grid-row: 3;
+
+							align-self: center;
+
+							h2 {
+								display: none;
+							}
+						}
 
 					}
 				}
 			}
-		}
 
-		.sidebar {
-			grid-column: 2;
-			grid-row: 2;
+			.sidebar {
+				grid-column: 2;
+				grid-row: 2;
 
-			display: inherit;
-			grid-template-columns: 1fr 12fr 1fr;
-			grid-template-rows: auto;
+				display: inherit;
+				grid-template-columns: 1fr 12fr 1fr;
+				grid-template-rows: auto;
 
-			.nav-btn {
-				background: transparent;
-				color: #77878B;
-				border: none;
-				opacity: .2;
-			}
+				.nav-btn {
+					background: transparent;
+					color: #77878B;
+					border: none;
+					opacity: .2;
+				}
 
-			.nav-btn:hover {
-				opacity: 1;
-				text-shadow: 1px 1px 2px $dark-grey;
-				background-color: $background-green;
-			}
+				.nav-btn:hover {
+					opacity: 1;
+					text-shadow: 1px 1px 2px $dark-grey;
+					background-color: $background-green;
+				}
 
-			.nav-btn:first-of-type {
-				grid-column: 1;
-				grid-row: 1;
-			}
+				.nav-btn:first-of-type {
+					grid-column: 1;
+					grid-row: 1;
+				}
 
-			.nav-btn:last-of-type {
-				grid-column: 3;
-				grid-row: 1;
+				.nav-btn:last-of-type {
+					grid-column: 3;
+					grid-row: 1;
+				}
 			}
 		}
 	}

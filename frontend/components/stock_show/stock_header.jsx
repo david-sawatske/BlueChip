@@ -26,17 +26,23 @@ class StockHeader extends React.Component {
         <div className="data">
           <div className="price">
             <h3>Latest Price</h3>
-            <div>{ numberToCurrency(quote.latestPrice) }</div>
+            <div className="display-data">
+              { numberToCurrency(quote.latestPrice) }
+            </div>
           </div>
 
           <div className="total">
             <h3>Day Change</h3>
-            <div>{showSign(change)}{change}</div>
+            <div className="display-data">
+              {showSign(change)}{change}
+            </div>
           </div>
 
           <div className="percent">
             <h3>Percent Change</h3>
-            <div>{showSign(percent)}{percent}%</div>
+            <div className="display-data">
+              {showSign(percent)}{percent}%
+            </div>
          </div>
        </div>
 
