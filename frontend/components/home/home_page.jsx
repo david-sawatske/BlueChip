@@ -12,7 +12,7 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { techTicker: '', activeComponentIdx: 0, timer: null }
+    this.state = { techTicker: '', activeComponentIdx: 1, timer: null }
 
     // this.initializeTimer = this.initializeTimer.bind(this);
     // this.autoCount = this.autoCount.bind(this);
@@ -72,25 +72,21 @@ class HomePage extends React.Component {
     const sampleStock = remoteStockData[this.state.techTicker];
     const sampleLeagueId = arrSample(leagueIds);
 
-    let LeaderBoard = null;
+    let LeaderBoard = <Loader />;
     if (sampleLeagueId) {
       LeaderBoard = <LeagueIndexItem leagueData={leagueData[sampleLeagueId]}
                                      key={sampleLeagueId} />
-    } else {
-      LeaderBoard = <Loader />
     }
 
-    let StockData = null;
+    let StockData = <Loader />;
     if (sampleStock) {
-      StockData = <div>
-                    <StockHeader quote={sampleStock.quote}
-                                 logo={sampleStock.logo} />
-                    <StockChart interval={{ ['1d']: "One Day" }}
+      StockData = <div className="show-sample">
+                    {/* <StockHeader quote={sampleStock.quote}
+                                 logo={sampleStock.logo} /> */}
+                    {/* <StockChart interval={{ ['1d']: "On e Day" }}
                                 chart={sampleStock.chart}
-                                companyName={sampleStock.quote.companyName} />
+                                companyName={sampleStock.quote.companyName} /> */}
                   </div>
-    } else {
-        StockData = <Loader />
     }
 
     const listOne =
@@ -111,33 +107,25 @@ class HomePage extends React.Component {
         </ul>
       </div>
 
-    const AppData =
-      <div className="app-data">
-        <h2 className="home-h2">Just like trading in the real market</h2>
-
-      </div>
-
     let ActiveComponent
     switch (this.state.activeComponentIdx) {
       case 0:
-        ActiveComponent = AppData
+        ActiveComponent = <div className="active-data">
+                            <h2> Realistic Stock Trading App </h2>
+                          </div>
         break;
       case 1:
-        ActiveComponent = <div>
-                            <h2 className="home-h2">Live Stock Data</h2>
-                            <div className="home-stock-data">
+        ActiveComponent = <div className="active-data">
+                            <h2>Live Stock Data</h2>
                               { StockData }
                               { listOne }
-                            </div>
                           </div>
         break;
       case 2:
-        ActiveComponent = <div>
-                            <h2 className="home-h2">Check leaderboards to see where you rank</h2>
-                            <div className="home-leaderboard">
+        ActiveComponent = <div className="active-data">
+                            <h2>Check leaderboards to see where you rank</h2>
                               { LeaderBoard }
                               { listTwo }
-                            </div>
                           </div>
         break;
       default:
@@ -147,7 +135,8 @@ class HomePage extends React.Component {
     return (
       <div className="home">
         <h1 className="home-h1">FREE STOCK TRADING FANTASY LEAGUES</h1>
-
+        <img className="logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
+        
         <div className="home-data">
           { ActiveComponent }
         </div>
