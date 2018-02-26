@@ -40,6 +40,7 @@ CSS Grid layout for modern browsers:
 
 				background-color: $background-grey;
 				border-radius: 2% 5%;
+				overflow: hidden;
 
 				display: inherit;
 				grid-template-columns: auto;
@@ -51,14 +52,15 @@ CSS Grid layout for modern browsers:
 
 					display: inherit;
 					grid-template-columns: repeat(4, 1fr);
-					grid-template-rows: .1fr repeat(4, 1fr);
+					grid-template-rows: 0fr 10fr 10fr 10fr;
 
 					.data-head {
-						grid-column: auto;
+						grid-column: 1;
 						grid-row: 1;
 
-						text-align: left;
-						font-size: 125%;
+						text-align: center;
+						padding: 0;
+						font-size: 100%;
 						color: $transparent-white;
 					}
 
@@ -72,7 +74,7 @@ CSS Grid layout for modern browsers:
 
 						.display-component {
 							grid-column: 2/3;
-							grid-row: 3;
+							grid-row: 3/4;
 						}
 
 
@@ -84,7 +86,7 @@ CSS Grid layout for modern browsers:
 
 							display: inherit;
 							grid-template-columns: repeat(8, 1fr);
-							grid-template-rows: auto;
+							grid-template-rows: 1fr;
 
 							.top {
 								grid-column: 1/5;
@@ -120,7 +122,7 @@ CSS Grid layout for modern browsers:
 								grid-row: 1;
 
 								display: grid;
-								grid-template-columns: 1fr 1fr;
+								grid-template-columns: 1fr 2fr;
 								grid-template-rows: 1fr 1fr;
 
 								div {
@@ -134,13 +136,13 @@ CSS Grid layout for modern browsers:
 
 										text-align: left;
 										font-size: 90%;
+										margin-top: 25%;
 										padding: 0;
 									}
 
 									.display-data {
 										grid-column: auto;
 										grid-row: 2;
-
 
 										padding-left: 10%;
 									}
@@ -153,47 +155,130 @@ CSS Grid layout for modern browsers:
 									h3 {
 										grid-column: auto;
 										grid-row: 1;
-
+										margin-top: 25%;
 									}
 
 									.display-data {
 										font-size: 250%;
 									}
 								}
-
-							.total {
-								grid-column: 2;
-								grid-row: 1;
-
-
-
 							}
 
-							.percent {
-								grid-column: 2;
-								grid-row: 2;
+							.percent .total {
+								grid-column: 3;
+								grid-row: 1;
 
 								.display-data {
 									padding-left: 10%;
 								}
 							}
 
-
-						  }
-
 							.time {
 								grid-column: 1/3;
-								grid-row: 2;
+								grid-row: 1;
 
 								align-self: end;
 							}
+						}
+
+						.chart-container {
+							height: 100%;
+
+							display: grid;
+							grid-template-columns: auto;
+							grid-template-rows: auto;
+
+							.button {
+								grid-column: 1;
+								grid-row: 1;
+								z-index: 2;
+
+								justify-self: right;
+								margin-right: 5%;
+								width: 20%;
+								height: 7.5%;
+								font-size: 75%;
+								opacity: .5;
+								border: none;
+							}
+
+							.button:hover {
+								opacity: 1;
+								border: none;
+							}
+
+							.chart {
+								grid-column: 1;
+								grid-row: 1;
+								z-index: 1;
+
+								height: 175%;
+							}
+						}
+
+						.financials-table {
+							grid-column: 1/3;
+							grid-row: 1/3;
+
+							thead {
+								background: $transparent-white;
+								width: 200%;
+
+								th  {
+									font-family: Quattrocento;
+									font-size: 150%;
+									font-style: normal;
+								}
+
+								td {
+									color: $blue-grey;
+									font-weight: normal;
+									text-align: left;
+									text-transform: none;
+								}
+							}
+
+							tbody {
+								.sub-head {
+									background: $transparent-white;
+
+									td {
+										text-align: left;
+										color: $dark-blue;
+										font-size: 120%;
+									}
+
+									th {
+										color: $blue-grey;
+										font-weight: normal;
+										font-style: italic;
+									}
+								}
+
+								td {
+									text-align: center;
+								}
+
+								.side-head {
+									background: $transparent-white;
+									color: $blue-grey;
+									font-weight: normal;
+									font-style: italic;
+									text-align: left;
+									width: 15%;
+									padding-left: 5%;
+									border-top: 1px solid $table-outline;
+									border-bottom: 1px solid $table-outline;
+								}
+							}
+
 						}
 
 						.stock-summary {
 							grid-column: 1;
 							grid-row: 3;
 
-							align-self: center;
+							align-self: top;
 
 							h2 {
 								display: none;
