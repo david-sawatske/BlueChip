@@ -29,6 +29,7 @@ const App = () => {
                 <Route path="/users/:userId" component={ UserShow }/>
                 <Route exact path="/" component={ HomePage } />
                 <Route  path="/loader" component={ Loader } />
+                <Route path="*" component={ ()=>(<h1>No Match</h1>) } />
               </Switch>
             </section>
           </div> )
