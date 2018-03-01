@@ -20,7 +20,10 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { techTicker: '', activeComponentIdx: 1, timer: null }
+    this.state = { activeComponentIdx: 1,
+                   containerClass: "home-search",
+                   techTicker: '',
+                   timer: null }
 
     this.setTicker = this.setTicker.bind(this)
   }
@@ -39,7 +42,8 @@ class HomePage extends React.Component {
   }
 
   setTicker(ticker) {
-    this.setState({ techTicker: ticker})
+    this.setState({ techTicker: ticker,
+                    containerClass: 'home-show' })
   }
 
   returnStockData(sampleStock) {
@@ -73,7 +77,7 @@ class HomePage extends React.Component {
     }
 
     return (
-      <div className="home">
+      <div className="home-show">
         <h1 className="home-h1">BlueChip</h1>
         <h2 className="home-h2">FANTASY STOCK TRADING LEAGUES</h2>
         <img className="app-logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
