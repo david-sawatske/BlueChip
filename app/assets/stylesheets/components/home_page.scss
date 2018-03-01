@@ -11,26 +11,59 @@ CSS Grid layout for modern browsers:
 
 			display: grid;
 			grid-template-columns: 1fr 1fr 6fr .5fr;
-			grid-template-rows: 1fr 6fr;
+			grid-template-rows: auto auto;
 
-			.logo {
+			.app-logo {
 				grid-column: 1;
 				grid-row: 1;
 
+				justify-self: end;
+				align-self: center;
+
 				height: auto;
-				width: 50%;
+				width: 40%;
 			}
 
 			.home-h1 {
 				grid-column: 2;
 				grid-row: 1;
 
-				text-align: left;
-				font-size: 300%;
-				color: $off-white;
-				font-weight: 100;
+				align-self: center;
+				padding: 0 0 0 10%;
 
 				font-family: Martel;
+				font-size: 200%;
+				text-align: left;
+				color: $off-white;
+				font-weight: 100;
+			}
+
+			.home-h2 {
+				display: none;
+			}
+
+			.button-container {
+				grid-column: 3;
+				grid-row: 1;
+
+				.session-buttons {
+
+					button {
+						background-color: $transparent;
+
+						border-bottom: 1px solid $background-grey;
+						border-radius: 0;
+						padding: 5px 15px;
+
+						color: $blue-grey;
+						font-size: 95%
+					}
+
+					button:hover {
+						color: $transparent-white;
+						text-shadow: -1px 2px 3px  $blue-grey;
+					}
+				}
 			}
 
 			.home-data {
@@ -84,7 +117,7 @@ CSS Grid layout for modern browsers:
 									grid-column: 1;
 									grid-row: 1;
 
-									padding-bottom: 2px;
+									padding-bottom: 5%;
 									height: auto;
 									width: 8vh;
 								}
