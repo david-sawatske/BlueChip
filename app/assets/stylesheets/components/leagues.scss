@@ -12,7 +12,6 @@
         grid-row: 1;
 				align-self: center;
         color: $main-blue;
-				-webkit-text-stroke: .25px $transparent-white;
 				font-size: 300%;
         background-color: black;
 
@@ -60,9 +59,7 @@
 
             h1 {
 							grid-column: 1;
-              color: $dark-blue;
 							font-size: 300%;
-							-webkit-text-stroke: .5px $dark-grey;
             }
 
             h2 {
