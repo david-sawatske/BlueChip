@@ -17,7 +17,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   requestTargetLeague: id => dispatch(requestTargetLeague(id)),
-  requestStockSearch: ticker => dispatch(requestStockSearch(ticker))
+  requestStockSearch: (ticker, interval, dataTypes) => (
+    dispatch(requestStockSearch(ticker, interval, dataTypes))
+  )
 })
 
 export default connect(
