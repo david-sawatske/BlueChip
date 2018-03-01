@@ -17,7 +17,8 @@ class StockSearch extends React.Component {
                    isSearchHovered: false };
 
     this.userTransactionData = this.userTransactionData.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleStockSearch = this.handleStockSearch.bind(this);
+    this.handlePeerSearch = this.handlePeerSearch.bind(this);
     this.handleHover = this.handleHover.bind(this);
     this.update = this.update.bind(this);
   }
@@ -29,25 +30,36 @@ class StockSearch extends React.Component {
       this.props.requestTargetUserData(this.props.currentUser.id)
     }
 
-    /// TEMP ///
-        const addTy = 'financials,earnings,relevant,';
-        const intKey = Object.keys(this.state.interval)[0];
-        this.props.requestStockSearch(this.state.ticker, intKey, addTy)
-          .then(stockData => {
-            const peerStr = this.props.remoteStockData[this.state.ticker]
-                                                      ['relevant']
-                                                      ['symbols']
-                                                      .toString()
-            this.props.requestStockPeers(peerStr);
-          }).then(data => { this.setSearchInitiated() })
-    /// TEMP ///
+    // /// TEMP ///
+    //     const addTy = 'financials,earnings,relevant,';
+    //     const intKey = Object.keys(this.state.interval)[0];
+    //     this.props.requestStockSearch(this.state.ticker, intKey, addTy)
+    //       .then(stockData => {
+    //         const peerStr = this.props.remoteStockData[this.state.ticker]
+    //                                                   ['relevant']
+    //                                                   ['symbols']
+    //                                                   .toString()
+    //         this.props.requestStockPeers(peerStr);
+    //       }).then(data => { this.setSearchInitiated() })
+    // /// TEMP ///
   }
 
   setSearchInitiated() {
     this.setState({ searchInitiated: true })
   }
 
-  handleSubmit(event) {
+  handleStockSearch(event) {
+    event.preventDefault();
+
+    const additionalDataTypes = 'financials,earnings,relevant,';
+    const intervalKey = Object.keys(this.state.interval)[0];
+    const ticker = this.state.ticker;
+
+    this.props.requestStockSearch(ticker, intervalKey, additionalDataTypes)
+    this.props.setTicker(ticker)
+  }
+
+  handlePeerSearch(event) {
     event.preventDefault();
 
     const additionalDataTypes = 'financials,earnings,relevant,';
@@ -93,12 +105,14 @@ class StockSearch extends React.Component {
 
   render() {
     const searchedTicker = this.state.ticker.toUpperCase();
-    const { isRemoteLoading, isPeerLoading, isRailsUserLoading, remoteStockData,
-            currentUserData, showModal, hideModal } = this.props;
+    const { isRemoteLoading, isPeerLoading, isRailsUserLoading, showModal, currentPath,
+            hideModal, remoteStockData = {}, currentUserData = {} } = this.props;
     const { isSearchHovered } = this.state;
     const currIntValue = Object.values(this.state.interval);
     const currentUserTranData = currentUserData.userLeagueData;
     const peerData = [];
+
+    let targetHandleSubmit = this.handlePeerSearch;
 
     if (remoteStockData[this.state.ticker]) {
       const peerTkrArr = remoteStockData[this.state.ticker]
@@ -125,8 +139,10 @@ class StockSearch extends React.Component {
                         { ['1d']: "One Day" } ];
 
 
-    let ShowComponent = null;
-    if (isRemoteLoading || isRailsUserLoading || isPeerLoading) {
+    let ShowComponent;
+    if (currentPath === '/') {
+      targetHandleSubmit = this.handleStockSearch;
+    } else if (isRemoteLoading || isRailsUserLoading || isPeerLoading) {
       ShowComponent = <Loader />
     } else if (this.state.searchInitiated && remoteStockData[searchedTicker]) {
       ShowComponent = <StockShow remoteStockData={remoteStockData[searchedTicker]}
@@ -148,7 +164,9 @@ class StockSearch extends React.Component {
     }
 
     let searchClass
-    if (!this.state.searchInitiated) {
+    if (currentPath === "/") {
+      searchClass = "home-search"
+    } else if (!this.state.searchInitiated) {
       searchClass = "initial-search"
     } else if (isSearchHovered && this.state.searchInitiated) {
       searchClass = "side-search"
@@ -165,7 +183,7 @@ class StockSearch extends React.Component {
         <h1 className='initial'>Enter Ticker for Live Stock Data</h1>
         <h1 className='searched'>Stock Search</h1>
 
-          <form onSubmit={this.handleSubmit}
+          <form onSubmit={targetHandleSubmit}
             className="search">
             <input
               type="text"
@@ -180,7 +198,7 @@ class StockSearch extends React.Component {
             </label>
           </form>
 
-          <form onSubmit={this.handleSubmit}
+          <form onSubmit={targetHandleSubmit}
                 className="intervals">
             {intervals.map((interval, idx) => {
               const intVal = Object.values(interval)[0];

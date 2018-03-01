@@ -9,29 +9,37 @@ import StockHeader from '../stock_show/stock_header';
 import StockChart from '../stock_show/stock_chart';
 import Loader from '../shared/loader';
 
+import StockSearch from '../stock_search/stock_search';
 
-import SampleComponent from './sample_component'
 
-import { arrSample } from '../../util/helper_functions'
+import SampleComponent from './sample_component';
+
+import { arrSample } from '../../util/helper_functions';
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = { techTicker: '', activeComponentIdx: 1, timer: null }
+
+    this.setTicker = this.setTicker.bind(this)
   }
 
   componentWillMount() {
-    const sampleTicker = arrSample(['AAPL', 'AMZN', 'GOOG', 'TSLA', 'FB']);
-    const additionalDataTypes = 'financials,earnings,relevant,';
+    // const sampleTicker = arrSample(['AAPL', 'AMZN', 'GOOG', 'TSLA', 'FB']);
+    // const additionalDataTypes = 'financials,earnings,relevant,';
+    //
+    // this.setState({ techTicker: sampleTicker })
+    //
+    // this.props.requestStockSearch(sampleTicker, '1d', additionalDataTypes)
+    //
+    // if ( !this.props.leagueIds[0] ) {
+    //   this.props.requestTargetLeague('stockData')
+    // }
+  }
 
-    this.setState({ techTicker: sampleTicker })
-
-    this.props.requestStockSearch(sampleTicker, '1d', additionalDataTypes)
-
-    if ( !this.props.leagueIds[0] ) {
-      this.props.requestTargetLeague('stockData')
-    }
+  setTicker(ticker) {
+    this.setState({ techTicker: ticker})
   }
 
   returnStockData(sampleStock) {
@@ -46,13 +54,22 @@ class HomePage extends React.Component {
   }
 
   render()  {
-    const { currentUser, leagueIds, remoteStockData, logout,
-            hideModal, showModal } = this.props;
+    const { currentUser, leagueIds, remoteStockData, logout, hideModal, currentPath,
+            showModal, requestStockSearch, requestStockPeers } = this.props;
     const sampleStock = remoteStockData[this.state.techTicker];
-console.log(showModal);
-    let StockData = <Loader />;
+
+    let StockDataComponent
     if (sampleStock) {
-      StockData = this.returnStockData(sampleStock)
+      StockDataComponent = this.returnStockData(sampleStock)
+    }
+
+    let SearchComponent
+    if (!sampleStock) {
+      SearchComponent = <StockSearch requestStockSearch={requestStockSearch}
+                                     requestStockPeers={requestStockPeers}
+                                     setTicker={this.setTicker}
+                                     remoteStockData={remoteStockData}
+                                     currentPath={currentPath} />
     }
 
     return (
@@ -66,7 +83,8 @@ console.log(showModal);
                          logout={logout} />
 
         <div className="home-data">
-          { StockData }
+          { SearchComponent }
+          { StockDataComponent }
         </div>
       </div>
     )

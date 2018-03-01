@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { requestStockSearch } from '../../actions/remote_stock_actions';
+import { requestStockSearch, requestStockPeers } from '../../actions/remote_stock_actions';
 import { requestTargetLeague } from '../../actions/league_actions';
 import { hideModal, showModal } from '../../actions/modal_actions';
 import { requestTargetUserData } from '../../actions/user_actions';
@@ -17,16 +17,18 @@ const mapStateToProps = state => ({
   currentUser: state.session.currentUser
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   requestTargetLeague: id => dispatch(requestTargetLeague(id)),
   requestStockSearch: (ticker, interval, dataTypes) => (
     dispatch(requestStockSearch(ticker, interval, dataTypes))
   ),
+  requestStockPeers: () => dispatch(requestStockPeers()),
   logout: () => dispatch(logout()),
   hideModal: () => dispatch(hideModal()),
   showModal: (modalType, modalProps) => (
     dispatch(showModal(modalType, modalProps))
-  )
+  ),
+  currentPath: ownProps.match.path, 
 })
 
 export default connect(
