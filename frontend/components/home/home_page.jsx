@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import FinancialsTable from '../stock_show/financials_table';
+import MastheadButtons from '../masthead/masthead_buttons';
 import LeagueIndexItem from '../league/league_index_item'
 import StockSummary from '../stock_show/stock_summary';
 import StockHeader from '../stock_show/stock_header';
@@ -45,9 +46,10 @@ class HomePage extends React.Component {
   }
 
   render()  {
-    const { currentUser, leagueIds, remoteStockData } = this.props;
+    const { currentUser, leagueIds, remoteStockData, logout,
+            hideModal, showModal } = this.props;
     const sampleStock = remoteStockData[this.state.techTicker];
-
+console.log(showModal);
     let StockData = <Loader />;
     if (sampleStock) {
       StockData = this.returnStockData(sampleStock)
@@ -57,7 +59,11 @@ class HomePage extends React.Component {
       <div className="home">
         <h1 className="home-h1">BlueChip</h1>
         <h2 className="home-h2">FANTASY STOCK TRADING LEAGUES</h2>
-        <img className="logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
+        <img className="app-logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
+        <MastheadButtons currentUser={currentUser}
+                         hideModal={hideModal}
+                         showModal={showModal}
+                         logout={logout} />
 
         <div className="home-data">
           { StockData }

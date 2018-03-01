@@ -2,7 +2,7 @@ import React from 'react';
 
 import ModalRoot from  '../modal/modal_root_container'
 
-class Masthead extends React.Component {
+class MastheadButtons extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -17,7 +17,7 @@ class Masthead extends React.Component {
     const { currentUser, showModal, hideModal } = this.props;
 
     return (
-      <div>
+      <div className="button-container">
         {currentUser ? (
           <div className="session-buttons">
             <button className="button" onClick={ (e) =>
@@ -45,4 +45,4 @@ class Masthead extends React.Component {
   }
 }
 
-export default Masthead
+export default MastheadButtons
