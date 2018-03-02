@@ -21,24 +21,11 @@ class HomePage extends React.Component {
     super(props);
 
     this.state = { activeComponentIdx: 1,
-                   containerClass: "home-search",
+                   containerClass: "landing-search",
                    techTicker: '',
                    timer: null }
 
     this.setTicker = this.setTicker.bind(this)
-  }
-
-  componentWillMount() {
-    // const sampleTicker = arrSample(['AAPL', 'AMZN', 'GOOG', 'TSLA', 'FB']);
-    // const additionalDataTypes = 'financials,earnings,relevant,';
-    //
-    // this.setState({ techTicker: sampleTicker })
-    //
-    // this.props.requestStockSearch(sampleTicker, '1d', additionalDataTypes)
-    //
-    // if ( !this.props.leagueIds[0] ) {
-    //   this.props.requestTargetLeague('stockData')
-    // }
   }
 
   setTicker(ticker) {
@@ -77,10 +64,11 @@ class HomePage extends React.Component {
     }
 
     return (
-      <div className="home-show">
+      <div className={this.state.containerClass}>
+        <img className="app-logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
         <h1 className="home-h1">BlueChip</h1>
         <h2 className="home-h2">FANTASY STOCK TRADING LEAGUES</h2>
-        <img className="app-logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
+        <p>Enter the name or stock ticker for a publicy traded company to see an overview</p>
         <MastheadButtons currentUser={currentUser}
                          hideModal={hideModal}
                          showModal={showModal}
