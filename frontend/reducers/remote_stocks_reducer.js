@@ -26,7 +26,7 @@ const remoteStockData = (state = {}, action) => {
 const remoteSymbols = (state = [], action) => {
   switch(action.type) {
     case RECEIVE_SYMBOLS:
-      return action.symbolData;
+      return getNameSymbol(action.symbolData);
     default:
       return state;
   }
@@ -37,6 +37,12 @@ function customizer(objValue, srcValue) {
   if (objValue <= srcValue) {
     return objValue;
   }
+}
+
+function getNameSymbol(symbolData) {
+  return symbolData.map(data => {
+    return { name: data.name,  symbol: data.symbol }
+  })
 }
 // START: Selectors //
 
