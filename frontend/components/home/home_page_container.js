@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 
-import { requestStockSearch, requestStockPeers } from '../../actions/remote_stock_actions';
+import { requestStockSearch,
+         requestStockPeers,
+         requestSymbols } from '../../actions/remote_stock_actions';
 import { requestTargetLeague } from '../../actions/league_actions';
 import { hideModal, showModal } from '../../actions/modal_actions';
 import { requestTargetUserData } from '../../actions/user_actions';
@@ -23,12 +25,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(requestStockSearch(ticker, interval, dataTypes))
   ),
   requestStockPeers: () => dispatch(requestStockPeers()),
+  requestSymbols: () => dispatch(requestSymbols()),
   logout: () => dispatch(logout()),
   hideModal: () => dispatch(hideModal()),
   showModal: (modalType, modalProps) => (
     dispatch(showModal(modalType, modalProps))
   ),
-  currentPath: ownProps.match.path, 
+  currentPath: ownProps.match.path,
 })
 
 export default connect(

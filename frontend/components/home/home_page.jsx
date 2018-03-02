@@ -46,7 +46,7 @@ class HomePage extends React.Component {
 
   render()  {
     const { currentUser, leagueIds, remoteStockData, logout, hideModal, currentPath,
-            showModal, requestStockSearch, requestStockPeers } = this.props;
+            showModal, requestStockSearch, requestStockPeers, requestSymbols } = this.props;
     const sampleStock = remoteStockData[this.state.techTicker];
 
     let StockDataComponent
@@ -58,8 +58,9 @@ class HomePage extends React.Component {
     if (!sampleStock) {
       SearchComponent = <StockSearch requestStockSearch={requestStockSearch}
                                      requestStockPeers={requestStockPeers}
-                                     setTicker={this.setTicker}
                                      remoteStockData={remoteStockData}
+                                     requestSymbols={requestSymbols}
+                                     setTicker={this.setTicker}
                                      currentPath={currentPath} />
     }
 
