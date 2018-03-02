@@ -22,3 +22,10 @@ export const fetchPeers = tkrStr => (
     url: `${ROOT_URL}${tkrStr}&types=quote`
   })
 )
+
+export const fetchSymbols = () => {
+  return $.ajax({
+    method: 'GET',
+    url: 'https://api.iextrading.com/1.0/ref-data/symbols'
+  })
+}
