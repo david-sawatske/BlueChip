@@ -15,7 +15,8 @@ const mapStateToProps = state => ({
   isRemoteLoading: state.ui.loading.remoteStockLoading,
   isPeerLoading: state.ui.loading.remotePeersLoading,
   isRailsUserLoading: state.ui.loading.railsUserLoading,
-  remoteStockData: state.ui.remoteStocks.remoteStockData
+  remoteStockData: state.ui.remoteStocks.remoteStockData,
+  tickerData: state.ui.remoteStocks.remoteSymbols,
 });
 
 const mapDispatchToProps = dispatch => ({

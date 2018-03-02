@@ -9,7 +9,7 @@ class StockSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { ticker: "AAPL",
+    this.state = { ticker: "",
                    interval: { ['1d']: "One Day" },
                    searchInitiated: false,
                    prevSearchData: null,
@@ -90,16 +90,35 @@ class StockSearch extends React.Component {
     return transactData;
   }
 
+  filterTickers(str, tickers) {
+    const filteredTickers = []
+
+    tickers.map(tkr => {
+      if (tkr.symbol.toLowerCase().startsWith(str.toLowerCase())) {
+        filteredTickers.push(tkr)
+      } else if ((tkr.name.toLowerCase().startsWith(str.toLowerCase()))) {
+        filteredTickers.push(tkr)
+      }
+    })
+
+    return filteredTickers
+  }
+
   render() {
     const searchedTicker = this.state.ticker.toUpperCase();
     const { isRemoteLoading, isPeerLoading, isRailsUserLoading, showModal, currentPath,
-            hideModal, remoteStockData = {}, currentUserData = {} } = this.props;
+            hideModal, tickerData, remoteStockData = {}, currentUserData = {} } = this.props;
     const { isSearchHovered } = this.state;
     const currIntValue = Object.values(this.state.interval);
     const currentUserTranData = currentUserData.userLeagueData;
     const peerData = [];
 
     let targetHandleSubmit = this.handlePeerSearch;
+
+    let filteredTickers = []
+    if (tickerData.length != 0) {
+      filteredTickers = this.filterTickers(this.state.ticker, tickerData)
+    }
 
     if (remoteStockData[this.state.ticker]) {
       const peerTkrArr = remoteStockData[this.state.ticker]
