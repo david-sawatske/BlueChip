@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 
 import { mergeWith} from 'lodash';
 
-import { RECEIVE_STOCK_SEARCH,
+import { RECEIVE_SYMBOLS,
+         RECEIVE_STOCK_SEARCH,
          RECEIVE_PEER_SEARCH,
          START_REMOTE_PEER_FETCH,
          START_REMOTE_STOCK_FETCH } from '../actions/remote_stock_actions';
@@ -22,6 +23,15 @@ const remoteStockData = (state = {}, action) => {
   }
 };
 
+const remoteSymbols = (state = [], action) => {
+  switch(action.type) {
+    case RECEIVE_SYMBOLS:
+      return action.symbolData;
+    default:
+      return state;
+  }
+};
+
 // START: Selectors //
 function customizer(objValue, srcValue) {
   if (objValue <= srcValue) {
@@ -31,7 +41,8 @@ function customizer(objValue, srcValue) {
 // START: Selectors //
 
 const RemoteStocksReducer = combineReducers({
-  remoteStockData
+  remoteStockData,
+  remoteSymbols
 });
 
 export default RemoteStocksReducer;
