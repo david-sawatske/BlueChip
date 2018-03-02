@@ -1,5 +1,6 @@
 import React from 'react';
 
+import SearchSuggestions from './search_suggestions';
 import StockShow from '../stock_show/stock_show';
 import Loader from '../shared/loader';
 
@@ -169,6 +170,15 @@ class StockSearch extends React.Component {
                                  interval={this.state.interval} />
     }
 
+    let SuggestedTickers
+    if (searchedTicker.length > 0) {
+      SuggestedTickers = <SearchSuggestions filteredTickers={filteredTickers} />
+    } else if (searchedTicker.length === 0){
+      SuggestedTickers = <h1>Please Enter a vaild ticker</h1>
+    } else {
+       SuggestedTickers = <h1>{searchedTicker.length}</h1>
+    }
+
     let searchClass
     if (currentPath === "/") {
       searchClass = "home-search"
@@ -218,6 +228,8 @@ class StockSearch extends React.Component {
             })}
           </form>
         </div>
+
+        { SuggestedTickers }
 
         <div className="search-show">{ ShowComponent }</div>
       </div>
