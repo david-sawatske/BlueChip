@@ -22,8 +22,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   requestTargetLeague: id => dispatch(requestTargetLeague(id)),
-  requestStockSearch: (ticker, interval, dataTypes) => (
-    dispatch(requestStockSearch(ticker, interval, dataTypes))
+  requestStockSearch: (ticker, dataTypes) => (
+    dispatch(requestStockSearch(ticker, dataTypes))
   ),
   requestStockPeers: () => dispatch(requestStockPeers()),
   requestSymbols: () => dispatch(requestSymbols()),

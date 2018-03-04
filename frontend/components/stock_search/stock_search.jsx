@@ -10,8 +10,7 @@ class StockSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { ticker: "",
-                   interval: { ['1d']: "One Day" },
+    this.state = { ticker: "AAPL",
                    searchInitiated: false,
                    prevSearchData: null,
                    prevPeerData: null,
@@ -40,10 +39,9 @@ class StockSearch extends React.Component {
     event.preventDefault();
 
     const additionalDataTypes = 'financials,earnings,relevant,';
-    const intervalKey = Object.keys(this.state.interval)[0];
     const ticker = this.state.ticker;
 
-    this.props.requestStockSearch(ticker, intervalKey, additionalDataTypes)
+    this.props.requestStockSearch(ticker, additionalDataTypes)
     this.props.setTicker(ticker)
   }
 
@@ -51,8 +49,7 @@ class StockSearch extends React.Component {
     event.preventDefault();
 
     const additionalDataTypes = 'financials,earnings,relevant,';
-    const intervalKey = Object.keys(this.state.interval)[0];
-    this.props.requestStockSearch(this.state.ticker, intervalKey, additionalDataTypes)
+    this.props.requestStockSearch(this.state.ticker, additionalDataTypes)
       .then(stockData => {
         const peerStr = this.props.remoteStockData[this.state.ticker]
                                                   ['relevant']
@@ -110,7 +107,6 @@ class StockSearch extends React.Component {
     const { isRemoteLoading, isPeerLoading, isRailsUserLoading, showModal, currentPath,
             hideModal, tickerData, remoteStockData = {}, currentUserData = {} } = this.props;
     const { isSearchHovered } = this.state;
-    const currIntValue = Object.values(this.state.interval);
     const currentUserTranData = currentUserData.userLeagueData;
     const peerData = [];
 
@@ -136,15 +132,6 @@ class StockSearch extends React.Component {
                                 :
                               { };
 
-    const intervals = [ { ['5y']: "Five Years" },
-                        { ['2y']:" Two Years" },
-                        { ['1y']:" One Year" },
-                        { ['YTD']: "Year to Date" },
-                        { ['6m']: "Six Months" },
-                        { ['3m']: "Three Months" },
-                        { ['1m']: "One Month" },
-                        { ['1d']: "One Day" } ];
-
 
     let ShowComponent;
     if (currentPath === '/') {
@@ -156,8 +143,7 @@ class StockSearch extends React.Component {
                                  peerData={peerData}
                                  transactionData={transactionData}
                                  showModal={showModal}
-                                 hideModal={hideModal}
-                                 interval={this.state.interval} />
+                                 hideModal={hideModal} />
 
         this.state.prevSearchData = remoteStockData[searchedTicker];
         this.state.prevPeerhData = peerData;
@@ -166,8 +152,7 @@ class StockSearch extends React.Component {
                                  peerData={this.state.prevPeerData}
                                  transactionData={transactData}
                                  showModal={showModal}
-                                 hideModal={hideModal}
-                                 interval={this.state.interval} />
+                                 hideModal={hideModal} />
     }
 
     let searchClass
@@ -208,23 +193,8 @@ class StockSearch extends React.Component {
             />
 
             <label className='submit-search'>
-              <input type="submit" value={currIntValue} className="int-val"/>
               <input type="submit" value='Search' className="search-val"/>
             </label>
-          </form>
-
-          <form onSubmit={targetHandleSubmit}
-                className="intervals">
-            {intervals.map((interval, idx) => {
-              const intVal = Object.values(interval)[0];
-              if (intVal != currIntValue) {
-                return <button
-                        key={idx}
-                        onClick={ () => this.setState({ interval: interval }) }>
-                        { intVal }
-                      </button>
-              }
-            })}
           </form>
         </div>
 

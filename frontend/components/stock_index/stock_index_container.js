@@ -13,8 +13,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestStockSearch: (ticker, interval, dataTypes) => (
-    dispatch(requestStockSearch(ticker, interval, dataTypes))
+  requestStockSearch: (ticker, dataTypes) => (
+    dispatch(requestStockSearch(ticker, dataTypes))
   ),
   requestStockPeers: (peerStr) => (
     dispatch(requestStockPeers(peerStr))

@@ -19,7 +19,7 @@ class StockShow extends React.Component {
   }
 
   render() {
-    const { remoteStockData, interval, showModal, hideModal,
+    const { remoteStockData, showModal, hideModal,
             transactionData, peerData } = this.props;
     const transactArray = (transactionData) ? Object.values(transactionData)
                                                :
@@ -78,7 +78,6 @@ class StockShow extends React.Component {
 
           <div className="chart-earnings">
             <StockChart chart={chart}
-                        interval={interval}
                         companyName={quote.companyName}/>
 
             <EarningsTable earnings={earnings.earnings} />

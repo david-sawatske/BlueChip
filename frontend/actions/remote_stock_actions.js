@@ -32,10 +32,10 @@ export const receiveSymbols = symbolData => ({
 });
 
 // thunk async action creators
-export const requestStockSearch = (symbol, interval, dataTypes) => dispatch => {
+export const requestStockSearch = (symbol, dataTypes) => dispatch => {
   dispatch(startStockRemoteFetch());
 
-  return RemoteStockAPIUtil.fetchStockSeries(symbol, interval, dataTypes)
+  return RemoteStockAPIUtil.fetchStockSeries(symbol, dataTypes)
     .then(stockSeriesData => {
       dispatch(receiveStockSearch(stockSeriesData));
   });
