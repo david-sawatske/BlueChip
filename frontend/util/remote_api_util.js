@@ -1,7 +1,7 @@
 const rootURL = 'https://api.iextrading.com/1.0/';
 const baseURL = `${rootURL}stock/market/batch?symbols=`;
 
-const defaultDataTypes = 'logo,quote,news,chart,company,stats';
+const defaultDataTypes = 'logo,quote,news,company,stats';
 export const fetchStockSeries = ( symbol,
                                   optionalParams,
                                   defaultTypes = defaultDataTypes ) => {
@@ -12,9 +12,16 @@ export const fetchStockSeries = ( symbol,
 
   return $.ajax({
     method: 'GET',
-    url: `${baseURL}${symbol}&types=${dataTypes}&range='dynamic'&last=5`
+    url: `${baseURL}${symbol}&types=${dataTypes}&last=5`
   })
 }
+
+export const fetchChartUpdate = (symbol, interval) => (
+  $.ajax({
+    method: 'GET',
+    url: `${rootURL}/stock/${symbol}/chart/${interval}`
+  })
+)
 
 export const fetchPeers = tkrStr => (
   $.ajax({
