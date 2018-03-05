@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { mergeWith} from 'lodash';
+import { mergeWith, union } from 'lodash';
 
 import { RECEIVE_SYMBOLS,
-         RECEIVE_STOCK_SEARCH,
+         RECEIVE_CHART_DATA,
          RECEIVE_PEER_SEARCH,
+         RECEIVE_STOCK_SEARCH,
          START_REMOTE_PEER_FETCH,
          START_REMOTE_STOCK_FETCH } from '../actions/remote_stock_actions';
 
@@ -32,23 +33,36 @@ const remoteSymbols = (state = [], action) => {
   }
 };
 
+const remoteChartData = (state = {}, action) => {
+  switch(action.type) {
+
+  case RECEIVE_CHART_DATA:
+    return mergeWith({}, action.chartData, state);
+  default:
+    return state;
+  }
+};
+
 // START: Selectors //
-function customizer(objValue, srcValue) {
+const customizer = (objValue, srcValue) => {
   if (objValue <= srcValue) {
     return objValue;
   }
 }
 
-function getNameSymbol(symbolData) {
+const getNameSymbol = (symbolData) => {
   return symbolData.map(data => {
     return { name: data.name,  symbol: data.symbol }
   })
 }
+
+
 // START: Selectors //
 
 const RemoteStocksReducer = combineReducers({
   remoteStockData,
-  remoteSymbols
+  remoteSymbols,
+  remoteChartData
 });
 
 export default RemoteStocksReducer;
