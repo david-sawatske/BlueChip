@@ -9,8 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 
   return ({ symbol: symbol,
             companyName: companyName,
-            chartData: state.ui.remoteStocks.remoteChartData[symbol]
-         })
+            chartData: state.ui.remoteStocks.remoteChartData[symbol],
+            isChartLoading: state.ui.loading.remoteChartLoading })
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

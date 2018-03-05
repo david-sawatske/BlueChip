@@ -16,31 +16,55 @@ class StockChart extends React.Component {
     this.state = { yType: "priceData",
                    typeButton: "Volume Data",
                    intervalStr: "One Day",
-                   intervalKey: "1d" }
+                   intervalKey: "1d",
+                   fetching: true }
 
+    this.changeInterval = this.changeInterval.bind(this);
     this.setYType = this.setYType.bind(this);
   }
 
   componentWillMount() {
-    this.props.requestChartUpdate(this.props.symbol, '1d')
+    this.props.requestChartUpdate(this.props.symbol, '1d').then(() => {
+      this.setState({ fetching: false })
+    })
   }
 
   setYType() {
-    if (this.state.yType === "volumeData") {
+    (this.state.yType === "volumeData") ?
       this.setState({ yType: "priceData", typeButton: "Volume Data" })
-    } else {
-        this.setState({ yType: "volumeData", typeButton: "Price Data" })
-      }
+       :
+      this.setState({ yType: "volumeData", typeButton: "Price Data" })
+  }
+
+  changeInterval(intervalStr, intervalKey, event) {
+    event.preventDefault();
+
+    this.setState({ intervalStr: intervalStr,
+                    intervalKey: intervalKey,
+                    fetching: true })
+
+    this.props.requestChartUpdate(this.props.symbol, intervalKey).then(() => {
+      this.setState({ fetching: false })
+    })
   }
 
   render() {
-    const { chartData, companyName, interval = {'1d' : 'One Day'}, symbol } = this.props;
+    const { companyName, symbol, chartData = {} } = this.props;
     const { intervalStr, intervalKey } = this.state;
     const priceData = [];
     const volumeData = [];
+    const subtitle = companyName + ' - ' + this.state.intervalStr;
+    const intervals =   { ['5y']: "Five Years",
+                         ['2y']:" Two Years",
+                         ['1y']:" One Year",
+                         ['YTD']: "Year to Date",
+                         ['6m']: "Six Months",
+                         ['3m']: "Three Months",
+                         ['1m']: "One Month",
+                         ['1d']: "One Day" } ;
 
-    if (chartData) {
-      chartData.map(obj => {
+    if (!this.state.fetching) {
+      chartData[intervalKey].map(obj => {
         const date = (intervalKey === '1d') ? dateConv(obj) : Date.parse(obj.date);
         const price = (intervalKey === '1d') ? obj.average : obj.close;
 
@@ -51,7 +75,7 @@ class StockChart extends React.Component {
       })
     }
 
-    const graphTypeButton = <button className="button" onClick={ (e) =>
+    const GraphTypeButton = <button className="button" onClick={ (e) =>
                               this.setYType(e) }>
                               { this.state.typeButton }
                             </button>
@@ -75,11 +99,22 @@ class StockChart extends React.Component {
                   </YAxis>
       }
 
-    const subtitle = companyName + ' - ' + interval[intervalKey];
+      const InvervalButtons = Object.keys(intervals).map(intKey => {
+        return (
+          <button onClick={(e) => this.changeInterval(intervals[intKey], intKey, e)}
+                  key={intKey} >
+            { intervals[intKey] }
+          </button>
+        )
+
+      })
+
 
     return (
       <div className="chart-container">
-        { graphTypeButton }
+        { GraphTypeButton }
+
+        { InvervalButtons }
 
         <HighchartsStockChart>
           <Chart zoomType="x" />
