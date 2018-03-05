@@ -2,7 +2,7 @@ import React from 'react';
 
 import Highcharts from 'highcharts/highstock';
 import { HighchartsStockChart, Chart, withHighcharts, XAxis, YAxis, Title,
-         Subtitle, Legend, SplineSeries, AreaSplineSeries, Navigator, Tooltip
+         SplineSeries, AreaSplineSeries, Navigator, Tooltip
        } from 'react-jsx-highstock';
 
 import '../../../app/assets/stylesheets/components/chart';
@@ -53,9 +53,8 @@ class StockChart extends React.Component {
     const { intervalStr, intervalKey } = this.state;
     const priceData = [];
     const volumeData = [];
-    const subtitle = companyName + ' - ' + this.state.intervalStr;
+    const chartTitle = companyName + ' - ' + this.state.intervalStr;
     const intervals =   { ['5y']: "Five Years",
-                         ['2y']:" Two Years",
                          ['1y']:" One Year",
                          ['YTD']: "Year to Date",
                          ['6m']: "Six Months",
@@ -75,7 +74,7 @@ class StockChart extends React.Component {
       })
     }
 
-    const GraphTypeButton = <button className="button" onClick={ (e) =>
+    const GraphTypeButton = <button className="graph-type-button" onClick={ (e) =>
                               this.setYType(e) }>
                               { this.state.typeButton }
                             </button>
@@ -100,31 +99,33 @@ class StockChart extends React.Component {
       }
 
       const InvervalButtons = Object.keys(intervals).map(intKey => {
+        const isDisabled = (intKey === this.state.intervalKey) ? true : false;
+
         return (
           <button onClick={(e) => this.changeInterval(intervals[intKey], intKey, e)}
+                  className="int-button"
+                  disabled={isDisabled}
                   key={intKey} >
-            { intervals[intKey] }
+            { intKey }
           </button>
         )
-
       })
 
 
     return (
       <div className="chart-container">
+
+        <h1>{chartTitle}</h1>
         { GraphTypeButton }
 
-        { InvervalButtons }
+        <div className="interval-buttons">
+          Intervals: { InvervalButtons }
+        </div>
 
         <HighchartsStockChart>
           <Chart zoomType="x" />
 
           <Title> - </Title>
-          <Subtitle>{ subtitle }</Subtitle>
-
-          <Legend>
-            <Legend.Title>Key</Legend.Title>
-          </Legend>
 
           <Tooltip />
 
