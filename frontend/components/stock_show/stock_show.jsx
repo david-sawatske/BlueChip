@@ -1,13 +1,13 @@
 import React from 'react';
 
 import PeerData from './peer_data';
-import StockChart from './stock_chart';
 import CompanyData from './company_data';
 import StockHeader from './stock_header';
 import StockSummary from './stock_summary';
 import StockNews from './stock_news_index';
 import EarningsTable from './earnings_table';
 import FinancialsTable from './financials_table';
+import StockChart from './stock_chart_container';
 import UserTransactions from './user_transaction_index';
 import ModalRoot from  '../modal/modal_root_container';
 
@@ -77,7 +77,7 @@ class StockShow extends React.Component {
           </div>
 
           <div className="chart-earnings">
-            <StockChart chart={chart}
+            <StockChart symbol={quote.symbol}
                         companyName={quote.companyName}/>
 
             <EarningsTable earnings={earnings.earnings} />

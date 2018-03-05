@@ -15,20 +15,14 @@ class StockChart extends React.Component {
 
     this.state = { yType: "priceData",
                    typeButton: "Volume Data",
-                   intervalStr: "One Month",
+                   intervalStr: "One Day",
                    intervalKey: "1d" }
 
     this.setYType = this.setYType.bind(this);
   }
 
   componentWillMount() {
-    const interval = this.props.interval;
-    let intervalKey;
-    if (interval) {
-      intervalKey = Object.keys(interval)[0];
-      this.setState({ intervalStr: interval.intervalKey,
-                      intervalKey: intervalKey });
-    }
+    this.props.requestChartUpdate(this.props.symbol, '1d')
   }
 
   setYType() {
@@ -40,20 +34,22 @@ class StockChart extends React.Component {
   }
 
   render() {
-    const { chart, companyName, interval = {'1d' : 'One Day'} } = this.props;
+    const { chartData, companyName, interval = {'1d' : 'One Day'}, symbol } = this.props;
     const { intervalStr, intervalKey } = this.state;
     const priceData = [];
     const volumeData = [];
 
-    chart.map(obj => {
-      const date = (intervalKey === '1d') ? dateConv(obj) : Date.parse(obj.date);
-      const price = (intervalKey === '1d') ? obj.average : obj.close;
+    if (chartData) {
+      chartData.map(obj => {
+        const date = (intervalKey === '1d') ? dateConv(obj) : Date.parse(obj.date);
+        const price = (intervalKey === '1d') ? obj.average : obj.close;
 
-      if (price > 0) {
-        priceData.push([date, price]);
-        volumeData.push([date, obj.volume]);
-      }
-    })
+        if (price > 0) {
+          priceData.push([date, price]);
+          volumeData.push([date, obj.volume]);
+        }
+      })
+    }
 
     const graphTypeButton = <button className="button" onClick={ (e) =>
                               this.setYType(e) }>
@@ -61,7 +57,7 @@ class StockChart extends React.Component {
                             </button>
 
     let yAxis
-    if (this.state.yType === "priceData") {
+    if (this.state.yType === "priceData" && priceData.length > 0) {
           yAxis = <div>
                     <YAxis id="price">
                       <YAxis.Title>Price</YAxis.Title>
