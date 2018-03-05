@@ -14,9 +14,9 @@ export const receiveStockSearch = stockSeriesData => ({
   stockSeriesData
 });
 
-export const receiveChartData = (symbol, stockChartData) => ({
+export const receiveChartData = (symbol, interval, stockChartData) => ({
   type: RECEIVE_CHART_DATA,
-  chartData: { [symbol]: stockChartData}
+  chartData: { [symbol]: { [interval]: stockChartData }}
 });
 
 export const receivePeerSearch = stockPeerData => ({
@@ -56,7 +56,7 @@ export const requestChartUpdate = (symbol, interval) => dispatch => {
 
   return RemoteStockAPIUtil.fetchChartUpdate(symbol, interval)
     .then(stockChartData => {
-      dispatch(receiveChartData(symbol, stockChartData));
+      dispatch(receiveChartData(symbol, interval, stockChartData));
   });
 }
 
