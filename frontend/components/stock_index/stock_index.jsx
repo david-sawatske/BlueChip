@@ -24,7 +24,7 @@ class StockIndex extends React.Component {
 
 
     if (ownedTickers) {
-      requestStockSearch(ownedTickers, '1d', additionalDataTypes)
+      requestStockSearch(ownedTickers, additionalDataTypes)
     }
   }
 
@@ -51,7 +51,7 @@ class StockIndex extends React.Component {
     const { additionalDataTypes, requestStockSearch } = this.props;
 
     if (ownedTickers) {
-      requestStockSearch(ownedTickers, '1d', additionalDataTypes)
+      requestStockSearch(ownedTickers, additionalDataTypes)
     }
 
     this.setState({ clickedTicker: '', showTable: true })
@@ -97,8 +97,6 @@ class StockIndex extends React.Component {
                               'invested': 'Total Invested',
                               'sharesOwned': 'Shares Owned',
                               'searchLink': 'Click Logo for More Data' }
-
-
 
       const isDataSotable = { 'companyName': true,
                               'symbol': true,
