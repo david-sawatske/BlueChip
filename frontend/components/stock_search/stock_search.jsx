@@ -42,7 +42,6 @@ class StockSearch extends React.Component {
     const ticker = this.state.ticker;
 
     this.props.requestStockSearch(ticker, additionalDataTypes)
-    this.props.setTicker(ticker)
   }
 
   handlePeerSearch(event) {
