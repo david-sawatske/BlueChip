@@ -5,8 +5,6 @@ import { HighchartsStockChart, Chart, withHighcharts, XAxis, YAxis, Title,
          SplineSeries, AreaSplineSeries, Navigator, Tooltip
        } from 'react-jsx-highstock';
 
-import '../../../app/assets/stylesheets/components/chart';
-
 import { dateConv } from '../../util/helper_functions';
 
 class StockChart extends React.Component {
@@ -111,10 +109,8 @@ class StockChart extends React.Component {
         )
       })
 
-
     return (
       <div className="chart-container">
-
         <h1>{chartTitle}</h1>
         { GraphTypeButton }
 
