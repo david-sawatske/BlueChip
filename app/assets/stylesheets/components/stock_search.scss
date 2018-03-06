@@ -1,33 +1,36 @@
 @import '_variables';
-
 /*--------------------------------------------------------------
 CSS Grid layout for modern browsers:
 --------------------------------------------------------------*/
 @supports (grid-area: auto) {
 	@media screen and (min-width: 768px) {
 		.stock-search-container {
+			height: 80vh;
+			overflow-y: scroll;
+
 			display: grid;
-			grid-template-columns: 1fr 4fr 1fr;
-			grid-template-rows: auto;
+			grid-template-columns: 1fr 2fr 1fr;
+			grid-template-rows: .25fr 2fr 3fr;
 
 			.initial-search {
 				grid-column: 2;
-				grid-row: 1;
-
+				grid-row: 2;
 				justify-self: center;
-				background-color: $background-grey;
-				border-radius: 10% 10% 5% 5%;
-				padding: 0% 3%;
+
+				background-color: $transparent-white;
+				border-radius: 10%;
 
 				display: inherit;
 				grid-template-columns: auto;
-				grid-template-rows: 1fr 3fr;
+				grid-template-rows: .25fr .5fr 1fr .25fr;
 
 				h1.initial {
-					grid-column: 2;
-					grid-row: 1;
+					grid-column: 1;
+					grid-row: 2;
 
-					font-weight: 100;
+					background-color: $off-white;
+					border-top: 5px solid $dark-blue;
+					border-bottom: 5px solid $dark-blue;
 					font-size: 200%;
 				}
 
@@ -36,37 +39,39 @@ CSS Grid layout for modern browsers:
 				}
 
 				.search {
-					grid-column:2;
-					grid-row: 2;
-
+					grid-column: 1;
+					grid-row: 3;
 					display: inherit;
-					grid-template-columns: auto;
+					grid-template-columns: 70% 30%;
 					grid-template-rows: auto;
-					margin-bottom: 15%;
 
 					input[type=text] {
-						grid-column: 2/8;
+						grid-column: 1/3;
 						grid-row: 1;
+
+						width: 75%;
+						justify-self: center;
+						align-self: center;
+
 						color: black;
-						border:2px solid #ccc;
+						border: 2px solid $dark-grey;
 						border-radius: 5px;
 						background-color: $blue-grey;
-						font-size: 250%;
+						font-size: 225%;
 					}
 
 					.submit-search {
-						grid-column: 6/8;
+						grid-column: 2;
 						grid-row: 1;
 						align-self: center;
-						justify-self: center;
+						justify-self: left;
 
 						input[type="submit"] {
 							background: $background-grey;
 							padding: 10%;
-							font-size: 150%;
+							font-size: 125%;
 							color: $blue-grey;
-							border-color: $blue-grey;
-							border-style: solid;
+							border: none;
 							border-radius: 5px;
 						}
 
@@ -78,133 +83,144 @@ CSS Grid layout for modern browsers:
 					}
 				}
 			}
-		}
-	}
 
-		.side-search {
-			grid-column: 1fr;
-			width: auto;
-
-			display: grid;
-			grid-template-rows: auto;
-			justify-content: center;
-			align-content: start;
-			background-color: $background-grey;
-			padding: 0% 3%;
-
-			h1.searched {
-				grid-row: 1;
-				color: $pale-green;
-			}
-
-			h1.initial {
-				display: none;
-			}
-
-			.search {
-				grid-row: 2;
+			.side-search {
+				grid-column: 1fr;
+				width: auto;
 				display: grid;
+				grid-template-rows: auto;
+				justify-content: center;
+				align-content: start;
+				background-color: $background-grey;
+				padding: 0 3%;
 
-				grid-template-columns: auto;
-				grid-template-row: auto;
+				h1.searched {
+					grid-row: 1;
+					color: $pale-green;
+				}
 
-				input[type=text] {
+				h1.initial {
+					display: none;
+				}
+
+				.search {
+					grid-row: 2;
+					display: grid;
+					grid-template-columns: auto;
+					grid-template-row: auto;
+
+					input[type=text] {
+						grid-column: 1;
+						grid-row: 1;
+						width: 80%;
+						color: black;
+						border: 2px solid #ccc;
+						border-radius: 5px;
+						background-color: $blue-grey;
+						font-size: 150%;
+					}
+
+					input[type="submit"] {
+						grid-column: 1;
+						grid-row: 2;
+						align-self: center;
+						margin-top: 15%;
+						transition: transform 0.2s;
+						padding: 5px 15px;
+						background: $background-grey;
+						font-size: 125%;
+						color: $blue-grey;
+						border-color: $blue-grey;
+						border-style: solid;
+						border-radius: 5px;
+					}
+
+					.int-val {
+						display: inline;
+					}
+
+					label:hover .search-val {
+						display: inline;
+					}
+
+					label:hover .int-val {
+						display: none;
+					}
+
+					.search-val {
+						display: none;
+					}
+				}
+
+				.stock-summary {
+					display: none;
+				}
+
+				.chart-container {
+					height: 100%;
+					justify-content: center;
+					margin-left: 30%;
+				}
+
+				.initial {
+					display: none;
+				}
+			}
+
+			.hide-search {
+				h1.searched {
 					grid-column: 1;
 					grid-row: 1;
-					width: 80%;
-					color: black;
-					border:2px solid #ccc;
-					border-radius: 5px;
-					background-color: $blue-grey;
-					font-size: 150%;
-				}
-
-
-				input[type="submit"] {
-					grid-column: 1;
-					grid-row: 2;
-					align-self: center;
-
-					margin-top: 15%;
-					transition: transform .2s;
-					padding:5px 15px;
-					background: $background-grey;
-					font-size: 125%;
 					color: $blue-grey;
-					border-color: $blue-grey;
-					border-style: solid;
-					border-radius: 5px;
+					margin-left: -50px;
+					margin-top: 33px;
+					margin-right: -50px;
+					font-size: 125%;
+					transform: rotate(270deg);
 				}
 
-				.int-val {
-				  display: inline;
+				.initial {
+					display: none;
 				}
 
-				label:hover .search-val {
-				  display: inline;
+				.search {
+					display: none;
 				}
 
-				label:hover .int-val {
-				  display: none;
+				.stock-show {
+					grid-column: 2;
+					grid-row: auto;
+					width: auto;
+					height: 100vh;
 				}
-
-				.search-val {
-				  display: none;
-				}
 			}
 
-			.stock-summary {
-				display: none;
-			}
 
-			.chart-container {
-				height: 100%;
-				justify-content: center;
-				margin-left: 30%;
-			}
-
-			.initial {
-				display: none;
-			}
-		}
-
-		.hide-search {
-			h1.searched {
-				grid-column: 1;
-				grid-row: 1;
-
-				color: $blue-grey;
-				margin-left: -50px;
-				margin-top: 33px;
-				margin-right: -50px;
-				font-size: 125%;
-				transform: rotate(270deg);
-			}
-
-			.initial {
-				display: none;
-			}
-
-			.search {
-				display: none;
-			}
-
-			.stock-show {
-				grid-column: 2;
-				grid-row: auto;
-
-				width: auto;
-				height: 100vh;
-			}
-		}
-
-		.suggestion-container {
-			grid-column: 1;
-			grid-row: 3;
-
-			background-color: $transparent;
 			.search-suggestions {
-				color: red;
+				grid-column: 2;
+				grid-row: 3;
+
+				justify-self: center;
+				max-height: 40vh;
+				width: 75%;
+				overflow-y: hidden;
+
+				background-color:  $blue-grey;
+				border-radius: 0 0 5% 5%;
+
+				ul > li {
+					color: $dark-grey;
+					font-size: 125%;
+					padding: 1%;
+
+					opacity: .9;
+				}
+
+				ul > li:hover {
+					opacity: 1;
+					color: black;
+				}
 			}
+		}
 	}
 }

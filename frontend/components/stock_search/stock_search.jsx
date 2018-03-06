@@ -10,7 +10,7 @@ class StockSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { ticker: "AAPL",
+    this.state = { ticker: "A",
                    searchInitiated: false,
                    prevSearchData: null,
                    prevPeerData: null,
@@ -169,8 +169,6 @@ class StockSearch extends React.Component {
     if (searchedTicker.length > 0 && (searchClass === "initial-search" ||
                                       searchClass === "home-search") ) {
       SuggestedTickers = <SearchSuggestions filteredTickers={filteredTickers} />
-    } else if (searchedTicker.length === 0){
-      SuggestedTickers = <h1>Please Enter a vaild ticker</h1>
     }
 
     return (
@@ -179,16 +177,16 @@ class StockSearch extends React.Component {
              onMouseEnter={this.handleHover}
              onMouseLeave={this.handleHover}>
 
-        <h1 className='initial'>Enter Ticker for Live Stock Data</h1>
+        <h1 className='initial'>Enter Ticker  or Company Name for Live Stock Data</h1>
         <h1 className='searched'>Stock Search</h1>
 
           <form onSubmit={targetHandleSubmit}
-            className="search">
+                className="search">
             <input
               type="text"
               value={this.state.ticker}
               onChange={this.update('ticker')}
-              placeholder="Ticker"
+              placeholder="Begin Typing..."
             />
 
             <label className='submit-search'>
