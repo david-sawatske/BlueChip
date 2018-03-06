@@ -66,23 +66,13 @@ CSS Grid layout for modern browsers:
 			background-size: cover;
 		  height: 100vh;
 		  width: 100vw;
-			overflow: scroll;
+			overflow: hidden;
 
 			display: grid;
       grid-template-columns: auto;
-      grid-template-rows: 1fr 4fr;
+      grid-template-rows: 1fr 5fr;
 		}
-
-		.header {
-			grid-row: 1;
-			background-color: white;
-			opacity: .95;
-			position: fixed;
-			z-index: 3;
-
-			width: 100vw;
-		}
-
+		
 		.body {
 			grid-row: 2;
 		}
