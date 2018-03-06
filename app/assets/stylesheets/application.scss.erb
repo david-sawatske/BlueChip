@@ -64,20 +64,21 @@ CSS Grid layout for modern browsers:
     .container {
 			background: url('<%= asset_path 'bg-image.jpg' %>');
 			background-size: cover;
-		  height: 95vh;
+		  height: 100vh;
 		  width: 100vw;
 			overflow: scroll;
 
 			display: grid;
+      grid-template-columns: auto;
       grid-template-rows: 1fr 4fr;
 		}
 
 		.header {
 			grid-row: 1;
 			background-color: white;
-			opacity: .9;
+			opacity: .95;
 			position: fixed;
-			top: 0;
+			z-index: 3;
 
 			width: 100vw;
 		}
@@ -99,8 +100,8 @@ CSS Grid layout for modern browsers:
     text-decoration: none;
 		padding: 10px 15px;
     display: inline;
-    font-size: 12px;
-    border-radius: 12px;
+    font-size: 100%;
+    border-radius: 5%;
 }
 
 .button:hover {
