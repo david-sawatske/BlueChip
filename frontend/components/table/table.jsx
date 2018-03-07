@@ -75,18 +75,19 @@ class SortableTable extends React.Component {
 
   render () {
     const { tableHeadings, ranked, isDataSotable } = this.props;
-    const { dataArr, isOrderASC, sortedValue } = this.state;
+    const { dataArr = [], isOrderASC, sortedValue } = this.state;
     const rankHeader = (ranked) ? <th><a className="ranking">Ranking</a></th>
                                      :
                                    null;
+                                   
+    const dataAttributes = dataArr[0] ? Object.keys(dataArr[0]) : []
     let arrow;
-
     return (
         <table>
           <thead>
             <tr>
               { rankHeader }
-              {Object.keys(dataArr[0]).map((attribute, idx) => {
+              { dataAttributes.map((attribute, idx) => {
                 if (!isDataSotable[attribute]) {
                   arrow = null;
                 } else if (attribute === sortedValue) {
