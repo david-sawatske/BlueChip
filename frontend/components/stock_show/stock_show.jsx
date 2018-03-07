@@ -24,7 +24,7 @@ class StockShow extends React.Component {
     const transactArray = (transactionData) ? Object.values(transactionData)
                                                :
                                               [];
-
+                                              
     const TransactionButton = <button className="button" onClick={ () =>
                                 showModal('transaction', { modalOpen: true }) }>
                                 Buy/Sell
@@ -64,7 +64,7 @@ class StockShow extends React.Component {
 
           <CompanyData companyData={companyData} />
 
-          <PeerData peerData={peerData} />
+          <PeerData peerData={peerData.filter(Boolean)} />
 
           <div className="summary-transaction">
             <StockSummary quote={quote} />
