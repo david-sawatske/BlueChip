@@ -19,16 +19,18 @@ class StockShow extends React.Component {
   }
 
   render() {
-    const { remoteStockData, showModal, hideModal,
+    const { remoteStockData, showModal, hideModal, currentUser,
             transactionData, peerData } = this.props;
     const transactArray = (transactionData) ? Object.values(transactionData)
                                                :
                                               [];
-                                              
-    const TransactionButton = <button className="button" onClick={ () =>
-                                showModal('transaction', { modalOpen: true }) }>
-                                Buy/Sell
-                              </button>
+    let TransactionButton
+    if (currentUser) {
+      TransactionButton = <button className="button" onClick={ () =>
+                            showModal('transaction', { modalOpen: true }) }>
+                            Buy/Sell
+                          </button>
+    }
 
     let TransactionComponent
     if (transactArray.length > 0) {
