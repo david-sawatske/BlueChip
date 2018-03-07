@@ -66,7 +66,7 @@ class StockShow extends React.Component {
 
           <CompanyData companyData={companyData} />
 
-          <PeerData peerData={peerData.filter(Boolean)} />
+          <PeerData peerData={peerData} />
 
           <div className="summary-transaction">
             <StockSummary quote={quote} />

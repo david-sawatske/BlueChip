@@ -10,10 +10,9 @@ class StockSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { ticker: "",
+    this.state = { ticker: '',
+                   prevTicker: '',
                    searchInitiated: false,
-                   prevSearchData: null,
-                   prevPeerData: null,
                    isSearchHovered: false };
 
     this.userTransactionData = this.userTransactionData.bind(this);
@@ -32,8 +31,9 @@ class StockSearch extends React.Component {
     }
   }
 
-  setSearchInitiated() {
-    this.setState({ searchInitiated: true })
+  initiateSearch() {
+    this.setState({ searchInitiated: !this.state.searchInitiated,
+                    prevTicker: this.state.ticker })
   }
 
   handleStockSearch(event) {
@@ -48,6 +48,8 @@ class StockSearch extends React.Component {
   handlePeerSearch(event) {
     event.preventDefault();
 
+    this.setState({ searchInitiated: false })
+
     const additionalDataTypes = 'financials,earnings,relevant,';
     this.props.requestStockSearch(this.state.ticker, additionalDataTypes)
       .then(stockData => {
@@ -57,7 +59,7 @@ class StockSearch extends React.Component {
                                                   .toString()
 
         this.props.requestStockPeers(peerStr);
-      }).then(data => { this.setSearchInitiated() })
+      }).then(data => { this.initiateSearch() })
   }
 
   handleHover() {
@@ -110,7 +112,7 @@ class StockSearch extends React.Component {
   render() {
     const searchedTicker = this.state.ticker.toUpperCase();
     const { isRemoteLoading, isPeerLoading, isRailsUserLoading, showModal, currentPath,
-            hideModal, tickerData, remoteStockData = {}, currentUserData = {} } = this.props;
+            hideModal, tickerData, remoteStockData = {}, currentUserData = {}, currentUser} = this.props;
     const { isSearchHovered } = this.state;
     const currentUserTranData = currentUserData.userLeagueData;
     const peerData = [];
@@ -128,7 +130,9 @@ class StockSearch extends React.Component {
                                         ['symbols']
 
       peerTkrArr.map(tkr => {
-        peerData.push(remoteStockData[tkr])
+        if (remoteStockData[tkr]) {
+          peerData.push(remoteStockData[tkr])
+        }
       })
     }
 
@@ -137,25 +141,25 @@ class StockSearch extends React.Component {
                                 :
                               { };
 
-
     let ShowComponent;
     if (currentPath === '/') {
       targetHandleSubmit = this.handleStockSearch;
     } else if (isRemoteLoading || isRailsUserLoading || isPeerLoading) {
       ShowComponent = <Loader />
     } else if (this.state.searchInitiated && remoteStockData[searchedTicker]) {
-      ShowComponent = <StockShow remoteStockData={remoteStockData[searchedTicker]}
-                                 peerData={peerData}
+      const targetRemoteData = remoteStockData[searchedTicker];
+      ShowComponent = <StockShow remoteStockData={targetRemoteData}
                                  transactionData={transactionData}
+                                 currentUser={currentUser}
+                                 peerData={peerData}
                                  showModal={showModal}
                                  hideModal={hideModal} />
-
-        this.state.prevSearchData = remoteStockData[searchedTicker];
-        this.state.prevPeerhData = peerData;
-    } else if (this.state.prevSearchData) {
-      ShowComponent = <StockShow remoteStockData={this.state.prevSearchData}
-                                 peerData={this.state.prevPeerData}
-                                 transactionData={transactData}
+    } else if (remoteStockData[this.state.prevTicker]) {
+      const targetRemoteData = remoteStockData[this.state.prevTicker];
+      ShowComponent = <StockShow remoteStockData={targetRemoteData}
+                                 transactionData={transactionData}
+                                 currentUser={currentUser}
+                                 peerData={peerData}
                                  showModal={showModal}
                                  hideModal={hideModal} />
     }
@@ -174,6 +178,7 @@ class StockSearch extends React.Component {
     let SuggestedTickers
     if (searchedTicker.length > 0 && (searchClass === "initial-search" ||
                                       searchClass === "home-search") ) {
+
       SuggestedTickers = <SearchSuggestions filteredTickers={filteredTickers}
                                             updateTicker={this.clickUpdateTicker} />
     }
@@ -183,7 +188,6 @@ class StockSearch extends React.Component {
         <div className={searchClass}
              onMouseEnter={this.handleHover}
              onMouseLeave={this.handleHover}>
-
         <h1 className='initial'>Enter Ticker  or Company Name for Live Stock Data</h1>
         <h1 className='searched'>Stock Search</h1>
 
