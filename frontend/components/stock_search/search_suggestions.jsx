@@ -1,14 +1,14 @@
 import React from 'react';
 
-const SearchSuggestions = ({ filteredTickers }) => (
+const SearchSuggestions = ({ filteredTickers, updateTicker }) => (
   <div className="search-suggestions">
     <ul>
       { filteredTickers.map((tkrData) => {
         const { name, symbol } = tkrData;
-
-        return (
-          <li key={symbol}>{name} - {symbol}</li>
-        )
+        return <li key={symbol}
+                   onClick={ (e) => updateTicker(symbol, e) }>
+                 {name} - {symbol}
+               </li>
       })}
     </ul>
   </div>

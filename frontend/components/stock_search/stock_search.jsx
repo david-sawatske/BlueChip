@@ -10,7 +10,7 @@ class StockSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { ticker: "A",
+    this.state = { ticker: "",
                    searchInitiated: false,
                    prevSearchData: null,
                    prevPeerData: null,
@@ -18,6 +18,7 @@ class StockSearch extends React.Component {
 
     this.userTransactionData = this.userTransactionData.bind(this);
     this.handleStockSearch = this.handleStockSearch.bind(this);
+    this.clickUpdateTicker = this.clickUpdateTicker.bind(this);
     this.handlePeerSearch = this.handlePeerSearch.bind(this);
     this.handleHover = this.handleHover.bind(this);
     this.update = this.update.bind(this);
@@ -54,6 +55,7 @@ class StockSearch extends React.Component {
                                                   ['relevant']
                                                   ['symbols']
                                                   .toString()
+
         this.props.requestStockPeers(peerStr);
       }).then(data => { this.setSearchInitiated() })
   }
@@ -69,6 +71,10 @@ class StockSearch extends React.Component {
       [field]: e.currentTarget.value.toUpperCase(),
       isSearchHovered: true
     });
+  }
+
+  clickUpdateTicker(newTicker) {
+    this.setState({ ['ticker']: newTicker })
   }
 
   userTransactionData(currentUserTranData) {
@@ -113,11 +119,11 @@ class StockSearch extends React.Component {
 
     let filteredTickers = []
     if (tickerData.length != 0) {
-      filteredTickers = this.filterTickers(this.state.ticker, tickerData)
+      filteredTickers = this.filterTickers(searchedTicker, tickerData)
     }
 
-    if (remoteStockData[this.state.ticker]) {
-      const peerTkrArr = remoteStockData[this.state.ticker]
+    if (remoteStockData[searchedTicker]) {
+      const peerTkrArr = remoteStockData[searchedTicker]
                                         ['relevant']
                                         ['symbols']
 
@@ -168,7 +174,8 @@ class StockSearch extends React.Component {
     let SuggestedTickers
     if (searchedTicker.length > 0 && (searchClass === "initial-search" ||
                                       searchClass === "home-search") ) {
-      SuggestedTickers = <SearchSuggestions filteredTickers={filteredTickers} />
+      SuggestedTickers = <SearchSuggestions filteredTickers={filteredTickers}
+                                            updateTicker={this.clickUpdateTicker} />
     }
 
     return (
@@ -184,7 +191,7 @@ class StockSearch extends React.Component {
                 className="search">
             <input
               type="text"
-              value={this.state.ticker}
+              value={searchedTicker}
               onChange={this.update('ticker')}
               placeholder="Begin Typing..."
             />
