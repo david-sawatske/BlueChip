@@ -52,85 +52,76 @@ CSS Grid layout for modern browsers:
 							grid-row: 1;
 
 							display: grid;
-							grid-template-columns: 1fr 3fr;
+							grid-template-columns: 1fr 8fr;
 							grid-template-rows: auto;
 
 							.logo {
 								grid-column: 1;
-								width: 50%;
+
 								height: auto;
+								width: 90%;
 								align-self: center;
 								justify-self: center;
-								padding:1px;
+
 								border:1px solid $dark-grey;
 								background-color: $off-white;
 							}
 
 							.name {
 								grid-column: 2;
+
 								align-self: center;
 								justify-self: left;
-								font-size: 200%;
+								padding: 0;
+								margin-left: 1vw;
+
+								font-size: 5vh;
 								font-family: Oswald;
 							}
 						 }
 
 						.data {
 							grid-column: 1/6;
-							grid-row: 2/2;
+							grid-row: 2;
 
-							display: inherit;
-							grid-template-columns: auto;
+							display: grid;
+							grid-template-columns: 1fr 1fr 1fr;
+
+							div {
+								h3 {
+									text-align: left
+								}
+
+								.display-data {
+									text-align: center;
+									font-size: 4vh;
+
+								}
+							}
 
 							.price {
-								grid-column: 1/3;
-								grid-row: 2;
+								grid-column: 1;
 
-								display: inherit;
-								grid-template-rows: auto;
-
-								div {
-									grid-row: 3;
-									justify-self: center;
-									font-size: 250%;
-									margin-top: -25%;
+								.display-data {
+									font-size: 6vh;
 								}
 							}
 
-							div.total {
-								grid-column: 4;
-								grid-row: 2;
-
-								display: inherit;
-								grid-template-rows: auto;
-
-								div {
-									grid-row: 2;
-									justify-self: center;
-									font-size: 200%;
-									margin-top: -25%;
-								}
+							.total {
+								grid-column: 2;
 							}
 
-							div.percent {
+							.percent {
 								grid-column: 3;
-								grid-row: 2;
-
-								display: grid;
-								grid-template-rows: auto;
-
-								div {
-									grid-row: 2;
-									justify-self: center;
-									font-size: 200%;
-									margin-top: -25%;
-								}
 							}
 						}
 
 						.time {
 							grid-column: 1/5;
-							margin-left: 5%;
+
+							margin: 1vh 0 0 2vh;
+
+							font-size: 3vh;
 						}
 					}
 
