@@ -12,6 +12,7 @@ class StockChart extends React.Component {
     super(props);
 
     this.state = { yType: "priceData",
+                   typeString: "Price",
                    typeButton: "Volume Data",
                    intervalStr: "One Day",
                    intervalKey: "1d",
@@ -29,9 +30,13 @@ class StockChart extends React.Component {
 
   setYType() {
     (this.state.yType === "volumeData") ?
-      this.setState({ yType: "priceData", typeButton: "Volume Data" })
+      this.setState({ yType: "priceData",
+                      typeString: "Price",
+                      typeButton: "Volume Data" })
        :
-      this.setState({ yType: "volumeData", typeButton: "Price Data" })
+      this.setState({ yType: "volumeData",
+                      typeString: "Volume",
+                      typeButton: "Price Data" })
   }
 
   changeInterval(intervalStr, intervalKey, event) {
@@ -48,10 +53,10 @@ class StockChart extends React.Component {
 
   render() {
     const { companyName, symbol, chartData = {} } = this.props;
-    const { intervalStr, intervalKey } = this.state;
+    const { intervalStr, intervalKey, yType, typeString } = this.state;
     const priceData = [];
     const volumeData = [];
-    const chartTitle = companyName + ' - ' + this.state.intervalStr;
+
     const intervals =   { ['5y']: "Five Years",
                          ['1y']:" One Year",
                          ['YTD']: "Year to Date",
@@ -78,7 +83,7 @@ class StockChart extends React.Component {
                             </button>
 
     let yAxis
-    if (this.state.yType === "priceData" && priceData.length > 0) {
+    if (yType === "priceData" && priceData.length > 0) {
           yAxis = <div>
                     <YAxis id="price">
                       <YAxis.Title>Price</YAxis.Title>
@@ -87,7 +92,7 @@ class StockChart extends React.Component {
                                     data={priceData} />
                     </YAxis>
                   </div>
-      } else if (this.state.yType === "volumeData") {
+      } else if (yType === "volumeData") {
           yAxis = <YAxis id="volumeData">
                     <YAxis.Title>Price</YAxis.Title>
                     <AreaSplineSeries id="volumeData"
@@ -111,7 +116,10 @@ class StockChart extends React.Component {
 
     return (
       <div className="chart-container">
-        <h1>{chartTitle}</h1>
+        <div className="chart-title">
+          <h2>{ typeString }</h2>
+          <h3>{'  (' + this.state.intervalStr +')'}</h3>
+        </div>
         { GraphTypeButton }
 
         <div className="interval-buttons">
