@@ -188,7 +188,9 @@ class StockSearch extends React.Component {
         <div className={searchClass}
              onMouseEnter={this.handleHover}
              onMouseLeave={this.handleHover}>
-        <h1 className='initial'>Enter Ticker  or Company Name for Live Stock Data</h1>
+        <h1 className='initial'>Search for Live Stock Data</h1>
+        <h2 className='initial-sub'>Enter Company Name or Ticker</h2>
+
         <h1 className='searched'>Stock Search</h1>
 
           <form onSubmit={targetHandleSubmit}

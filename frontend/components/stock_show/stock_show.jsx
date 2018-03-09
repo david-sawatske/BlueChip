@@ -58,40 +58,37 @@ class StockShow extends React.Component {
       ShowComponent =
         <div className="stock-data">
           <div className="header-container">
-            { TransactionButton }
-
             <StockHeader quote={quote}
                          logo={logo} />
+
+           { TransactionButton }
           </div>
 
-          <CompanyData companyData={companyData} />
+          <div className="transaction-data">
+            <h1>Transaction History</h1>
 
-          <PeerData peerData={peerData} />
-
-          <div className="summary-transaction">
-            <StockSummary quote={quote} />
-
-            { TransactionButton }
-
-            <div className="transaction-data">
-              { TransactionComponent }
-            </div>
+            { TransactionComponent }
           </div>
 
-          <div className="chart-earnings">
-            <StockChart symbol={quote.symbol}
-                        companyName={quote.companyName}/>
+          <StockChart symbol={quote.symbol}
+                      companyName={quote.companyName}/>
 
-            <EarningsTable earnings={earnings.earnings} />
-          </div>
-
-          <StockNews news={news}
-                     companyName={quote.companyName}/>
+          <StockSummary quote={quote} />
 
           <FinancialsTable financials={financials.financials} />
 
-          <ModalRoot quote={quote}
-                     logo={logo} />
+          <CompanyData companyData={companyData} />
+
+          <div className="earnings-peer">
+            <EarningsTable earnings={earnings.earnings} />
+            <PeerData peerData={peerData} />
+          </div>
+
+            <StockNews news={news}
+                       companyName={quote.companyName}/>
+
+            <ModalRoot quote={quote}
+                       logo={logo} />
         </div>
     }
 

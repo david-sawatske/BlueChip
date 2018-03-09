@@ -36,7 +36,6 @@ class UserTransactions extends React.Component {
 
     return (
       <div className="transaction-table">
-        <h1>Transaction History</h1>
         <SortableTable dataArr={tableData}
                        isDataDate={isDataDate}
                        sideHeadings={sideHeadings}
