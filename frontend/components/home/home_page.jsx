@@ -11,7 +11,6 @@ import Loader from '../shared/loader';
 
 import StockSearch from '../stock_search/stock_search';
 
-
 import SampleComponent from './sample_component';
 
 import { arrSample } from '../../util/helper_functions';
@@ -68,10 +67,12 @@ class HomePage extends React.Component {
 
     return (
       <div className={this.state.containerClass}>
-        <img className="app-logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
-        <h1 className="home-h1">BlueChip</h1>
-        <h2 className="home-h2">FANTASY STOCK TRADING LEAGUES</h2>
-        <p>Enter the name or stock ticker for a publicy traded company to see an overview</p>
+        <div className="logo-headings">
+          <img className="app-logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
+          <h1 className="home-h1">BlueChip</h1>
+          <h2 className="home-h2">FANTASY STOCK TRADING LEAGUES</h2>
+          <p>Enter the name or stock ticker for a publicy traded company to see an overview</p>
+        </div>
         <MastheadButtons currentUser={currentUser}
                          hideModal={hideModal}
                          showModal={showModal}
