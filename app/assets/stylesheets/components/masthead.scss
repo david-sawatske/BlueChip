@@ -7,7 +7,7 @@ CSS Grid layout for modern browsers:
 	@media screen and (min-width: 768px) {
     .masthead {
       display: grid;
-      grid-template-columns: [logo] 10% [title] auto [buttons] 60% ;
+      grid-template-columns: [logo] 10vw [title] 30vw [buttons] 60vw ;
       grid-template-rows: 10vh 7vh;
 
 			position: fixed;
@@ -21,23 +21,28 @@ CSS Grid layout for modern browsers:
 
 	    .title {
 	      grid-column: title;
-	      grid-row: 1/1;
+	      grid-row: 1;
 
-				font-size: 150%;
 				justify-self: left;
 				align-self: center;
+
+				font-size: 4.5vh;
+
+				h1 {
+					padding: 0 0 0 .25vw;
+				}
 	    }
 
 	    .logo  {
 	      grid-column: logo;
 	      grid-row: 1/1;
 
+				align-self: center;
+				margin-left: auto;
 				z-index: 1;
 
-				width: 85px;
+				width: 11.5vh;
 				height: auto;
-	      align-self: center;
-				margin-left: auto;
 	    }
 
 	    .session-buttons {
