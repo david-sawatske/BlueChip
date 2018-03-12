@@ -176,7 +176,7 @@ CSS Grid layout for modern browsers:
 					margin-left: 2vw;
 
 					border-radius: .5vw;
-					
+
 					button {
 						font-size: 1vw;
 					}
@@ -233,70 +233,6 @@ CSS Grid layout for modern browsers:
 				.financials-table {
 					grid-column: 1/7;
 					grid-row: 3;
-
-					width: 63vw;
-					margin: 0 1.5vw;
-					border: 1vw solid $news-transparent;
-					border-radius: .5vw;
-
-					table {
-						thead {
-							background: $transparent-white;
-							width: 63vw;
-
-							th  {
-								font-family: Quattrocento;
-								font-size: 2vw;
-								font-style: normal;
-							}
-
-							td {
-								color: $blue-grey;
-								font-weight: normal;
-								text-align: left;
-								text-transform: none;
-							}
-						}
-
-						tbody {
-							.sub-head {
-								background: $transparent-white;
-
-								td {
-									text-align: left;
-									color: $dark-blue;
-									font-size: 1.5vw;
-								}
-
-								th {
-									width: 10vw;
-
-									color: $blue-grey;
-									font-weight: normal;
-									font-style: italic;
-								}
-							}
-						}
-
-						.side-head {
-							width: 10vw;
-							padding-left: 3vw;
-
-							font-size: 1.25vw;
-							font-weight: normal;
-							font-style: italic;
-							text-align: left;
-							color: $blue-grey;
-							background: $transparent-white;
-							border-top: 1px solid $table-outline;
-							border-bottom: 1px solid $table-outline;
-						}
-
-						td {
-							width: 12vw;
-							text-align: center;
-						}
-					}
 				}
 
 				.company-data {

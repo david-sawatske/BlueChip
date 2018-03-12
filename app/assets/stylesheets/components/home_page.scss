@@ -247,7 +247,6 @@ CSS Grid layout for modern browsers:
 				grid-row: 2;
 
 				height: 80vh;
-		// div.sample-container div.sample-component div.financials-table table tbody.financials-body tr
 
 				.sample-container {
 					display: grid;
@@ -409,6 +408,7 @@ CSS Grid layout for modern browsers:
 						overflow: hidden;
 
 						background-color: white;
+						border-radius: 1vw;
 
 						display: grid;
 						grid-template-columns: auto;
@@ -423,11 +423,6 @@ CSS Grid layout for modern browsers:
 						  grid-row: 2;
 
 						  overflow: scroll;
-	 				  	height: 65vh;
-
-						  table {
-						 	 width: 65vw;
-						  }
 					  }
 
 						.chart-container {
