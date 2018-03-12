@@ -4,8 +4,11 @@
 /*--------------------------------------------------------------
 TYPOGRAPHY
 --------------------------------------------------------------*/
-.container {
+html, .container {
+	height: 100vh;
+	width: 100vw;
 	margin: 0;
+	overflow: hidden;
 }
 
 h1 {
@@ -72,7 +75,7 @@ CSS Grid layout for modern browsers:
       grid-template-columns: auto;
       grid-template-rows: 1fr 5fr;
 		}
-		
+
 		.body {
 			grid-row: 2;
 		}
