@@ -408,7 +408,7 @@ CSS Grid layout for modern browsers:
 						margin-left: 1vw;
 						overflow: hidden;
 
-				background-color: white;
+						background-color: white;
 
 						display: grid;
 						grid-template-columns: auto;
@@ -434,7 +434,32 @@ CSS Grid layout for modern browsers:
 							grid-column: 1;
 							grid-row: 2;
 
-							background-color: #ffffff;
+							width: 64vw;
+							height: 65vh;
+
+							button {
+								font-size: 1vw;
+							}
+
+							.chart-title {
+								h2 {
+									font-size: 2vw;
+								}
+
+								h3 {
+									font-size: 1.25vw;
+								}
+							}
+
+							.chart {
+								height: 49vh;
+								width: 63vw;
+							}
+
+							.graph-type-button {
+								height: 5vh;
+								width: 7vw;
+							}
 						}
 
 						.news {
