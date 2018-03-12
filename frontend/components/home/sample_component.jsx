@@ -3,7 +3,8 @@ import React from 'react';
 import FinancialsTable from '../stock_show/financials_table';
 import StockSummary from '../stock_show/stock_summary';
 import StockHeader from '../stock_show/stock_header';
-import StockChart from '../stock_show/stock_chart';
+import StockNewsIndex from '../stock_show/stock_news_index';
+import StockChart from '../stock_show/stock_chart_container';
 
 class SampleComponent extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class SampleComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.initializeTimer()
+    // this.initializeTimer()
   }
 
   componentWillUnmount() {
@@ -55,7 +56,7 @@ class SampleComponent extends React.Component {
 
   render() {
     const { sampleStock } = this.props;
-    const { chart, quote, financials, logo } = sampleStock;
+    const { quote, financials, logo, news } = sampleStock;
 
     let SampleComponent
     switch (this.state.activeComponentIdx) {
@@ -63,11 +64,20 @@ class SampleComponent extends React.Component {
         SampleComponent = <FinancialsTable financials={financials.financials} />
 
         break;
+      case 1:
+        SampleComponent = <StockNewsIndex companyName={quote.companyName}
+                                          news={news} />
+        break;
+      case 2:
+        SampleComponent = <StockChart symbol={quote.symbol}
+                                      companyName={quote.name} />
+
+        break;
       default:
         SampleComponent = <h1>Welcome to BlueChip</h1>
     }
 
-    const Heading = <h1>TEST HEADING</h1>
+    const Heading = <h1 className="component-heading">TEST HEADING</h1>
 
     return (
       <div className="sample-container">
