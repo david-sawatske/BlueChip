@@ -7,7 +7,6 @@ CSS Grid layout for modern browsers:
 	@media screen and (min-width: 768px) {
     .chart-container {
       background-color: $background-grey;
-      border-radius: .5vw;
 
       display: grid;
       grid-template-columns: auto auto;
