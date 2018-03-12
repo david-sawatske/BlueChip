@@ -59,6 +59,7 @@ CSS Grid layout for modern browsers:
 				.search {
 					grid-column: 1;
 					grid-row: 4;
+
 					display: inherit;
 					grid-template-columns: 75% 25%;
 					grid-template-rows: auto;
@@ -222,20 +223,20 @@ CSS Grid layout for modern browsers:
 				width: 75%;
 				overflow-y: hidden;
 
-				background-color:  $blue-grey;
-				border-radius: 0 0 5% 5%;
+				background-color: $suggestion-bg;
+				border-radius: 0 0 .25vw .25vw;
 
 				ul > li {
-					color: $dark-grey;
-					font-size: 125%;
-					padding: 1%;
+					color: $transparent-white;
+					font-size: 3vh;
+					padding: .25vh;
 
 					opacity: .9;
 				}
 
 				ul > li:hover {
 					opacity: 1;
-					color: black;
+					color: white;
 				}
 			}
 		}
