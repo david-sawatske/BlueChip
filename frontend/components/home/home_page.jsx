@@ -32,17 +32,6 @@ class HomePage extends React.Component {
                     containerClass: 'home-show' })
   }
 
-  returnStockData(sampleStock) {
-    const { quote, logo } = sampleStock;
-
-    return  <div className="show-sample">
-              <StockHeader quote={quote}
-                           logo={logo} />
-              <SampleComponent sampleStock={sampleStock} />
-              <StockSummary quote={quote} />
-            </div>
-  }
-
   render()  {
     const { currentUser, leagueIds, remoteStockData, logout, hideModal, currentPath,
             showModal, requestStockSearch, requestStockPeers, requestSymbols,
@@ -51,7 +40,7 @@ class HomePage extends React.Component {
 
     let StockDataComponent
     if (sampleStock) {
-      StockDataComponent = this.returnStockData(sampleStock)
+      StockDataComponent = <SampleComponent sampleStock={sampleStock} />
     }
 
     let SearchComponent
@@ -68,8 +57,8 @@ class HomePage extends React.Component {
     return (
       <div className={this.state.containerClass}>
         <div className="logo-headings">
-          <img className="app-logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
-          <h1 className="home-h1">BlueChip</h1>
+          <img className="logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
+          <h1 className="title">BlueChip</h1>
           <h2 className="home-h2">FANTASY STOCK TRADING LEAGUES</h2>
           <p>Enter the name or stock ticker for a publicy traded company to see an overview</p>
         </div>
