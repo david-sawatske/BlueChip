@@ -71,7 +71,7 @@ class StockShow extends React.Component {
           </div>
 
           <StockChart symbol={quote.symbol}
-                      companyName={quote.companyName}/>
+                      companyName={quote.companyName} />
 
           <StockSummary quote={quote} />
 
@@ -84,11 +84,11 @@ class StockShow extends React.Component {
             <PeerData peerData={peerData} />
           </div>
 
-            <StockNews news={news}
-                       companyName={quote.companyName}/>
+          <StockNews news={news}
+                     companyName={quote.companyName}/>
 
-            <ModalRoot quote={quote}
-                       logo={logo} />
+          <ModalRoot quote={quote}
+                     logo={logo} />
         </div>
     }
 
