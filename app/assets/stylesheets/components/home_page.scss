@@ -31,17 +31,18 @@ CSS Grid layout for modern browsers:
 				grid-template-columns: 15vw 55vw;
 				grid-template-rows: 17vh 8vh 8vh;
 
-				.app-logo {
+				.logo {
 					grid-column: 1;
 					grid-row: 1;
 
-					height: 15vh;
-					width: auto;
+					width: 18vh;
+					height: auto;
+
 					justify-self: right;
 					align-self: center;
 				}
 
-				.home-h1 {
+				.title {
 					grid-column: 2;
 					grid-row: 1;
 
@@ -203,11 +204,255 @@ CSS Grid layout for modern browsers:
 
 		.home-show {
 			height: 100vh;
-			width: 80vw;
+			width: 100vw;
 
 			display: grid;
-			grid-template-columns: 1fr 1fr 6fr .5fr;
-			grid-template-rows: auto auto;
+			grid-template-columns:  10vw 10vw 70vw 10vw;
+			grid-template-rows: 13vh 33vh 54vh;
+
+			.logo-headings {
+				grid-column: 1/4;
+				grid-row: 1;
+
+				display: grid;
+				grid-template-columns: 10vw 80vw;
+
+				.logo {
+					grid-column: 1;
+					grid-row: 1;
+
+					align-self: center;
+					margin-left: auto;
+
+					width: 11.5vh;
+					height: auto;
+				}
+
+				.title {
+					grid-column: 2;
+					grid-row: 1;
+
+					align-self: center;
+					padding-left: .75vw;
+
+					font-size: 7vh;
+					font-weight: 100;
+					text-align: left;
+					color: $transparent-white;
+					text-shadow: 0 -1px $background-green, // TOP
+											 1px 0 $background-green, // RIGHT
+											 0 1.5px $heading-border, // BOTTOM
+											 -1.5px 0 $heading-border, // LEFT
+				}
+
+				.home-h2, p {
+					display: none;
+				}
+			}
+
+			.button-container {
+				grid-column: 2/5;
+				grid-row: 1;
+
+				justify-self: right;
+				margin: 2vh 5vw 0 0;
+			}
+
+			.home-data {
+				grid-column: 2/4;
+				grid-row: 2;
+
+				height: 80vh;
+
+				.sample-container {
+					display: grid;
+
+					grid-template-columns: 15vw 86;
+					grid-template-rows: 15vh 65vh;
+background-color: rgba(#d41111, 0.56);
+					.stock-header {
+						grid-column: 1/5;
+						grid-row: 1;
+
+						height: 13vh;
+
+						background-color: $off-white;
+						border-top: 5px solid $dark-blue;
+						border-bottom: 5px solid $dark-blue;
+						box-shadow: 0 4px 2px -2px  $off-white,
+										    0px -2px  2px   $off-white;
+
+						display: inherit;
+						grid-template-columns: 45vw 35vw;
+						grid-template-rows: auto;
+
+						.top {
+							grid-column: 1;
+							grid-row: 1;
+
+							display: inherit;
+							grid-template-columns: 1fr 7fr;
+							grid-template-rows: auto;
+							grid-column-gap: 2%;
+
+							.logo {
+								grid-column: 1;
+								grid-row: 1;
+
+								align-self: center;
+								justify-self: center;
+
+								height: auto;
+								width: 8vh;
+							}
+
+							.name {
+								grid-column: 2;
+								grid-row: 1;
+
+								padding: 0;
+								font-size: 4vh;
+								text-align: left;
+								align-self: center;
+								color: $dark-blue;
+							}
+						}
+
+						.data {
+							grid-column: 2;
+							grid-row: 1;
+
+							display: grid;
+							grid-template-columns: auto auto;
+							grid-template-rows: auto auto;
+
+							div {
+								display: grid;
+								grid-template-columns: auto;
+								grid-template-rows:  auto auto;
+
+								h3 {
+									grid-column: auto;
+									grid-row: 1;
+
+									font-family: 'Quattrocento Sans';
+									font-size: 1.5vw;
+									font-style: italic;
+									color: $dark-green;
+									text-align: left;
+									padding: 0;
+								}
+
+								.display-data {
+									grid-column: auto;
+									grid-row: 2;
+
+									font-family: 'Martel';
+									font-size: 2vw;
+									font-weight: 100;
+									padding-left: 1vw;
+								}
+							}
+
+							.price {
+								grid-column: 1;
+								grid-row: 1/3;
+
+								h3 {
+									grid-column: auto;
+									grid-row: 1;
+								}
+
+								.display-data {
+									font-size: 3vw;
+								}
+							}
+						}
+
+						.total {
+							grid-column: 2;
+							grid-row: 1;
+						}
+
+						.percent  {
+							grid-column: 3;
+							grid-row: 1;
+						}
+
+						.time {
+							grid-column: 2;
+							grid-row: 1;
+
+							align-self: end;
+							text-align: end;
+							padding-right: 2%;
+
+							font-family: Quattrocento Sans;
+							font-style: italic;
+							font-size: 90%;
+					    color: $blue-grey;
+							opacity: .5;
+						}
+					}
+
+					.stock-summary {
+						grid-column: 1;
+						grid-row: 2;
+
+						height: auto;
+						width: auto;
+						justify-self: left;
+						align-self: top;
+
+						h2 {
+							display: none;
+						}
+
+						table {
+							background-color: white;
+							font-size: 1.25vw;
+						}
+					}
+
+					.sidebar {
+						grid-column: 1/3;
+						grid-row: 2;
+						z-index: 2;
+
+						display: inherit;
+						grid-template-columns: 1fr 1fr;
+						grid-template-rows: auto;
+
+						.nav-btn {
+							background: transparent;
+							color: $bright-blue;
+							opacity: .5;
+							border: none;
+						}
+
+						.nav-btn:hover {
+							opacity: 1;
+							text-shadow: 1px 3px 5px $dark-grey;
+							font-size: 90%;
+						}
+
+						.nav-btn:first-of-type {
+							grid-column: 1;
+							grid-row: 1;
+
+							text-align: left;
+							margin-left: -4%;
+						}
+
+						.nav-btn:last-of-type {
+							grid-column: 2;
+							grid-row: 1;
+
+							text-align: right;
+						}
+					}
+				}
+			}
 		}
 	}
 }
