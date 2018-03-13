@@ -11,8 +11,6 @@ import StockChart from './stock_chart_container';
 import UserTransactions from './user_transaction_index';
 import ModalRoot from  '../modal/modal_root_container';
 
-import { numAbbr } from '../../util/helper_functions'
-
 class StockShow extends React.Component {
   constructor(props) {
     super(props);
@@ -41,19 +39,6 @@ class StockShow extends React.Component {
     if (remoteStockData) {
       const { quote, chart, logo, company, stats, news,
               earnings, financials } = remoteStockData;
-      const { float, revenuePerEmployee, revenue } = stats;
-
-      const companyData = {
-              description: company.description,
-              website: company.website,
-              tableData: { float: numAbbr(float),
-                           exchange: company.exchange,
-                           sector: company.sector,
-                           industry: company.industry,
-                           sharesOutstanding: numAbbr(stats.sharesOutstanding),
-                           numberOfEmployees: (numAbbr(revenue / revenuePerEmployee))
-              }
-            }
 
       ShowComponent =
         <div className="stock-data">
@@ -77,7 +62,8 @@ class StockShow extends React.Component {
 
           <FinancialsTable financials={financials.financials} />
 
-          <CompanyData companyData={companyData} />
+          <CompanyData company={company}
+                       stats = {stats} />
 
           <div className="earnings-peer">
             <EarningsTable earnings={earnings.earnings} />

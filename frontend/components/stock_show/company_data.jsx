@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { camelToTitle } from '../../util/helper_functions'
+import { numAbbr } from '../../util/helper_functions'
 
 class CompanyData extends React.Component {
   constructor(props) {
@@ -17,7 +18,18 @@ class CompanyData extends React.Component {
   }
 
   render() {
-    const { description, website, tableData } = this.props.companyData;
+    const { float, sharesOutstanding,
+            revenue, revenuePerEmployee } = this.props.stats;
+    const { description, website, exchange,
+            sector, industry } = this.props.company;
+
+    const tableData = { float: numAbbr(float),
+                        exchange: exchange,
+                        sector: sector,
+                        industry: industry,
+                        sharesOutstanding: numAbbr(sharesOutstanding),
+                        numberOfEmployees: (numAbbr(revenue / revenuePerEmployee))
+                      }
 
     return (
       <div className ="company-data">
