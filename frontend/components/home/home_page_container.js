@@ -17,7 +17,8 @@ const mapStateToProps = state => ({
   leagueIds: state.entities.leagues.allLeagueIds,
   leagueData: getLeagueUserData(state),
   currentUser: state.session.currentUser,
-  tickerData: state.ui.remoteStocks.remoteSymbols
+  tickerData: state.ui.remoteStocks.remoteSymbols,
+  isSampleUser: state.entities.users.usersById[23]
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

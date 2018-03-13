@@ -28,7 +28,9 @@ class HomePage extends React.Component {
   }
 
   componentWillMount() {
-    this.props.requestTargetUserData(23)
+    if (!this.props.isSampleUser) {
+      this.props.requestTargetUserData(23)
+    }
   }
 
   setTicker(ticker) {
