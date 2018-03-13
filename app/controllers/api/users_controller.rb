@@ -11,8 +11,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    render :show
+    @user =   User.find_by(id: params[:id]) || User.random_user
   end
 
   def destroy

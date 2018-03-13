@@ -31,6 +31,10 @@ class User < ApplicationRecord
     self.session_token
   end
 
+  def self.random_user
+    User.limit(1).order("RANDOM()").first
+  end
+
   private
     def ensure_session_token
       self.session_token ||= new_session_token
