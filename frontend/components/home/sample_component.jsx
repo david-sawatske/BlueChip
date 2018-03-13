@@ -1,16 +1,18 @@
 import React from 'react';
 
 import FinancialsTable from '../stock_show/financials_table';
+import StockChart from '../stock_show/stock_chart_container';
+import StockNews from '../stock_show/stock_news_index';
+import EarningsTable from '../stock_show/earnings_table';
 import StockSummary from '../stock_show/stock_summary';
 import StockHeader from '../stock_show/stock_header';
-import StockNewsIndex from '../stock_show/stock_news_index';
-import StockChart from '../stock_show/stock_chart_container';
+import CompanyData from '../stock_show/company_data';
 
 class SampleComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { techTicker: '', activeComponentIdx: 0, timer: null }
+    this.state = { techTicker: '', activeComponentIdx: 3, timer: null }
 
     this.initializeTimer = this.initializeTimer.bind(this);
     this.autoCount = this.autoCount.bind(this);
@@ -22,7 +24,7 @@ class SampleComponent extends React.Component {
   }
 
   componentDidMount() {
-    // this.initializeTimer()
+    this.initializeTimer()
   }
 
   componentWillUnmount() {
@@ -48,7 +50,7 @@ class SampleComponent extends React.Component {
     if (newIdx === 3) {
       this.setState({ activeComponentIdx: 0 })
     } else if (newIdx == -1){
-      this.setState({ activeComponentIdx: 2 })
+      this.setState({ activeComponentIdx: 3 })
     } else {
       this.setState({ activeComponentIdx: newIdx })
     }
@@ -56,7 +58,8 @@ class SampleComponent extends React.Component {
 
   render() {
     const { sampleStock } = this.props;
-    const { quote, financials, logo, news } = sampleStock;
+
+    const { quote, financials, logo, news, earnings, peerData, stats, company } = sampleStock;
 
     let SampleComponent
     switch (this.state.activeComponentIdx) {
@@ -65,12 +68,19 @@ class SampleComponent extends React.Component {
 
         break;
       case 1:
-        SampleComponent = <StockNewsIndex companyName={quote.companyName}
-                                          news={news} />
+        SampleComponent = <StockNews companyName={quote.companyName}
+                                     news={news} />
         break;
       case 2:
         SampleComponent = <StockChart symbol={quote.symbol}
                                       companyName={quote.name} />
+      case 3:
+        SampleComponent = <div className='comp-group'>
+                            <EarningsTable earnings={earnings.earnings} />
+                            <CompanyData company={company}
+                                         stats = {stats} />
+                          </div>
+
 
         break;
       default:
