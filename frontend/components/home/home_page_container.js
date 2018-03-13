@@ -27,6 +27,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   ),
   requestStockPeers: () => dispatch(requestStockPeers()),
   requestSymbols: () => dispatch(requestSymbols()),
+  requestTargetUserData: id => dispatch(requestTargetUserData(id)),
   logout: () => dispatch(logout()),
   hideModal: () => dispatch(hideModal()),
   showModal: (modalType, modalProps) => (

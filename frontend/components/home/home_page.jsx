@@ -27,6 +27,10 @@ class HomePage extends React.Component {
     this.setTicker = this.setTicker.bind(this)
   }
 
+  componentWillMount() {
+    this.props.requestTargetUserData(23)
+  }
+
   setTicker(ticker) {
     this.setState({ techTicker: ticker,
                     containerClass: 'home-show' })
