@@ -8,27 +8,28 @@ import { hideModal, showModal } from '../../actions/modal_actions';
 import { requestTargetUserData } from '../../actions/user_actions';
 import { logout } from '../../actions/session_actions';
 
-import { getLeagueUserData } from '../../reducers/selectors';
+import { getLeagueUserData, getUserLeagueData } from '../../reducers/selectors';
 
 import HomePage from './home_page';
 
 const mapStateToProps = state => ({
   remoteStockData: state.ui.remoteStocks.remoteStockData,
   leagueIds: state.entities.leagues.allLeagueIds,
-  leagueData: getLeagueUserData(state),
+  userId: state.entities.users.allUserIds[0],
+  leagueUserData: getLeagueUserData(state),
   currentUser: state.session.currentUser,
   tickerData: state.ui.remoteStocks.remoteSymbols,
-  isSampleUser: state.entities.users.usersById[23]
+  userLeagueData: getUserLeagueData(state)
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   requestTargetLeague: id => dispatch(requestTargetLeague(id)),
+  requestTargetUserData: id => dispatch(requestTargetUserData(id)),
   requestStockSearch: (ticker, dataTypes) => (
     dispatch(requestStockSearch(ticker, dataTypes))
   ),
   requestStockPeers: () => dispatch(requestStockPeers()),
   requestSymbols: () => dispatch(requestSymbols()),
-  requestTargetUserData: id => dispatch(requestTargetUserData(id)),
   logout: () => dispatch(logout()),
   hideModal: () => dispatch(hideModal()),
   showModal: (modalType, modalProps) => (

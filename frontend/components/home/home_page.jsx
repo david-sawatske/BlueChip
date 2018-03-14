@@ -3,50 +3,61 @@ import { Link } from 'react-router-dom';
 
 import FinancialsTable from '../stock_show/financials_table';
 import MastheadButtons from '../masthead/masthead_buttons';
-import LeagueIndexItem from '../league/league_index_item'
 import StockSummary from '../stock_show/stock_summary';
 import StockHeader from '../stock_show/stock_header';
 import StockChart from '../stock_show/stock_chart';
 import Loader from '../shared/loader';
 
 import StockSearch from '../stock_search/stock_search';
-
 import SampleComponent from './sample_component';
 
-import { arrSample } from '../../util/helper_functions';
+import { arrSample } from '../../util/helper_functions'
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { activeComponentIdx: 1,
-                   containerClass: "landing-search",
-                   techTicker: '',
+    this.state = { ticker: '',
+                   randomUserId: null,
+                   randomLeagueId: null,
                    timer: null }
 
     this.setTicker = this.setTicker.bind(this)
   }
 
   componentWillMount() {
-    if (!this.props.isSampleUser) {
-      this.props.requestTargetUserData(23)
-    }
+    this.props.requestTargetUserData().then(() => {
+      const sampleLeagueId = arrSample(this.props.leagueIds);
+
+      this.setState({ randomUserId: this.props.userId })
+
+      this.props.requestTargetLeague(sampleLeagueId).then(() => {
+        this.setState({ randomLeagueId: sampleLeagueId })
+      })
+    })
   }
 
   setTicker(ticker) {
-    this.setState({ techTicker: ticker,
+    this.setState({ ticker: ticker,
                     containerClass: 'home-show' })
   }
 
   render()  {
-    const { currentUser, leagueIds, remoteStockData, logout, hideModal, currentPath,
-            showModal, requestStockSearch, requestStockPeers, requestSymbols,
-            tickerData } = this.props;
-    const sampleStock = remoteStockData[this.state.techTicker];
+    const { currentUser, remoteStockData, logout, hideModal, requestSymbols,
+            showModal, requestStockSearch, requestStockPeers, currentPath,
+            tickerData, leagueUserData, userLeagueData, requestTargetUserData
+          } = this.props;
+
+    const { ticker, randomLeagueId, randomUserId } = this.state;
+    const sampleStock = remoteStockData[ticker];
 
     let StockDataComponent
-    if (sampleStock) {
-      StockDataComponent = <SampleComponent sampleStock={sampleStock} />
+    if (sampleStock && leagueUserData && randomLeagueId) {
+      StockDataComponent =
+        <SampleComponent sampleLeagueData={leagueUserData[randomLeagueId]}
+                         userLeagueData={userLeagueData}
+                         sampleStock={sampleStock}
+                         userId={randomUserId} />
     }
 
     let SearchComponent

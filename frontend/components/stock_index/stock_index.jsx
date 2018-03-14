@@ -12,7 +12,7 @@ class StockIndex extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { showTable: true,
+    this.state = { showTable: false,
                    peersLoaded: false,
                    clickedTicker: '' }
 
@@ -24,7 +24,9 @@ class StockIndex extends React.Component {
 
 
     if (ownedTickers) {
-      requestStockSearch(ownedTickers, additionalDataTypes)
+      requestStockSearch(ownedTickers, additionalDataTypes).then(() => {
+        this.setState({ showTable: true })
+      })
     }
   }
 
@@ -60,6 +62,7 @@ class StockIndex extends React.Component {
   render() {
     const { remoteStockData, transactionData, showModal, hideModal,
             isRemoteStockLoading, investedByTicker } = this.props;
+
     const { clickedTicker, showTable, peersLoaded } = this.state;
 
     const peerData = [];

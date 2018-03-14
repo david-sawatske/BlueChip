@@ -2,24 +2,26 @@ import React from 'react';
 
 import FinancialsTable from '../stock_show/financials_table';
 import StockChart from '../stock_show/stock_chart_container';
-import StockNews from '../stock_show/stock_news_index';
+import LeagueIndexItem from '../league/league_index_item'
 import EarningsTable from '../stock_show/earnings_table';
+import StockNews from '../stock_show/stock_news_index';
 import StockSummary from '../stock_show/stock_summary';
 import StockHeader from '../stock_show/stock_header';
 import CompanyData from '../stock_show/company_data';
+import UserShow from '../users/user_show';
 
 class SampleComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { techTicker: '', activeComponentIdx: 3, timer: null }
+    this.state = { activeComponentIdx: 0, timer: null }
 
     this.initializeTimer = this.initializeTimer.bind(this);
     this.autoCount = this.autoCount.bind(this);
   }
 
   initializeTimer() {
-    let timer = setInterval(this.autoCount, 5000);
+    let timer = setInterval(this.autoCount, 3000);
     this.setState({ timer });
   }
 
@@ -33,7 +35,8 @@ class SampleComponent extends React.Component {
 
   autoCount() {
     const currIdx = this.state.activeComponentIdx
-    if (currIdx < 3) {
+
+    if (currIdx < 5) {
       this.setState({
         activeComponentIdx: this.state.activeComponentIdx + 1
       });
@@ -57,9 +60,10 @@ class SampleComponent extends React.Component {
   }
 
   render() {
-    const { sampleStock } = this.props;
+    const { sampleStock, sampleLeagueData, userId, userLeagueData } = this.props;
 
-    const { quote, financials, logo, news, earnings, peerData, stats, company } = sampleStock;
+    const { quote, financials, logo, news,
+            earnings, peerData, stats, company } = sampleStock;
 
     let SampleComponent
     switch (this.state.activeComponentIdx) {
@@ -74,13 +78,23 @@ class SampleComponent extends React.Component {
       case 2:
         SampleComponent = <StockChart symbol={quote.symbol}
                                       companyName={quote.name} />
+
+        break;
       case 3:
         SampleComponent = <div className='comp-group'>
                             <EarningsTable earnings={earnings.earnings} />
                             <CompanyData company={company}
                                          stats = {stats} />
                           </div>
+        break;
+      case 4:
+        SampleComponent = <LeagueIndexItem currentUserLeagueIds={[]}
+                                           leagueData={sampleLeagueData} />
 
+        break;
+      case 5:
+        SampleComponent = <UserShow userData={userLeagueData}
+                                    userId={userId} />
 
         break;
       default:

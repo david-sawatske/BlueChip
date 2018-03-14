@@ -14,7 +14,9 @@ class UserShow extends React.Component {
   }
 
   componentWillMount() {
-    this.fetchUserData(this.props.match.params.userId)
+    if (!this.props.userId) {
+      this.fetchUserData(this.props.match.params.userId)
+    }
 
     if (this.props.currentUser) {
       this.fetchUserData(this.props.currentUser.id)
@@ -22,14 +24,16 @@ class UserShow extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.match.params.userId !== this.props.match.params.userId) {
-      this.fetchUserData(nextProps.match.params.userId)
-    }
+    if ( !this.props.userId && nextProps.match.params.userId !==
+                               this.props.match.params.userId )
+      {
+        this.fetchUserData(nextProps.match.params.userId)
+      }
   }
 
   render() {
-    const { isRailsUserLoading, userData } = this.props;
-    const targetUserId = this.props.match.params.userId;
+    const { isRailsUserLoading, userData, userId } = this.props;
+    const targetUserId = userId || this.props.match.params.userId;
 
     let ShowComponent
     if (isRailsUserLoading) {
