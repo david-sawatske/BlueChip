@@ -6,9 +6,10 @@ import { hideModal, showModal } from '../../actions/modal_actions';
 
 import LeagueShow from './league_show';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   currentUser: state.session.currentUser,
-  formType: state.ui.modal.modalProps.formType
+  formType: state.ui.modal.modalProps.formType,
+  setLeagueId: ownProps.setLeagueId
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -24,24 +24,24 @@ class LeagueShow extends Component {
   }
 
   render() {
-    const { currentUserLeagueIds, leagueData, currentUser,
+    const { currentUserLeagueIds, leagueData, currentUser, setLeagueId,
             hideModal, showModal, formType } = this.props;
 
-    let leagueIndexButton = null;
+    let leagueShowButton = null;
     if (currentUserLeagueIds && currentUserLeagueIds.includes(leagueData.id)) {
-        leagueIndexButton =
+        leagueShowButton =
           <Link className="button" to={`/users/${currentUser.id}`}>
             View Your Leagues
           </Link>
       } else if (currentUser) {
-        leagueIndexButton =
+        leagueShowButton =
           <form onSubmit={this.handleSubmit}>
             <input type="submit"
                    value="Join League"
                    className="button" />
           </form>
       } else {
-        leagueIndexButton =
+        leagueShowButton =
           <MastheadButtons hideModal={hideModal}
                            showModal={showModal}
                            formType={formType} />
@@ -49,6 +49,9 @@ class LeagueShow extends Component {
 
     return (
       <div className="league-container">
+        <button onClick={(e) => setLeagueId(null, e)}>
+          Return to League Index
+        </button>
         <div className="league">
           <div className="league-title">
             <h1>{ leagueData.name }</h1>
@@ -61,7 +64,7 @@ class LeagueShow extends Component {
           </div>
 
           <div className="league-right">
-            { leagueIndexButton }
+            { leagueShowButton }
           </div>
         </div>
       </div>
