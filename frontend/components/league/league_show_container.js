@@ -4,7 +4,7 @@ import { createCashBalance } from '../../actions/cash_balance_actions';
 import { requestTargetUserData } from '../../actions/user_actions';
 import { hideModal, showModal } from '../../actions/modal_actions';
 
-import LeagueIndexItem from './league_index_item';
+import LeagueShow from './league_show';
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
@@ -23,4 +23,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LeagueIndexItem)
+)(LeagueShow)

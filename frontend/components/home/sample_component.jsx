@@ -2,7 +2,7 @@ import React from 'react';
 
 import FinancialsTable from '../stock_show/financials_table';
 import StockChart from '../stock_show/stock_chart_container';
-import LeagueIndexItem from '../league/league_index_item'
+import LeagueShow from '../league/league_show'
 import EarningsTable from '../stock_show/earnings_table';
 import StockNews from '../stock_show/stock_news_index';
 import StockSummary from '../stock_show/stock_summary';
@@ -14,7 +14,7 @@ class SampleComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { activeComponentIdx: 0, timer: null }
+    this.state = { activeComponentIdx: 4, timer: null }
 
     this.initializeTimer = this.initializeTimer.bind(this);
     this.autoCount = this.autoCount.bind(this);
@@ -104,7 +104,7 @@ class SampleComponent extends React.Component {
                           </div>
         break;
       case 4:
-        SampleComponent = <LeagueIndexItem currentUserLeagueIds={[]}
+        SampleComponent = <LeagueShow currentUserLeagueIds={[]}
                                            leagueData={sampleLeagueData} />
         StockHead = null;
         StockSumm = null;

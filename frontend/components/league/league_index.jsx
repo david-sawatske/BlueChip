@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import LeagueIndexItem from './league_index_item_container'
+import LeagueShow from './league_show_container';
+import LeagueIndexItem from './league_index_item';
 import Loader from '../shared/loader';
 
 class LeagueIndex extends Component {
@@ -26,17 +27,22 @@ class LeagueIndex extends Component {
       ShowComponent = <Loader />
     } else {
         ShowComponent = leagueIds.map( id  => (
-          <LeagueIndexItem currentUserLeagueIds={currentUserLeagueIds}
-                           leagueData={allLeaguesData[id]}
-                           key={id} />
+          <LeagueShow currentUserLeagueIds={currentUserLeagueIds}
+                      leagueData={allLeaguesData[id]}
+                      key={id} />
         ))
     }
+
+    const test = leagueIds.map( id  => (
+      <LeagueIndexItem leagueData={allLeaguesData[id]}
+                       key={id} />
+    ))
 
     return (
       <div className="index-page">
         <h1 className="index-title">League Leaderboards</h1>
         <ul className="league-index">
-          { ShowComponent }
+          { test }
         </ul>
       </div>
     );
