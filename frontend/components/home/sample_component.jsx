@@ -50,7 +50,7 @@ class SampleComponent extends React.Component {
     const change = (direction == 'left') ? -1 : 1
     const newIdx = currentIdx + change
 
-    if (newIdx === 3) {
+    if (newIdx === 6) {
       this.setState({ activeComponentIdx: 0 })
     } else if (newIdx == -1){
       this.setState({ activeComponentIdx: 3 })
@@ -64,6 +64,22 @@ class SampleComponent extends React.Component {
 
     const { quote, financials, logo, news,
             earnings, peerData, stats, company } = sampleStock;
+
+    const Sidebar = <aside className="sidebar">
+                      <button className="nav-btn" onClick={ (e) =>
+                          this.handleClick('left', e) }>
+                          ◀
+                      </button>
+                      <button className="nav-btn" onClick={ (e) =>
+                          this.handleClick('right', e) }>
+                          ▶
+                      </button>
+                    </aside>
+
+    let componentClass = "stock-component";
+    let StockHead = <StockHeader quote={quote}
+                                 logo={logo} />
+    let StockSumm = <StockSummary quote={quote} />
 
     let SampleComponent
     switch (this.state.activeComponentIdx) {
@@ -90,11 +106,17 @@ class SampleComponent extends React.Component {
       case 4:
         SampleComponent = <LeagueIndexItem currentUserLeagueIds={[]}
                                            leagueData={sampleLeagueData} />
+        StockHead = null;
+        StockSumm = null;
+        componentClass = "league-component";
 
         break;
       case 5:
         SampleComponent = <UserShow userData={userLeagueData}
                                     userId={userId} />
+        StockHead = null;
+        StockSumm = null;
+        componentClass = "user-component";
 
         break;
       default:
@@ -105,29 +127,19 @@ class SampleComponent extends React.Component {
 
     return (
       <div className="sample-container">
-        <StockHeader quote={quote}
-                     logo={logo} />
-        <div className="sample-component">
+        { StockHead }
+
+        <div className={componentClass}>
           { Heading }
           { SampleComponent }
         </div>
 
-        <StockSummary quote={quote} />
+        { StockSumm }
 
-        <aside className="sidebar">
-          <button className="nav-btn" onClick={ (e) =>
-              this.handleClick('left', e) }>
-              ◀
-          </button>
-          <button className="nav-btn" onClick={ (e) =>
-              this.handleClick('right', e) }>
-              ▶
-          </button>
-        </aside>
+        { Sidebar }
       </div>
     );
   }
-
 }
 
 export default SampleComponent;
