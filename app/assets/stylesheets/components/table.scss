@@ -6,7 +6,7 @@ table {
   width: auto;
 
   th, td {
-    padding: 10px;
+    padding: .75vw;
   }
 
   thead {
@@ -20,6 +20,7 @@ table {
 
     .ranking {
       pointer-events: none;
+      justify-self: center;
     }
 
     a {
@@ -28,28 +29,25 @@ table {
   }
 
   tbody {
+    background-color: white;
+
     tr {
       background-color: $pale-green;
       td:first-of-type {
         font-style: italic;
         font-weight: bold;
-        text-align: left;
         font-family: Quattrocento;
       }
 
       td:not(first-of-type) {
         font-family: Martel;
         color: $grey;
-        font-size: 90%;
+        font-size: 2vh;
       }
     }
 
     tr:nth-child(even) {
       background-color: $background-blue;
-    }
-
-    .index {
-      text-align: center;
     }
 
     .logo {
