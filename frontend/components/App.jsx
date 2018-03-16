@@ -10,29 +10,26 @@ import StockSearch from './stock_search/stock_search_container';
 
 import Loader from './shared/loader';
 
-const App = () => {
-  let PageHeader
-
-  console.log();
-  return ( <div className="container">
-            <nav className="header">
-              <Switch>
-                <Route exact path="/" component={ null }/>
-                <Route exact path="*" component={ Masthead }/>
-              </Switch>
-            </nav>
-            <section className="body">
-              <Switch>
-                <Route exact path="/leagues" component={ LeagueIndex }/>
-                <Route path="/stocks/search" component={ StockSearch }/>
-                <Route path="/leagues/new" component={ LeagueForm }/>
-                <Route path="/users/:userId" component={ UserShow }/>
-                <Route exact path="/" component={ HomePage } />
-                <Route  path="/loader" component={ Loader } />
-                <Route path="*" component={ ()=>(<h1>No Match</h1>) } />
-              </Switch>
-            </section>
-          </div> )
-};
+const App = () => (
+  <div className="container">
+    <nav className="header">
+      <Switch>
+        <Route exact path="/" component={ null }/>
+        <Route exact path="*" component={ Masthead }/>
+      </Switch>
+    </nav>
+    <section className="body">
+      <Switch>
+        <Route exact path="/leagues" component={ LeagueIndex }/>
+        <Route path="/stocks/search" component={ StockSearch }/>
+        <Route path="/leagues/new" component={ LeagueForm }/>
+        <Route path="/users/:userId" component={ UserShow }/>
+        <Route exact path="/" component={ HomePage } />
+        <Route  path="/loader" component={ Loader } />
+        <Route path="*" component={ ()=>(<h1>No Match</h1>) } />
+      </Switch>
+    </section>
+  </div>
+);
 
 export default App;
