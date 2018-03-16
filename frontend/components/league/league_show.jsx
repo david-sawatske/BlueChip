@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import LeagueLeaderboard from './league_leaderboard';
 import MastheadButtons from '../masthead/masthead_buttons';
 
+import { numberToCurrency } from '../../util/helper_functions'
+
 class LeagueShow extends Component {
   constructor(props) {
     super(props)
@@ -24,8 +26,9 @@ class LeagueShow extends Component {
   }
 
   render() {
-    const { currentUserLeagueIds, leagueData, currentUser, setLeagueId,
+    const { currentUserLeagueIds, leagueData, currentUser, setLeagueData,
             hideModal, showModal, formType } = this.props;
+    const currencyStarting = numberToCurrency(leagueData.startingBalance);
 
     let leagueShowButton = null;
     if (currentUserLeagueIds && currentUserLeagueIds.includes(leagueData.id)) {
@@ -49,22 +52,28 @@ class LeagueShow extends Component {
 
     return (
       <div className="league-container">
-        <button onClick={(e) => setLeagueId(null, e)}>
-          Return to League Index
+        <button onClick={(e) => setLeagueData(null, "index-only", e)}>
+          ← Return to League Index Grid
         </button>
         <div className="league">
           <div className="league-title">
             <h1>{ leagueData.name }</h1>
-            <h2>Starting Balance: {leagueData.startingBalance}</h2>
+
+            <div className="starting-balance">
+              <h3>Starting Balance:</h3>
+              <h2>{ currencyStarting }</h2>
+            </div>
           </div>
 
-          <div className="league-table">
-            <h3>League Leaders</h3>
+          <div className="league-table-container">
+            <h2>League Leaders</h2>
             <LeagueLeaderboard leagueUserData={ leagueData.leagueUserData } />
           </div>
 
           <div className="league-right">
             { leagueShowButton }
+
+            <div className='league-data'> <h1>  league Info</h1></div>
           </div>
         </div>
       </div>

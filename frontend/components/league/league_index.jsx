@@ -9,9 +9,10 @@ class LeagueIndex extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { activeLeagueId: null };
+    this.state = { activeLeagueId: 1,
+                   containerClass: "league-show" };
 
-    this.setLeagueId = this.setLeagueId.bind(this)
+    this.setLeagueData = this.setLeagueData.bind(this)
   }
 
   componentWillMount() {
@@ -22,41 +23,53 @@ class LeagueIndex extends Component {
     })
   }
 
-  setLeagueId(id, event) {
+  setLeagueData(id, newClass, event) {
     event.preventDefault();
 
-    this.setState({ activeLeagueId: id })
+    this.setState({ activeLeagueId: id,
+                    containerClass: newClass })
   }
 
   render() {
     const { isLeagueLoading, requestTargetUserData, isUserLoading,
             currentUserLeagueIds, leagueIds, allLeaguesData } = this.props;
 
-    let ShowComponent
+    let LeagueDisplay
+    let ActiveLeague
     if ( isLeagueLoading || isUserLoading ) {
-      ShowComponent = <Loader />
-    } else if (this.state.activeLeagueId) {
+      ActiveLeague = <Loader />
+    } else if (this.state.activeLeagueId && allLeaguesData) {
       const id = this.state.activeLeagueId;
-        ShowComponent =
+      LeagueDisplay = leagueIds.map( id  => (
+        <LeagueIndexItem setLeagueData={this.setLeagueData}
+                         leagueData={allLeaguesData[id]}
+                         key={id} />
+      ))
+
+        ActiveLeague =
           <LeagueShow currentUserLeagueIds={currentUserLeagueIds}
-                      setLeagueId={this.setLeagueId}
+                      setLeagueData={this.setLeagueData}
                       leagueData={allLeaguesData[id]}
                       key={id} />
-    } else {
-      ShowComponent = leagueIds.map( id  => (
-        <LeagueIndexItem leagueData={allLeaguesData[id]}
-                         setLeagueId={this.setLeagueId}
+
+          LeagueDisplay
+
+    } else if (allLeaguesData) {
+      LeagueDisplay = leagueIds.map( id  => (
+        <LeagueIndexItem setLeagueData={this.setLeagueData}
+                         leagueData={allLeaguesData[id]}
                          key={id} />
       ))
     }
 
     return (
-      <div className="index-page">
-        <h1> {this.state.activeLeagueId}</h1>
-        <h1 className="index-title">League Leaderboards</h1>
+      <div className={this.state.containerClass}>
+        <h1 className="index-title">Leagues</h1>
         <ul className="league-index">
-          { ShowComponent }
+          { LeagueDisplay }
         </ul>
+
+        { ActiveLeague }
       </div>
     );
   }
