@@ -215,10 +215,14 @@
 
 				.starting-balance {
 					grid-column: 2;
-					align-self: end;
+					align-self: center;
 					padding-right: 1.5vw;
 
 					display: grid;
+
+					h2, h3 {
+						padding: 0;
+					}
 
 					h2 {
 						grid-row: 2;
@@ -285,9 +289,15 @@
 					grid-column: 1;
 					grid-row: 1;
 
-				.session-buttons > button {
-						color: $transparent-white;
-						margin: auto;
+					margin: 0;
+
+					.session-buttons {
+						text-align: right;
+
+						 button {
+							color: $transparent-white;
+							margin: auto;
+						}
 					}
 				}
 			}
@@ -301,6 +311,8 @@
 			.grid-item {
 				height: 25vh;
 				width: 18vw;
+
+				opacity: .5;
 
 				margin-right: 1vw;
 
@@ -322,6 +334,10 @@
 					font-size: 1vw;
 					color: $off-white ;
 				}
+			}
+
+			.grid-item:hover {
+				opacity: 1;
 			}
 		}
   }
