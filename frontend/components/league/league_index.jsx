@@ -5,22 +5,33 @@ import LeagueShow from './league_show_container';
 import LeagueIndexItem from './league_index_item';
 import Loader from '../shared/loader';
 
+import { arrSample } from '../../util/helper_functions'
+
 class LeagueIndex extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { activeLeagueId: 1,
-                   containerClass: "league-show" };
+    this.state = { activeLeagueId: null,
+                   containerClass: "index-only" };
 
     this.setLeagueData = this.setLeagueData.bind(this)
   }
 
   componentWillMount() {
-    this.props.requestAllLeagues().then(data => {
-      if (this.props.currentUser) {
-        this.props.requestTargetUserData(this.props.currentUser.id)
+    const { requestAllLeagues, requestTargetUserData,
+            currentUser, currentPath, leagueIds } = this.props;
+    const randomLeagueId = arrSample(leagueIds);
+
+    requestAllLeagues().then(data => {
+      if (currentUser) {
+        requestTargetUserData(currentUser.id)
       }
     })
+
+    if (currentPath) {
+        this.setState({ activeLeagueId: randomLeagueId,
+                        containerClass: "league-show" })
+    }
   }
 
   setLeagueData(id, newClass, event) {
