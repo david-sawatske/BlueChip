@@ -548,11 +548,25 @@ CSS Grid layout for modern browsers:
 		}
 
 		.button-container {
-			grid-column: 2/5;
+			grid-column: 3/5;
 			grid-row: 1;
 
-			justify-self: right;
-			margin: 2vh 5vw 0 0;
+			align-self: center;
+			margin-right: 2vw;
+
+			.session-buttons {
+
+				button {
+					color: $main-blue;
+				}
+
+				button:hover {
+					color: $bright-blue;
+					background: none;
+
+					border-bottom: 1px solid $off-white;
+				}
+			}
 		}
 	}
 }
