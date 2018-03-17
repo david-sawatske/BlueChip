@@ -23,7 +23,8 @@ class LeagueLeaderboard extends React.Component {
                             'totalEquity': true }
 
     const isDataCurrency = { 'cashBalance': true,
-                             'cashInvested': true }
+                             'cashInvested': true,
+                             'totalEquity': true }
 
     const isDataInteger = { };
     const isDataPercent = { };
