@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { requestStockSearch,
          requestStockPeers,
          requestSymbols } from '../../actions/remote_stock_actions';
-import { requestTargetLeague } from '../../actions/league_actions';
 import { hideModal, showModal } from '../../actions/modal_actions';
 import { requestTargetUserData } from '../../actions/user_actions';
 import { logout } from '../../actions/session_actions';
@@ -14,7 +13,6 @@ import HomePage from './home_page';
 
 const mapStateToProps = state => ({
   remoteStockData: state.ui.remoteStocks.remoteStockData,
-  leagueIds: state.entities.leagues.allLeagueIds,
   userId: state.entities.users.allUserIds[0],
   leagueUserData: getLeagueUserData(state),
   currentUser: state.session.currentUser,
@@ -23,7 +21,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  requestTargetLeague: id => dispatch(requestTargetLeague(id)),
   requestTargetUserData: id => dispatch(requestTargetUserData(id)),
   requestStockSearch: (ticker, dataTypes) => (
     dispatch(requestStockSearch(ticker, dataTypes))

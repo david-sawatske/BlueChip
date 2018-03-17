@@ -11,15 +11,12 @@ import Loader from '../shared/loader';
 import StockSearch from '../stock_search/stock_search';
 import SampleComponent from './sample_component';
 
-import { arrSample } from '../../util/helper_functions'
-
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = { ticker: '',
                    randomUserId: null,
-                   randomLeagueId: null,
                    timer: null }
 
     this.setTicker = this.setTicker.bind(this)
@@ -27,13 +24,7 @@ class HomePage extends React.Component {
 
   componentWillMount() {
     this.props.requestTargetUserData().then(() => {
-      const sampleLeagueId = arrSample(this.props.leagueIds);
-
       this.setState({ randomUserId: this.props.userId })
-
-      this.props.requestTargetLeague(sampleLeagueId).then(() => {
-        this.setState({ randomLeagueId: sampleLeagueId })
-      })
     })
   }
 
@@ -48,14 +39,14 @@ class HomePage extends React.Component {
             tickerData, leagueUserData, userLeagueData, requestTargetUserData
           } = this.props;
 
-    const { ticker, randomLeagueId, randomUserId } = this.state;
+    const { ticker, randomUserId } = this.state;
     const sampleStock = remoteStockData[ticker];
 
     let StockDataComponent
-    if (sampleStock && leagueUserData && randomLeagueId) {
+    if (sampleStock && leagueUserData && userLeagueData) {
       StockDataComponent =
-        <SampleComponent sampleLeagueData={leagueUserData[randomLeagueId]}
-                         userLeagueData={userLeagueData}
+        <SampleComponent userLeagueData={userLeagueData}
+                         currentPath={currentPath}
                          sampleStock={sampleStock}
                          userId={randomUserId} />
     }
