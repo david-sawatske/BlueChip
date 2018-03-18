@@ -65,7 +65,7 @@
 				grid-row: 1/2;
 
 				height: 80vh;
-				width:  74vw;
+				width:  77vw;
 
 				display: grid;
 				grid-template-columns: 15vw 60vw;
@@ -75,11 +75,11 @@
 					grid-column: 1/4;
 					grid-row: 2;
 
-					height: 71vh;
-					width: 66vw;
+					height: 70vh;
+					width: 75vw;
 					justify-self: right;
 
-					grid-template-columns: 45vw 21vw;
+					grid-template-columns: 54vw 21vw;
 					grid-template-rows: 11vh 60vh;
 					grid-row-gap: 1vh;
 
@@ -90,8 +90,6 @@
 
 						h1 {
 							font-size: 6.5vh;
-
-							color: $bg-gradient;
 						}
 
 						.starting-balance {
@@ -123,6 +121,8 @@
 					.league-right {
 						grid-template-columns: auto;
 						grid-template-rows: 8vh 52vh;
+
+						width: 20vw;
 
 						a {
 							width: 9vw;
@@ -210,6 +210,8 @@
 					align-self: center;
 					justify-self: left;
 					padding-left: 1vw;
+
+					color: $bg-gradient;
 				}
 
 				.starting-balance {
@@ -281,7 +283,9 @@
 
 				.league-data {
 					grid-row: 2;
-					background-color: white
+
+					background-color: $transparent-white;
+					border-radius: 1vw;
 				}
 
 				.button-container {
