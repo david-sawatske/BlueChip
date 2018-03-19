@@ -2,36 +2,43 @@
 	@media screen and (min-width: 768px) {
     .user-show-container {
 			display: grid;
-
       grid-template-columns: auto;
       grid-template-rows: auto;
-      height: 75vh;
-      width: 100vw;
 
 			.user-show {
 				grid-column: 2/3;
 				grid-row: 1/4;
 
-				background-color: $background-grey;
-				display: grid;
-				margin-left: 1%;
+				height: 80vh;
+				width: 95vw;
 
-				grid-template-columns: 1fr 4fr;
-			  grid-template-rows: 15% auto;
+				background-color: $background-grey;
+
+				display: grid;
+				margin-left: .5vw;
+
+				grid-template-columns: 20vw 75vw;
+			  grid-template-rows: 10vh 23vh 50vh;
 
 				.avatar {
 					grid-column: 1;
-					grid-row: 1/2;
+					grid-row: 1/3;
 
 					background-color: $background-blue;
 
 					display: grid;
 					grid-template-columns: 1fr;
-					grid-template-rows: 5% auto;
+					grid-template-rows: 1vh auto;
 
 					img {
 						grid-column: 1;
 						grid-row: 2;
+
+						height: auto;
+						width: 17.5vw;
+						padding-top: 2vh;
+						margin: auto;
+
 						border-radius: 50%;
 					}
 
@@ -41,17 +48,17 @@
 
 						background-color: $transparent-white;
 						text-shadow: 2px 2px 2px $off-white;
-						line-height: 20%;
+						line-height: 2vh;
 					}
 				}
 
 				.user-league-index {
-					grid-column: 1/3;
-					grid-row: 1/3;
+					grid-column: 1/4;
+					grid-row: 1/4;
 
 					display: inherit;
-					grid-template-columns: 1fr 4fr;
-					grid-template-rows: minmax(250px, 15%) auto;
+					grid-template-columns: 20vw 75vw;
+					grid-template-rows: 30vh 50vh;
 
 					.joined-leagues {
 						grid-column: 1;
@@ -65,26 +72,27 @@
 
 					  .league-data {
 							h1 {
-								font-size: 133%;
-								margin-left: auto;
+								font-size: 1.5vw;
+								margin: auto;
 								margin-bottom: -10%;
+								cursor: pointer;
 							}
 
-							h3 {
+							h2, h3 {
 								display: none;
 							}
 						}
 
 						.league-data:hover {
 							h1 {
-								font-size: 150%;
-								text-shadow: -1px -1px 1px $blue-grey;
+								text-shadow: -1px -1px 1px $dark-grey;
+								margin-bottom: -1vh;
 							}
 
-							h3 {
-								display: block;
-								font-size: 100%;
-								margin-bottom: -10%;
+							h2, h3 {
+								display: inline;
+								font-size: 1.1vw;
+								padding: 0;
 							}
 						}
 
@@ -92,15 +100,15 @@
 							opacity: .66;
 
 							h1 {
-								font-size: 133%;
-								margin-bottom: -10%;
+								font-size: 1.5vw;
 								color: $dark-grey;
+								margin-bottom: -1vh;
 							}
 
-							h3 {
-								display: block;
-								font-size: 100%;
-								margin-bottom: -10%;
+							h2, h3 {
+								display: inline;
+								font-size: 1.1vw;
+								padding: 0;
 							}
 						}
 					}
@@ -109,50 +117,95 @@
 						grid-column: 2;
 						grid-row: 1/3;
 
-						margin-top: 1%;
+						margin-top: 1vh;
 
 						display: inherit;
-						grid-template-rows: minmax(auto, 10%) auto;
+						grid-template-rows: 10vh, 65vh;
 
 						.user-stock-header {
 							grid-row: 1;
-							justify-self: center;
-							width: 97.5%;
+
+							width: 75vw;
+							justify-self: left;
+
 							border-top: 5px solid $background-blue;
 							border-bottom: 5px solid $background-blue;
+
+							display: grid;
+							grid-template-columns: 45vw 14.5vw 14.5vw;
+							grid-template-rows: 3vh 7vh;
 
 							h1, h3 {
 								display: inline;
 							}
 
 							h1 {
-								font-size: 275%;
+								grid-column: 1;
+								grid-row: 1/3;
+
+								text-align: left;
+
+								font-size: 3vw;
 								color: $off-white;
 							}
 
-							h3 {
+							h2 {
+								grid-row: 2;
+
+								font-size: 2vw;
 								color: $transparent-white;
+							}
+
+							h2:first-of-type {
+								grid-column: 2;
+							}
+
+							h2:last-of-type {
+								grid-column: 3;
+							}
+
+							h3 {
+								grid-row: 1;
+
+								text-align: left;
+								padding: 1vh 0;
+
+								font-size: 1.25vw;
+								color: $transparent-white;
+							}
+
+							h3:first-of-type {
+								grid-column: 2;
+							}
+
+							h3:last-of-type {
+								grid-column: 3;
 							}
 						}
 
-						.stock-index-table {   /// goood
+						.stock-index-table {
 							grid-row: 2;
-							padding-top: 20px;
-							width: 95%;
+
+							height: 65vh;
+							width: 80vw;
+							overflow-y: scroll;
+							padding-top: 1vh;
 							justify-self: center;
 
-							button {
-								background-color: $dark-blue;
-								color: white;
-								margin: 5px;
-								padding: 10px 15px;
-								font-size: 100%;
-								border-radius: 12px;
-								border: none;
+							table {
+								margin-left: 2vw;
+
+								thead > tr > th > a > div > p {
+									margin-bottom: -1.5vh;
+								}
 							}
 
-							button:hover {
-								border: 1px solid $transparent-white;
+							.return {
+								font-size: 1vw;
+								color: $transparent-white;
+								background-color: $transparent;
+								border: none;
+								cursor: pointer;
 							}
 
 							.no-transacitons {
@@ -167,23 +220,27 @@
 
 									justify-self: center;
 									align-self: center;
-									height: 50%;
-									width: 50%;
+									height: 25vh;
+									width: 35vw;
 
 									background-color: $background-grey;
 
 									display: inherit;
-									grid-template-rows: 33% auto;
+									grid-template-rows: 10vh 15vh;
 
 									h1 {
+										font-size: 5vh;
 										color: $transparent-white;
+										text-shadow: 2px 2px 2px black;
 									}
 
 									.button {
-										width: 66%;
+										width: 20vw;
+										height: 4vh;
 										justify-self: center;
-										align-self: center;
-										font-size: 150%;
+										align-self: top;
+
+										font-size: 2vw;
 									}
 								}
 

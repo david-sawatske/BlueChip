@@ -5,8 +5,9 @@ import { numberToCurrency } from '../../util/helper_functions'
 const PortfolioHeader = ({ balance, cashInvested, leagueName, leagueClass }) => (
   <div className={leagueClass}>
     <h1>{leagueName}</h1>
-    <h3>Cash Available: {numberToCurrency(balance)}</h3>
-    <h3>Cash Invested: {numberToCurrency(cashInvested)}</h3>
+    <h3>Cash Available:</h3> <h2>{numberToCurrency(balance)}</h2>
+    <br/>  
+    <h3>Cash Invested:</h3> <h2>{numberToCurrency(cashInvested)}</h2>
   </div>
 );
 

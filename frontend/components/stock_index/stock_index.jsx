@@ -99,7 +99,10 @@ class StockIndex extends React.Component {
                               'latestPrice': 'Current Price',
                               'invested': 'Total Invested',
                               'sharesOwned': 'Shares Owned',
-                              'searchLink': 'Click Logo for More Data' }
+                              'searchLink': <div>
+                                              <p>Click Logo</p>
+                                              <p>for Data</p>
+                                            </div>}
 
       const isDataSotable = { 'companyName': true,
                               'symbol': true,
@@ -149,8 +152,9 @@ class StockIndex extends React.Component {
     if (clickedTicker && peersLoaded) {
       const tkr = clickedTicker;
       StockShowComponent = <div>
-                             <button onClick={ (e) => this.closeStockShow(e) }>
-                               Return to Transactions
+                             <button onClick={ (e) => this.closeStockShow(e) }
+                                     className='return'>
+                               ← Return to Transactions
                              </button>
                              <StockShow remoteStockData={remoteStockData[tkr]}
                                         transactionData={transactionData[tkr]}
