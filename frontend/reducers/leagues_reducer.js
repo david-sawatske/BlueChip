@@ -1,50 +1,25 @@
-import
-{
-  combineReducers
-}
-from 'redux';
+import { combineReducers } from 'redux';
 
-import
-{
-  RECEIVE_TARGET_USER_DATA
-}
-from '../actions/user_actions';
-import
-{
-  RECEIVE_TARGET_LEAGUE,
-  RECEIVE_ALL_LEAGUES
-}
-from '../actions/league_actions';
+import { RECEIVE_TARGET_USER_DATA } from '../actions/user_actions';
+import { RECEIVE_TARGET_LEAGUE, RECEIVE_ALL_LEAGUES } from '../actions/league_actions';
 
-import
-{
-  merge,
-  union
-}
-from 'lodash';
+import { merge, union } from 'lodash';
 
-const leaguesById = (state = {}, action) =>
-{
-  switch (action.type)
-  {
+const leaguesById = (state = {}, action) => {
+  switch (action.type) {
     case RECEIVE_TARGET_USER_DATA:
-      return merge(
-      {}, state, action.targetUser.leagues.leaguesById);
+      return merge({}, state, action.targetUser.leagues.leaguesById);
     case RECEIVE_TARGET_LEAGUE:
-      return merge(
-      {}, state, action.targetLeague.leagues.leaguesById);;
+      return merge({}, state, action.targetLeague.leagues.leaguesById);;
     case RECEIVE_ALL_LEAGUES:
-      return merge(
-      {}, state, getLeagueData(action).byId);
+      return merge({}, state, getLeagueData(action).byId);
     default:
       return state;
   }
 };
 
-const allLeagueIds = (state = [], action) =>
-{
-  switch (action.type)
-  {
+const allLeagueIds = (state = [], action) => {
+  switch (action.type) {
     case RECEIVE_TARGET_USER_DATA:
       return union([], state, action.targetUser.leagues.allLeagueIds);
     case RECEIVE_TARGET_LEAGUE:
@@ -57,13 +32,11 @@ const allLeagueIds = (state = [], action) =>
 };
 
 // START selectors //
-const getLeagueData = obj =>
-{
+const getLeagueData = obj => {
   let byId = {};
   let allIds = [];
 
-  Object.values(obj.allLeagues).map(league =>
-  {
+  Object.values(obj.allLeagues).map(league => {
     byId = merge(
     {}, byId, league.leagues.leaguesById);
     allIds = union([], allIds, league.leagues.allLeagueIds)
@@ -76,8 +49,7 @@ const getLeagueData = obj =>
 }
 // END selectors //
 
-const LeaguesReducer = combineReducers(
-{
+const LeaguesReducer = combineReducers({
   leaguesById,
   allLeagueIds
 });
