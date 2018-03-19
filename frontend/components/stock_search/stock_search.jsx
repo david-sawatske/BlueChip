@@ -42,7 +42,9 @@ class StockSearch extends React.Component {
     const additionalDataTypes = 'financials,earnings,relevant,';
     const ticker = this.state.ticker;
 
-    this.props.requestStockSearch(ticker, additionalDataTypes)
+    this.props.requestStockSearch(ticker, additionalDataTypes).then(() => {
+      this.props.setTicker(ticker)
+    })
   }
 
   handlePeerSearch(event) {
