@@ -43,7 +43,7 @@ class HomePage extends React.Component {
     const sampleStock = remoteStockData[ticker];
 
     let StockDataComponent
-    if (sampleStock && leagueUserData && userLeagueData) {
+    if (sampleStock && leagueUserData && userLeagueData && randomUserId) {
       StockDataComponent =
         <SampleComponent userLeagueData={userLeagueData}
                          currentPath={currentPath}
