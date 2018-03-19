@@ -252,9 +252,133 @@
 							}
 
 							.stock-show {
-								max-width: 75vw;
-								grid-column: 2;
-								grid-row: 2;
+								width: 75vw;
+
+								.stock-data {
+									width: 75vw;
+
+									.header-container {
+										.logo {
+											width: 4vw;
+										}
+
+										.price > .display-data {
+											font-size: 5vh;
+										}
+
+										.display-data {
+											font-size: 3vh;
+										}
+
+										.name {
+											font-size: 4vh;
+										}
+
+										.time {
+											font-size: 1.75vh;
+										}
+									}
+
+									.transaction-data {
+										height: 25vh;
+										width: 27vw;
+									}
+
+									.chart-container {
+										grid-column: 1/8;
+										grid-row: 2;
+
+										height: 55vh;
+										width: 56vw;
+										margin-left: 1vw;
+
+										.chart {
+											height: 45vh;
+											width: 54vw;
+										}
+									}
+
+									.stock-summary {
+										grid-column: 8/10;
+										grid-row: 2;
+
+										height: 50vh;
+										width: 15vw;
+
+										table {
+											width: 14.5vw;
+
+											margin: .5vh auto;
+										}
+									}
+
+									.financials-table {
+										width: 45vw;
+										margin: 0;
+									}
+
+									.company-data {
+										grid-column: 6/10;
+
+										table {
+											margin: 0;
+										}
+									}
+
+									.earnings-peer {
+										height: auto;
+
+										.earnings-table {
+											grid-column: 1;
+											grid-row: 1;
+
+											table {
+												margin: 0;
+											}
+
+										}
+
+										.peer-data {
+											grid-column: 1;
+											grid-row: 2;
+
+											padding-top: 4vh;
+
+											table {
+												margin: 0;
+											}
+										}
+									}
+
+									.news {
+										grid-column: 1/10;
+										grid-row: 5;
+
+										width: 75vw;
+
+										h1 {
+											font-size: 4vw;
+											font-weight: 900;
+											width: 60vw;
+										}
+
+										h3 {
+											font-size: 1.25vw;
+										}
+
+										h4 {
+											font-size: 1vw;
+										}
+
+										.story-list {
+											width: 70vw;
+
+											div:hover {
+  											transform: scale(1.1);
+											}
+										}
+									}
+								}
 							}
 						}
 					}

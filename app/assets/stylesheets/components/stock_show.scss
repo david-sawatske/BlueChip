@@ -13,6 +13,7 @@ CSS Grid layout for modern browsers:
 			grid-template-columns: auto;
 			grid-template-rows: auto;
 			overflow-y: scroll;
+			overflow-x: hidden;
 
 			background-color: $transparent-white;
 
@@ -308,7 +309,7 @@ CSS Grid layout for modern browsers:
 						grid-row: auto;
 
 						height: 40vh;
-						width: 50vw;
+						width: 45vw;
 						justify-self: center;
 
 						display: grid;
@@ -319,11 +320,7 @@ CSS Grid layout for modern browsers:
 							grid-column: 1/3;
 							grid-row: 1;
 							height: 40vh;
-							width: 50vw;
-
-							th, td {
-								padding: 2vh 1vw;
-							}
+							width: 45vw;
 
 							thead {
 								background: $transparent-white;
@@ -366,13 +363,13 @@ CSS Grid layout for modern browsers:
 						grid-row: auto;
 
 						height: 45vh;
-						width: 40vw;
+						width: 47vw;
 						justify-self: center;
 						margin-right: 2vw;
 
 						h2 {
 							text-align: left;
-							padding: 0 0 0 1vw;
+							padding: 0 0 0 2vw;
 
 							color: $dark-grey;
 							background-color: $news-transparent;
@@ -382,8 +379,16 @@ CSS Grid layout for modern browsers:
 						}
 
 						table {
-							width: 40vw;
+							width: 47vw;
 							justify-self: center;
+
+							thead > tr > th > a {
+								font-size: 1vw;
+							}
+
+							tbody > tr > td {
+								font-size: 1.25vw;
+							}
 						}
 					}
 				}
