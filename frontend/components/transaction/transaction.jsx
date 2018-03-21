@@ -121,8 +121,11 @@ class Transaction extends React.Component {
     if (this.state.showLeagueData) {
       const leagueData = targetUserData['userLeagueData']
                                        [this.state.league_id]
-      const currStockTransactions = Object.values(leagueData['transactionData']
-                                                            [this.state.symbol])
+      const leagueStockData = leagueData[this.state.symbol]
+
+      const currStockTransactions = (leagueStockData) ? Object.values(leagueStockData)
+                                                         :
+                                                       [];
 
       TransactonInfo = <TransactionData leagueName={leagueData.name}
                                         balance={leagueData.balance}
