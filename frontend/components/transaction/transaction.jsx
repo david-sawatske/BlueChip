@@ -38,7 +38,7 @@ class Transaction extends React.Component {
                        leagueBtnVal: "Select League"
                      };
 
-    this.setState(newState)
+    this.setState(newState);
   }
 
   transactionVerification() {
@@ -118,6 +118,15 @@ class Transaction extends React.Component {
 
     const leagueChoices = Object.values(targetUserData.userLeagueData)
 
+    let quantOwned = 0;
+    if (transactionData) {
+      Object.values(transactionData).map(transactObj => {
+        if (transactObj.league === this.state.leagueBtnVal) {
+          quantOwned += transactObj.shareQuant;
+        }
+      })
+    }
+
     let TransactonInfo
     if (this.state.showLeagueData) {
       const leagueData = targetUserData['userLeagueData']
@@ -130,7 +139,7 @@ class Transaction extends React.Component {
 
       TransactonInfo = <TransactionData leagueName={leagueData.name}
                                         balance={leagueData.balance}
-                                        transactData={currStockTransactions}
+                                        quantOwned={quantOwned}
                                         quote={quote} />
     }
 
