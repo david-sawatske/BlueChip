@@ -22,6 +22,7 @@ class StockShow extends React.Component {
     const transactArray = (transactionData) ? Object.values(transactionData)
                                                :
                                               [];
+
     let TransactionButton
     if (currentUser) {
       TransactionButton = <button className="button" onClick={ () =>
@@ -73,7 +74,8 @@ class StockShow extends React.Component {
           <StockNews news={news}
                      companyName={quote.companyName}/>
 
-          <ModalRoot quote={quote}
+          <ModalRoot transactionData={transactionData}
+                     quote={quote} 
                      logo={logo} />
         </div>
     }

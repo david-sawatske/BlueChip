@@ -14,7 +14,8 @@ class ModalRoot extends React.Component {
   }
 
   render() {
-    const { modalType, modalProps, hideModal, currentUser, quote, logo } = this.props;
+    const { modalType, modalProps, hideModal, currentUser,
+            quote, logo, transactionData } = this.props;
 
     if (!modalType) return null;
 
@@ -22,6 +23,7 @@ class ModalRoot extends React.Component {
 
     return <TargetModal modalOpen={modalProps.modalOpen}
                         formType={modalProps.formType}
+                        transactionData={transactionData}
                         currentUser={currentUser}
                         quote={quote}
                         logo={logo}
