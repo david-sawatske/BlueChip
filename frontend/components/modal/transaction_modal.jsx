@@ -15,7 +15,8 @@ class TransactionModal extends React.Component {
   }
 
   render() {
-    const { modalOpen, hideModal, quote, logo } = this.props;
+    const { modalOpen, hideModal, quote, logo,
+            transactionData } = this.props;
 
     return (
       <div>
@@ -26,7 +27,8 @@ class TransactionModal extends React.Component {
 
           <h1>Transaction</h1>
 
-          <Transaction quote={quote}
+          <Transaction transactionData={transactionData}
+                       quote={quote}
                        logo={logo} />
         </Modal>
       </div>

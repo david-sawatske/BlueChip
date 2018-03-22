@@ -112,7 +112,8 @@ class Transaction extends React.Component {
   }
 
   render() {
-    const { targetUserData, currentUser, quote, logo } = this.props;
+    const { targetUserData, currentUser, quote, logo,
+            transactionData } = this.props;
     const targetUserId = currentUser.id;
 
     const leagueChoices = Object.values(targetUserData.userLeagueData)

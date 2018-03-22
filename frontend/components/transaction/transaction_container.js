@@ -9,9 +9,10 @@ import { getUserLeagueData } from '../../reducers/selectors';
 
 import Transaction from './transaction';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   targetUserData: getUserLeagueData(state, state.session.currentUser),
   currentUser: state.session.currentUser,
+  transactionData: ownProps.transactionData
 });
 
 const mapDispatchToProps = dispatch => ({
