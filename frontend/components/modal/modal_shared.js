@@ -20,8 +20,9 @@ export const ModalStyle = {
     border          : '1px solid #ccc',
     borderRadius    : '40px 15px',
     backgroundColor: 'white',
-    padding         : '30px',
-    zIndex          : 101
+    padding         : '0px 30px',
+    'overflow-x'    : 'hidden',
+    zIndex          : 10
   },
   'content:hover' : {
     cursor : 'pointer'
