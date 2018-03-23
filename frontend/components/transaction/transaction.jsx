@@ -132,7 +132,8 @@ class Transaction extends React.Component {
       })
     }
 
-    let TransactonInfo
+    let TransactonInfo;
+    let TransactionForm;
     if (this.state.showLeagueData) {
       const leagueData = targetUserData['userLeagueData']
                                        [this.state.league_id]
@@ -146,9 +147,26 @@ class Transaction extends React.Component {
                                         balance={leagueData.balance}
                                         quantOwned={quantOwned}
                                         quote={quote} />
+
+      TransactionForm = <form onSubmit={this.handleSubmit}
+                              className="transaction-form">
+                          <input type="number"
+                                 placeholder="Share Quantitiy"
+                                 value={Math.abs(this.state.share_quant)}
+                                 onChange={this.update('share_quant')} />
+                         <label className="switch">
+                           <input type="checkbox"
+                                  onChange={this.toggleTransaction} />
+                           <span className="slider"></span>
+                         </label>
+
+                        <input type="submit"
+                               value={this.state.transactionType}
+                               className="button" />
+                      </form>
     }
 
-    let StockData
+    let StockData;
     if (quote && logo) {
        StockData = <StockHeader quote={quote}
                                 logo={logo} />
@@ -173,22 +191,7 @@ class Transaction extends React.Component {
         { StockData }
         { LeagueButtons }
         { TransactonInfo }
-
-        <form onSubmit={this.handleSubmit} className="transaction-form">
-          <input type="number"
-                 placeholder="Share Quantitiy"
-                 value={Math.abs(this.state.share_quant)}
-                 onChange={this.update('share_quant')} />
-         <label className="switch">
-           <input type="checkbox"
-                  onChange={this.toggleTransaction} />
-           <span className="slider"></span>
-         </label>
-
-        <input type="submit"
-               value={this.state.transactionType}
-               className="button" />
-      </form>
+        { TransactionForm }
     </div>
   );
   }
