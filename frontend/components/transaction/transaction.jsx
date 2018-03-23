@@ -35,7 +35,7 @@ class Transaction extends React.Component {
                        showLeagueData: false,
                        transactionType: 'buy',
                        leagueClicked: false,
-                       leagueBtnVal: "Select League"
+                       leagueBtnVal: "Select League ▾"
                      };
 
     this.setState(newState);
@@ -106,9 +106,14 @@ class Transaction extends React.Component {
   }
 
   toggleTransaction() {
-    const newType = ( this.state.transactionType === "buy" ) ? "sell" : "buy"
+    const quant = this.state.share_quant;
 
-    this.setState({ transactionType: newType })
+    const newValues = ( this.state.transactionType === "buy" ) ?
+    { transactionType: "sell", share_quant: -Math.abs(quant) }
+      :
+    { transactionType: "buy", share_quant: Math.abs(quant) }
+
+    this.setState(newValues)
   }
 
   render() {
@@ -170,9 +175,9 @@ class Transaction extends React.Component {
         { TransactonInfo }
 
         <form onSubmit={this.handleSubmit} className="transaction-form">
-          <input type="text"
+          <input type="number"
                  placeholder="Share Quantitiy"
-                 value={this.state.share_quant}
+                 value={Math.abs(this.state.share_quant)}
                  onChange={this.update('share_quant')} />
          <label className="switch">
            <input type="checkbox"
