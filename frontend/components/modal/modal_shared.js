@@ -21,7 +21,7 @@ export const ModalStyle = {
     borderRadius    : '40px 15px',
     backgroundColor: 'white',
     padding         : '0px 30px',
-    'overflow-x'    : 'hidden',
+    overflowX       : 'hidden',
     zIndex          : 10
   },
   'content:hover' : {
