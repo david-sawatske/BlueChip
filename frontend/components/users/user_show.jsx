@@ -9,47 +9,38 @@ class UserShow extends React.Component {
     super(props);
   }
 
-  fetchUserData(userId) {
-    this.props.requestTargetUserData(userId);
-  }
-
   componentWillMount() {
-    if (!this.props.userId) {
-      this.fetchUserData(this.props.match.params.userId)
-    }
-
-    if (this.props.currentUser) {
-      this.fetchUserData(this.props.currentUser.id)
-    }
+    this.props.requestTargetUserData(this.props.match.params.userId)
   }
 
   componentWillUpdate(nextProps) {
-    if ( !this.props.userId && nextProps.match.params.userId !==
-                               this.props.match.params.userId )
-      {
-        this.fetchUserData(nextProps.match.params.userId)
-      }
+    const currUserId = this.props.match.params.userId;
+    const nextUserId = nextProps.match.params.userId;
+
+    if ( currUserId !== nextUserId ) {
+      this.props.requestTargetUserData(nextUserId);
+    }
   }
 
   render() {
-    const { isRailsUserLoading, userData, userId } = this.props;
-    const targetUserId = userId || this.props.match.params.userId;
+    const { userData, match  } = this.props;
+    const targetUserId = match.params.userId;
 
     let ShowComponent
-    if (isRailsUserLoading) {
+    if (userData[targetUserId]) {
+      const targetUserData = userData[targetUserId];
+      const sampleLeagueId = Object.keys(targetUserData.userLeagueData)[0]
+
+      ShowComponent =
+        <div className="user-show">
+            <UserAvatar userData={{ id: targetUserData.id,
+                                    username: targetUserData.username }} />
+
+            <UserLeagueIndex sampleLeagueId={sampleLeagueId}
+                             userLeagueData={targetUserData.userLeagueData} />
+        </div>
+    } else {
       ShowComponent = <Loader />
-    } else if (userData[targetUserId]) {
-        const targetUserData = userData[targetUserId];
-        const sampleLeagueId = Object.keys(targetUserData.userLeagueData)[0]
-
-        ShowComponent =
-          <div className="user-show">
-              <UserAvatar userData={{ id: targetUserData.id,
-                                      username: targetUserData.username }} />
-
-              <UserLeagueIndex userLeagueData={targetUserData.userLeagueData}
-                               sampleLeagueId={sampleLeagueId} />
-          </div>
     }
 
     return (

@@ -7,9 +7,7 @@ import { getUserLeagueData } from '../../reducers/selectors'
 import UserShow from './user_show';
 
 const mapStateToProps = state => ({
-  isRailsUserLoading: state.ui.loading.railsUserLoading,
-  userData: getUserLeagueData(state),
-  currentUser: state.session.currentUser
+  userData: getUserLeagueData(state)
 });
 
 const mapDispatchToProps = dispatch => ({
