@@ -23,6 +23,6 @@ class Api::CashBalancesController < ApplicationController
 
   private
     def cash_balance_params
-      params.require(:cash_balance).permit(:user_id, :league_id, :balance)
+      params.require(:cash_balance).permit(:user_id, :league_id, :balance, :id)
     end
 end

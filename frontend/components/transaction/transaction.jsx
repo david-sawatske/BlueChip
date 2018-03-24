@@ -1,97 +1,86 @@
 import React from 'react';
 
-import TransactionData from './transaction_data'
+import TransactionData from './transaction_data';
 import LeagueSelection from './league_selection';
 import StockHeader from '../stock_show/stock_header';
 import StockSummary from '../stock_show/stock_summary';
 
-import { stringToInt } from '../../util/helper_functions'
+import { stringToInt } from '../../util/helper_functions';
 
 class Transaction extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { };
+    const quote = (this.props.quote) ? this.props.quote : {};
+
+    this.state = { symbol: quote.symbol,
+                   shareQuant: '',
+                   sharePrice: quote.latestPrice,
+                   purchaseDay: new Date(),
+                   userId: this.props.currentUser.id,
+                   leagueId: '',
+                   cashBalance: '',
+                   quantOwned: 0,
+                   balanceId: '',
+                   showLeagueData: false,
+                   transactionType: 'buy',
+                   leagueClicked: false,
+                   leagueBtnVal: 'Select League ▾'
+                  };
 
     this.setLeagueStateData = this.setLeagueStateData.bind(this);
     this.setLeagueClicked = this.setLeagueClicked.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
 
-
     this.toggleTransaction = this.toggleTransaction.bind(this);
-  }
-
-  componentWillMount() {
-    const quote = (this.props.quote) ? this.props.quote : {};
-    const newState = { symbol: quote.symbol,
-                       share_quant: "",
-                       share_price: quote.latestPrice,
-                       purchase_day: new Date(),
-                       user_id: this.props.currentUser.id,
-                       league_id: '',
-                       cashBalance: '',
-                       balanceId: '',
-                       showLeagueData: false,
-                       transactionType: 'buy',
-                       leagueClicked: false,
-                       leagueBtnVal: "Select League ▾"
-                     };
-
-    this.setState(newState);
-  }
-
-  transactionVerification() {
-    const transactionAmount = (this.state.share_price * this.state.share_quant);
-    const netBalance = (this.state.cashBalance - transactionAmount);
-
-    return (netBalance >= transactionAmount) ?
-      { ['id']: this.state.balanceId, ['balance']: netBalance }
-        :
-      null  // Action to render Errors in future
-  }
-
-  transactionProcessor() {
-    const updatedBalance = this.transactionVerification();
-
-    if (updatedBalance) {
-      this.props.postTransaction(this.state)
-      this.props.updateCashBalance(updatedBalance)
-    } else {
-        alert('Insufficient Balance for that trade') // Future Error Action return
-      }
-    this.setState({
-      share_quant: ""
-    })
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const share_quant = this.state.share_quant;
-    const transactionType = this.state.transactionType;
+    const { transactionType, shareQuant, symbol, purchaseDay, sharePrice,
+            leagueId, userId, cashBalance, balanceId } = this.state;
 
-    if (transactionType === 'sell') {
-      this.setState(
-        { 'share_quant': (this.state.share_quant * -1) }, () => (
-          this.transactionProcessor()
-        )
-      )
-    } else if (transactionType === 'buy') (
-      this.transactionProcessor()
-    )
+    const netBalance = (cashBalance - shareQuant * sharePrice)
 
-    this.props.requestTargetUserData(this.state.user_id)
+    const transactionData = { symbol: symbol,
+                              purchase_day: purchaseDay,
+                              share_quant: shareQuant,
+                              share_price: sharePrice,
+                              league_id: leagueId,
+                              user_id: userId }
+
+    this.props.postTransaction(transactionData).then(() => {
+      this.props.updateCashBalance({ league_id: leagueId,
+                                     user_id: userId,
+                                     id: balanceId,
+                                     balance: netBalance }).then(() => {
+                                       this.props.requestTargetUserData(userId)
+                                     })
+    })
   }
 
   setLeagueStateData(leagueData, event) {
     event.preventDefault();
 
-    this.setState({ league_id: leagueData['leagueId'],
+    const leagueTargetStock = this.props.targetUserData
+                                        .userLeagueData
+                                        [leagueData.leagueId]
+                                        ['transactionData']
+                                        [this.state.symbol]
+
+    let quantOwned = 0;
+    Object.values(leagueTargetStock).map(transactObj => {
+        quantOwned += transactObj.shareQuant;
+    })
+
+    this.setState({ leagueId: leagueData['leagueId'],
                     cashBalance: leagueData['balance'],
                     balanceId: leagueData['balanceId'],
+                    leagueBtnVal: leagueData.name,
+                    quantOwned: quantOwned,
                     showLeagueData: true,
-                    leagueClicked: false,
-                    leagueBtnVal: leagueData.name
+                    leagueClicked: false
                    })
   }
 
@@ -106,12 +95,12 @@ class Transaction extends React.Component {
   }
 
   toggleTransaction() {
-    const quant = this.state.share_quant;
+    const quant = this.state.shareQuant;
 
     const newValues = ( this.state.transactionType === "buy" ) ?
-    { transactionType: "sell", share_quant: -Math.abs(quant) }
+    { transactionType: "sell", shareQuant: -Math.abs(quant) }
       :
-    { transactionType: "buy", share_quant: Math.abs(quant) }
+    { transactionType: "buy", shareQuant: Math.abs(quant) }
 
     this.setState(newValues)
   }
@@ -123,20 +112,11 @@ class Transaction extends React.Component {
 
     const leagueChoices = Object.values(targetUserData.userLeagueData)
 
-    let quantOwned = 0;
-    if (transactionData) {
-      Object.values(transactionData).map(transactObj => {
-        if (transactObj.league === this.state.leagueBtnVal) {
-          quantOwned += transactObj.shareQuant;
-        }
-      })
-    }
-
     let TransactonInfo;
     let TransactionForm;
     if (this.state.showLeagueData) {
       const leagueData = targetUserData['userLeagueData']
-                                       [this.state.league_id]
+                                       [this.state.leagueId]
       const leagueStockData = leagueData[this.state.symbol]
 
       const currStockTransactions = (leagueStockData) ? Object.values(leagueStockData)
@@ -145,15 +125,15 @@ class Transaction extends React.Component {
 
       TransactonInfo = <TransactionData leagueName={leagueData.name}
                                         balance={leagueData.balance}
-                                        quantOwned={quantOwned}
+                                        quantOwned={this.state.quantOwned}
                                         quote={quote} />
 
       TransactionForm = <form onSubmit={this.handleSubmit}
                               className="transaction-form">
                           <input type="number"
                                  placeholder="Share Quantitiy"
-                                 value={Math.abs(this.state.share_quant)}
-                                 onChange={this.update('share_quant')} />
+                                 value={Math.abs(this.state.shareQuant)}
+                                 onChange={this.update('shareQuant')} />
                          <label className="switch">
                            <input type="checkbox"
                                   onChange={this.toggleTransaction} />
