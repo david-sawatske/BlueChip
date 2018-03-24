@@ -29,29 +29,27 @@ class UserLeagueIndex extends React.Component {
 
       ShowComponent = <UserLeaguePortfolio key={targetLeague.leagueId}
                                            leagueData={targetLeague} />
-    } else {
-      ShowComponent = <h3>Select a League to View</h3>
     }
 
     return (
       <div className="user-league-index">
         <ul className="joined-leagues">
           {Object.values(userLeagueData).map(league => {
-            const cashInvested = calcCashInvested(league.transactionData);
-            let leagueClass = "league-data";
+            const { transactionData, balance, name, leagueId } = league;
+            const cashInvested = calcCashInvested(transactionData);
 
-            if (league.leagueId == this.state.targetLeagueId) {
-              leagueClass = "league-data-active";
-            }
+            const leagueClass = (leagueId == this.state.targetLeagueId)
+                                  ? "league-data-active"
+                                  : "league-data";
 
             return (
-              <div onClick={(e) => this.setShowLeague(e, league.leagueId)}
-                   key={league.leagueId} >
+              <div onClick={(e) => this.setShowLeague(e, leagueId)}
+                   key={leagueId} >
 
                 <PortfolioHeader cashInvested={cashInvested.totalCashInvested}
-                                 balance={league.balance}
-                                 leagueName={league.name}
-                                 leagueClass={leagueClass} />
+                                 leagueClass={leagueClass}
+                                 balance={balance}
+                                 leagueName={name} />
               </div>
             )
           })}
