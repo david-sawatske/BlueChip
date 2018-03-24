@@ -70,10 +70,12 @@ class Transaction extends React.Component {
                                         [this.state.symbol]
 
     let quantOwned = 0;
-    Object.values(leagueTargetStock).map(transactObj => {
-        quantOwned += transactObj.shareQuant;
-    })
-
+    if (leagueTargetStock) {
+      Object.values(leagueTargetStock).map(transactObj => {
+          quantOwned += transactObj.shareQuant;
+      })
+    }
+    
     this.setState({ leagueId: leagueData['leagueId'],
                     cashBalance: leagueData['balance'],
                     balanceId: leagueData['balanceId'],
