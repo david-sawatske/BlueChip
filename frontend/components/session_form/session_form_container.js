@@ -8,7 +8,8 @@ import SessionForm from './session_form';
 const mapStateToProps = state => {
   return {
     loggedIn: Boolean(state.session.currentUser),
-    errors: state.ui.errors.session
+    errors: state.ui.errors.session,
+    currentUser: state.session.currentUser
   }
 };
 

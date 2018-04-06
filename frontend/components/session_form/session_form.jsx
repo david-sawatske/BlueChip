@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -8,7 +8,8 @@ class SessionForm extends React.Component {
     this.state = {
       username: "",
       password: "",
-      hasErrors: false
+      hasErrors: false,
+      redirect: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -36,7 +37,7 @@ class SessionForm extends React.Component {
 
     this.props.processForm(user).then(actionObj => {
       this.props.requestTargetUserData(actionObj.currentUser.id)
-      this.props.hideModal()
+      this.setState({ redirect: true })
     })
   }
 
@@ -67,6 +68,12 @@ class SessionForm extends React.Component {
 
   render() {
     let errorList = null;
+      if (this.state.redirect) {
+        const currentUserURL = `users/${this.props.currentUser.id}`
+
+        this.props.hideModal()
+        return <Redirect to={currentUserURL}/>;
+      }
 
     if (this.state.hasErrors) {
       errorList = this.renderErrors(this.props.errors);
