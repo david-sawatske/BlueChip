@@ -41,11 +41,15 @@ class Transaction extends React.Component {
     const { transactionType, shareQuant, symbol, purchaseDay, sharePrice,
             leagueId, userId, cashBalance, balanceId } = this.state;
 
-    const netBalance = (cashBalance - shareQuant * sharePrice)
+    const netShareQuant = transactionType === 'buy' ? shareQuant
+                                                      :
+                                                      -Math.abs(shareQuant)
+
+    const netBalance = (cashBalance - netShareQuant * sharePrice)
 
     const transactionData = { symbol: symbol,
                               purchase_day: purchaseDay,
-                              share_quant: shareQuant,
+                              share_quant: netShareQuant,
                               share_price: sharePrice,
                               league_id: leagueId,
                               user_id: userId }
@@ -75,7 +79,7 @@ class Transaction extends React.Component {
           quantOwned += transactObj.shareQuant;
       })
     }
-    
+
     this.setState({ leagueId: leagueData['leagueId'],
                     cashBalance: leagueData['balance'],
                     balanceId: leagueData['balanceId'],
@@ -100,9 +104,9 @@ class Transaction extends React.Component {
     const quant = this.state.shareQuant;
 
     const newValues = ( this.state.transactionType === "buy" ) ?
-    { transactionType: "sell", shareQuant: -Math.abs(quant) }
+    { transactionType: "sell" }
       :
-    { transactionType: "buy", shareQuant: Math.abs(quant) }
+    { transactionType: "buy"}
 
     this.setState(newValues)
   }
