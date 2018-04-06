@@ -62,6 +62,8 @@ class SampleComponent extends React.Component {
     } else {
       this.setState({ activeComponentIdx: newIdx })
     }
+
+    clearInterval(this.state.timer);
   }
 
   render() {
