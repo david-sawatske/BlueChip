@@ -41,7 +41,7 @@ class SampleComponent extends React.Component {
       this.setState({
         activeComponentIdx: this.state.activeComponentIdx + 1
       });
-    } else if (currIdx === 5) {
+    } else if (currIdx === 4) {
       this.setState({
         activeComponentIdx: 0
       });
@@ -116,14 +116,6 @@ class SampleComponent extends React.Component {
         StockSumm = null;
         componentClass = "league-component";
         scrollCoverClass = "scroll-cover";
-
-        break;
-      case 5:
-        SampleComponent = <UserShow userData={userLeagueData}
-                                    userId={userId} />
-        StockHead = null;
-        StockSumm = null;
-        componentClass = "user-component";
 
         break;
       default:
