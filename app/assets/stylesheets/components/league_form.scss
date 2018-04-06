@@ -2,58 +2,59 @@
 	@media screen and (min-width: 768px) {
 		.league-new-container {
 			height: 75vh;
+			width: 100vw;
+
 			display: grid;
-			grid-template-columns: 33% auto 33%;
-			grid-template-rows: 15% auto;
+			grid-template-columns: 33vw 33vw 33vw;
+			grid-template-rows: 10vh 65vh;
 
 			.league-new {
 				grid-column: 2;
 				grid-row: 2;
-				height: 50%;
+				height: 35vh;
 
 				display: inherit;
-				grid-template-areas: "title"
-														 "form";
-
-				grid-template-rows: 25% auto;
+				grid-template-columns: auto;
+				grid-template-rows: 10vh 25vh;
 
 				background-color: white;
-				border-radius: 5% 15%;
+				border-radius: 4vh 4vw;
 
 				h1 {
-					grid-area: title;
+					grid-row: 1;
 				}
 
 				h2 {
-					grid-area: form;
+					grid-row: 2;
 				}
 
 				.league-form {
-					grid-area: form;
+					grid-area: 2;
 
 					display: inherit;
 					justify-items: center;
 
 					input {
-						display: block;
-						height: 50%;
-						padding: 5%;
-						font-size: 100%;
+						height: 5vh;
+						width: 20vw;
+						font-size: 1.75vw;
 					}
 
 					input[type="submit"] {
+						width: 12.5vw;
+						margin-right: auto;
+						margin-left: auto;
+
 						background-color: $dark-blue;
 						color: $off-white;
 						border-radius: 5px;
-						font-size: 100%;
+						font-size: 1.5vw;
+
 						display: block;
-						margin-right: auto;
-						margin-left: auto;
 					}
 
 					input[type="submit"]:hover {
 						border: 2px solid $dark-grey;
-						font-size: 105%;
 					}
 				}
 
