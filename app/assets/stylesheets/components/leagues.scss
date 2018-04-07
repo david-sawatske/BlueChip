@@ -128,7 +128,7 @@
 						h2 {
 							font-size: 3.5vh;
 							padding: 0;
-						}						
+						}
 					}
 
 					.league-right {
@@ -299,6 +299,19 @@
 
 					background-color: $transparent-white;
 					border-radius: 1vw;
+					height: 37.5vh;
+
+					table {
+						border: none;
+
+						tr {
+							background-color: $transparent-white;
+
+							td:first-of-type {
+								text-align: left;
+							}
+						}
+					}
 				}
 
 				.button-container {
