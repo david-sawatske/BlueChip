@@ -116,6 +116,19 @@
 						h2 {
 							font-size: 4vh;
 						}
+
+						table {
+							margin-left: 1vw;
+
+							overflow-y:scroll;
+							height: 50vh;
+							display:block;
+						}
+
+						h2 {
+							font-size: 3.5vh;
+							padding: 0;
+						}						
 					}
 
 					.league-right {
