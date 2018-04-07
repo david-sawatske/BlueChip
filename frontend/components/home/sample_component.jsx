@@ -41,7 +41,7 @@ class SampleComponent extends React.Component {
       this.setState({
         activeComponentIdx: this.state.activeComponentIdx + 1
       });
-    } else if (currIdx === 4) {
+    } else if (currIdx === 5) {
       this.setState({
         activeComponentIdx: 0
       });
@@ -52,13 +52,13 @@ class SampleComponent extends React.Component {
     event.preventDefault();
 
     const currentIdx = this.state.activeComponentIdx;
-    const change = (direction == 'left') ? -1 : 1
-    const newIdx = currentIdx + change
+    const change = (direction == 'left') ? -1 : 1;
+    const newIdx = currentIdx + change;
 
     if (newIdx === 6) {
       this.setState({ activeComponentIdx: 0 })
     } else if (newIdx == -1){
-      this.setState({ activeComponentIdx: 3 })
+      this.setState({ activeComponentIdx: 5 })
     } else {
       this.setState({ activeComponentIdx: newIdx })
     }
@@ -106,13 +106,14 @@ class SampleComponent extends React.Component {
 
         break;
       case 3:
-        SampleComponent = <div className='comp-group'>
-                            <EarningsTable earnings={earnings.earnings} />
-                            <CompanyData company={company}
-                                         stats = {stats} />
-                          </div>
+        SampleComponent =  <EarningsTable earnings={earnings.earnings} />
+
         break;
       case 4:
+        SampleComponent = <CompanyData company={company}
+                                       stats = {stats} />
+        break;
+      case 5:
         SampleComponent = <LeagueIndex currentPath={currentPath}/>
         StockHead = null;
         StockSumm = null;
