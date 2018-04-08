@@ -37,13 +37,9 @@ class SampleComponent extends React.Component {
   autoCount() {
     const currIdx = this.state.activeComponentIdx
 
-    if (currIdx < 5) {
+    if (currIdx < 6) {
       this.setState({
         activeComponentIdx: this.state.activeComponentIdx + 1
-      });
-    } else if (currIdx === 5) {
-      this.setState({
-        activeComponentIdx: 0
       });
     }
   }
