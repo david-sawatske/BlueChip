@@ -1,6 +1,6 @@
 class Api::LeaguesController < ApplicationController
   def index
-    @leagues = League.all
+    @leagues = League.includes(:cash_balances, :users)
   end
 
   def show
