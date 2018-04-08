@@ -132,12 +132,14 @@ CSS Grid layout for modern browsers:
 					.button {
 						grid-column: 3;
 						grid-row: 3;
+						z-index: 1;
 
 						width: 7vw;
 						height: 5vh;
 						justify-self: center;
 						align-self: top;
-						z-index: 1;
+
+						font-size: 1vw;
 
 						border: none;
 					}
