@@ -5,13 +5,12 @@ import LeagueAtGlance from './league_at_glance';
 import LeagueLeaderboard from './league_leaderboard';
 import MastheadButtons from '../masthead/masthead_buttons';
 
-import { numberToCurrency } from '../../util/helper_functions'
+import { calcLeagueGlance } from '../../util/helper_functions'
 
 class LeagueShow extends Component {
   constructor(props) {
     super(props)
 
-    this.calcLeagueGlance = this.calcLeagueGlance.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -27,28 +26,13 @@ class LeagueShow extends Component {
 
   }
 
-  calcLeagueGlance(leagueUserData) {
-    const glanceData = { numPlayers: 0,
-                         totalEquity: 0,
-                         totalCashInvested: 0 }
 
-    leagueUserData.map(player => {
-      glanceData['numPlayers'] += 1;
-      glanceData['totalEquity'] += player.totalEquity;
-      glanceData['totalCashInvested'] += player.cashInvested;
-    })
-
-    glanceData['totalEquity'] = numberToCurrency(glanceData['totalEquity'])
-    glanceData['totalCashInvested'] = numberToCurrency(glanceData['totalCashInvested'])
-
-    return glanceData
-  }
 
   render() {
     const { currentUserLeagueIds, leagueData, currentUser, setLeagueData,
             hideModal, showModal, formType } = this.props;
     const currencyStarting = numberToCurrency(leagueData.startingBalance);
-    const atGlanceData = this.calcLeagueGlance(leagueData.leagueUserData);
+    const atGlanceData = calcLeagueGlance(leagueData.leagueUserData);
 
     let leagueShowButton = null;
     if (currentUserLeagueIds && currentUserLeagueIds.includes(leagueData.id)) {

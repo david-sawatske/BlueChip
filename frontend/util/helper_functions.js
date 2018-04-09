@@ -93,3 +93,20 @@ export const camelToTitle = camel => {
     firstLettLow.charAt(0).toUpperCase() +  firstLettLow.slice(1)
   )
 }
+
+export const calcLeagueGlance = leagueUserData => {
+  const glanceData = { numPlayers: 0,
+                       totalEquity: 0,
+                       totalCashInvested: 0 }
+
+  leagueUserData.map(player => {
+    glanceData['numPlayers'] += 1;
+    glanceData['totalEquity'] += player.totalEquity;
+    glanceData['totalCashInvested'] += player.cashInvested;
+  })
+
+  glanceData['totalEquity'] = numberToCurrency(glanceData['totalEquity'])
+  glanceData['totalCashInvested'] = numberToCurrency(glanceData['totalCashInvested'])
+
+  return glanceData
+}
