@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-
 const LeagueIndexItem = ({ leagueData, setLeagueData }) => {
   const { id, name, startingBalance } = leagueData;
 

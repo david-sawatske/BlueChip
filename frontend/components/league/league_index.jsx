@@ -37,8 +37,10 @@ class LeagueIndex extends Component {
   setLeagueData(id, newClass, event) {
     event.preventDefault();
 
-    this.setState({ activeLeagueId: id,
-                    containerClass: newClass })
+    this.props.requestTargetLeague(id).then(() => {
+      this.setState({ activeLeagueId: id,
+                      containerClass: newClass })
+    })
   }
 
   render() {
