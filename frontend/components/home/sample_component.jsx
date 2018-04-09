@@ -31,7 +31,7 @@ class SampleComponent extends React.Component {
   }
 
   componentWillUnmount() {
-    this.clearInterval(this.state.timer);
+    clearInterval(this.state.timer);
   }
 
   autoCount() {
@@ -63,11 +63,14 @@ class SampleComponent extends React.Component {
   }
 
   render() {
+    const { activeComponentIdx } = this.state;
+
     const { sampleStock, sampleLeagueData, userId,
             userLeagueData, currentPath } = this.props;
 
     const { quote, financials, logo, news,
             earnings, peerData, stats, company } = sampleStock;
+    const { companyName } = quote;
 
     const Sidebar = <aside className="sidebar">
                       <button className="nav-btn" onClick={ (e) =>
@@ -79,15 +82,21 @@ class SampleComponent extends React.Component {
                           ▶
                       </button>
                     </aside>
+    const stockHeadings =
+        [ `Get a detailed look at ${companyName}'s Financials`,
+          `Is ${companyName} in the news? You'll see it here!`,
+          `Graphical Price and Volume Data using Highcharts`,
+          `Estimate profitabliity with Earnings per Share Calculations`,
+          `Get to know ${companyName} before investing` ]
 
     let componentClass = "stock-component";
-    let scrollCoverClass = "";
     let StockHead = <StockHeader quote={quote}
                                  logo={logo} />
     let StockSumm = <StockSummary quote={quote} />
 
+
     let SampleComponent
-    switch (this.state.activeComponentIdx) {
+    switch (activeComponentIdx) {
       case 0:
         SampleComponent = <FinancialsTable financials={financials.financials} />
 
@@ -110,18 +119,19 @@ class SampleComponent extends React.Component {
                                        stats = {stats} />
         break;
       case 5:
-        SampleComponent = <LeagueIndex currentPath={currentPath}/>
+        SampleComponent = <LeagueIndex currentPath={currentPath} />
         StockHead = null;
         StockSumm = null;
         componentClass = "league-component";
-        scrollCoverClass = "scroll-cover";
 
         break;
       default:
         SampleComponent = <h1>Welcome to BlueChip</h1>
     }
 
-    const Heading = <h1 className="component-heading">TEST HEADING</h1>
+    const Heading = <h1 className="component-heading">
+                      { stockHeadings[activeComponentIdx] }
+                    </h1>
 
     return (
       <div className="sample-container">
@@ -135,8 +145,6 @@ class SampleComponent extends React.Component {
         { StockSumm }
 
         { Sidebar }
-
-        <div className={scrollCoverClass}></div>
       </div>
     );
   }
