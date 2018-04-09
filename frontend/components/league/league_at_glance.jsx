@@ -6,7 +6,7 @@ const LeagueAtGlance = ({ atGlanceData, leagueName, currencyStarting }) => (
     <table>
       <tbody>
         <tr>
-          <td>Starting Cash: </td>
+          <td>Starting Balance: </td>
           <td>{ currencyStarting }</td>
         </tr>
 
@@ -16,7 +16,7 @@ const LeagueAtGlance = ({ atGlanceData, leagueName, currencyStarting }) => (
         </tr>
 
         <tr>
-          <td>Total Cash Invested: </td>
+          <td>Total Cash Available: </td>
           <td>{ atGlanceData.totalCashInvested }</td>
         </tr>
 
