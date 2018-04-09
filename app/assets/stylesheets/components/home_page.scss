@@ -412,6 +412,45 @@ CSS Grid layout for modern browsers:
 							font-size: 1.25vw;
 						}
 					}
+			//  div.logo-headings h1.title
+					.greeting-component {
+						grid-column: 1/4;
+						grid-row: 1/3;
+
+						.logo-headings {
+							width: 80vw;
+
+							display: grid;
+							grid-template-columns: 15vw 15vw 35vw 10vw;
+							grid-template-rows: 10vh 20vh;
+
+							h3 {
+								grid-column: 2/4;
+								grid-row: 1;
+
+								justify-self: left;
+
+								font-size: 4vw;
+								font-style: italic;
+								color: $news-back;
+							}
+
+							.logo {
+								grid-column: 2;
+								grid-row: 2;
+
+								width: 10vw;
+							}
+
+							.title {
+								grid-column: 3;
+								grid-row: 2;
+
+								font-size: 10vw;
+								color: $dark-blue;
+							}
+						}
+					}
 
 					.stock-component {
 						grid-column: 3;
@@ -426,6 +465,10 @@ CSS Grid layout for modern browsers:
 						display: grid;
 						grid-template-columns: auto;
 						grid-template-rows: 6vh 60vh;
+
+						.logo-headings {
+
+						}
 
 						.component-heading {
 							align-self: start;

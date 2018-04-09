@@ -2,13 +2,14 @@ import React from 'react';
 
 import FinancialsTable from '../stock_show/financials_table';
 import StockChart from '../stock_show/stock_chart_container';
-import LeagueShow from '../league/league_show';
 import LeagueIndex from '../league/league_index_container';
+import MastheadButtons from '../masthead/masthead_buttons';
 import EarningsTable from '../stock_show/earnings_table';
 import StockNews from '../stock_show/stock_news_index';
 import StockSummary from '../stock_show/stock_summary';
-import StockHeader from '../stock_show/stock_header';
 import CompanyData from '../stock_show/company_data';
+import StockHeader from '../stock_show/stock_header';
+import LeagueShow from '../league/league_show';
 import UserShow from '../users/user_show';
 
 class SampleComponent extends React.Component {
@@ -72,7 +73,7 @@ class SampleComponent extends React.Component {
             earnings, peerData, stats, company } = sampleStock;
     const { companyName } = quote;
 
-    const Sidebar = <aside className="sidebar">
+    let Sidebar =   <aside className="sidebar">
                       <button className="nav-btn" onClick={ (e) =>
                           this.handleClick('left', e) }>
                           ◀
@@ -87,7 +88,12 @@ class SampleComponent extends React.Component {
           `Is ${companyName} in the news? You'll see it here!`,
           `Graphical Price and Volume Data using Highcharts`,
           `Estimate profitabliity with Earnings per Share Calculations`,
-          `Get to know ${companyName} before investing` ]
+          `Get to know ${companyName} before investing`,
+          'Check League Leaderboards to see where you rank' ]
+
+    let Heading = <h1 className="component-heading">
+                      { stockHeadings[activeComponentIdx] }
+                    </h1>
 
     let componentClass = "stock-component";
     let StockHead = <StockHeader quote={quote}
@@ -126,12 +132,18 @@ class SampleComponent extends React.Component {
 
         break;
       default:
-        SampleComponent = <h1>Welcome to BlueChip</h1>
-    }
+        StockHead = null;
+        StockSumm = null;
+        Heading = null;
+        Sidebar = null;
+        componentClass = "greeting-component";
 
-    const Heading = <h1 className="component-heading">
-                      { stockHeadings[activeComponentIdx] }
-                    </h1>
+        SampleComponent = <div className="logo-headings">
+                            <h3>Welcome to </h3>
+                            <img className="logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
+                            <h1 className="title">BlueChip</h1>
+                          </div>
+    }
 
     return (
       <div className="sample-container">
