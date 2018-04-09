@@ -5,7 +5,7 @@ import LeagueAtGlance from './league_at_glance';
 import LeagueLeaderboard from './league_leaderboard';
 import MastheadButtons from '../masthead/masthead_buttons';
 
-import { calcLeagueGlance } from '../../util/helper_functions'
+import { calcLeagueGlance, numberToCurrency } from '../../util/helper_functions'
 
 class LeagueShow extends Component {
   constructor(props) {
