@@ -45,8 +45,28 @@
 					grid-column: auto;
 					grid-row: auto;
 
-					height: 25vh;
+					height: 30vh;
 					width: 18vw;
+
+					.league-data {
+						border-radius: 0;
+
+						margin-top: 2vh;
+
+						h1 {
+							display: none;
+						}
+
+						table > tbody {
+							tr {
+								background-color: $transparent-white;
+							}
+
+							tr:nth-child(3) {
+								display: none;
+							}
+						}
+					}
 				}
 			}
     }
@@ -297,21 +317,7 @@
 				.league-data {
 					grid-row: 2;
 
-					background-color: $transparent-white;
-					border-radius: 1vw;
 					height: 37.5vh;
-
-					table {
-						border: none;
-
-						tr {
-							background-color: $transparent-white;
-
-							td:first-of-type {
-								text-align: left;
-							}
-						}
-					}
 				}
 
 				.button-container {
@@ -367,6 +373,24 @@
 
 			.grid-item:hover {
 				opacity: 1;
+			}
+		}
+
+// base League Data styling
+		.league-data {
+			background-color: $transparent-white;
+			border-radius: 1vw;
+
+			table {
+				border: none;
+
+				tr {
+					background-color: $transparent-white;
+
+					td:first-of-type {
+						text-align: left;
+					}
+				}
 			}
 		}
   }
