@@ -8,13 +8,13 @@ import SessionForm from './session_form';
 const mapStateToProps = state => {
   return {
     loggedIn: Boolean(state.session.currentUser),
-    errors: state.ui.errors.session,
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    errors: state.ui.errors.session
   }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const formType = ownProps.formType
+  const formType = ownProps.formType;
   const processForm = (formType === 'login') ? login : signup;
 
   return {

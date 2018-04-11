@@ -16,12 +16,19 @@ class SessionForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { currentUser, formType, history, hideModal } = this.props;
+
     if (nextProps.errors) (
-      this.state.hasErrors = true
+      this.setState({ hasErrors: true })
     );
 
-    if (nextProps.formType != this.props.formType) {
+    if (nextProps.formType != formType) {
       nextProps.clearSessionErrors()
+    }
+
+    if (nextProps.loggedIn) {
+      history.push(`/users/${nextProps.currentUser.id}`);
+      hideModal();
     }
   }
 
@@ -68,12 +75,6 @@ class SessionForm extends React.Component {
 
   render() {
     let errorList = null;
-      if (this.state.redirect) {
-        const currentUserURL = `users/${this.props.currentUser.id}`
-
-        this.props.hideModal()
-        return <Redirect to={currentUserURL}/>;
-      }
 
     if (this.state.hasErrors) {
       errorList = this.renderErrors(this.props.errors);
