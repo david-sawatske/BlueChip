@@ -11,8 +11,8 @@ class LeagueIndex extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { activeLeagueId: null,
-                   containerClass: "index-only" };
+    this.state = { containerClass: "index-only",
+                   activeLeagueId: null };
 
     this.setLeagueData = this.setLeagueData.bind(this)
   }
@@ -38,8 +38,8 @@ class LeagueIndex extends Component {
     event.preventDefault();
 
     this.props.requestTargetLeague(id).then(() => {
-      this.setState({ activeLeagueId: id,
-                      containerClass: newClass })
+      this.setState({ containerClass: newClass,
+                      activeLeagueId: id })
     })
   }
 
@@ -50,7 +50,7 @@ class LeagueIndex extends Component {
     let LeagueDisplay
     let ActiveLeague
     if ( isLeagueLoading || isUserLoading ) {
-      ActiveLeague = <Loader />
+      LeagueDisplay = <Loader />
     } else if (this.state.activeLeagueId && allLeaguesData) {
       const id = this.state.activeLeagueId;
       LeagueDisplay = leagueIds.map( id  => (

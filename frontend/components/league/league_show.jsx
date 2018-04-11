@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import LeagueAtGlance from './league_at_glance';
-import LeagueLeaderboard from './league_leaderboard';
 import MastheadButtons from '../masthead/masthead_buttons';
+import LeagueLeaderboard from './league_leaderboard';
+import LeagueAtGlance from './league_at_glance';
+import Loader from '../shared/loader';
 
 import { calcLeagueGlance, numberToCurrency } from '../../util/helper_functions'
 
@@ -17,16 +18,14 @@ class LeagueShow extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.createCashBalance({ user_id: this.props.currentUser.id,
+    this.props.createCashBalance({ balance: this.props.leagueData.startingBalance,
                                    league_id: this.props.leagueData.id,
-                                   balance: this.props.leagueData.startingBalance })
+                                   user_id: this.props.currentUser.id })
               .then(data => (
                 this.props.requestTargetUserData(this.props.currentUser.id))
               );
 
   }
-
-
 
   render() {
     const { currentUserLeagueIds, leagueData, currentUser, setLeagueData,
@@ -43,9 +42,9 @@ class LeagueShow extends Component {
       } else if (currentUser) {
         leagueShowButton =
           <form onSubmit={this.handleSubmit}>
-            <input type="submit"
-                   value="Join League"
-                   className="button" />
+            <input value="Join League"
+                   className="button"
+                   type="submit" />
           </form>
       } else {
         leagueShowButton =
@@ -77,9 +76,9 @@ class LeagueShow extends Component {
           <div className="league-right">
             { leagueShowButton }
 
-            <LeagueAtGlance atGlanceData={atGlanceData}
+            <LeagueAtGlance currencyStarting={currencyStarting}
                             leagueName={leagueData.name}
-                            currencyStarting={currencyStarting} />
+                            atGlanceData={atGlanceData} />
           </div>
         </div>
       </div>
