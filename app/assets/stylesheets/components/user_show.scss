@@ -46,6 +46,8 @@
 						grid-column: 1;
 						grid-row: 1;
 
+						padding: 3vh;
+
 						background-color: $transparent-white;
 						text-shadow: 2px 2px 2px $off-white;
 						line-height: 2vh;
@@ -72,7 +74,7 @@
 
 					  .league-data {
 							background-color: $transparent;
-							
+
 							h1 {
 								font-size: 1.5vw;
 								margin: auto;
@@ -385,6 +387,10 @@
 						}
 					}
 				}
+			}
+
+			h1 {
+				padding: 1.5vh;
 			}
     }
   }
