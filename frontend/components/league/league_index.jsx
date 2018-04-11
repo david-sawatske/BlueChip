@@ -77,9 +77,11 @@ class LeagueIndex extends Component {
 
     return (
       <div className={this.state.containerClass}>
-        <h1 className="index-title">Leagues</h1>
+        <div className="league-index-header">
+          <h1>Leagues</h1>
+        </div>
         <ul className="league-index">
-          { LeagueDisplay }
+          <li>{ LeagueDisplay }</li>
         </ul>
 
         { ActiveLeague }

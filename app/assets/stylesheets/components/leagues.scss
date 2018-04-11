@@ -9,23 +9,16 @@
 
       display: grid;
       grid-template-columns: 100vw 1vw;
-      grid-template-rows: 9vh 74vh;
+      grid-template-rows: 13vh 70vh;
 			grid-row-gap: 1vh;
 
-      .index-title {
+      .league-index-header {
         grid-column: 1;
         grid-row: 1;
 
-				height: 9vh;
-				padding: 0;
-				align-self: center;
-
-				font-size: 6vh;
-
-				background: $transparent-white;
-				border-top: 5px solid $dark-blue;
-				border-bottom: 5px solid $dark-blue;
-				border-radius: .25vh .25vh 0 0;
+				h1 {
+					font-size: 7vh;
+				}
 			}
 
       .league-index {
@@ -36,17 +29,16 @@
 				overflow-y: scroll;
 				padding-left: 10vw;
 
-        display: grid;
-        grid-template-columns: 20vw 20vw 20vw 20vw;
-        grid-template-rows: auto;
-				grid-row-gap: 3vh;
+				columns: auto;
 
 				.grid-item {
-					grid-column: auto;
-					grid-row: auto;
+					display: inline-block;
+			    vertical-align: top;
 
 					height: 30vh;
 					width: 18vw;
+
+					background: $bg-gradient;
 
 					.league-data {
 						border-radius: 0;
@@ -76,13 +68,13 @@
 			height: 83vh;
 
 			display: grid;
-			grid-template-columns: 74vw 25vw;
-			grid-template-rows: 5vh 78vh;
+			grid-template-columns: 78vw 22vw;
+			grid-template-rows: 5vh 5vh 73vh;
 			grid-column-gap: 1vw;
 
 			.league-container {
 				grid-column: 1;
-				grid-row: 1/2;
+				grid-row: 1/3;
 
 				height: 80vh;
 				width:  77vw;
@@ -181,36 +173,36 @@
 				}
 			}
 
-			.index-title {
+			.league-index-header{
 				grid-column: 2;
-				grid-row: 1;
+				grid-row: 1/3;
 
+				align-self: end;
+				margin-left: 1vw;
+
+				height: 6vh;
 				width: 18vw;
-				justify-self: center;
-				align-self: center;
-				padding: 1vh 1vw 0 0;
 
-				color: $transparent-white;
-				font-size: 4vh;
-				font-weight: lighter;
+				h1 {
+					font-size: 4vh;
+					font-weight: lighter;
+				}
 			}
 
 			.league-index {
 				grid-column: 2;
-				grid-row: 2;
+				grid-row: 3;
 
-				width: 26vw;
-				padding: 0;
-
-				display: grid;
-				grid-template-columns: auto;
-				grid-template-rows: auto;
-				grid-row-gap: 1vh;
+				margin-top: 0;
+				width: auto;
 
 				.grid-item {
-					justify-self: center;
-
 					width: 15vw;
+					height: auto;
+
+					.league-data {
+						display: none;
+					}
 				}
 			}
 		}
@@ -347,13 +339,10 @@
 				height: 25vh;
 				width: 18vw;
 
-				opacity: .5;
+				opacity: .8;
+				margin: 3vh 2vw 0 0;
 
-				margin-right: 1vw;
-
-				background: $bg-gradient;
 				border-radius: .5vh .5vw;
-				background-color: $blue-grey;
 
 				h1 {
 					color: $off-white;
@@ -374,7 +363,28 @@
 			.grid-item:hover {
 				opacity: 1;
 			}
+
+			.grid-item:last-of-type {
+				margin-bottom: 4vh;
+			}
 		}
+
+// base Index Title styling
+	.league-index-header {
+		margin-top: 1vh;
+
+		display:grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
+
+		background: $transparent-white;
+		border-top: 5px solid $dark-blue;
+		border-bottom: 5px solid $dark-blue;
+		border-radius: .25vh .25vh 0 0;
+
+		align-items: center;
+		justify-content: center;
+	}
 
 // base League Data styling
 		.league-data {
