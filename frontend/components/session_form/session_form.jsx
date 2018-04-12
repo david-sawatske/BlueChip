@@ -17,6 +17,10 @@ class SessionForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { currentUser, formType, history, hideModal } = this.props;
+    const parsedRoute = nextProps.match.url.match(/[^\/][^\/]*/i);
+
+    const noLoginRedirect = ( parsedRoute == 'leagues' ||
+                              parsedRoute == 'stocks' );
 
     if (nextProps.errors) (
       this.setState({ hasErrors: true })
@@ -26,7 +30,10 @@ class SessionForm extends React.Component {
       nextProps.clearSessionErrors()
     }
 
-    if (nextProps.loggedIn) {
+    if (nextProps.loggedIn && noLoginRedirect ) {
+      alert(`Welcome ${nextProps.currentUser.username}`)
+      hideModal();
+    } else if (nextProps.loggedIn) {
       history.push(`/users/${nextProps.currentUser.id}`);
       hideModal();
     }
