@@ -22,11 +22,10 @@ class UserLeagueIndex extends React.Component {
   render() {
     const { userLeagueData } = this.props;
     const targetLeagueId = this.state.targetLeagueId;
+    const targetLeague = userLeagueData[targetLeagueId];
 
     let ShowComponent
-    if (userLeagueData[targetLeagueId]) {
-      const targetLeague = userLeagueData[targetLeagueId];
-
+    if (!$.isEmptyObject(targetLeague['transactionData'])) {
       ShowComponent = <UserLeaguePortfolio key={targetLeague.leagueId}
                                            leagueData={targetLeague} />
     }
