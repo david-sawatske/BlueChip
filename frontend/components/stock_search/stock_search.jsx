@@ -12,14 +12,12 @@ class StockSearch extends React.Component {
 
     this.state = { ticker: '',
                    prevTicker: '',
-                   searchInitiated: false,
-                   isSearchHovered: false };
+                   searchInitiated: false };
 
     this.userTransactionData = this.userTransactionData.bind(this);
     this.handleStockSearch = this.handleStockSearch.bind(this);
     this.clickUpdateTicker = this.clickUpdateTicker.bind(this);
     this.handlePeerSearch = this.handlePeerSearch.bind(this);
-    this.handleHover = this.handleHover.bind(this);
     this.update = this.update.bind(this);
   }
 
@@ -64,16 +62,9 @@ class StockSearch extends React.Component {
       }).then(data => { this.initiateSearch() })
   }
 
-  handleHover() {
-    this.setState({
-      isSearchHovered: !this.state.isSearchHovered
-    });
-  }
-
   update(field) {
     return e => this.setState({
-      [field]: e.currentTarget.value.toUpperCase(),
-      isSearchHovered: true
+      [field]: e.currentTarget.value.toUpperCase()
     });
   }
 
@@ -115,7 +106,7 @@ class StockSearch extends React.Component {
     const searchedTicker = this.state.ticker.toUpperCase();
     const { isRemoteLoading, isPeerLoading, isRailsUserLoading, showModal, currentPath,
             hideModal, tickerData, remoteStockData = {}, currentUserData = {}, currentUser} = this.props;
-    const { isSearchHovered } = this.state;
+
     const currentUserTranData = currentUserData.userLeagueData;
     const peerData = [];
 
@@ -171,10 +162,8 @@ class StockSearch extends React.Component {
       searchClass = "home-search"
     } else if (!this.state.searchInitiated) {
       searchClass = "initial-search"
-    } else if (isSearchHovered && this.state.searchInitiated) {
+    } else if (this.state.searchInitiated) {
       searchClass = "side-search"
-    } else {
-      searchClass = "hide-search"
     }
 
     let SuggestedTickers
@@ -187,9 +176,7 @@ class StockSearch extends React.Component {
 
     return (
       <div className="stock-search-container">
-        <div className={searchClass}
-             onMouseEnter={this.handleHover}
-             onMouseLeave={this.handleHover}>
+        <div className={searchClass} >
         <h1 className='initial'>Search for Live Stock Data</h1>
         <h2 className='initial-sub'>Enter Company Name or Ticker</h2>
 

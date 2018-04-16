@@ -5,17 +5,17 @@ CSS Grid layout for modern browsers:
 @supports (grid-area: auto) {
 	@media screen and (min-width: 768px) {
 		.stock-search-container {
-			height: 80vh;
+			height: auto;
 			width: 100vw;
 			overflow-y: scroll;
 
 			display: grid;
 			grid-template-columns: 5vw 95vw;
-			grid-template-rows: 5vh 35vh 5vh 30vh;
+			grid-template-rows: 5vh 15vh 20vh 10vh 30vh;
 
 			.initial-search {
 				grid-column: 1/3;
-				grid-row: 2/4;
+				grid-row: 2/5;
 
 				width: 50vw;
 				justify-self: center;
@@ -52,7 +52,7 @@ CSS Grid layout for modern browsers:
 					font-style: italic;
 				}
 
-				h1.searched {
+				h1.searched, h3 {
 					display: none;
 				}
 
@@ -107,19 +107,37 @@ CSS Grid layout for modern browsers:
 			}
 
 			.side-search {
-				grid-column: 1/3;
-				grid-row: 1/4;
+				grid-column: 1;
+				grid-row: 1/6;
 
-				z-index: 2;
-				align-content: start;
+				height: 30vh;
+				width: 5vw;
+
 				background-color: $background-grey;
+				-webkit-transition: width .5s ease;
+				transition: width .5s ease;
 
-				display: grid;
-				grid-template-rows: auto;
+				h1.searched {
+					margin-left: -50px;
+					margin-top: 10vh;
+					margin-right: -50px;
 
-				.searched {
-					grid-row: 1;
-					color: $pale-green;
+					color: $blue-grey;
+					font-size: 2vw;
+					transform: rotate(270deg);
+
+					-webkit-transition: all .5s ease;
+					transition: all .5s ease;
+				}
+
+				h3 {
+					padding-top: 5vh;
+					padding-right: 1vh;
+					text-align: end;
+
+					font-size: 3vw;
+					color: $transparent-white;
+					opacity: .5
 				}
 
 				.initial, h2 {
@@ -127,35 +145,78 @@ CSS Grid layout for modern browsers:
 				}
 
 				.search {
+					display: none;
+				}
+			}
+
+			.side-search:hover {
+				z-index: 3;
+
+				height: 30vh;
+				width: 30vw;
+
+				display: grid;
+				grid-template-columns: 30vw;
+				grid-template-rows: 5vh 7.5vh 7.5vh;
+
+				h1.searched {
 					grid-row: 2;
+
+					width: 30vw;
+					height: 5vh;
+					margin: 0;
+
+					color: $off-white;
+
+					-webkit-transform: rotate(0deg) scale(1.5);
+					-moz-transform: rotate(0deg) scale(1.5);
+					-ms-transform: rotate(0deg) scale(1.5);
+					-o-transform: rotate(0deg) scale(1.5);
+					transform: rotate(0deg) scale(1.5);
+				}
+
+				.initial, h2, h3 {
+					display: none;
+				}
+
+				.search {
+					grid-row: 3;
+
+					height: 7.5vh;
+					width: 30vw;
+
 					display: grid;
-					grid-template-columns: auto;
-					grid-template-row: auto;
+					grid-template-columns: 20vw 10vw;
+					grid-template-row: 7.5vh;
 
 					input[type=text] {
-						grid-column: 1;
+						grid-column: 1/3;
 						grid-row: 1;
-						width: 80%;
+
+						width: 25vw;
+						justify-self: center;
+
 						color: black;
 						border: 2px solid #ccc;
 						border-radius: 5px;
 						background-color: $blue-grey;
-						font-size: 150%;
+						font-size: 3vw;
 					}
 
-					input[type="submit"] {
-						grid-column: 1;
-						grid-row: 2;
+					.submit-search {
+						grid-column: 2;
+						grid-row: 1;
+
 						align-self: center;
-						margin-top: 15%;
-						transition: transform 0.2s;
-						padding: 5px 15px;
-						background: $background-grey;
-						font-size: 125%;
-						color: $blue-grey;
-						border-color: $blue-grey;
-						border-style: solid;
-						border-radius: 5px;
+
+						input[type="submit"] {
+							background: $background-grey;
+							font-size: 2vw;
+							color: $blue-grey;
+							border-color: $blue-grey;
+							border-style: solid;
+							border-radius: 5px;
+						}
 					}
 
 					.int-val {
@@ -169,20 +230,6 @@ CSS Grid layout for modern browsers:
 					label:hover .int-val {
 						display: none;
 					}
-
-					.search-val {
-						display: none;
-					}
-				}
-
-				.stock-summary {
-					display: none;
-				}
-
-				.chart-container {
-					height: 100%;
-					justify-content: center;
-					margin-left: 30%;
 				}
 
 				.initial {
@@ -190,35 +237,14 @@ CSS Grid layout for modern browsers:
 				}
 			}
 
-			.hide-search {
-				h1.searched {
-					grid-column: 1;
-					grid-row: 1;
-					color: $blue-grey;
-					margin-left: -50px;
-					margin-top: 33px;
-					margin-right: -50px;
-					font-size: 125%;
-					transform: rotate(270deg);
-				}
-
-				.initial, h2 {
-					display: none;
-				}
-
-				.search {
-					display: none;
-				}
-			}
-
 			.search-show {
-				grid-row: 1/4;
+				grid-row: 1/3;
 				grid-column: 2/6;
 			}
 
 			.search-suggestions {
 				grid-column: 1/3;
-				grid-row: 3/5;
+				grid-row: 4/6;
 				z-index: 1;
 
 				justify-self: center;
