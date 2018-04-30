@@ -54,18 +54,31 @@
 					}
 				}
 
+
 				.user-league-index {
 					grid-column: 1/4;
 					grid-row: 1/4;
 
 					display: inherit;
 					grid-template-columns: 20vw 75vw;
-					grid-template-rows: 30vh 50vh;
+					grid-template-rows: 30vh 5vh 45vh;
+
+					.joined-header {
+						grid-row: 2;
+						align-self: end;
+
+						font-size: 1.5vw;
+						color: $transparent-white;
+
+						background-color: $main-blue;
+					}
 
 					.joined-leagues {
 						grid-column: 1;
-						grid-row: 2;
+						grid-row: 3;
+
 						overflow-y: scroll;
+						margin: 0;
 
 						background-color: $transparent-white;
 						h1, h3 {
@@ -129,9 +142,10 @@
 						.user-stock-header {
 							grid-row: 1;
 
-							width: 75vw;
+							width: 79vw;
 							justify-self: left;
 
+							background-color: $background-grey;
 							border-top: 5px solid $background-blue;
 							border-bottom: 5px solid $background-blue;
 
@@ -197,7 +211,7 @@
 							justify-self: center;
 
 							table {
-								margin-left: 2vw;
+								margin-left: .5vw;
 
 								thead > tr > th > a > div > p {
 									margin: auto;
@@ -284,8 +298,15 @@
 									}
 
 									.transaction-data {
-										height: 25vh;
+										height: 22.5vh;
 										width: 27vw;
+
+										background-color: $transparent;
+										border: none;
+
+										.transaction-table {
+
+										}
 									}
 
 									.chart-container {
