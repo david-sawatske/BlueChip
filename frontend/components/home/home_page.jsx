@@ -38,7 +38,6 @@ class HomePage extends React.Component {
     const { history } = this.props;
 
     if (nextProps.currentUser) {
-      alert(`Welcome ${nextProps.currentUser.username}`)
       history.push(`/users/${nextProps.currentUser.id}`);
     }
   }
