@@ -99,9 +99,12 @@ class SessionForm extends React.Component {
     let GuestLogin;
     if (formType === 'login') {
 
-    GuestLogin = <input type="submit"
+    GuestLogin = <div>
+                    <h3>~or~</h3>
+                    <input type="submit"
                         value="Login as Guest"
                         onClick={this.handleGuestLogin} />
+                  </div>
     }
 
     return (
@@ -119,8 +122,6 @@ class SessionForm extends React.Component {
 
             <input type="submit"
                    value="Start Trading" />
-
-            <h3>~or~</h3>
 
             { GuestLogin }
           </div>
