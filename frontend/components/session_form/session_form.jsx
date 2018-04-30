@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -12,7 +12,8 @@ class SessionForm extends React.Component {
       redirect: false
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleGuestLogin = this.handleGuestLogin.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,14 +46,21 @@ class SessionForm extends React.Component {
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
     const user = Object.assign({}, this.state);
 
     this.props.processForm(user).then(actionObj => {
       this.props.requestTargetUserData(actionObj.currentUser.id)
       this.setState({ redirect: true })
     })
+  }
+
+  handleGuestLogin(event){
+    event.preventDefault();
+
+    this.props.processForm({ username: "Stockafeller",
+                             password: "password" });
   }
 
   signupBullets() {
@@ -81,27 +89,40 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    let errorList = null;
+    const { errors, formType } = this.props;
 
+    let ErrorList;
     if (this.state.hasErrors) {
-      errorList = this.renderErrors(this.props.errors);
+      ErrorList = this.renderErrors(errors);
+    }
+
+    let GuestLogin;
+    if (formType === 'login') {
+
+    GuestLogin = <input type="submit"
+                        value="Login as Guest"
+                        onClick={this.handleGuestLogin} />
     }
 
     return (
       <div className="session">
-        { errorList }
+        { ErrorList }
         <form onSubmit={this.handleSubmit}>
           <div className="session-input">
             <input type="text"
-              value={this.state.username}
-              onChange={this.update('username')} />
+                   value={this.state.username}
+                   onChange={this.update('username')} />
 
             <input type="password"
-              value={this.state.password}
-              onChange={this.update('password')} />
+                   value={this.state.password}
+                   onChange={this.update('password')} />
 
             <input type="submit"
                    value="Start Trading" />
+
+            <h3>~or~</h3>
+
+            { GuestLogin }
           </div>
         </form>
 

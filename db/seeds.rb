@@ -1,15 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 User.destroy_all
 League.destroy_all
-
 Transaction.destroy_all
+
 symbols = ['MU', 'CSX', 'INTC', 'AAPL', 'SIRI', 'CSCO', 'FB', 'ROKU', 'MSFT',
            'NVDA', 'TWTR', 'ORCL', 'P', 'TSLA', 'NFLX', 'AMD']
 
@@ -24,13 +16,11 @@ leagues = []
   users << User.create!(username: Faker::Internet.user_name, password: "password")
 end
 
-users << User.create!(username: 't1', password: "password")
-users << User.create!(username: 't2', password: "password")
+users << User.create!(username: 'Stockafeller', password: "password")
 
 5.times do
   leagues << League.create!(name: Faker::GameOfThrones.unique.house, starting_balance: 10000)
 end
-
 
 10000.times do
   Transaction.create!(user_id: users.sample.id,
