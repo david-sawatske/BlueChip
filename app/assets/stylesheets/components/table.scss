@@ -12,9 +12,12 @@ table {
   thead {
     text-transform: uppercase;
     font-family: inherit;
+
     color: $dark-blue;
+    font-size: 1.25vw;
     font-style: italic;
     text-align: center;
+
     background: $transparent-white;
     border-bottom: 1px solid $dark-grey;
 
