@@ -77,7 +77,7 @@ class HomePage extends React.Component {
           <img className="logo" src="http://res.cloudinary.com/sawatskeda10/image/upload/e_auto_contrast,q_100/v1516937726/cutmypic_1_pxnibw.png" />
           <h1 className="title">BlueChip</h1>
           <h2 className="home-h2">FANTASY STOCK TRADING LEAGUES</h2>
-          <p>Enter the name or stock ticker for a publicy traded company to see an overview</p>
+          <p>Enter the name or stock ticker for a publicy traded company to see an overview or login above to begin trading! </p>
         </div>
         <MastheadButtons currentUser={currentUser}
                          hideModal={hideModal}
