@@ -13,7 +13,6 @@ class StockIndex extends React.Component {
     super(props);
 
     this.state = { showTable: false,
-                   peersLoaded: false,
                    clickedTicker: '' }
 
     this.handleClick = this.handleClick.bind(this);
@@ -41,16 +40,13 @@ class StockIndex extends React.Component {
                                    ['symbols']
                                    .toString()
 
-    requestStockPeers(peerStr).then(val => {
-      this.setState({ peersLoaded: true })
-    })
+    requestStockPeers(peerStr);
   }
 
   closeStockShow(event) {
     event.preventDefault();
 
-    const { ownedTickers } = this.props;
-    const { additionalDataTypes, requestStockSearch } = this.props;
+    const { additionalDataTypes, ownedTickers, requestStockSearch } = this.props;
 
     if (ownedTickers) {
       requestStockSearch(ownedTickers, additionalDataTypes)
@@ -61,7 +57,7 @@ class StockIndex extends React.Component {
 
   render() {
     const { remoteStockData, transactionData, showModal, hideModal,
-            isRemoteStockLoading, investedByTicker } = this.props;
+            isRemoteStockLoading, investedByTicker, isPeerLoading } = this.props;
 
     const { clickedTicker, showTable, peersLoaded } = this.state;
 
@@ -72,7 +68,9 @@ class StockIndex extends React.Component {
                                         ['symbols']
 
       peerTkrArr.map(tkr => {
-        peerData.push(remoteStockData[tkr])
+        if (remoteStockData[tkr]) {
+          peerData.push(remoteStockData[tkr])
+        }
       })
     }
 
@@ -125,8 +123,7 @@ class StockIndex extends React.Component {
         const searchLink = { searchLink: <img className="logo"
                                               src={remoteData.logo.url}
                                               onClick={ (e) =>
-                                                this.handleClick(quote, e) }
-                                         />
+                                                this.handleClick(quote, e) } />
                            };
         const toFilter = merge( {}, searchLink, quote,
                                 investedByTicker[quote.symbol] );
@@ -145,11 +142,11 @@ class StockIndex extends React.Component {
                                       isDataInteger={isDataInteger}
                                       isDataCurrency={isDataCurrency}
                                       initialSort="symbol" />
-
     }
 
     let StockShowComponent
-    if (clickedTicker && peersLoaded) {
+    if (clickedTicker && !isPeerLoading) {
+      console.log(peerData);
       const tkr = clickedTicker;
       StockShowComponent = <div>
                              <button onClick={ (e) => this.closeStockShow(e) }

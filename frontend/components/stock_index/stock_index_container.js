@@ -8,6 +8,7 @@ import StockIndex from './stock_index';
 const mapStateToProps = (state, ownProps) => ({
   isRemoteStockLoading: state.ui.loading.remoteStockLoading,
   remoteStockData: state.ui.remoteStocks.remoteStockData,
+  isPeerLoading: state.ui.loading.remotePeersLoading,
   ownedTickers: getOwnedTickers(ownProps.transactionData),
   additionalDataTypes: 'financials,earnings,relevant,'
 });
