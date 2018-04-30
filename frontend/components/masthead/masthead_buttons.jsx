@@ -14,7 +14,7 @@ class MastheadButtons extends React.Component {
   }
 
   render() {
-    const { currentUser, showModal, hideModal } = this.props;
+    const { currentUser, showModal, hideModal, login } = this.props;
 
     return (
       <div className="button-container">
@@ -35,7 +35,11 @@ class MastheadButtons extends React.Component {
               showModal('session', { modalOpen: true, formType: 'signup' }) }>
               Sign Up
             </button>
-            <button to="" className="button">Guest Login</button>
+            <button className="button"
+              onClick={ () =>
+                login({ username: 'Stockafeller', password: 'password' }) }>
+              Guest Login
+            </button>
           </div>
         )}
 

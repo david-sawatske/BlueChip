@@ -34,11 +34,20 @@ class HomePage extends React.Component {
                     containerClass: 'home-show' })
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { history } = this.props;
+
+    if (nextProps.currentUser) {
+      alert(`Welcome ${nextProps.currentUser.username}`)
+      history.push(`/users/${nextProps.currentUser.id}`);
+    }
+  }
+
   render()  {
     const { currentUser, remoteStockData, logout, hideModal, requestSymbols,
             showModal, requestStockSearch, requestStockPeers, currentPath,
-            tickerData, leagueUserData, userLeagueData, requestTargetUserData
-          } = this.props;
+            tickerData, leagueUserData, userLeagueData, requestTargetUserData,
+            login } = this.props;
 
     const { ticker, randomUserId } = this.state;
     const sampleStock = remoteStockData[ticker];
@@ -74,7 +83,8 @@ class HomePage extends React.Component {
         <MastheadButtons currentUser={currentUser}
                          hideModal={hideModal}
                          showModal={showModal}
-                         logout={logout} />
+                         logout={logout}
+                         login={login} />
 
         <div className="home-data">
           { SearchComponent }
