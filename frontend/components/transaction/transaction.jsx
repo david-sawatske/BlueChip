@@ -62,6 +62,15 @@ class Transaction extends React.Component {
                                        this.props.requestTargetUserData(userId)
                                      })
     })
+
+    let alertString = 'Sale'
+    if (transactionType === 'buy') {
+      alertString = 'Purchase'
+    }
+
+
+    alert(`${alertString} of ${Math.abs(shareQuant)} shares of ${symbol} complete`)
+    this.props.hideModal();
   }
 
   setLeagueStateData(leagueData, event) {
