@@ -49,6 +49,6 @@ league_users.map { |key, value| value.uniq! }
 
 league_users.each do |key, values|
   values.each do |v|
-    CashBalance.create!(user_id: v, league_id: key, balance: rand(100..100000))
+    CashBalance.create!(user_id: v, league_id: key, balance: rand(100.1..10000.9).round(2))
   end
 end
