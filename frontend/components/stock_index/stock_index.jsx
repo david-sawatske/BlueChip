@@ -56,7 +56,7 @@ class StockIndex extends React.Component {
   }
 
   render() {
-    const { remoteStockData, transactionData, showModal, hideModal,
+    const { remoteStockData, transactionData, showModal, hideModal, currentUser,
             isRemoteStockLoading, investedByTicker, isPeerLoading } = this.props;
 
     const { clickedTicker, showTable, peersLoaded } = this.state;
@@ -146,7 +146,6 @@ class StockIndex extends React.Component {
 
     let StockShowComponent
     if (clickedTicker && !isPeerLoading) {
-      console.log(peerData);
       const tkr = clickedTicker;
       StockShowComponent = <div>
                              <button onClick={ (e) => this.closeStockShow(e) }
@@ -155,9 +154,10 @@ class StockIndex extends React.Component {
                              </button>
                              <StockShow remoteStockData={remoteStockData[tkr]}
                                         transactionData={transactionData[tkr]}
-                                        peerData={peerData}
+                                        currentUser={currentUser}
                                         showModal={showModal}
-                                        hideModal={hideModal} />
+                                        hideModal={hideModal}
+                                        peerData={peerData} />
                            </div>
     }
 

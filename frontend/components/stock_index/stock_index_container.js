@@ -10,7 +10,8 @@ const mapStateToProps = (state, ownProps) => ({
   remoteStockData: state.ui.remoteStocks.remoteStockData,
   isPeerLoading: state.ui.loading.remotePeersLoading,
   ownedTickers: getOwnedTickers(ownProps.transactionData),
-  additionalDataTypes: 'financials,earnings,relevant,'
+  additionalDataTypes: 'financials,earnings,relevant,',
+  currentUser: state.session.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({
