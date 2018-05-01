@@ -34,7 +34,8 @@ class UserShow extends React.Component {
       ShowComponent =
         <div className="user-show">
             <UserAvatar userData={{ id: targetUserData.id,
-                                    username: targetUserData.username }} />
+                                    username: targetUserData.username,
+                                    img_url: targetUserData.img_url }} />
 
             <UserLeagueIndex sampleLeagueId={sampleLeagueId}
                              userLeagueData={targetUserData.userLeagueData} />

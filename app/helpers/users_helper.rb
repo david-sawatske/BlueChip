@@ -3,7 +3,7 @@ module UsersHelper
     byId = {}
     id = user.id.to_s
 
-    byId[id] = { id: id, username: user.username }
+    byId[id] = { id: id, username: user.username, img_url: user.img_url }
 
     allIds = [id]
 
