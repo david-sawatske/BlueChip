@@ -36,41 +36,92 @@ class Transaction extends React.Component {
     this.toggleTransaction = this.toggleTransaction.bind(this);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const { transactionType, shareQuant, symbol, purchaseDay, sharePrice,
-            leagueId, userId, cashBalance, balanceId } = this.state;
-
+  transactionVerification() {
+    const { shareQuant, sharePrice,
+            quantOwned, transactionType, cashBalance  } = this.state;
     const netShareQuant = transactionType === 'buy' ? shareQuant
                                                       :
                                                       -Math.abs(shareQuant)
-
     const netBalance = (cashBalance - netShareQuant * sharePrice)
 
-    const transactionData = { symbol: symbol,
-                              purchase_day: purchaseDay,
+    let verifiedData = { netBalance: netBalance,
+                         netShareQuant: netShareQuant }
+
+    let alertString = 'Sale'
+    switch (transactionType) {
+      case 'buy':
+        alertString = 'Purchase';
+        if (netBalance < 0) {
+          alert("Insuffecient funds available")
+          return false
+        } else {
+          return verifiedData
+        }
+        break;
+      case 'sell':
+        if (quantOwned === 0) {
+          alert(`You do not own ${'TKR'}`)
+          return false
+        } else if (quantOwned < shareQuant) {
+          alert(`Only ${quantOwned} can be sold`)
+          return false
+        } else {
+          return verifiedData
+        }
+        break;
+      default:
+        return false
+    }
+  }
+
+  transactionProcessor(verifiedData) {
+    const { symbol, purchaseDay, sharePrice,
+            leagueId, userId, balanceId } = this.state;
+
+    const { netBalance, netShareQuant } = verifiedData;
+
+    const transactionData = { purchase_day: purchaseDay,
                               share_quant: netShareQuant,
                               share_price: sharePrice,
                               league_id: leagueId,
-                              user_id: userId }
+                              user_id: userId,
+                              symbol: symbol }
 
-    this.props.postTransaction(transactionData).then(() => {
-      this.props.updateCashBalance({ league_id: leagueId,
-                                     user_id: userId,
-                                     id: balanceId,
-                                     balance: netBalance }).then(() => {
-                                       this.props.requestTargetUserData(userId)
-                                     })
+    this.props.postTransaction(transactionData)
+      .then(() => {
+        this.props.updateCashBalance({ league_id: leagueId,
+                                       user_id: userId,
+                                       id: balanceId,
+                                       balance: netBalance })
+        .then(() => {
+         this.props.requestTargetUserData(userId)
+       })
     })
+  }
+
+  successAlert() {
+    const { transactionType, shareQuant, symbol } = this.state;
 
     let alertString = 'Sale'
     if (transactionType === 'buy') {
       alertString = 'Purchase'
     }
 
-
     alert(`${alertString} of ${Math.abs(shareQuant)} shares of ${symbol} complete`)
     this.props.hideModal();
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    const { shareQuant, symbol } = this.state;
+    const verifiedData = this.transactionVerification();
+
+    if (verifiedData) {
+      this.transactionProcessor(verifiedData)
+
+      this.successAlert()
+    }
   }
 
   setLeagueStateData(leagueData, event) {
@@ -121,8 +172,7 @@ class Transaction extends React.Component {
   }
 
   render() {
-    const { targetUserData, currentUser, quote, logo,
-            transactionData } = this.props;
+    const { targetUserData, currentUser, quote, logo, transactionData } = this.props;
     const targetUserId = currentUser.id;
 
     const leagueChoices = Object.values(targetUserData.userLeagueData)
