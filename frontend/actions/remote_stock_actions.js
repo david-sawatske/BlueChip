@@ -2,6 +2,7 @@ import * as RemoteStockAPIUtil from '../util/remote_api_util';
 
 export const START_REMOTE_STOCK_FETCH = 'START_REMOTE_STOCK_FETCH';
 export const START_REMOTE_PEER_FETCH = 'START_REMOTE_PEER_FETCH';
+export const START_SYMBOL_FETCH = 'START_SYMBOL_FETCH';
 export const START_CHART_FETCH = 'START_CHART_FETCH';
 export const RECEIVE_STOCK_SEARCH = 'RECEIVE_STOCK_SEARCH';
 export const RECEIVE_PEER_SEARCH = 'RECEIVE_PEER_SEARCH';
@@ -41,6 +42,10 @@ export const receiveSymbols = symbolData => ({
   symbolData
 });
 
+export const startSymbolFetch = () => ({
+  type: START_SYMBOL_FETCH
+});
+
 // thunk async action creators
 export const requestStockSearch = (symbol, dataTypes) => dispatch => {
   dispatch(startStockRemoteFetch());
@@ -69,7 +74,9 @@ export const requestStockPeers = tkrStr => dispatch => {
   });
 }
 
-export const requestSymbols = () => dispatch => (
-  RemoteStockAPIUtil.fetchSymbols()
+export const requestSymbols = () => dispatch => {
+  dispatch(startSymbolFetch());
+
+  return RemoteStockAPIUtil.fetchSymbols()
     .then(symbolData => dispatch(receiveSymbols(symbolData)))
-);
+};
