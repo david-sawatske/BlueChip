@@ -142,6 +142,7 @@
 						.user-stock-header {
 							grid-row: 1;
 
+							height: 10vh;
 							width: 79vw;
 							justify-self: left;
 
@@ -198,6 +199,27 @@
 
 							h3:last-of-type {
 								grid-column: 3;
+							}
+						}
+
+						.search-link {
+							grid-row: 2;
+
+							width: 45vw;
+							height: 7.5vh;
+
+							justify-self: center;
+							font-size: 2.5vw;
+
+							background-color: $transparent-white;
+							box-shadow: inset 0 0 10px $dark-green;
+
+ 	 						.link,  .link:visited {
+								color: $bright-blue;
+							}
+
+							.link:hover {
+								color: $main-blue;
 							}
 						}
 

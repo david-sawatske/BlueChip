@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import UserLeaguePortfolio from '../user_league_portfolio/user_league_portfolio';
 import PortfolioHeader from '../user_league_portfolio/user_league_portfolio_header';
@@ -28,6 +28,20 @@ class UserLeagueIndex extends React.Component {
     if (!$.isEmptyObject(targetLeague['transactionData'])) {
       ShowComponent = <UserLeaguePortfolio key={targetLeague.leagueId}
                                            leagueData={targetLeague} />
+    } else {
+      const liveDataLink = <Link to={'/stocks/search'} className="link">
+                             Live Stock Data
+                           </Link>
+      ShowComponent = <div className="league-portfolio">
+                        <PortfolioHeader balance={targetLeague.balance}
+                               leagueName={targetLeague.name}
+                               leagueClass="user-stock-header"
+                               cashInvested={0} />
+
+                        <h1 className="search-link">
+                          Search {liveDataLink} to trade in {targetLeague.name}
+                        </h1>
+                      </div>
     }
 
     return (
