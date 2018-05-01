@@ -2,8 +2,11 @@ User.destroy_all
 League.destroy_all
 Transaction.destroy_all
 
-symbols = ['MU', 'CSX', 'INTC', 'AAPL', 'SIRI', 'CSCO', 'FB', 'ROKU', 'MSFT',
-           'NVDA', 'TWTR', 'ORCL', 'P', 'TSLA', 'NFLX', 'AMD']
+symbols = ['MU', 'CSX', 'INTC', 'AAPL', 'SIRI', 'CSCO', 'FB', 'MSFT', 'AMD',
+           'NVDA', 'TWTR', 'ORCL', 'P', 'TSLA', 'NFLX']
+
+img_base_url = 'https://picsum.photos/300?image='
+stockefeller_img = 'http://res.cloudinary.com/sawatskeda10/image/upload/v1525133595/stockefeller_hlmdex.png'
 
 def time_rand from = 0.0, to = Time.now
   Time.at(from + rand * (to.to_f - from.to_f))
@@ -13,10 +16,15 @@ users = []
 leagues = []
 
 20.times do
-  users << User.create!(username: Faker::Internet.user_name, password: "password")
+  img_id = rand(1..1000).to_s
+  users << User.create!(username: Faker::Internet.user_name,
+                        password: "password",
+                        img_url: img_base_url + img_id)
 end
 
-users << User.create!(username: 'Stockafeller', password: "password")
+users << User.create!(username: 'Stockafeller',
+                      password: "password",
+                      img_url: stockefeller_img)
 
 5.times do
   leagues << League.create!(name: Faker::GameOfThrones.unique.house, starting_balance: 10000)
