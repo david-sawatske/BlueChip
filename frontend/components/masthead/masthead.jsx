@@ -15,7 +15,8 @@ const MastHead = props => (
     </Link>
 
     <MastheadButtons { ...props }/>
-    <TopNav />
+
+    <TopNav currentUser={props.currentUser} />
   </div>
 );
 
