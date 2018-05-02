@@ -76,7 +76,7 @@ class StockSearch extends React.Component {
     const transactData = {};
 
     Object.values(currentUserTranData).map(val => {
-      const targTranData = val.transactionData[this.state.ticker];
+      const targTranData = val.transactionData[this.state.prevTicker];
 
       if (targTranData) {
         Object.values(targTranData).map(transaction => {
@@ -139,14 +139,6 @@ class StockSearch extends React.Component {
       targetHandleSubmit = this.handleStockSearch;
     } else if (isRemoteLoading || isRailsUserLoading || isPeerLoading) {
       ShowComponent = <Loader />
-    } else if (this.state.searchInitiated && remoteStockData[searchedTicker]) {
-      const targetRemoteData = remoteStockData[searchedTicker];
-      ShowComponent = <StockShow remoteStockData={targetRemoteData}
-                                 transactionData={transactionData}
-                                 currentUser={currentUser}
-                                 peerData={peerData}
-                                 showModal={showModal}
-                                 hideModal={hideModal} />
     } else if (remoteStockData[this.state.prevTicker]) {
       const targetRemoteData = remoteStockData[this.state.prevTicker];
       ShowComponent = <StockShow remoteStockData={targetRemoteData}
