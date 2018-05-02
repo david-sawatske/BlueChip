@@ -64,7 +64,7 @@ CSS Grid layout for modern browsers:
 					padding: 0 1%;
 				}
 
-				.nav-link:last-of-type {
+				.nav-link:nth-child(4) {
 					float: right;
 					margin-right: 5%;
 				}
