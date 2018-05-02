@@ -97,19 +97,20 @@ CSS Grid layout for modern browsers:
 					overflow-y: hidden;
 					display: grid;
 					grid-template-columns: auto;
-					grid-template-rows: 15vh 35vh;
+					grid-template-rows: 10vh 35vh;
+					grid-row-gap: 1vh;
 
 					.home-search {
 						grid-column: 2;
 						grid-row: 1;
 
-						height: 15vh;
+						height: 45vh;
 						width: 70vw;
 						justify-self: center;
 
 						display: grid;
 						grid-template-columns: 15vw 40vw 15vw;
-						grid-template-rows: auto;
+						grid-template-rows: 15vh 30vh;
 
 						.search {
 							grid-column: 2;
@@ -164,13 +165,30 @@ CSS Grid layout for modern browsers:
 						}
 					}
 
+					.search-help  {
+						grid-column: 2;
+						grid-row: 2;
+
+						margin-top: 2vh;
+
+						ul {
+							h3:not(:first-child) {
+								color: $main-blue;
+							}
+
+							h3:not(:first-child):hover {
+								color: white;
+							}
+						}
+					}
+
 					.search-suggestions {
 						grid-column: 2;
 						grid-row: 2;
 
 						justify-self: center;
+						margin-top: 0;
 						width: 40vw;
-						margin-top: -4vh;
 
 						background-color: $suggestion-bg;
 

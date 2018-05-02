@@ -171,8 +171,24 @@ class StockSearch extends React.Component {
     }
 
     let SuggestedTickers
-    if (searchedTicker.length > 0 && (searchClass === "initial-search" ||
-                                      searchClass === "home-search") ) {
+    const tickerOptions = { ['Tesla']: 'TSLA', ['Apple']: 'AAPL', ['AMD']: 'AMD' }
+    if (searchedTicker.length === 0 || filteredTickers.length == 0) {
+      SuggestedTickers =
+        <div className='search-help'>
+          <h3>Please enter a valid ticker symbol</h3>
+          <h3>~or~</h3>
+          <ul>
+            <h3>Pick from a few samples: </h3>
+            {Object.keys(tickerOptions).map(optKey => (
+              <h3 onClick={ () => this.clickUpdateTicker(tickerOptions[optKey])}>
+                { optKey }
+              </h3>
+            ))}
+          </ul>
+        </div>
+    } else if (searchedTicker.length > 0 &&
+              (searchClass === "initial-search" ||
+               searchClass === "home-search")) {
 
       SuggestedTickers = <SearchSuggestions filteredTickers={filteredTickers}
                                             updateTicker={this.clickUpdateTicker} />

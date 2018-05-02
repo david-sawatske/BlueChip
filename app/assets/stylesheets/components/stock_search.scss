@@ -13,6 +13,43 @@ CSS Grid layout for modern browsers:
 			grid-template-columns: 5vw 95vw;
 			grid-template-rows: 5vh 15vh 20vh 10vh 30vh;
 
+			.search-help {
+				grid-column: 1/3;
+				grid-row: 4;
+				z-index: 2;
+
+				justify-self: center;
+
+				h3 {
+					color: $pale-green;
+					font-style: italic;
+				}
+
+				h3:nth-child(2) {
+					margin: 1vh;
+				}
+
+				ul {
+					padding: auto;
+					margin: 0;
+
+					h3 {
+						display: inline;
+					}
+
+					h3:not(:first-child) {
+						margin-left: 1vw;
+
+						font-weight: bold;
+						color: $dark-green;
+					}
+
+					h3:not(:first-child):hover {
+						color: $blue-grey;
+					}
+				}
+			}
+
 			.search-reset {
 				grid-column: 2;
 				grid-row: 1;
@@ -46,6 +83,7 @@ CSS Grid layout for modern browsers:
 				grid-column: 1/3;
 				grid-row: 2/5;
 
+				height: 50vh;
 				width: 50vw;
 				justify-self: center;
 				border-radius: 4vh 1vh;
@@ -55,7 +93,7 @@ CSS Grid layout for modern browsers:
 
 				display: inherit;
 				grid-template-columns: auto;
-				grid-template-rows: 5vh 12vh 5vh 15.5vh;
+				grid-template-rows: 5vh 12vh 5vh 10vh;
 
 				h1.initial {
 					grid-column: 1;
@@ -277,6 +315,7 @@ CSS Grid layout for modern browsers:
 				z-index: 1;
 
 				justify-self: center;
+				margin-top: -3.5vh;
 				max-height: 40vh;
 				width: 40vw;
 				overflow-y: hidden;
