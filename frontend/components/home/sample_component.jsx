@@ -23,7 +23,7 @@ class SampleComponent extends React.Component {
   }
 
   initializeTimer() {
-    let timer = setInterval(this.autoCount, 3000);
+    let timer = setInterval(this.autoCount, 4000);
     this.setState({ timer });
   }
 
@@ -73,16 +73,6 @@ class SampleComponent extends React.Component {
             earnings, peerData, stats, company } = sampleStock;
     const { companyName } = quote;
 
-    let Sidebar =   <aside className="sidebar">
-                      <button className="nav-btn" onClick={ (e) =>
-                          this.handleClick('left', e) }>
-                          ◀
-                      </button>
-                      <button className="nav-btn" onClick={ (e) =>
-                          this.handleClick('right', e) }>
-                          ▶
-                      </button>
-                    </aside>
     const stockHeadings =
         [ `Get a detailed look at ${companyName}'s Financials`,
           `Is ${companyName} in the news? You'll see it here!`,
@@ -144,6 +134,20 @@ class SampleComponent extends React.Component {
                             <h1 className="title">BlueChip</h1>
                           </div>
     }
+
+    const sidebarClass = (activeComponentIdx === 5 ) ?  "league-sidebar"
+                                                          :
+                                                        "sidebar";
+    let Sidebar = <aside className={sidebarClass}>
+                    <button className="nav-btn" onClick={ (e) =>
+                        this.handleClick('left', e) }>
+                        ◀
+                    </button>
+                    <button className="nav-btn" onClick={ (e) =>
+                        this.handleClick('right', e) }>
+                        ▶
+                    </button>
+                  </aside>
 
     return (
       <div className="sample-container">
