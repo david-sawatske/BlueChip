@@ -49,30 +49,30 @@ class LeagueIndex extends Component {
 
     let LeagueDisplay
     let ActiveLeague
+    const AsIndex = <ul className="league-index">
+                      {leagueIds.map( id  => (
+                        <li key={id}>
+                          <LeagueIndexItem setLeagueData={this.setLeagueData}
+                                           leagueData={allLeaguesData[id]}
+                                           key={id} />
+                        </li>
+                      ))}
+                    </ul>
+
     if ( isLeagueLoading || isUserLoading ) {
       LeagueDisplay = <Loader />
     } else if (this.state.activeLeagueId && allLeaguesData) {
       const id = this.state.activeLeagueId;
-      LeagueDisplay = leagueIds.map( id  => (
-        <LeagueIndexItem setLeagueData={this.setLeagueData}
-                         leagueData={allLeaguesData[id]}
-                         key={id} />
-      ))
+      LeagueDisplay = AsIndex;
 
-        ActiveLeague =
-          <LeagueShow currentUserLeagueIds={currentUserLeagueIds}
-                      setLeagueData={this.setLeagueData}
-                      leagueData={allLeaguesData[id]}
-                      key={id} />
-
-          LeagueDisplay
+      ActiveLeague =
+        <LeagueShow currentUserLeagueIds={currentUserLeagueIds}
+                    setLeagueData={this.setLeagueData}
+                    leagueData={allLeaguesData[id]}
+                    key={id} />
 
     } else if (allLeaguesData) {
-      LeagueDisplay = leagueIds.map( id  => (
-        <LeagueIndexItem setLeagueData={this.setLeagueData}
-                         leagueData={allLeaguesData[id]}
-                         key={id} />
-      ))
+      LeagueDisplay = AsIndex;
     }
 
     return (
@@ -80,9 +80,8 @@ class LeagueIndex extends Component {
         <div className="league-index-header">
           <h1>Leagues</h1>
         </div>
-        <ul className="league-index">
-          <li>{ LeagueDisplay }</li>
-        </ul>
+
+        { LeagueDisplay }
 
         { ActiveLeague }
       </div>

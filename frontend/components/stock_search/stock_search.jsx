@@ -180,7 +180,8 @@ class StockSearch extends React.Component {
           <ul>
             <h3>Pick from a few samples: </h3>
             {Object.keys(tickerOptions).map(optKey => (
-              <h3 onClick={ () => this.clickUpdateTicker(tickerOptions[optKey])}>
+              <h3 key={optKey} 
+                  onClick={ () => this.clickUpdateTicker(tickerOptions[optKey])}>
                 { optKey }
               </h3>
             ))}
