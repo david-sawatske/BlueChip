@@ -17,11 +17,25 @@ class SortableTable extends React.Component {
                    sortedValue: "" };
   }
 
+  compareValues(targetKey, isOrderASC) {
+    return (a, b) => {
+      const varA = (typeof a[targetKey] === 'string') ? a[targetKey].toUpperCase()
+                                                          :
+                                                        a[targetKey];
+      const varB = (typeof b[targetKey] === 'string') ? b[targetKey].toUpperCase()
+                                                          :
+                                                        b[targetKey];
+
+      let comparison;
+      ( varA > varB ) ? comparison = 1 : comparison = -1
+
+      return (isOrderASC) ?  comparison : (comparison * - 1)
+    }
+  }
+
   sortArray(targetKey, isOrderASC) {
     let { dataArr } = merge({}, this.state);
-
-    const newOrder = (isOrderASC) ? dataArr.sort((a, b) => a[targetKey] > b[targetKey]) :
-                                    dataArr.sort((a, b) => b[targetKey] > a[targetKey])
+    const newOrder = dataArr.sort(this.compareValues(targetKey, isOrderASC))
 
     this.setState({ dataArr: newOrder,
                     sortedValue: targetKey,
@@ -38,8 +52,8 @@ class SortableTable extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.dataArr != this.props.dataArr) {
-      this.setState({ dataArr: nextProps.dataArr,
-                      sortedValue: '' })
+      this.setState({ sortedValue: '',
+                      dataArr: nextProps.dataArr })
     }
   }
 
@@ -79,7 +93,7 @@ class SortableTable extends React.Component {
     const rankHeader = (ranked) ? <th><a className="ranking">Ranking</a></th>
                                      :
                                    null;
-                                   
+
     const dataAttributes = dataArr[0] ? Object.keys(dataArr[0]) : []
     let arrow;
     return (
