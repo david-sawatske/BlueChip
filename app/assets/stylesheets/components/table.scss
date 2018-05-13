@@ -29,6 +29,10 @@ table {
     a {
       display: ruby;
     }
+
+    a:hover {
+      cursor: pointer;
+    }
   }
 
   tbody {
