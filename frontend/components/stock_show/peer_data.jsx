@@ -7,16 +7,10 @@ import { filterObject } from '../../util/helper_functions'
 class PeerData extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { peerData: null }
-  }
-
-  componentWillMount() {
-    this.setState({ peerData: this.props.peerData })
   }
 
   render() {
-    const { peerData } = this.state;
+    const { peerData } = this.props;
 
     const tableHeadings = { 'symbol': 'Symbol',
                             'change': 'Change',
@@ -62,7 +56,6 @@ class PeerData extends React.Component {
       </div>
     );
   }
-
 }
 
 export default PeerData;
