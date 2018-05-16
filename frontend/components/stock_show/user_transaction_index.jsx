@@ -25,10 +25,6 @@ class UserTransactions extends React.Component {
     const isDataCurrency = { 'sharePrice': true };
     const isDataDate = { 'purchaseDay': true };
 
-    const isDataPercent = { };
-    const isDataInteger = { };
-    const sideHeadings = { };
-
     const allowedKeys = Object.keys(tableHeadings)
     const tableData = Object.values(transactData).map(dataObj => (
        filterObject(dataObj, allowedKeys))
@@ -38,13 +34,10 @@ class UserTransactions extends React.Component {
       <div className="transaction-table">
         <SortableTable dataArr={tableData}
                        isDataDate={isDataDate}
-                       sideHeadings={sideHeadings}
+                       initialSort="purchaseDay"
                        tableHeadings={tableHeadings}
                        isDataSotable={isDataSotable}
-                       isDataPercent={isDataPercent}
-                       isDataInteger={isDataInteger}
-                       isDataCurrency={isDataCurrency}
-                       initialSort="purchaseDay" />
+                       isDataCurrency={isDataCurrency} />
       </div>
     )}
 };

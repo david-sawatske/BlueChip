@@ -110,9 +110,6 @@ class StockIndex extends React.Component {
 
       const isDataCurrency = { 'invested': true };
       const isDataInteger = { 'sharesOwned': true };
-      const isDataPercent = { };
-      const isDataDate = { };
-      const sideHeadings = { };
 
       const allowedKeys = Object.keys(tableHeadings);
 
@@ -134,14 +131,11 @@ class StockIndex extends React.Component {
       })
 
       TableComponent = <SortableTable dataArr={tableData}
-                                      isDataDate={isDataDate}
-                                      sideHeadings={sideHeadings}
+                                      initialSort="symbol"
                                       tableHeadings={tableHeadings}
                                       isDataSotable={isDataSotable}
-                                      isDataPercent={isDataPercent}
                                       isDataInteger={isDataInteger}
-                                      isDataCurrency={isDataCurrency}
-                                      initialSort="symbol" />
+                                      isDataCurrency={isDataCurrency} />
     }
 
     let StockShowComponent

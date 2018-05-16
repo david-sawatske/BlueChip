@@ -26,11 +26,6 @@ class LeagueLeaderboard extends React.Component {
                              'cashInvested': true,
                              'totalEquity': true }
 
-    const isDataInteger = { };
-    const isDataPercent = { };
-    const isDataDate = { };
-    const sideHeadings = { };
-
     const allowedKeys = Object.keys(tableHeadings)
     const tableData = Object.values(leagueUserData).map(dataObj => (
        filterObject(dataObj, allowedKeys))
@@ -38,16 +33,12 @@ class LeagueLeaderboard extends React.Component {
 
     return (
       <div className="leaderboard">
-        <SortableTable dataArr={tableData}
-                       isDataDate={isDataDate}
-                       sideHeadings={sideHeadings}
+        <SortableTable ranked={true}
+                       dataArr={tableData}
+                       initialSort="totalEquity"
                        tableHeadings={tableHeadings}
                        isDataSotable={isDataSotable}
-                       isDataPercent={isDataPercent}
-                       isDataInteger={isDataInteger}
-                       isDataCurrency={isDataCurrency}
-                       initialSort="totalEquity"
-                       ranked={true} />
+                       isDataCurrency={isDataCurrency} />
       </div>
     )}
   }

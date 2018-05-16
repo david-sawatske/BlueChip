@@ -31,8 +31,6 @@ class PeerData extends React.Component {
 
     const isDataCurrency = { latestPrice: true };
     const isDataPercent = { 'changePercent': true };
-    const isDataDate = { };
-    const sideHeadings = { };
 
     const allowedKeys = Object.keys(tableHeadings)
     const tableData = Object.values(peerData).map(dataObj => (
@@ -42,16 +40,14 @@ class PeerData extends React.Component {
     return (
       <div className="peer-data">
         <h2>Peer Data</h2>
-        <SortableTable dataArr={tableData}
-                       isDataDate={isDataDate}
-                       sideHeadings={sideHeadings}
+        <SortableTable ranked={false}
+                       dataArr={tableData}
+                       initialSort="symbol"
                        tableHeadings={tableHeadings}
                        isDataSotable={isDataSotable}
                        isDataPercent={isDataPercent}
                        isDataInteger={isDataInteger}
-                       isDataCurrency={isDataCurrency}
-                       initialSort="symbol"
-                       ranked={false} />
+                       isDataCurrency={isDataCurrency} />
 
       </div>
     );
