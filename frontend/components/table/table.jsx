@@ -13,8 +13,8 @@ class SortableTable extends React.Component {
     this.sortArray = this.sortArray.bind(this);
     this.renderRows = this.renderRows.bind(this);
 
-    this.state = { dataArr: this.props.dataArr,
-                   sortedValue: "" };
+    this.state = { sortedValue: "",
+                   dataArr: this.props.dataArr };
   }
 
   compareValues(targetKey, isOrderASC) {
@@ -47,13 +47,6 @@ class SortableTable extends React.Component {
 
     if (initialSort) {
       this.sortArray(initialSort, false)
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.dataArr != this.props.dataArr) {
-      this.setState({ sortedValue: '',
-                      dataArr: nextProps.dataArr })
     }
   }
 
