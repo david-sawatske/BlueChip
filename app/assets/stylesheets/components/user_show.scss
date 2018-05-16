@@ -168,6 +168,17 @@
 								color: $off-white;
 							}
 
+							h4 {
+								grid-column: 1/4;
+								grid-row: 2;
+
+								margin: 5vh 0 0 5vw;
+
+								color: $transparent-white;
+								font-family: Playfair;
+								font-style: italic;
+							}
+
 							h2 {
 								grid-row: 2;
 
