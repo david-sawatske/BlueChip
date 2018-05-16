@@ -34,7 +34,7 @@ class SortableTable extends React.Component {
   }
 
   sortArray(targetKey, isOrderASC) {
-    let { dataArr } = merge({}, this.state);
+    let { dataArr } = this.state;
     const newOrder = dataArr.sort(this.compareValues(targetKey, isOrderASC))
 
     this.setState({ dataArr: newOrder,
@@ -101,7 +101,6 @@ class SortableTable extends React.Component {
     const dataAttributes = dataArr[0] ? Object.keys(dataArr[0]) : []
     let arrow;
 
-    console.log(dataAttributes);
     return (
         <table>
           <thead>
