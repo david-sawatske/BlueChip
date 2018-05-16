@@ -6,7 +6,7 @@ class SortableHeader extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { isOrderASC: true };
+    this.state = { isOrderASC: false };
 
     this.handleClick = this.handleClick.bind(this);
     this.toggleOrder = this.toggleOrder.bind(this);
