@@ -100,26 +100,27 @@ class SortableTable extends React.Component {
 
     const dataAttributes = dataArr[0] ? Object.keys(dataArr[0]) : []
     let arrow;
+
+    console.log(dataAttributes);
     return (
         <table>
           <thead>
             <tr>
               { rankHeader }
+
               { dataAttributes.map((attribute, idx) => {
-                if (!isDataSotable[attribute]) {
-                  arrow = null;
-                } else if (attribute === sortedValue) {
+                if (attribute === sortedValue) {
                   arrow = isOrderASC ? '⬆' : '⬇';
-                } else {
+                } else if (isDataSotable[attribute]) {
                   arrow = '⬍'
                 }
 
                 return (
                   <SortableHeader title={tableHeadings[attribute]}
-                                  attribute={attribute}
                                   onClick={this.sortArray}
-                                  key={idx}
-                                  arrow={arrow}/>
+                                  attribute={attribute}
+                                  arrow={arrow}
+                                  key={idx} />
                 )
 
               })}
