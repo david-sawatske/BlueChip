@@ -85,6 +85,10 @@
 							text-align: left;
 						}
 
+						h4 {
+							display: none;
+						}
+
 					  .league-data {
 							background-color: $transparent;
 
@@ -172,7 +176,7 @@
 								grid-column: 1/4;
 								grid-row: 2;
 
-								margin: 5vh 0 0 5vw;
+								margin: 4.5vh 0 0 5vw;
 
 								color: $transparent-white;
 								font-family: Playfair;
