@@ -23,7 +23,7 @@ class FinancialsTable extends React.Component {
   }
 
   render() {
-    const { financials } = this.props;
+    const { financials = [] } = this.props;
     const pushData = (dataType, currDataObj, dataKey) => {
       const sideHead = camelToTitle(dataKey);
       const datum = (currDataObj[dataKey]) ? currDataObj[dataKey] / 1000 : '-';
