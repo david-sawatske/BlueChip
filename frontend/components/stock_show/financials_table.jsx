@@ -24,6 +24,9 @@ class FinancialsTable extends React.Component {
 
   render() {
     const { financials = [] } = this.props;
+    const noDataWarn = (financials.length === 0) ? <h1>Data Not Available</h1>
+                                                    :
+                                                   null;
     const pushData = (dataType, currDataObj, dataKey) => {
       const sideHead = camelToTitle(dataKey);
       const datum = (currDataObj[dataKey]) ? currDataObj[dataKey] / 1000 : '-';
@@ -78,6 +81,7 @@ class FinancialsTable extends React.Component {
 
    return (
     <div className ="financials-table">
+      { noDataWarn }
       <table>
         <thead>
           <tr>
@@ -88,7 +92,7 @@ class FinancialsTable extends React.Component {
 
         <tbody className="financials-body">
           <tr className="sub-head">
-            <td >
+            <td>
               Income Statement
             </td>
             { topHeadings.map((head, idx) => (
