@@ -12,7 +12,7 @@ class Api::TransactionsController < ApplicationController
 
   private
     def transaction_params
-      params.require(:transaction).permit(:symbol, :purchase_day, :share_quant,
+      params.require(:transaction).permit(:symbol, :transaction_date, :share_quant,
                                           :user_id, :league_id, :share_price)
     end
 end

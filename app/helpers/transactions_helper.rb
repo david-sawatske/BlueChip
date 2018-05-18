@@ -7,7 +7,7 @@ module TransactionsHelper
                  symbol: transaction.symbol,
                  sharePrice: transaction.share_price,
                  shareQuant: transaction.share_quant,
-                 purchaseDay: transaction.purchase_day }
+                 transactionDate: transaction.transaction_date }
 
     allIds = [id]
 

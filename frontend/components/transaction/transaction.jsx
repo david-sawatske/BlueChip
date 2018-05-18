@@ -80,7 +80,7 @@ class Transaction extends React.Component {
 
     const { netBalance, netShareQuant } = verifiedData;
 
-    const transactionData = { purchase_day: purchaseDay,
+    const transactionData = { transaction_date: purchaseDay,
                               share_quant: netShareQuant,
                               share_price: sharePrice,
                               league_id: leagueId,

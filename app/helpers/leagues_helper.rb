@@ -41,7 +41,7 @@ module LeaguesHelper
 
     def league_transaction_data(league)
       byId = league.transactions.select(:id, :symbol, :share_price, :share_quant,
-                                        :purchase_day)
+                                        :transaction_date)
                                 .index_by(&:id)
 
       byId.each do |id, transaction|

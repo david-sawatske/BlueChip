@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501132047) do
+ActiveRecord::Schema.define(version: 20180518154530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180501132047) do
     t.string "symbol", null: false
     t.integer "share_quant", null: false
     t.float "share_price", null: false
-    t.datetime "purchase_day", null: false
+    t.datetime "transaction_date", null: false
     t.integer "user_id", null: false
     t.integer "league_id", null: false
     t.datetime "created_at", null: false

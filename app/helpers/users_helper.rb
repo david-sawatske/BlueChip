@@ -41,7 +41,7 @@ module UsersHelper
 
   def user_transacton_data(user)
     byId = user.transactions.select( :id, :share_price, :share_quant,
-                                     :purchase_day, :symbol )
+                                     :transaction_date, :symbol )
                             .index_by(&:id)
 
     byId.each do |id, transaction|

@@ -12,29 +12,31 @@ class UserTransactions extends React.Component {
 
   render() {
     const { transactData } = this.props;
-    const tableHeadings = { 'purchaseDay': 'Date',
+    const tableHeadings = { 'transactionDate': 'Date',
                             'sharePrice': 'Price',
                             'shareQuant': 'Quantitiy',
                             'league': 'League' }
 
-    const isDataSotable = { 'purchaseDay': true,
+    const isDataSotable = { 'transactionDate': true,
                             'sharePrice': true,
                             'shareQuant': true,
                             'league': true }
 
     const isDataCurrency = { 'sharePrice': true };
-    const isDataDate = { 'purchaseDay': true };
+    const isDataDate = { 'transactionDate': true };
 
     const allowedKeys = Object.keys(tableHeadings)
     const tableData = Object.values(transactData).map(dataObj => (
        filterObject(dataObj, allowedKeys))
     )
 
+    console.log(transactData);
+
     return (
       <div className="transaction-table">
         <SortableTable dataArr={tableData}
                        isDataDate={isDataDate}
-                       initialSort="purchaseDay"
+                       initialSort="transactionDate"
                        tableHeadings={tableHeadings}
                        isDataSotable={isDataSotable}
                        isDataCurrency={isDataCurrency} />
