@@ -46,6 +46,7 @@ CSS Grid layout for modern browsers:
 
 					h3:not(:first-child):hover {
 						color: $blue-grey;
+						cursor: pointer;
 					}
 				}
 			}
