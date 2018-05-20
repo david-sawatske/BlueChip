@@ -24,12 +24,11 @@ class LeagueShow extends Component {
               .then(data => (
                 this.props.requestTargetUserData(this.props.currentUser.id))
               );
-
   }
 
   render() {
     const { currentUserLeagueIds, leagueData, currentUser, setLeagueData,
-            hideModal, showModal, formType } = this.props;
+            hideModal, showModal, formType, login } = this.props;
     const currencyStarting = numberToCurrency(leagueData.startingBalance);
     const atGlanceData = calcLeagueGlance(leagueData.leagueUserData);
 
@@ -50,7 +49,8 @@ class LeagueShow extends Component {
         leagueShowButton =
           <MastheadButtons hideModal={hideModal}
                            showModal={showModal}
-                           formType={formType} />
+                           formType={formType}
+                           login={login} />
       }
 
     return (
