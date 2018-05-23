@@ -7,7 +7,7 @@ CSS Grid layout for modern browsers:
 	@media screen and (min-width: 768px) {
     .masthead {
       display: grid;
-      grid-template-columns: [logo] 10vw [title] 30vw [buttons] 60vw ;
+      grid-template-columns: [logo] 10vw [title] 15vw [github] 5vw  [buttons] 70vw ;
       grid-template-rows: 10vh 7vh;
 
 			position: fixed;
@@ -33,7 +33,7 @@ CSS Grid layout for modern browsers:
 				}
 	    }
 
-	    .logo  {
+	    .logo {
 	      grid-column: logo;
 	      grid-row: 1/1;
 
@@ -45,13 +45,31 @@ CSS Grid layout for modern browsers:
 				height: auto;
 	    }
 
+	    .github {
+	      grid-column: github;
+	      grid-row: 1/1;
+
+				width: 5vh;
+				height: auto;
+
+				position: absolute;
+			  left: 0;
+			  bottom: 0;
+
+				opacity: .5;
+	    }
+
+			.github:hover {
+				opacity: 1;
+			}
+
 			.button-container {
 				grid-column: buttons;
 				grid-row: 1/1;
 			}
 
 			.top-nav {
-				grid-column: 1/4;
+				grid-column: 1/5;
 				grid-row: 2/2;
 
 				padding-top: 2vh;
