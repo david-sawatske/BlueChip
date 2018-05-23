@@ -18,6 +18,10 @@ const MastHead = props => (
       <img className="github" src="http://res.cloudinary.com/sawatskeda10/image/upload/v1523645571/github_gepeui.png" />
     </a>
 
+    <a target="_blank" href="http://www.sawatske.com">
+      <img className="personal-page" src="http://res.cloudinary.com/sawatskeda10/image/upload/v1524860068/personal-page_qrmtcq.png" />
+    </a>
+
     <MastheadButtons { ...props }/>
 
     <TopNav currentUser={props.currentUser} />
